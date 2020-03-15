@@ -1,0 +1,104 @@
+---- Minecraft Crash Report ----
+// Daisy, daisy...
+
+Time: 20-3-12 下午7:45
+Description: Exception ticking world
+
+java.lang.RuntimeException: class arknights.tileentity.WorkshopEntity is missing a mapping! This is a bug!
+	at net.minecraft.tileentity.TileEntity.writeInternal(TileEntity.java:64) ~[?:?] {re:classloading}
+	at net.minecraft.tileentity.TileEntity.write(TileEntity.java:58) ~[?:?] {re:classloading}
+	at arknights.tileentity.WorkshopEntity.write(WorkshopEntity.java:114) ~[?:?] {re:classloading}
+	at arknights.tileentity.WorkshopEntity.getUpdateTag(WorkshopEntity.java:91) ~[?:?] {re:classloading}
+	at arknights.tileentity.WorkshopEntity.getUpdatePacket(WorkshopEntity.java:97) ~[?:?] {re:classloading}
+	at net.minecraft.world.server.ChunkHolder.sendTileEntity(ChunkHolder.java:221) ~[?:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.world.server.ChunkHolder.sendChanges(ChunkHolder.java:196) ~[?:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.world.server.ServerChunkProvider.func_223434_a(SourceFile:378) ~[?:?] {re:classloading,pl:accesstransformer:B}
+	at it.unimi.dsi.fastutil.longs.Long2ObjectLinkedOpenHashMap$1.forEach(Long2ObjectLinkedOpenHashMap.java:1661) ~[fastutil-8.2.1.jar:?] {}
+	at com.google.common.collect.Iterables$UnmodifiableIterable.forEach(Iterables.java:105) ~[guava-21.0.jar:?] {}
+	at net.minecraft.world.server.ServerChunkProvider.func_217220_m(SourceFile:371) ~[?:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.world.server.ServerChunkProvider.tick(SourceFile:340) ~[?:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.world.server.ServerWorld.tick(ServerWorld.java:313) ~[?:?] {re:classloading}
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:847) ~[?:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:782) ~[?:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:114) ~[?:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:635) [?:?] {re:classloading,pl:accesstransformer:B}
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_231] {}
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at net.minecraft.tileentity.TileEntity.writeInternal(TileEntity.java:64)
+	at net.minecraft.tileentity.TileEntity.write(TileEntity.java:58)
+	at arknights.tileentity.WorkshopEntity.write(WorkshopEntity.java:114)
+	at arknights.tileentity.WorkshopEntity.getUpdateTag(WorkshopEntity.java:91)
+	at arknights.tileentity.WorkshopEntity.getUpdatePacket(WorkshopEntity.java:97)
+	at net.minecraft.world.server.ChunkHolder.sendTileEntity(ChunkHolder.java:221)
+	at net.minecraft.world.server.ChunkHolder.sendChanges(ChunkHolder.java:196)
+	at net.minecraft.world.server.ServerChunkProvider.func_223434_a(SourceFile:378)
+	at it.unimi.dsi.fastutil.longs.Long2ObjectLinkedOpenHashMap$1.forEach(Long2ObjectLinkedOpenHashMap.java:1661)
+	at com.google.common.collect.Iterables$UnmodifiableIterable.forEach(Iterables.java:105)
+	at net.minecraft.world.server.ServerChunkProvider.func_217220_m(SourceFile:371)
+	at net.minecraft.world.server.ServerChunkProvider.tick(SourceFile:340)
+	at net.minecraft.world.server.ServerWorld.tick(ServerWorld.java:313)
+
+-- Affected level --
+Details:
+	All players: 1 total; [ServerPlayerEntity['Dev'/510, l='RhodesIsland', x=4.39, y=64.00, z=-73.01]]
+	Chunk stats: ServerChunkCache: 2209
+	Level dimension: DimensionType{minecraft:overworld}
+	Level name: RhodesIsland
+	Level seed: 213858318
+	Level generator: ID 00 - default, ver 1. Features enabled: true
+	Level generator options: {}
+	Level spawn location: World: (-16,64,-80), Chunk: (at 0,4,0 in -1,-5; contains blocks -16,0,-80 to -1,255,-65), Region: (-1,-1; contains chunks -32,-32 to -1,-1, blocks -512,0,-512 to -1,255,-1)
+	Level time: 72216 game time, 1317 day time
+	Known server brands: forge
+	Level was modded: true
+	Level storage version: 0x04ABD - Anvil
+	Level weather: Rain time: 1 (now: false), thunder time: 1 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: true
+Stacktrace:
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:847)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:782)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:114)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:635)
+	at java.lang.Thread.run(Thread.java:748)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.15.2
+	Minecraft Version ID: 1.15.2
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 1.8.0_231, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 565876600 bytes (539 MB) / 1089470464 bytes (1039 MB) up to 1900019712 bytes (1812 MB)
+	CPUs: 4
+	JVM Flags: 1 total; -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump
+	ModLauncher: 5.0.0-milestone.4+67+b1a340b
+	ModLauncher launch target: fmluserdevclient
+	ModLauncher naming: mcp
+	ModLauncher services: 
+		/eventbus-2.0.0-milestone.1-service.jar eventbus PLUGINSERVICE 
+		/forge-1.15.2-31.0.14_mapped_snapshot_20190719-1.14.3-launcher.jar object_holder_definalize PLUGINSERVICE 
+		/forge-1.15.2-31.0.14_mapped_snapshot_20190719-1.14.3-launcher.jar runtime_enum_extender PLUGINSERVICE 
+		/accesstransformers-2.0.0-milestone.1-shadowed.jar accesstransformer PLUGINSERVICE 
+		/forge-1.15.2-31.0.14_mapped_snapshot_20190719-1.14.3-launcher.jar capability_inject_definalize PLUGINSERVICE 
+		/forge-1.15.2-31.0.14_mapped_snapshot_20190719-1.14.3-launcher.jar runtimedistcleaner PLUGINSERVICE 
+		/forge-1.15.2-31.0.14_mapped_snapshot_20190719-1.14.3-launcher.jar fml TRANSFORMATIONSERVICE 
+	FML: 31.0
+	Forge: net.minecraftforge:31.0.14
+	FML Language Providers: 
+		javafml@31.0
+		minecraft@1
+	Mod List: 
+		client-extra.jar Minecraft {minecraft@1.15.2 DONE}
+		forge-1.15.2-31.0.14_mapped_snapshot_20190719-1.14.3.jar Forge {forge@31.0.14 DONE}
+		main Arknights {arknights@NONE DONE}
+	Player Count: 1 / 8; [ServerPlayerEntity['Dev'/510, l='RhodesIsland', x=4.39, y=64.00, z=-73.01]]
+	Data Packs: vanilla, mod:arknights, mod:forge (incompatible)
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'forge'

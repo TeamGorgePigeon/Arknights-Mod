@@ -1,0 +1,59 @@
+{
+  "itemGroup.arknights": "明日方舟",
+
+  "item.arknights.originium_shard": "源石碎片",
+  "item.arknights.originite_prime": "至纯源石",
+  "item.arknights.pure_gold":"赤金",
+  
+  "item.arknights.jb":"[半完成]啊噗噜派",
+
+  "item.arknights.orirock": "源岩",
+  "block.arknights.orirock_cube": "固源岩",
+  "item.arknights.orirock_cluster": "固源岩组",
+  "item.arknights.orirock_concentration": "提纯源岩",
+
+  "item.arknights.sugar_substitute": "代糖",
+  "item.arknights.sugar": "糖",
+  "item.arknights.sugar_pack": "糖组",
+  "item.arknights.sugar_lump": "糖聚块",
+
+  "item.arknights.ester": "酯原料",
+  "item.arknights.polyester": "聚酸酯",
+  "item.arknights.polyester_pack": "聚酸酯组",
+  "item.arknights.polyester_lump": "聚酸酯块",
+
+  "item.arknights.oriron_shard": "异铁碎片",
+  "item.arknights.oriron": "异铁",
+  "item.arknights.oriron_cluster": "异铁组",
+  "item.arknights.oriron_block": "异铁块",
+
+  "item.arknights.diketon": "双酮",
+  "item.arknights.polyketon": "酮凝集",
+  "item.arknights.aketon": "酮凝集组",
+  "item.arknights.keton_colloid": "酮阵列",
+
+  "item.arknights.damaged_device": "破损装置",
+  "item.arknights.device": "装置",
+  "item.arknights.integrated_device": "全新装置",
+  "item.arknights.optimized_device": "改量装置",
+
+  "item.arknights.loxic_kohl": "扭转醇",
+  "item.arknights.white_horse_kohl": "白马醇",
+
+  "item.arknights.manganese_ore": "轻锰矿",
+  "item.arknights.manganese_trihydrate": "三水锰矿",
+
+  "item.arknights.rma70_12": "RMA70-12",
+  "item.arknights.rma70_24": "RMA70-24",
+
+  "item.arknights.grindstone": "研磨石",
+  "item.arknights.grindstone_pentahydrate": "五水研磨石",
+
+  "item.arknights.d32_steel": "D32钢",
+  "item.arknights.bipolar_nanoflake": "双极纳米片",
+  "item.arknights.polymerization_preperation": "聚合剂",
+
+  "block.arknights.originite_prime_block": "至纯源石(装饰)",
+  
+  "block.arknights.trading_home":"制造站"
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "result": { "item": "arknights:pure_originiums", "count": 1 },
+  "ingredients": [
+      { "item": "arknights:originiums_fragments", "data": 0 },
+      { "item": "arknights:originiums_fragments", "data": 0 },
+	  { "item": "arknights:originiums_fragments", "data": 0 },
+	  { "item": "arknights:originiums_fragments", "data": 0 },
+	  { "item": "arknights:originiums_fragments", "data": 0 },
+	  { "item": "arknights:originiums_fragments", "data": 0 },
+	  { "item": "arknights:originiums_fragments", "data": 0 },
+	  { "item": "arknights:originiums_fragments", "data": 0 },
+	  { "item": "arknights:originiums_fragments", "data": 0 }
+  ]
+}
