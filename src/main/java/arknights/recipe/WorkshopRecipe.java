@@ -79,7 +79,6 @@ public class WorkshopRecipe implements IWorkshopRecipe {
                 if (isSimple)
                     recipeitemhelper.func_221264_a(itemstack, 1);
                 else inputs.add(itemstack);
-
                 a = itemstack.getCount() >= this.counts.get(j).getCount();
                 this.items.set(j, itemstack.getItem() != null ? itemstack.getItem() : Items.AIR);
             }

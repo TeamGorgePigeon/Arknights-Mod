@@ -15,7 +15,7 @@ import net.minecraftforge.common.extensions.IForgeItem;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class JB extends BaseItem implements IForgeItem{
+public class Apulupai extends BaseItem implements IForgeItem{
     private int skill = 0;//0:none 1: 2: 3:
     private boolean isSkill = false;
     private int s1_rank, s2_rank, s3_rank;
@@ -24,7 +24,7 @@ public class JB extends BaseItem implements IForgeItem{
     private boolean pressed;
     private int tick = 0;
     private int tick2 = 0;
-    public JB(Properties p_i48487_1_) {
+    public Apulupai(Properties p_i48487_1_) {
         super(p_i48487_1_);
         this.pressed = false;
     }

@@ -31,7 +31,7 @@ public class ItemHandler {
     public static final Item PUREGOLD = createItem("pure_gold", 1000, EPIC);
 
     public static final Item TESTSWORD = new TestSword(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "testsword");
-    public static final Item JB = new JB(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "jb");
+    public static final Item JB = new Apulupai(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "jb");
 
 
     public static final Item ORIROCK = createItem("orirock", 1, COMMON);
