@@ -4,6 +4,7 @@ import arknights.event.EventHandler;
 import arknights.network.PacketHandler;
 import arknights.registry.*;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.*;
