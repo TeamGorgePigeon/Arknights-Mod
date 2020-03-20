@@ -9,8 +9,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-class OriginiumSlugRenderer extends MobRenderer<OriginiumSlugEntity, OriginiumSlugModel<OriginiumSlugEntity>> {
-   private static final ResourceLocation ORIGINIUMSLUG_TEXTURES = new ResourceLocation("textures/entity/originiumslug/originiumslug.png");
+public class OriginiumSlugRenderer extends MobRenderer<OriginiumSlugEntity, OriginiumSlugModel<OriginiumSlugEntity>> {
+   private static final ResourceLocation ORIGINIUMSLUG_TEXTURES = new ResourceLocation("arknights:textures/entity/originium_slug.png");
 
    public OriginiumSlugRenderer(EntityRendererManager renderManagerIn) {
       super(renderManagerIn, new OriginiumSlugModel<>(), 0.3F);
