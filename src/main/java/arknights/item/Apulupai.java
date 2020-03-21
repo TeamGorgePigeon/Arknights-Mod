@@ -81,7 +81,7 @@ public class Apulupai extends BaseItem implements IForgeItem{
             this.tick = 0;
         }
         if(this.pressed && this.tick2%20 == 1){
-            BulletEntity arrowEntity = new BulletEntity(entity, world);
+            BulletEntity arrowEntity = new BulletEntity((LivingEntity) entity, world);
             arrowEntity.setNoGravity(true);
             arrowEntity.shoot(entity, entity.rotationPitch, entity.rotationYaw, 0.0F, 10.0F * 3.0F, 1.0F);
             world.addEntity(arrowEntity);

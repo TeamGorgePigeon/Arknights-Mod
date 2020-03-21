@@ -2,6 +2,7 @@ package arknights.registry;
 
 import arknights.renderer.entity.BulletRenderer;
 import arknights.renderer.entity.DisasterRenderer;
+import arknights.renderer.entity.ExusiaiRenderer;
 import arknights.renderer.entity.OriginiumSlugRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -17,5 +18,7 @@ public class RendererHandler {
 
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.DISASTERZERO, DisasterRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.SNOWSTORM, DisasterRenderer::new);
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityHandler.EXUSIAI, ExusiaiRenderer::new);
     }
 }
