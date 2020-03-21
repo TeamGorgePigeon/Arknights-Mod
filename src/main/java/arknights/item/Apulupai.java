@@ -1,5 +1,6 @@
 package arknights.item;
 
+import arknights.entity.notLiving.BulletEntity;
 import arknights.registry.SoundHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -80,7 +81,7 @@ public class Apulupai extends BaseItem implements IForgeItem{
             this.tick = 0;
         }
         if(this.pressed && this.tick2%20 == 1){
-            ArrowEntity arrowEntity = new ArrowEntity(world, (LivingEntity) entity);
+            BulletEntity arrowEntity = new BulletEntity((LivingEntity) entity, world);
             arrowEntity.setNoGravity(true);
             arrowEntity.shoot(entity, entity.rotationPitch, entity.rotationYaw, 0.0F, 10.0F * 3.0F, 1.0F);
             world.addEntity(arrowEntity);
@@ -88,9 +89,9 @@ public class Apulupai extends BaseItem implements IForgeItem{
                 world.playSound(null, entity.func_226277_ct_(), entity.func_226278_cu_(), entity.func_226281_cx_(), SoundHandler.EXUSIAI_ATTACK, SoundCategory.NEUTRAL, 1.0F, 1.0F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.4F);
             } else {
                 for(int i = 0;i < 4;i++){
-                    ArrowEntity arrowEntity2 = new ArrowEntity(world, (LivingEntity) entity);
+                    BulletEntity arrowEntity2 = new BulletEntity((LivingEntity) entity, world);
                     arrowEntity2.setNoGravity(true);
-                    arrowEntity2.shoot(entity, entity.rotationPitch, entity.rotationYaw, 0.0F, 10.0F * 3.0F, 1.0F);
+                    arrowEntity2.shoot(entity, entity.rotationPitch, entity.rotationYaw, 0.0F, 10.0F, 1.0F);
                     world.addEntity(arrowEntity2);
                 }
                 world.playSound(null, entity.func_226277_ct_(), entity.func_226278_cu_(), entity.func_226281_cx_(), SoundHandler.EXUSIAI_SKILLATTACK, SoundCategory.NEUTRAL, 1.0F, 1.0F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.4F);

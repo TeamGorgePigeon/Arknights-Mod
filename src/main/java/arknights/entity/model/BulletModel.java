@@ -1,6 +1,6 @@
 package arknights.entity.model;
 
-import arknights.entity.BulletEntity;
+import arknights.entity.notLiving.BulletEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.EntityModel;
@@ -10,11 +10,12 @@ public class BulletModel extends EntityModel<BulletEntity> {
     private final ModelRenderer bb_main;
 
     public BulletModel() {
-        textureWidth = 1;
-        textureHeight = 1;
+        textureWidth = 8;
+        textureHeight = 4;
 
-        bb_main = new ModelRenderer(this);
-        bb_main.setRotationPoint(0.0F, 24.0F, 0.0F);
+        bb_main = new ModelRenderer(this, 0, 0);
+        bb_main.func_228300_a_(-0.5F, -0.5F, -0.5F, 2.0F, 2.0F, 2.0F);
+        bb_main.setRotationPoint(0.0F, 23.0F, -3.5F);
         //bb_main.cubeList.add(new ModelRenderer.ModelBox(bb_main, 0, 0, -1.0F, -9.0F, -1.0F, 2, 2, 2, 0.0F, false));
 
         bb_main.addChild(bb_main);
@@ -23,11 +24,6 @@ public class BulletModel extends EntityModel<BulletEntity> {
     @Override
     public void func_225597_a_(BulletEntity bulletEntity, float v, float v1, float v2, float v3, float v4) {
 
-    }
-    public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.rotateAngleX = x;
-        modelRenderer.rotateAngleY = y;
-        modelRenderer.rotateAngleZ = z;
     }
 
     @Override

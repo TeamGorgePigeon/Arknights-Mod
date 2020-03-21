@@ -1,6 +1,7 @@
 package arknights.network;
 
 import arknights.Arknights;
+import arknights.network.packets.DisasterPacket;
 import arknights.network.packets.LeftClickPacket;
 import arknights.network.packets.UpdateWindowPacket;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -26,5 +27,6 @@ public final class PacketHandler {
     public static void register(){
         HANDLER.registerMessage(id++, LeftClickPacket.class, LeftClickPacket::encode, LeftClickPacket::decode, LeftClickPacket.Handler::handle);
         HANDLER.registerMessage(id++, UpdateWindowPacket.class, UpdateWindowPacket::encode, UpdateWindowPacket::decode, UpdateWindowPacket.Handler::handle);
+        HANDLER.registerMessage(id++, DisasterPacket.class, DisasterPacket::encode, DisasterPacket::decode, DisasterPacket.Handler::handle);
     }
 }

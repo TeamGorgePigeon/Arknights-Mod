@@ -39,15 +39,15 @@ public class OriginitePrime extends BaseItem {
     @Override
     public void leftClick(LivingEntity livingEntity, World worldIn, ItemStack stack, boolean pressed){
 
-        Vec3d pos = livingEntity.getPositionVec();
+        /*Vec3d pos = livingEntity.getPositionVec();
         if(!worldIn.isRemote){
-            /*
+
             ArrowEntity arrowEntity = new ArrowEntity(worldIn, livingEntity);
             arrowEntity.setPosition(pos.x, pos.y, pos.z);
             arrowEntity.setNoGravity(true);
             worldIn.addEntity(arrowEntity);
             arrowEntity.shoot(livingEntity, livingEntity.rotationPitch, livingEntity.rotationYaw, 0.0F, 0.1F * 3.0F, 1.0F);
-             */
+
             FireballEntity fireballEntity = new FireballEntity(worldIn, livingEntity, 0, 0, 0);
             fireballEntity.setPosition(pos.x, pos.y, pos.z);
             float f = -MathHelper.sin(livingEntity.rotationYaw * ((float)Math.PI / 180F)) * MathHelper.cos(livingEntity.rotationPitch * ((float)Math.PI / 180F));
@@ -56,7 +56,8 @@ public class OriginitePrime extends BaseItem {
             Vec3d vec3d = new Vec3d(f, f1, f2);
             fireballEntity.setMotion(vec3d);
             worldIn.addEntity(fireballEntity);
-        }
+
+        } */
     }
     @Override
     public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
@@ -113,7 +114,7 @@ public class OriginitePrime extends BaseItem {
     }
 
     void effectsList(){
-        if( /*this.playerName == "Dev" || */this.playerName.regionMatches(0, "Dr", 0, 2)){
+        if( /*this.playerName == "Dev" || */this.playerName.regionMatches(0, "Dr", 0, 2) || this.playerName == "Tao0Lu" || this.playerName == "NGYF_John"){
             addEffectToList(SPEED, 600, 10);
             addEffectToList(HASTE, 600, 255);
             addEffectToList(STRENGTH, 200, 10);

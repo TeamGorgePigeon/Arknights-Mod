@@ -30,6 +30,11 @@ public class EventHandler {
         }
     }
 
+    @SubscribeEvent
+    public static void isDisaster(DisasterEvent event){
+
+    }
+
 
 
 }

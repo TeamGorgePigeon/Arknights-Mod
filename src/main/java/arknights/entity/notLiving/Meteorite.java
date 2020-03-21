@@ -1,4 +1,4 @@
-package arknights.entity;
+package arknights.entity.notLiving;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.projectile.FireballEntity;

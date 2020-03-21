@@ -1,9 +1,10 @@
 package arknights.registry;
 
-import arknights.entity.DisasterZero;
-import arknights.entity.Meteorite;
-import arknights.entity.OriginiumSlugEntity;
-import arknights.entity.SnowStorm;
+import arknights.entity.disaster.DisasterZero;
+import arknights.entity.notLiving.BulletEntity;
+import arknights.entity.notLiving.Meteorite;
+import arknights.entity.living.OriginiumSlugEntity;
+import arknights.entity.disaster.SnowStorm;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.event.RegistryEvent;
@@ -17,6 +18,7 @@ public class EntityHandler {
     public static final EntityType<SnowStorm> SNOWSTORM = (EntityType<SnowStorm>) EntityType.Builder.<SnowStorm>create(SnowStorm::new, EntityClassification.MISC).build("snowstorm").setRegistryName(MODID + ":snowstorm");
 
     public static final EntityType<Meteorite> METEORITE = (EntityType<Meteorite>)EntityType.Builder.<Meteorite>create(Meteorite::new, EntityClassification.MISC).build("meteorite").setRegistryName(MODID + ":" + "meteorite");
+    public static final EntityType<BulletEntity> BULLET = (EntityType<BulletEntity>)EntityType.Builder.<BulletEntity>create(BulletEntity::new, EntityClassification.MISC).build("bullet").setRegistryName(MODID+ ":bullet");
 
     public static final EntityType<OriginiumSlugEntity> ORIGINIUMSLUG = (EntityType<OriginiumSlugEntity>)EntityType.Builder.<OriginiumSlugEntity>create(OriginiumSlugEntity::new, EntityClassification.MONSTER).build("originium_slug").setRegistryName(MODID + ":" + "originium_slug");
 

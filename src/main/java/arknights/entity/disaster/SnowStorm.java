@@ -1,4 +1,4 @@
-package arknights.entity;
+package arknights.entity.disaster;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
