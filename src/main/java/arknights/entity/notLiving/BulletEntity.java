@@ -57,17 +57,17 @@ public class BulletEntity extends Entity implements IProjectile {
     private IntOpenHashSet field_213878_az;
     private List<Entity> field_213875_aA;
 
-    protected BulletEntity(EntityType<? extends AbstractArrowEntity> type, World p_i48546_2_) {
+    public BulletEntity(EntityType<BulletEntity> type, World p_i48546_2_) {
         super(type, p_i48546_2_);
     }
 
-    protected BulletEntity(EntityType<? extends AbstractArrowEntity> p_i48547_1_, double p_i48547_2_, double p_i48547_4_, double p_i48547_6_, World p_i48547_8_) {
+    public BulletEntity(EntityType<BulletEntity> p_i48547_1_, double p_i48547_2_, double p_i48547_4_, double p_i48547_6_, World p_i48547_8_) {
         this(p_i48547_1_, p_i48547_8_);
         this.setPosition(p_i48547_2_, p_i48547_4_, p_i48547_6_);
     }
 
-    protected BulletEntity(EntityType<? extends AbstractArrowEntity> p_i48548_1_, LivingEntity p_i48548_2_, World p_i48548_3_) {
-        this(p_i48548_1_, p_i48548_2_.func_226277_ct_(), p_i48548_2_.func_226280_cw_() - (double)0.1F, p_i48548_2_.func_226281_cx_(), p_i48548_3_);
+    public BulletEntity(LivingEntity p_i48548_2_, World p_i48548_3_) {
+        this(EntityHandler.BULLET, p_i48548_2_.func_226277_ct_(), p_i48548_2_.func_226280_cw_() - (double)0.1F, p_i48548_2_.func_226281_cx_(), p_i48548_3_);
         this.setShooter(p_i48548_2_);
         if (p_i48548_2_ instanceof PlayerEntity) {
             this.pickupStatus = AbstractArrowEntity.PickupStatus.ALLOWED;

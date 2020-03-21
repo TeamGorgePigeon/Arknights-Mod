@@ -5,6 +5,7 @@ import arknights.entity.notLiving.BulletEntity;
 import arknights.entity.notLiving.Meteorite;
 import arknights.entity.living.OriginiumSlugEntity;
 import arknights.entity.disaster.SnowStorm;
+import arknights.entity.*;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.event.RegistryEvent;
@@ -21,15 +22,15 @@ public class EntityHandler {
     public static final EntityType<BulletEntity> BULLET = (EntityType<BulletEntity>)EntityType.Builder.<BulletEntity>create(BulletEntity::new, EntityClassification.MISC).build("bullet").setRegistryName(MODID+ ":bullet");
 
     public static final EntityType<OriginiumSlugEntity> ORIGINIUMSLUG = (EntityType<OriginiumSlugEntity>)EntityType.Builder.<OriginiumSlugEntity>create(OriginiumSlugEntity::new, EntityClassification.MONSTER).build("originium_slug").setRegistryName(MODID + ":" + "originium_slug");
+    private static final EntityType<ExusiaiEntity> EXUSIAI = (EntityType<ExusiaiEntity>)EntityType.Builder.<ExusiaiEntity>create(ExusiaiEntity::new, EntityClassification.MONSTER).build("exusiai").setRegistryName(MODID + ":" + "exusiai");
 
     @SubscribeEvent
     public static void register(RegistryEvent.Register<EntityType<?>> evt){
         IForgeRegistry<EntityType<?>> r = evt.getRegistry();
         r.register(DISASTERZERO);
         r.register(SNOWSTORM);
-
         r.register(METEORITE);
-
         r.register(ORIGINIUMSLUG);
+		r.register(EXUSIAI);
     }
 }
