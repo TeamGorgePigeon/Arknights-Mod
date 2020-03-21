@@ -23,17 +23,15 @@ public class ExusiaiModel<T extends LivingEntity> extends BipedModel<T> {
    public final ModelRenderer bipedLeftLegwear;
    public final ModelRenderer bipedRightLegwear;
    public final ModelRenderer bipedBodyWear;
-   private final ModelRenderer bipedCape;
    private final ModelRenderer bipedDeadmau5Head;
    private final ModelRenderer bipedHalo;
 
+
    public ExusiaiModel(float modelSize ) {
-      super(RenderType::func_228644_e_, modelSize, 0.0F, 64, 128);
+      super(RenderType::func_228644_e_, modelSize, 0.0F, 128, 64);
       this.bipedDeadmau5Head = new ModelRenderer(this, 24, 0);
       this.bipedDeadmau5Head.func_228301_a_(-3.0F, -6.0F, -1.0F, 6.0F, 6.0F, 1.0F, modelSize);
-      this.bipedCape = new ModelRenderer(this, 0, 0);
-      this.bipedCape.setTextureSize(64, 32);
-      this.bipedCape.func_228301_a_(-5.0F, 0.0F, -1.0F, 10.0F, 16.0F, 1.0F, modelSize);
+
       this.bipedLeftArm = new ModelRenderer(this, 32, 48);
       this.bipedLeftArm.func_228301_a_(-1.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, modelSize);
       this.bipedLeftArm.setRotationPoint(5.0F, 2.5F, 0.0F);
@@ -93,9 +91,6 @@ public class ExusiaiModel<T extends LivingEntity> extends BipedModel<T> {
       this.bipedDeadmau5Head.func_228308_a_(p_228287_1_, p_228287_2_, p_228287_3_, p_228287_4_);
    }
 
-   public void func_228289_b_(MatrixStack p_228289_1_, IVertexBuilder p_228289_2_, int p_228289_3_, int p_228289_4_) {
-      this.bipedCape.func_228308_a_(p_228289_1_, p_228289_2_, p_228289_3_, p_228289_4_);
-   }
 
    public void func_225597_a_(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
       super.func_225597_a_(p_225597_1_, p_225597_2_, p_225597_3_, p_225597_4_, p_225597_5_, p_225597_6_);
@@ -104,12 +99,6 @@ public class ExusiaiModel<T extends LivingEntity> extends BipedModel<T> {
       this.bipedLeftArmwear.copyModelAngles(this.bipedLeftArm);
       this.bipedRightArmwear.copyModelAngles(this.bipedRightArm);
       this.bipedBodyWear.copyModelAngles(this.bipedBody);
-      if (p_225597_1_.isCrouching()) {
-         this.bipedCape.rotationPointY = 2.0F;
-      } else {
-         this.bipedCape.rotationPointY = 0.0F;
-      }
-
    }
 
    public void setVisible(boolean visible) {
@@ -119,7 +108,6 @@ public class ExusiaiModel<T extends LivingEntity> extends BipedModel<T> {
       this.bipedLeftLegwear.showModel = visible;
       this.bipedRightLegwear.showModel = visible;
       this.bipedBodyWear.showModel = visible;
-      this.bipedCape.showModel = visible;
       this.bipedDeadmau5Head.showModel = visible;
    }
 
