@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:crafting_shapeless",
-  "result": { "item": "arknights:jb", "count": 1 },
-  "ingredients": [
-      { "item": "arknights:pure_originiums", "data": 0 },
-      { "item": "minecraft:fish", "data": 0 }
-  ]
-}
