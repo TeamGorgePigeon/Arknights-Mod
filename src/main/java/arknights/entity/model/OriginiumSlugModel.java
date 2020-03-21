@@ -73,6 +73,7 @@ public class OriginiumSlugModel<T extends Entity> extends SegmentedModel<T> {
    }
 
    public void func_225597_a_(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
+      /*
       for(int i = 0; i < this.bodyBoxes.length; ++i) {
          this.bodyBoxes[i].rotateAngleY = MathHelper.cos(p_225597_4_ * 0.9F + (float)i * 0.15F * (float)Math.PI) * (float)Math.PI * 0.05F * (float)(1 + Math.abs(i - 2));
          this.bodyBoxes[i].rotationPointX = MathHelper.sin(p_225597_4_ * 0.9F + (float)i * 0.15F * (float)Math.PI) * (float)Math.PI * 0.2F * (float)Math.abs(i - 2);
@@ -80,6 +81,8 @@ public class OriginiumSlugModel<T extends Entity> extends SegmentedModel<T> {
 
       this.hornBoxes[0].rotateAngleY = this.bodyBoxes[0].rotateAngleY;
       this.hornBoxes[1].rotateAngleY = this.bodyBoxes[0].rotateAngleY;
+
+       */
       //this.hornBoxes[0].rotateAngleY = this.bodyBoxes[2].rotateAngleY;
       //this.hornBoxes[1].rotateAngleY = this.bodyBoxes[4].rotateAngleY;
       //this.hornBoxes[1].rotationPointX = this.bodyBoxes[4].rotationPointX;
