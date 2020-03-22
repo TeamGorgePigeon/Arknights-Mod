@@ -2,6 +2,7 @@ package arknights.item;
 
 import arknights.entity.notLiving.BulletEntity;
 import arknights.registry.SoundHandler;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.extensions.IForgeItem;
 
@@ -28,6 +30,11 @@ public class Apulupai extends BaseItem implements IForgeItem{
     public Apulupai(Properties p_i48487_1_) {
         super(p_i48487_1_);
         this.pressed = false;
+    }
+
+    @Override
+    public boolean canPlayerBreakBlockWhileHolding(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
+        return !player.isCreative();
     }
 
     @Override
