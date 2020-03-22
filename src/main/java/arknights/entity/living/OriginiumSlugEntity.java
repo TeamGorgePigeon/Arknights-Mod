@@ -22,8 +22,8 @@ public class OriginiumSlugEntity extends MonsterEntity {
    public OriginiumSlugEntity(EntityType<? extends OriginiumSlugEntity> typeIn, World worldIn) {
       super(typeIn, worldIn);
       AxisAlignedBB aabb = this.getBoundingBox();
-      this.setBoundingBox(new AxisAlignedBB(aabb.minX, aabb.minY, aabb.minZ, aabb.maxX, aabb.minY + 0.5D, aabb.maxZ));
-      this.recalculateSize();
+      this.setBoundingBox(new AxisAlignedBB(aabb.minX, aabb.minY, aabb.minZ, aabb.maxX, aabb.minY + 0.1D, aabb.maxZ));
+      //this.recalculateSize();
    }
 
    protected void registerGoals() {
