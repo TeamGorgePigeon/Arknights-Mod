@@ -2,7 +2,9 @@ package arknights.entity.living;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.merchant.villager.AbstractVillagerEntity;
 import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
@@ -24,11 +26,19 @@ public class OriginiumSlugEntity extends MonsterEntity {
 
    protected void registerGoals() {
       this.summonOriginiumSlug = new OriginiumSlugEntity.SummonOriginiumSlugGoal(this);
+      this.goalSelector.addGoal(10, new LookAtGoal(this, AnimalEntity.class, 8.0F));
+      this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
+      this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+      this.goalSelector.addGoal(10, new LookAtGoal(this, AbstractVillagerEntity.class, 8.0F));
+      this.goalSelector.addGoal(10, new RandomWalkingGoal(this, 1.0F));
       this.goalSelector.addGoal(1, new SwimGoal(this));
+      this.goalSelector.addGoal(10, new RandomSwimmingGoal(this, 1.0F, 120));
       this.goalSelector.addGoal(3, this.summonOriginiumSlug);
       this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.0D, false));
       this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setCallsForHelp());
+      this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AnimalEntity.class, true));
       this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+      this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AbstractVillagerEntity.class, true));
    }
 
    /**
@@ -43,7 +53,7 @@ public class OriginiumSlugEntity extends MonsterEntity {
       super.registerAttributes();
       this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
       this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-      //this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
+      this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
    }
 
    protected boolean func_225502_at_() {
