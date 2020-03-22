@@ -30,7 +30,7 @@ public class ItemHandler {
     public static final Item ORIGINIUMSHARD = createItem("originium_shard", 1001, LEGEND);
     public static final Item PUREGOLD = createItem("pure_gold", 1000, EPIC);
 
-    public static final Item TESTSWORD = new TestSword(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "testsword");
+    public static final Item TRUESILVER_SWORD = new TruesilverSword(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "truesilver_sword");
     public static final Item JB = new Apulupai(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "jb");
 
 
@@ -129,7 +129,7 @@ public class ItemHandler {
         r.register(BIPOLARNANOFLAKE);
         r.register(POLYMERIZATIONPREPERATION);
         r.register(JB);
-        r.register(TESTSWORD);
+        r.register(TRUESILVER_SWORD);
 
         r.register(TRADINGHOME_ITEM);
         r.register(ORIGINIUMS);

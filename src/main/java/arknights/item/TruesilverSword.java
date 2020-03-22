@@ -1,25 +1,44 @@
 package arknights.item;
 
+import arknights.registry.SoundHandler;
 import arknights.utils.MyMathHelper;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.UseAction;
+import net.minecraft.item.*;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
-public class TestSword extends BaseItem {
+import static net.minecraft.item.ItemTier.DIAMOND;
+
+public class TruesilverSword extends SwordItem {
 
     private int tick = 0;//Skill CD
     private boolean rightPressed = false; //Maybe useful
-    public TestSword(Properties p_i48487_1_) {
-        super(p_i48487_1_);
+
+    public TruesilverSword( Properties props) {
+        super(DIAMOND, 3, -2.4F, props);
     }
+
+    private static final Rarity RARITY = Rarity.UNCOMMON;
+
+    @Override
+    public Rarity getRarity(ItemStack stack) {
+        return stack.isEnchanted() ? Rarity.RARE.compareTo(RARITY) > 0 ? Rarity.RARE : RARITY : RARITY;
+    }
+
     @Override
     public UseAction getUseAction(ItemStack stack) {
         return UseAction.SPEAR;
@@ -42,6 +61,18 @@ public class TestSword extends BaseItem {
         //String playerName = entityLiving.getScoreboardName()
         return onSwordSwing(worldIn, stack, (PlayerEntity) entityLiving);
     }
+
+    @Override
+    public boolean canPlayerBreakBlockWhileHolding(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
+        return !player.isCreative();
+    }
+
+    @Override
+    public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.damageItem(stack.getMaxDamage() + 1, attacker, (user) -> user.sendBreakAnimation(attacker.getActiveHand()));
+        return true;
+    }
+
 
     public ItemStack onSwordSwing(World p_213357_1_, ItemStack p_213357_2_, PlayerEntity playerEntity) {
         Vec3d vec3d = playerEntity.getPositionVec();
@@ -74,7 +105,13 @@ public class TestSword extends BaseItem {
         }
 
          */
-        p_213357_1_.playSound(null, playerEntity.func_226277_ct_(), playerEntity.func_226278_cu_(), playerEntity.func_226281_cx_(), SoundEvents.ENTITY_ARROW_HIT, SoundCategory.NEUTRAL, 1.0F, 1.0F + (p_213357_1_.rand.nextFloat() - p_213357_1_.rand.nextFloat()) * 0.4F);
+        p_213357_1_.playSound(null, playerEntity.func_226277_ct_(), playerEntity.func_226278_cu_(), playerEntity.func_226281_cx_(), SoundHandler.TRUESILVER_SLASH, SoundCategory.NEUTRAL, 1.0F, 1.0F + (p_213357_1_.rand.nextFloat() - p_213357_1_.rand.nextFloat()) * 0.4F);
         return p_213357_2_;
     }
+    @OnlyIn(Dist.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
+        super.addInformation(stack, world, tooltip, flags);
+        tooltip.add(new TranslationTextComponent("右键发动技能"));
+    }
 }
+

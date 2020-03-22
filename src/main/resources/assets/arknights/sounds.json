@@ -28,5 +28,15 @@
 	{
 		"sounds": [ "arknights:exusiai/skill4" ],
 		"subtitle": "arknights.subtitle.skill4"
+	},
+	"truesilver_slash":
+	{
+		"sounds": [ "arknights:silverash/truesilver_slash" ],
+		"subtitle": "arknights.subtitle.truesilver_slash"
+	},
+	"operator_dead":
+	{
+		"sounds": [ "arknights:operator_dead" ],
+		"subtitle": "arknights.subtitle.operator_dead"
 	}
 }
