@@ -32,7 +32,7 @@ public class ItemHandler {
     public static final Item ORUNDUM= createItem("orundum", 44, COMMON);
 
     public static final Item TRUESILVER_SWORD = new TruesilverSword(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "truesilver_sword");
-    public static final Item APULUPAI = new Apulupai(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "jb");
+    public static final Item JB = new Apulupai(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "jb");
 
 
     public static final Item ORIROCK = createItem("orirock", 1, COMMON);
@@ -128,7 +128,7 @@ public class ItemHandler {
         r.register(D32STEEL);
         r.register(BIPOLARNANOFLAKE);
         r.register(POLYMERIZATIONPREPERATION);
-        r.register(APULUPAI);
+        r.register(JB);
         r.register(TRUESILVER_SWORD);
 
         r.register(TRADINGHOME_ITEM);
