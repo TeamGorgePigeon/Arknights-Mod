@@ -45,4 +45,12 @@ public class ExusiaiModel extends OperatorModel {
 		LeftWing.cubeList.add(new ModelBox(LeftWing, 63, 47, 0.2921F, -3.3063F, -5.2265F, 0, 8, 9, 0.0F, true));
 		*/
    }
+
+    public void func_225599_a_(HandSide p_225599_1_, MatrixStack p_225599_2_) {
+        float f = p_225599_1_ == HandSide.RIGHT ? 1.0F : -1.0F;
+        ModelRenderer modelrenderer = this.getArmForSide(p_225599_1_);
+        modelrenderer.rotationPointX += f;
+        modelrenderer.func_228307_a_(p_225599_2_);
+        modelrenderer.rotationPointX -= f;
+    }
 }
