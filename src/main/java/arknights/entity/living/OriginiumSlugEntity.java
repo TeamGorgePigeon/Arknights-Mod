@@ -1,4 +1,4 @@
-package arknights.entity;
+package arknights.entity.living;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
@@ -6,10 +6,12 @@ import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
 public class OriginiumSlugEntity extends MonsterEntity {
@@ -17,6 +19,7 @@ public class OriginiumSlugEntity extends MonsterEntity {
 
    public OriginiumSlugEntity(EntityType<? extends OriginiumSlugEntity> typeIn, World worldIn) {
       super(typeIn, worldIn);
+      //this.recalculateSize();
    }
 
    protected void registerGoals() {
@@ -40,7 +43,7 @@ public class OriginiumSlugEntity extends MonsterEntity {
       super.registerAttributes();
       this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
       this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-      this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
+      //this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
    }
 
    protected boolean func_225502_at_() {
@@ -91,6 +94,11 @@ public class OriginiumSlugEntity extends MonsterEntity {
 
       public boolean shouldExecute() {
          return this.lookForFriends > 0;
+      }
+
+      @Nullable
+      public AxisAlignedBB getCollisionBox(Entity entityIn) {
+         return new AxisAlignedBB(-4.0, -3.0, -5.0, 4.0, 3.0, 5.0);
       }
    }
 }
