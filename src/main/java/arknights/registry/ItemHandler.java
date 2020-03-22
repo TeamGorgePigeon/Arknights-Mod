@@ -29,9 +29,10 @@ public class ItemHandler {
     public static final Item ORIGINITEPRIME = new OriginitePrime(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID+":originite_prime");
     public static final Item ORIGINIUMSHARD = createItem("originium_shard", 1001, LEGEND);
     public static final Item PUREGOLD = createItem("pure_gold", 1000, EPIC);
+    public static final Item ORUNDUM= createItem("orundum", 44, COMMON);
 
     public static final Item TRUESILVER_SWORD = new TruesilverSword(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "truesilver_sword");
-    public static final Item JB = new Apulupai(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "jb");
+    public static final Item APULUPAI = new Apulupai(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "jb");
 
 
     public static final Item ORIROCK = createItem("orirock", 1, COMMON);
@@ -52,7 +53,6 @@ public class ItemHandler {
     public static final Item ORIRONSHARD= createItem("oriron_shard", 13, COMMON);
     public static final Item ORIRON = createItem("oriron", 14, UNCOMMON, 13, 3);
     public static final Item ORIRONCLUSTER = createItem("oriron_cluster", 15, RARE, 14, 4);
-    public static final Item ORUNDUM= createItem("orundum", 44, COMMON);
     public static final Item ORIRONBLOCK = createItem("oriron_block", 49, EPIC, 15, 2, 23, 1, 11, 1);
 
     public static final Item DIKETON = createItem("diketon", 17, COMMON);
@@ -128,7 +128,7 @@ public class ItemHandler {
         r.register(D32STEEL);
         r.register(BIPOLARNANOFLAKE);
         r.register(POLYMERIZATIONPREPERATION);
-        r.register(JB);
+        r.register(APULUPAI);
         r.register(TRUESILVER_SWORD);
 
         r.register(TRADINGHOME_ITEM);
