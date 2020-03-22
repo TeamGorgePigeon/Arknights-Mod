@@ -1,5 +1,6 @@
 package arknights.entity.model;
 
+import arknights.entity.ExusiaiEntity;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -11,19 +12,23 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Hand;
 import net.minecraft.util.HandSide;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ExusiaiModel extends OperatorModel {
+public class ExusiaiModel<T extends ExusiaiEntity> extends OperatorModel {
    private List<ModelRenderer> field_228286_w_ = Lists.newArrayList();
    private final ModelRenderer bipedHalo;
 
 
    public ExusiaiModel(float modelSize ) {
       super(modelSize);
-	  
+
+      //this.leftArmPose = BipedModel.ArmPose.BOW_AND_ARROW;
+      //this.rightArmPose = BipedModel.ArmPose.BOW_AND_ARROW;
 	  this.bipedHalo = new ModelRenderer(this, 65, 0);
 	  this.bipedHalo.setRotationPoint(0.0F, 24.0F, 0.0F);
 	  this.bipedHalo.func_228301_a_(-4.0F, -33.0F, -4.0F, 8.0F, 8.0F, 0.0F, modelSize );
@@ -45,6 +50,21 @@ public class ExusiaiModel extends OperatorModel {
 		LeftWing.cubeList.add(new ModelBox(LeftWing, 63, 47, 0.2921F, -3.3063F, -5.2265F, 0, 8, 9, 0.0F, true));
 		*/
    }
+
+    public void setLivingAnimations(T entityIn, float limbSwing, float limbSwingAmount, float partialTick) {
+        this.rightArmPose = BipedModel.ArmPose.EMPTY;
+        this.leftArmPose = BipedModel.ArmPose.EMPTY;
+        ItemStack itemstack = entityIn.getHeldItem(Hand.MAIN_HAND);
+        if (itemstack.getItem() instanceof net.minecraft.item.BowItem && entityIn.isAggressive()) {
+            if (entityIn.getPrimaryHand() == HandSide.RIGHT) {
+                this.rightArmPose = BipedModel.ArmPose.BOW_AND_ARROW;
+            } else {
+                this.leftArmPose = BipedModel.ArmPose.BOW_AND_ARROW;
+            }
+        }
+
+        super.setLivingAnimations(entityIn, limbSwing, limbSwingAmount, partialTick);
+    }
 
     public void func_225599_a_(HandSide p_225599_1_, MatrixStack p_225599_2_) {
         float f = p_225599_1_ == HandSide.RIGHT ? 1.0F : -1.0F;
