@@ -18,12 +18,10 @@ import java.util.Random;
 
 public class OriginiumSlugEntity extends MonsterEntity {
    private OriginiumSlugEntity.SummonOriginiumSlugGoal summonOriginiumSlug;
+   public EntitySize size;
 
    public OriginiumSlugEntity(EntityType<? extends OriginiumSlugEntity> typeIn, World worldIn) {
       super(typeIn, worldIn);
-      AxisAlignedBB aabb = this.getBoundingBox();
-      this.setBoundingBox(new AxisAlignedBB(aabb.minX, aabb.minY, aabb.minZ, aabb.maxX, aabb.minY + 0.1D, aabb.maxZ));
-      //this.recalculateSize();
    }
 
    protected void registerGoals() {
@@ -46,6 +44,10 @@ public class OriginiumSlugEntity extends MonsterEntity {
    /**
     * Returns the Y Offset of this entity.
     */
+
+   public double getYOffset() {
+      return 0.1D;
+   }
 
    protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
       return 0.1F;

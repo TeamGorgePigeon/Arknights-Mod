@@ -19,28 +19,14 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class ExusiaiEntity extends TameableEntity implements IRangedAttackMob {
-    private ExusiaiEntity.SummonExusiaiGoal summonExusiai;
+public class ExusiaiEntity extends OperatorBase implements IRangedAttackMob{
 
     public ExusiaiEntity(EntityType<? extends ExusiaiEntity> typeIn, World worldIn) {
         super(typeIn, worldIn);
     }
 
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new SwimGoal(this));
-        //this.goalSelector.addGoal(2, this.sitGoal);
-        this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
-        this.goalSelector.addGoal(10, new RandomWalkingGoal(this, 1.0F));
-        this.goalSelector.addGoal(10, new RandomSwimmingGoal(this, 1.0F, 120));
-        this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
-        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setCallsForHelp());
-        this.goalSelector.addGoal(6, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
-        this.summonExusiai = new ExusiaiEntity.SummonExusiaiGoal(this);
-        this.goalSelector.addGoal(1, new SwimGoal(this));
-        this.goalSelector.addGoal(3, this.summonExusiai);
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MonsterEntity.class, true));
+        super.registerGoals();
         this.goalSelector.addGoal(1, new RangedAttackGoal(this, 1.25D, 20, 10.0F));
     }
 
@@ -50,37 +36,6 @@ public class ExusiaiEntity extends TameableEntity implements IRangedAttackMob {
 
     protected void registerAttributes() {
         super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-        //this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
-    }
-
-    protected boolean func_225502_at_() {
-        return false;
-    }
-
-    public float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
-        switch(poseIn) {
-            case SWIMMING:
-            case FALL_FLYING:
-            case SPIN_ATTACK:
-                return 0.4F;
-            case CROUCHING:
-                return 1.27F;
-            default:
-                return 1.62F;
-        }
-    }
-
-    /**
-     * Called when the entity is attacked.
-     */
-
-
-    @Nullable
-    @Override
-    public AgeableEntity createChild(AgeableEntity ageable) {
-        return null;
     }
 
     public void attackEntityWithRangedAttack(LivingEntity target, float var2){
@@ -105,18 +60,5 @@ public class ExusiaiEntity extends TameableEntity implements IRangedAttackMob {
         }
     }
 */
-
-    static class SummonExusiaiGoal extends Goal {
-        private final ExusiaiEntity exusiai;
-
-        public SummonExusiaiGoal(ExusiaiEntity exusiaiIn) {
-            this.exusiai = exusiaiIn;
-        }
-
-        @Override
-        public boolean shouldExecute() {
-            return false;
-        }
-    }
 }
 

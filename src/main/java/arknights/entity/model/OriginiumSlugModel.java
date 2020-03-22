@@ -24,7 +24,7 @@ public class OriginiumSlugModel<T extends Entity> extends SegmentedModel<T> {
       this.bodyBoxes = new ModelRenderer[1];
       this.textureWidth = 64;
       this.textureHeight = 64;
-      float f = -3.5F;
+      float f = 0.0F;
       this.bodyBoxes[0] = new ModelRenderer(this, 0, 0);
       this.bodyBoxes[0].func_228300_a_(-4.0F, 0.0F, -5.0F, 8.0F, 6.0F, 10.0F);//4,3,5
       this.bodyBoxes[0].setRotationPoint(0.0F, 18.0F, f);
@@ -35,7 +35,7 @@ public class OriginiumSlugModel<T extends Entity> extends SegmentedModel<T> {
       this.hornBoxes[0].func_228300_a_(-8.0F, 0.0F, -1F, 16.0F, 10.0F, 2.0F);
       this.hornBoxes[0].setRotationPoint(0.0F, 14.0F, f);
       this.hornBoxes[1] = new ModelRenderer(this, 0, 32);
-      this.hornBoxes[1].func_228300_a_(-0.0F, 0.0F, -8.0F, 2.0F, 12.0F, 16.0F);
+      this.hornBoxes[1].func_228300_a_(0.0F, 0.0F, -8.0F, 2.0F, 12.0F, 16.0F);
       this.hornBoxes[1].setRotationPoint(0.0F, 12.0F, f);
       Builder<ModelRenderer> builder = ImmutableList.builder();
       builder.addAll(Arrays.asList(this.bodyBoxes));

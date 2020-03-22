@@ -1,5 +1,6 @@
 package arknights.entity;
 
+import arknights.registry.SoundHandler;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -7,6 +8,7 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -20,14 +22,18 @@ public class OperatorBase extends TameableEntity {
 
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new SwimGoal(this));
+        //this.goalSelector.addGoal(2, this.sitGoal);
         this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(1, new RandomWalkingGoal(this, 1.0F));
+        this.goalSelector.addGoal(1, new RandomSwimmingGoal(this, 1.0F, 120));
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
         this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setCallsForHelp());
-        this.goalSelector.addGoal(6, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
+        this.goalSelector.addGoal(3, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
         this.summonOperator = new OperatorBase.SummonOperatorGoal(this);
-        //this.goalSelector.addGoal(3, this.summonExusiai);
+        this.goalSelector.addGoal(1, new SwimGoal(this));
+        this.goalSelector.addGoal(3, this.summonOperator);
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MonsterEntity.class, true));
     }
 
@@ -47,13 +53,17 @@ public class OperatorBase extends TameableEntity {
     static class SummonOperatorGoal extends Goal {
         private final OperatorBase operatorBase;
 
-        public SummonOperatorGoal(OperatorBase exusiaiIn) {
-            this.operatorBase = exusiaiIn;
+        public SummonOperatorGoal(OperatorBase operatorBaseIn) {
+            this.operatorBase = operatorBaseIn;
         }
 
         @Override
         public boolean shouldExecute() {
             return false;
+        }
+
+        protected SoundEvent getDeathSound() {
+            return SoundHandler.OPERATOR_DEAD;
         }
     }
 }

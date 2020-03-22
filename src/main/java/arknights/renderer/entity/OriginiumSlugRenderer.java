@@ -13,7 +13,7 @@ public class OriginiumSlugRenderer extends MobRenderer<OriginiumSlugEntity, Orig
    private static final ResourceLocation ORIGINIUMSLUG_TEXTURES = new ResourceLocation("arknights:textures/entity/originium_slug.png");
 
    public OriginiumSlugRenderer(EntityRendererManager renderManagerIn) {
-      super(renderManagerIn, new OriginiumSlugModel<>(), 0.3F);
+      super(renderManagerIn, new OriginiumSlugModel<>(), 0.5F);
    }
 
    protected float getDeathMaxRotation(OriginiumSlugEntity entityLivingBaseIn) {
