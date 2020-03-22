@@ -1,4 +1,4 @@
-package arknights.entity.living;
+package arknights.entity;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
@@ -25,7 +25,7 @@ public class OriginiumSlugEntity extends MonsterEntity {
       this.goalSelector.addGoal(3, this.summonOriginiumSlug);
       this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.0D, false));
       this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setCallsForHelp());
-      this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, LivingEntity.class, true));
+      this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
    }
 
    /**

@@ -52,6 +52,7 @@ public class ItemHandler {
     public static final Item ORIRONSHARD= createItem("oriron_shard", 13, COMMON);
     public static final Item ORIRON = createItem("oriron", 14, UNCOMMON, 13, 3);
     public static final Item ORIRONCLUSTER = createItem("oriron_cluster", 15, RARE, 14, 4);
+    public static final Item ORUNDUM= createItem("orundum", 44, COMMON);
     public static final Item ORIRONBLOCK = createItem("oriron_block", 49, EPIC, 15, 2, 23, 1, 11, 1);
 
     public static final Item DIKETON = createItem("diketon", 17, COMMON);
@@ -104,6 +105,7 @@ public class ItemHandler {
         r.register(POLYESTERPACK);
         r.register(POLYESTERLUMP);
         r.register(ORIRONSHARD);
+        r.register(ORUNDUM);
         r.register(ORIRON);
         r.register(ORIRONCLUSTER);
         r.register(ORIRONBLOCK);
