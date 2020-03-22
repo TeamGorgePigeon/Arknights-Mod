@@ -29,8 +29,12 @@ public class EntityHandler {
         IForgeRegistry<EntityType<?>> r = evt.getRegistry();
         r.register(DISASTERZERO);
         r.register(SNOWSTORM);
+
         r.register(METEORITE);
+        r.register(BULLET);
+
         r.register(ORIGINIUMSLUG);
+
 		r.register(EXUSIAI);
     }
 }
