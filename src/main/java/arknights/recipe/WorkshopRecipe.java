@@ -18,6 +18,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import net.minecraftforge.event.enchanting.EnchantmentLevelSetEvent;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class WorkshopRecipe implements IWorkshopRecipe {
@@ -70,21 +71,24 @@ public class WorkshopRecipe implements IWorkshopRecipe {
         RecipeItemHelper recipeitemhelper = new RecipeItemHelper();
         java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
         int i = 0;
-        boolean a = true;
+        boolean IsMatchItemCountMain = false;
+        boolean IsMatchItemCount[] = new boolean[3];
 
         for(int j = 0; j < inv.getSizeInventory(); ++j) {
             ItemStack itemstack = inv.getStackInSlot(j);
-            if (!itemstack.isEmpty()) {
+            if (!itemstack.isEmpty() & itemstack.getCount()>0) {
                 ++i;
                 if (isSimple)
                     recipeitemhelper.func_221264_a(itemstack, 1);
                 else inputs.add(itemstack);
-                a = itemstack.getCount() >= this.counts.get(j).getCount();
-                this.items.set(j, itemstack.getItem() != null ? itemstack.getItem() : Items.AIR);
-            }
+                if (j <= this.counts.size()-1) {
+                    IsMatchItemCount[j] =  itemstack.getCount() >= this.counts.get(j).getCount();
+                    this.items.set(j,inv.getStackInSlot(j) != null ? itemstack.getItem() : Items.AIR);
+                }
+            } else {IsMatchItemCount[j]=true;}
         }
-
-        return i == this.recipeItems.size() && (isSimple ? recipeitemhelper.canCraft(this, (IntList)null) : net.minecraftforge.common.util.RecipeMatcher.findMatches(inputs,  this.recipeItems) != null) && a;
+        if (IsMatchItemCount[0] & IsMatchItemCount[1] & IsMatchItemCount[2]) {IsMatchItemCountMain=true;}
+        return i == this.recipeItems.size() && (isSimple ? recipeitemhelper.canCraft(this, (IntList)null) : net.minecraftforge.common.util.RecipeMatcher.findMatches(inputs,  this.recipeItems) != null) && IsMatchItemCountMain;
     }
 
     public ItemStack getCraftingResult(IInventory inv) {
