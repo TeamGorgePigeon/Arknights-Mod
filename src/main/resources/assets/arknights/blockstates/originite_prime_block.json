@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "arknights:block/originium_prime_block.obj" }
+    "": { "model": "arknights:block/originium_prime_block" }
   }
 }

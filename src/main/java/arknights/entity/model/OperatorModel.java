@@ -21,8 +21,8 @@ public class OperatorModel<T extends LivingEntity> extends BipedModel<T> {
     public final ModelRenderer bipedLeftLegwear;
     public final ModelRenderer bipedRightLegwear;
     public final ModelRenderer bipedBodyWear;
-    private final ModelRenderer bipedDeadmau5Head;
-    private final ModelRenderer bipedHalo;
+    public final ModelRenderer bipedDeadmau5Head;
+    //private final ModelRenderer bipedHalo;
 
 
     public OperatorModel(float modelSize) {
@@ -56,9 +56,9 @@ public class OperatorModel<T extends LivingEntity> extends BipedModel<T> {
         this.bipedBodyWear.func_228301_a_(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, modelSize + 0.25F);
         this.bipedBodyWear.setRotationPoint(0.0F, 0.0F, 0.0F);
 
-        this.bipedHalo = new ModelRenderer(this, 65, 0);
-        this.bipedHalo.setRotationPoint(0.0F, 24.0F, 0.0F);
-        this.bipedHalo.func_228301_a_(-4.0F, -33.0F, -4.0F, 8.0F, 8.0F, 0.0F, modelSize );
+        //this.bipedHalo = new ModelRenderer(this, 65, 0);
+        //this.bipedHalo.setRotationPoint(0.0F, 24.0F, 0.0F);
+        //this.bipedHalo.func_228301_a_(-4.0F, -33.0F, -4.0F, 8.0F, 8.0F, 0.0F, modelSize );
 	/*
 		Wing = new ModelRenderer(this);
 		Wing.setRotationPoint(0.3326F, 5.4407F, 0.4995F);

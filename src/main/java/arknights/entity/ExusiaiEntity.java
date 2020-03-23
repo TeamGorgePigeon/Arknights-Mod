@@ -1,5 +1,6 @@
 package arknights.entity;
 
+import arknights.Skill;
 import arknights.entity.notLiving.BulletEntity;
 import arknights.registry.ItemHandler;
 import arknights.registry.SoundHandler;
@@ -11,6 +12,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class ExusiaiEntity extends OperatorBase implements IRangedAttackMob{
+    private static final Skill skill3 = new Skill(20,30,15, Skill.SkillRecoverType.AUTORECOVER);
 
     public ExusiaiEntity(EntityType<? extends ExusiaiEntity> typeIn, World worldIn) {
         super(typeIn, worldIn);
@@ -40,6 +42,11 @@ public class ExusiaiEntity extends OperatorBase implements IRangedAttackMob{
         bulletEntity.shoot(d0, d1 + d3 * (double)0.2F, d2, 1.6F, 1.0F);
         this.playSound(SoundHandler.EXUSIAI_ATTACK, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
         this.world.addEntity(bulletEntity);
+    }
+
+    public void livingTick() {
+
+        super.livingTick();
     }
 
 /*

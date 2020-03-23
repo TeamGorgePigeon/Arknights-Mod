@@ -22,17 +22,20 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class ExusiaiModel<T extends ExusiaiEntity> extends OperatorModel {
    private List<ModelRenderer> field_228286_w_ = Lists.newArrayList();
    private final ModelRenderer bipedHalo;
+   private final ModelRenderer bipedWing;
 
 
    public ExusiaiModel(float modelSize ) {
       super(modelSize);
 
-      //this.leftArmPose = BipedModel.ArmPose.BOW_AND_ARROW;
-      this.rightArmPose = ArmPose.EMPTY;
-	  this.bipedHalo = new ModelRenderer(this, 65, 0);
-	  this.bipedHalo.setRotationPoint(0.0F, 24.0F, 0.0F);
-	  this.bipedHalo.func_228301_a_(-4.0F, -33.0F, -4.0F, 8.0F, 8.0F, 0.0F, modelSize );
-	/*
+	  this.bipedHalo = new ModelRenderer(this, 64, 0);
+	  this.bipedHalo.func_228301_a_(-4.0F, -9.0F, -4.0F, 8.0F, 1.0F, 8.0F, modelSize );
+	  this.bipedHalo.setRotationPoint(this.bipedHead.rotationPointX, this.bipedHead.rotationPointY, this.bipedHead.rotationPointZ);
+
+	  this.bipedWing = new ModelRenderer(this, 64, 16);
+	  this.bipedWing.func_228301_a_(-4.0F, 0.0F, -2.0F, 28.0F, 16.0F, 1.0F, modelSize);
+	  this.bipedWing.setRotationPoint(this.bipedBody.rotationPointX, this.bipedBody.rotationPointY, this.bipedBody.rotationPointZ);
+	  /*
 		Wing = new ModelRenderer(this);
 		Wing.setRotationPoint(0.3326F, 5.4407F, 0.4995F);
 		setRotationAngle(Wing, -0.0873F, 0.9599F, -0.1745F);
@@ -50,6 +53,12 @@ public class ExusiaiModel<T extends ExusiaiEntity> extends OperatorModel {
 		LeftWing.cubeList.add(new ModelBox(LeftWing, 63, 47, 0.2921F, -3.3063F, -5.2265F, 0, 8, 9, 0.0F, true));
 		*/
    }
+
+
+   @Override
+    protected Iterable<ModelRenderer> func_225600_b_() {
+        return Iterables.concat(super.func_225600_b_(), ImmutableList.of(this.bipedHalo, this.bipedWing));
+    }
 
     public void setLivingAnimations(T entityIn, float limbSwing, float limbSwingAmount, float partialTick) {
         this.rightArmPose = BipedModel.ArmPose.EMPTY;
@@ -72,5 +81,7 @@ public class ExusiaiModel<T extends ExusiaiEntity> extends OperatorModel {
         modelrenderer.rotationPointX += f;
         modelrenderer.func_228307_a_(p_225599_2_);
         modelrenderer.rotationPointX -= f;
+        this.bipedHalo.copyModelAngles(this.bipedHeadwear);
+        this.bipedWing.copyModelAngles(this.bipedBodyWear);
     }
 }
