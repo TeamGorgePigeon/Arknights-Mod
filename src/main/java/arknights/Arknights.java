@@ -72,6 +72,7 @@ public class Arknights
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
         RendererHandler.register();
+        ModelLoaderHandler.myRegister();
         LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }
 

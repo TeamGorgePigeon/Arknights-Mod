@@ -28,7 +28,7 @@ public class ExusiaiModel<T extends ExusiaiEntity> extends OperatorModel {
       super(modelSize);
 
       //this.leftArmPose = BipedModel.ArmPose.BOW_AND_ARROW;
-      //this.rightArmPose = BipedModel.ArmPose.BOW_AND_ARROW;
+      this.rightArmPose = ArmPose.EMPTY;
 	  this.bipedHalo = new ModelRenderer(this, 65, 0);
 	  this.bipedHalo.setRotationPoint(0.0F, 24.0F, 0.0F);
 	  this.bipedHalo.func_228301_a_(-4.0F, -33.0F, -4.0F, 8.0F, 8.0F, 0.0F, modelSize );
