@@ -2,8 +2,6 @@ package arknights.renderer.entity;
 
 import arknights.entity.model.ExusiaiModel;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
-import arknights.entity.ExusiaiEntity;
-import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.HeldItemLayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;

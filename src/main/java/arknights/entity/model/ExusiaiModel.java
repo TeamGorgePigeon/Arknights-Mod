@@ -1,21 +1,14 @@
 package arknights.entity.model;
 
 import arknights.entity.ExusiaiEntity;
-import arknights.entity.OperatorBase;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
 import java.util.List;
-import java.util.Random;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
 import net.minecraft.util.HandSide;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -26,8 +19,7 @@ public class ExusiaiModel<T extends ExusiaiEntity> extends OperatorModel {
    private final ModelRenderer bipedHalo;
    private final ModelRenderer bipedWing;
 
-
-   public ExusiaiModel(float modelSize ) {
+    public ExusiaiModel(float modelSize ) {
       super(modelSize);
 
 	  this.bipedHalo = new ModelRenderer(this, 64, 0);
@@ -64,10 +56,10 @@ public class ExusiaiModel<T extends ExusiaiEntity> extends OperatorModel {
 
     @Override
     public void setLivingAnimations(LivingEntity entityIn, float limbSwing, float limbSwingAmount, float partialTick) {
-       if (((ExusiaiEntity)entityIn).isAggressive()) {
+       if (((ExusiaiEntity)entityIn).isAttacking()) {
             this.rightArmPose = BipedModel.ArmPose.BOW_AND_ARROW;
-            this.leftArmPose = BipedModel.ArmPose.BOW_AND_ARROW;
-            System.out.print(((ExusiaiEntity)entityIn).isAggressive());
+            //this.leftArmPose = BipedModel.ArmPose.BOW_AND_ARROW;
+           this.bipedLeftArm.copyModelAngles(this.bipedRightArm);
         } else {
             this.rightArmPose = ArmPose.EMPTY;
             this.leftArmPose = ArmPose.EMPTY;

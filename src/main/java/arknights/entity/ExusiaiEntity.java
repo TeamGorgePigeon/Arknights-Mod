@@ -1,6 +1,7 @@
 package arknights.entity;
 
 import arknights.Skill;
+import arknights.entity.model.ExusiaiModel;
 import arknights.entity.notLiving.BulletEntity;
 import arknights.registry.ItemHandler;
 import arknights.registry.SoundHandler;
@@ -8,15 +9,32 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class ExusiaiEntity extends OperatorBase implements IRangedAttackMob{
     private static final Skill skill3 = new Skill(20,30,15, Skill.SkillRecoverType.AUTORECOVER);
+    public static final DataParameter<Boolean> OPERATORATTACKING = EntityDataManager.createKey(ExusiaiEntity.class, DataSerializers.BOOLEAN);
+    public ExusiaiModel model;
 
     public ExusiaiEntity(EntityType<? extends ExusiaiEntity> typeIn, World worldIn) {
         super(typeIn, worldIn);
         this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemHandler.APULUPAI));
+    }
+
+    public boolean isAttacking(){
+        return this.dataManager.get(OPERATORATTACKING);
+    }
+
+    @Override
+    protected void registerData() {
+        super.registerData();
+        this.dataManager.register(OPERATORATTACKING, false);
     }
 
     protected void registerGoals() {
@@ -45,7 +63,15 @@ public class ExusiaiEntity extends OperatorBase implements IRangedAttackMob{
     }
 
     public void livingTick() {
+        if(!world.isRemote()){
+            this.dataManager.set(OPERATORATTACKING, (this.getAttackTarget() != null));
+        }
         super.livingTick();
+    }
+
+    @Override
+    public void setAttackTarget(@Nullable LivingEntity entitylivingbaseIn) {
+        super.setAttackTarget(entitylivingbaseIn); //Forge: Moved down to allow event handlers to write data manager values.
     }
 
 /*
