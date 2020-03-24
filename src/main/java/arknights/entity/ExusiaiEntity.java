@@ -3,6 +3,7 @@ package arknights.entity;
 import arknights.Skill;
 import arknights.entity.model.ExusiaiModel;
 import arknights.entity.notLiving.BulletEntity;
+import arknights.registry.EntityHandler;
 import arknights.registry.ItemHandler;
 import arknights.registry.SoundHandler;
 import net.minecraft.entity.*;
@@ -24,6 +25,11 @@ public class ExusiaiEntity extends OperatorBase implements IRangedAttackMob{
 
     public ExusiaiEntity(EntityType<? extends ExusiaiEntity> typeIn, World worldIn) {
         super(typeIn, worldIn);
+        this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemHandler.APULUPAI));
+    }
+
+    public ExusiaiEntity(World world){
+        super(EntityHandler.EXUSIAI, world);
         this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemHandler.APULUPAI));
     }
 

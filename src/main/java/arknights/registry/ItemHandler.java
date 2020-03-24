@@ -1,5 +1,6 @@
 package arknights.registry;
 
+import arknights.entity.ExusiaiEntity;
 import arknights.item.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -25,6 +26,8 @@ public class ItemHandler {
     static TextFormatting LEGEND = GOLD;
 
     public static Map<Integer, Item> mapOfId = new HashMap<>();
+
+    public static final Item EXUSIAI = new Exusiai(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":exusiai");
 
     public static final Item ORIGINITEPRIME = new OriginitePrime(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID+":originite_prime");
     public static final Item ORIGINIUMSHARD = createItem("originium_shard", 1001, LEGEND);
@@ -133,6 +136,8 @@ public class ItemHandler {
 
         r.register(TRADINGHOME_ITEM);
         r.register(ORIGINIUMS);
+
+        r.register(EXUSIAI);
     }
 
     private static Item createItem(String name, int id, TextFormatting color, int item1, int num1, int item2, int num2, int item3, int num3){

@@ -16,7 +16,7 @@ import javax.annotation.Nullable;
 public class OperatorBase extends TameableEntity {
     private SummonOperatorGoal summonOperator;
 
-    protected OperatorBase(EntityType<? extends TameableEntity> p_i48574_1_, World p_i48574_2_) {
+    public OperatorBase(EntityType<? extends TameableEntity> p_i48574_1_, World p_i48574_2_) {
         super(p_i48574_1_, p_i48574_2_);
     }
 
