@@ -4,11 +4,7 @@ import arknights.Arknights;
 import arknights.network.packets.DisasterPacket;
 import arknights.network.packets.LeftClickPacket;
 import arknights.network.packets.UpdateWindowPacket;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.IContainerListener;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
@@ -28,5 +24,6 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, LeftClickPacket.class, LeftClickPacket::encode, LeftClickPacket::decode, LeftClickPacket.Handler::handle);
         HANDLER.registerMessage(id++, UpdateWindowPacket.class, UpdateWindowPacket::encode, UpdateWindowPacket::decode, UpdateWindowPacket.Handler::handle);
         HANDLER.registerMessage(id++, DisasterPacket.class, DisasterPacket::encode, DisasterPacket::decode, DisasterPacket.Handler::handle);
+        //HANDLER.registerMessage(id++, EntityStatuePacket.class, EntityStatuePacket::encode, EntityStatuePacket::decode, EntityStatuePacket.Handler::handle);
     }
 }

@@ -45,7 +45,6 @@ public class ExusiaiEntity extends OperatorBase implements IRangedAttackMob{
     }
 
     public void livingTick() {
-
         super.livingTick();
     }
 

@@ -1,5 +1,7 @@
 package arknights.entity.model;
 
+import arknights.entity.ExusiaiEntity;
+import arknights.entity.OperatorBase;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -107,6 +109,10 @@ public class OperatorModel<T extends LivingEntity> extends BipedModel<T> {
         this.bipedRightLegwear.showModel = visible;
         this.bipedBodyWear.showModel = visible;
         this.bipedDeadmau5Head.showModel = visible;
+    }
+
+    public void setLivingAnimations(T entityIn, float limbSwing, float limbSwingAmount, float partialTick){
+        super.setLivingAnimations(entityIn, limbSwing, limbSwingAmount, partialTick);
     }
 
     public void func_225599_a_(HandSide p_225599_1_, MatrixStack p_225599_2_) {

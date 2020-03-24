@@ -1,6 +1,7 @@
 package arknights.entity.model;
 
 import arknights.entity.ExusiaiEntity;
+import arknights.entity.OperatorBase;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -12,6 +13,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.util.HandSide;
@@ -33,8 +35,8 @@ public class ExusiaiModel<T extends ExusiaiEntity> extends OperatorModel {
 	  this.bipedHalo.setRotationPoint(this.bipedHead.rotationPointX, this.bipedHead.rotationPointY, this.bipedHead.rotationPointZ);
 
 	  this.bipedWing = new ModelRenderer(this, 64, 16);
-	  this.bipedWing.func_228301_a_(-3.0F, 0.0F, 0.0F, 28.0F, 16.0F, 1.0F, modelSize);
-	  this.bipedWing.setRotationPoint(this.bipedBody.rotationPointX, this.bipedBody.rotationPointY, this.bipedBody.rotationPointZ);
+	  this.bipedWing.func_228301_a_(-14.0F, -4.0F, 6.0F, 28.0F, 16.0F, 1.0F, modelSize);
+	  this.bipedWing.setRotationPoint(0, 0, 0);
 	  /*
 		Wing = new ModelRenderer(this);
 		Wing.setRotationPoint(0.3326F, 5.4407F, 0.4995F);
@@ -60,16 +62,15 @@ public class ExusiaiModel<T extends ExusiaiEntity> extends OperatorModel {
         return Iterables.concat(super.func_225600_b_(), ImmutableList.of(this.bipedHalo, this.bipedWing));
     }
 
-    public void setLivingAnimations(T entityIn, float limbSwing, float limbSwingAmount, float partialTick) {
-        this.rightArmPose = BipedModel.ArmPose.EMPTY;
-        this.leftArmPose = BipedModel.ArmPose.EMPTY;
-        ItemStack itemstack = entityIn.getHeldItem(Hand.MAIN_HAND);
-        if (itemstack.getItem() instanceof net.minecraft.item.BowItem && entityIn.isAggressive()) {
-            if (entityIn.getPrimaryHand() == HandSide.RIGHT) {
-                this.rightArmPose = BipedModel.ArmPose.BOW_AND_ARROW;
-            } else {
-                this.leftArmPose = BipedModel.ArmPose.BOW_AND_ARROW;
-            }
+    @Override
+    public void setLivingAnimations(LivingEntity entityIn, float limbSwing, float limbSwingAmount, float partialTick) {
+       if (((ExusiaiEntity)entityIn).isAggressive()) {
+            this.rightArmPose = BipedModel.ArmPose.BOW_AND_ARROW;
+            this.leftArmPose = BipedModel.ArmPose.BOW_AND_ARROW;
+            System.out.print(((ExusiaiEntity)entityIn).isAggressive());
+        } else {
+            this.rightArmPose = ArmPose.EMPTY;
+            this.leftArmPose = ArmPose.EMPTY;
         }
 
         super.setLivingAnimations(entityIn, limbSwing, limbSwingAmount, partialTick);
