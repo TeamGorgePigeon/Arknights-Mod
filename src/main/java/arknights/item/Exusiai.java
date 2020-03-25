@@ -10,6 +10,6 @@ public class Exusiai extends OperatorItem {
 
     @Override
     public void newOperator(World world){
-        this.operator = new ExusiaiEntity(world);
+        this.operator = new ExusiaiEntity(world, this);
     }
 }

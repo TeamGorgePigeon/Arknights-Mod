@@ -1,13 +1,18 @@
 package arknights.entity;
 
+import arknights.item.OperatorItem;
+import arknights.registry.EntityHandler;
 import arknights.registry.SoundHandler;
-import net.minecraft.entity.AgeableEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
@@ -15,9 +20,15 @@ import javax.annotation.Nullable;
 
 public class OperatorBase extends TameableEntity {
     private SummonOperatorGoal summonOperator;
+    public Item item = Items.AIR;
 
     public OperatorBase(EntityType<? extends TameableEntity> p_i48574_1_, World p_i48574_2_) {
         super(p_i48574_1_, p_i48574_2_);
+    }
+
+    public OperatorBase(EntityType<? extends TameableEntity> p_i48574_1_, World p_i48574_2_,Item item) {
+        super(p_i48574_1_, p_i48574_2_);
+        this.item = item;
     }
 
     protected void registerGoals() {
@@ -50,6 +61,13 @@ public class OperatorBase extends TameableEntity {
         //this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
     }
 
+    public void onDeath(DamageSource cause) {
+        if(this.item instanceof OperatorItem && !world.isRemote()){
+            ItemEntity entity = new ItemEntity(world, this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), new ItemStack(this.item, 1));
+            world.addEntity(entity);
+        }
+    }
+
     static class SummonOperatorGoal extends Goal {
         private final OperatorBase operatorBase;
 
@@ -61,9 +79,10 @@ public class OperatorBase extends TameableEntity {
         public boolean shouldExecute() {
             return false;
         }
+    }
 
-        protected SoundEvent getDeathSound() {
+        public SoundEvent getDeathSound() {
             return SoundHandler.OPERATOR_DEAD;
         }
-    }
 }
+

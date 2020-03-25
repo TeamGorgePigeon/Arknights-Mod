@@ -1,15 +1,19 @@
 package arknights.item;
 
 import arknights.entity.OperatorBase;
+import arknights.registry.SoundHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
@@ -18,13 +22,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class OperatorItem extends Item {
     protected OperatorBase operator;
-    private int id;
-    private boolean isUsed = false;
+    public int id;
+    public boolean isUsed;
+    public int cd = 0;
     public OperatorItem(Properties p_i48487_1_) {
         super(p_i48487_1_);
     }
@@ -51,23 +57,21 @@ public class OperatorItem extends Item {
     }
 
     @Override
+    public void inventoryTick(@Nonnull ItemStack stack, World world, @Nonnull Entity entity, int par4, boolean par5) {
+        if(this.cd>0)this.cd--;
+    }
+
+        @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         //String playerName = entityLiving.getScoreboardName()
-        System.out.print(this.isUsed);
         if(!worldIn.isRemote()){
             Vec3d pos = entityLiving.getPositionVec();
-            if(this.isUsed){
-                worldIn.getEntityByID(this.id).remove();
-                this.isUsed = false;
-            } else {
-                this.newOperator(entityLiving.world);
-                this.isUsed = true;
-                this.id = this.operator.getEntityId();
-                this.operator.setOwnerId(entityLiving.getUniqueID());
-                this.operator.setPosition(pos.x, pos.y, pos.z);
-                this.operator.setPositionAndRotation(pos.x, pos.y, pos.z, entityLiving.rotationYaw, entityLiving.rotationPitch);
-                worldIn.addEntity(this.operator);
-            }
+            this.newOperator(entityLiving.world);
+            this.operator.setOwnerId(entityLiving.getUniqueID());
+            this.operator.setPosition(pos.x, pos.y, pos.z);
+            this.operator.setPositionAndRotation(pos.x, pos.y, pos.z, entityLiving.rotationYaw, entityLiving.rotationPitch);
+            worldIn.addEntity(this.operator);
+            stack.shrink(1);
         }
         return stack;
     }
@@ -80,6 +84,5 @@ public class OperatorItem extends Item {
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
         super.addInformation(stack, world, tooltip, flags);
-        tooltip.add(new TranslationTextComponent("右键放置干员，再次右键撤退"));
     }
 }

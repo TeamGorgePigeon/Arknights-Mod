@@ -9,28 +9,38 @@ import arknights.registry.SoundHandler;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class ExusiaiEntity extends OperatorBase implements IRangedAttackMob{
     private static final Skill skill3 = new Skill(20,30,15, Skill.SkillRecoverType.AUTORECOVER);
     public static final DataParameter<Boolean> OPERATORATTACKING = EntityDataManager.createKey(ExusiaiEntity.class, DataSerializers.BOOLEAN);
     public ExusiaiModel model;
+    private int sp;
+    private int tick = 0;
+    private boolean isSkill = false;
 
     public ExusiaiEntity(EntityType<? extends ExusiaiEntity> typeIn, World worldIn) {
         super(typeIn, worldIn);
         this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemHandler.APULUPAI));
+        this.sp = skill3.spInit;
     }
 
-    public ExusiaiEntity(World world){
-        super(EntityHandler.EXUSIAI, world);
+    public ExusiaiEntity(World world, Item item){
+        super(EntityHandler.EXUSIAI, world, item);
         this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemHandler.APULUPAI));
+        this.sp = skill3.spInit;
     }
 
     public boolean isAttacking(){
@@ -57,20 +67,63 @@ public class ExusiaiEntity extends OperatorBase implements IRangedAttackMob{
     }
 
     public void attackEntityWithRangedAttack(LivingEntity target, float var2){
-        BulletEntity bulletEntity = new BulletEntity(this, this.world);
         double d0 = target.func_226277_ct_() - this.func_226277_ct_();
-        double d1 = target.func_226283_e_(0.3333333333333333D) - bulletEntity.func_226278_cu_();
+        double d1;
         double d2 = target.func_226281_cx_() - this.func_226281_cx_();
         double d3 = (double)MathHelper.sqrt(d0 * d0 + d2 * d2);
         //float f = MathHelper.sqrt(d1 * d1 + d3 * d3) * 0.2F;
-        bulletEntity.shoot(d0, d1 + d3 * (double)0.2F, d2, 1.6F, 1.0F);
-        this.playSound(SoundHandler.EXUSIAI_ATTACK, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
-        this.world.addEntity(bulletEntity);
+
+        if(!this.isSkill && !world.isRemote()){
+            BulletEntity bulletEntity = new BulletEntity(this, this.world);
+            d1 = target.func_226283_e_(0.3333333333333333D) - bulletEntity.func_226278_cu_();
+            bulletEntity.shoot(d0, d1 + d3 * (double)0.2F, d2, 1.6F, 1.0F);
+            this.playSound(SoundHandler.EXUSIAI_ATTACK, 1.0F, 1.0F);
+            this.world.addEntity(bulletEntity);
+        } else {
+            for(int i = 0;i < 5;i++){
+                BulletEntity bulletEntity = new BulletEntity(this, this.world);
+                d1 = target.func_226283_e_(0.3333333333333333D) - bulletEntity.func_226278_cu_();
+                //float f = MathHelper.sqrt(d1 * d1 + d3 * d3) * 0.2F;
+                bulletEntity.shoot(d0, d1 + d3 * (double)0.2F, d2, 1.6F, 1.0F);
+                this.world.addEntity(bulletEntity);
+            }
+            this.playSound(SoundHandler.EXUSIAI_SKILLATTACK, 1.0F, 1.0F);
+        }
+
     }
 
     public void livingTick() {
         if(!world.isRemote()){
             this.dataManager.set(OPERATORATTACKING, (this.getAttackTarget() != null));
+        }
+        this.tick++;
+        if(this.tick % 20 == 1 && !this.isSkill){
+            this.sp++;
+        }
+        if(this.sp >= skill3.spCost){
+            this.sp = 0;
+            this.isSkill = true;
+            this.tick = 0;
+            switch (new Random().nextInt(4)){
+                case 0:
+                    this.playSound(SoundHandler.EXUSIAI_SKILL1, 1.0F, 1.0F);
+                    break;
+                case 1:
+                    this.playSound(SoundHandler.EXUSIAI_SKILL2, 1.0F, 1.0F);
+                    break;
+                case 2:
+                    this.playSound(SoundHandler.EXUSIAI_SKILL3, 1.0F, 1.0F);
+                    break;
+                case 3:
+                    this.playSound(SoundHandler.EXUSIAI_SKILL4, 1.0F, 1.0F);
+                    break;
+                default:
+                    break;
+            }
+        }
+        if(this.tick >= skill3.maxSkillTime){
+            this.tick = 0;
+            this.isSkill = false;
         }
         super.livingTick();
     }
