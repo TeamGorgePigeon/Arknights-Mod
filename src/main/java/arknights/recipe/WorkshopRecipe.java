@@ -4,7 +4,6 @@ import arknights.registry.RecipeHandler;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import com.mojang.realmsclient.util.JsonUtils;
 import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Inventory;
@@ -18,8 +17,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import net.minecraftforge.event.enchanting.EnchantmentLevelSetEvent;
-import net.minecraftforge.items.ItemStackHandler;
 
 public class WorkshopRecipe implements IWorkshopRecipe {
     private final ResourceLocation id;
@@ -30,6 +27,20 @@ public class WorkshopRecipe implements IWorkshopRecipe {
     private final IInventory inventory = new Inventory(ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY);
     public final NonNullList<ItemStack> counts;
     public  NonNullList<Item> items = NonNullList.withSize(3, Items.AIR);
+    private static Item ItemRecipe[] = new Item[3];
+
+    public int CItemToInt(Item Item) {
+        int ItemToInt;
+        if (Item ==ItemRecipe[0]) {
+            ItemToInt=0;
+        } else if (Item ==ItemRecipe[1]) {
+            ItemToInt=1;
+        } else {
+            ItemToInt=2;
+        }
+        return ItemToInt;
+    }
+
 
     public WorkshopRecipe(ResourceLocation idIn, String groupIn, ItemStack recipeOutputIn, NonNullList<Ingredient> recipeItemsIn, NonNullList<ItemStack> counts) {
         this.id = idIn;
@@ -76,13 +87,13 @@ public class WorkshopRecipe implements IWorkshopRecipe {
 
         for(int j = 0; j < inv.getSizeInventory(); ++j) {
             ItemStack itemstack = inv.getStackInSlot(j);
-            if (!itemstack.isEmpty() & itemstack.getCount()>0) {
+            if (!itemstack.isEmpty()) {
                 ++i;
                 if (isSimple)
                     recipeitemhelper.func_221264_a(itemstack, 1);
                 else inputs.add(itemstack);
                 if (j <= this.counts.size()-1) {
-                    IsMatchItemCount[j] =  itemstack.getCount() >= this.counts.get(j).getCount();
+                    IsMatchItemCount[j] =  itemstack.getCount() >= this.counts.get(CItemToInt(inv.getStackInSlot(j).getItem())).getCount();
                     this.items.set(j,inv.getStackInSlot(j) != null ? itemstack.getItem() : Items.AIR);
                 }
             } else {IsMatchItemCount[j]=true;}
@@ -158,10 +169,12 @@ public class WorkshopRecipe implements IWorkshopRecipe {
             for(int i = 0; i < array1.size(); ++i) {
                 //Ingredient ingredient = Ingredient.deserialize(array.get(i));
                 ResourceLocation resourcelocation1 = new ResourceLocation(array2.get(i).getAsString());
+
                 Item item = Registry.ITEM.getValue(resourcelocation1).orElseThrow(() -> {
                     return new JsonSyntaxException("Unknown item '" + resourcelocation1 + "'");
                 });
                 int count = array1.get(i).getAsInt();
+                ItemRecipe[i]=item;
                 nonnulllist.add(new ItemStack(item, count));
                 //System.out.print(count);
                 //if (!ingredient.hasNoMatchingItems()) {
