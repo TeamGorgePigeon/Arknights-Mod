@@ -24,7 +24,7 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class ExusiaiEntity extends OperatorBase implements IRangedAttackMob{
-    private static final Skill skill3 = new Skill(20,30,15, Skill.SkillRecoverType.AUTORECOVER);
+    private static final Skill skill3 = new Skill(20,30,300, Skill.SkillRecoverType.AUTORECOVER);
     public static final DataParameter<Boolean> OPERATORATTACKING = EntityDataManager.createKey(ExusiaiEntity.class, DataSerializers.BOOLEAN);
     public ExusiaiModel model;
     private int sp;
@@ -79,7 +79,7 @@ public class ExusiaiEntity extends OperatorBase implements IRangedAttackMob{
             bulletEntity.shoot(d0, d1 + d3 * (double)0.2F, d2, 1.6F, 1.0F);
             this.playSound(SoundHandler.EXUSIAI_ATTACK, 1.0F, 1.0F);
             this.world.addEntity(bulletEntity);
-        } else {
+        } else if(this.isSkill) {
             for(int i = 0;i < 5;i++){
                 BulletEntity bulletEntity = new BulletEntity(this, this.world);
                 d1 = target.func_226283_e_(0.3333333333333333D) - bulletEntity.func_226278_cu_();
@@ -93,37 +93,38 @@ public class ExusiaiEntity extends OperatorBase implements IRangedAttackMob{
     }
 
     public void livingTick() {
-        if(!world.isRemote()){
+        if(!world.isRemote()) {
             this.dataManager.set(OPERATORATTACKING, (this.getAttackTarget() != null));
-        }
-        this.tick++;
-        if(this.tick % 20 == 1 && !this.isSkill){
-            this.sp++;
-        }
-        if(this.sp >= skill3.spCost){
-            this.sp = 0;
-            this.isSkill = true;
-            this.tick = 0;
-            switch (new Random().nextInt(4)){
-                case 0:
-                    this.playSound(SoundHandler.EXUSIAI_SKILL1, 1.0F, 1.0F);
-                    break;
-                case 1:
-                    this.playSound(SoundHandler.EXUSIAI_SKILL2, 1.0F, 1.0F);
-                    break;
-                case 2:
-                    this.playSound(SoundHandler.EXUSIAI_SKILL3, 1.0F, 1.0F);
-                    break;
-                case 3:
-                    this.playSound(SoundHandler.EXUSIAI_SKILL4, 1.0F, 1.0F);
-                    break;
-                default:
-                    break;
+
+            this.tick++;
+            if (this.tick % 19 == 2 && !this.isSkill) {
+                this.sp++;
             }
-        }
-        if(this.tick >= skill3.maxSkillTime){
-            this.tick = 0;
-            this.isSkill = false;
+            if (this.sp >= skill3.spCost) {
+                this.sp = 0;
+                this.isSkill = true;
+                this.tick = 0;
+                switch (new Random().nextInt(4)) {
+                    case 0:
+                        this.playSound(SoundHandler.EXUSIAI_SKILL1, 1.0F, 1.0F);
+                        break;
+                    case 1:
+                        this.playSound(SoundHandler.EXUSIAI_SKILL2, 1.0F, 1.0F);
+                        break;
+                    case 2:
+                        this.playSound(SoundHandler.EXUSIAI_SKILL3, 1.0F, 1.0F);
+                        break;
+                    case 3:
+                        this.playSound(SoundHandler.EXUSIAI_SKILL4, 1.0F, 1.0F);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (this.tick >= skill3.maxSkillTime && this.isSkill) {
+                this.tick = 0;
+                this.isSkill = false;
+            }
         }
         super.livingTick();
     }
