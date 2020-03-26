@@ -1,10 +1,7 @@
 package arknights.container;
 
-import arknights.network.PacketHandler;
-import arknights.network.packets.UpdateWindowPacket;
 import arknights.recipe.*;
 import arknights.registry.ContainerHandler;
-import arknights.tileentity.TradingHomeEntity;
 import arknights.tileentity.WorkshopEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,17 +11,12 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.*;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.RecipeItemHelper;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.play.server.SSetSlotPacket;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
@@ -72,7 +64,7 @@ public class WorkshopContainer extends Container {
             Optional<IWorkshopRecipe> optional = p_217066_1_.getServer().getRecipeManager().getRecipe(IRecipeTypeArk.WORKSHOP, this.craftingInv, p_217066_1_);
             if (optional.isPresent()) {
                 WorkshopRecipe icraftingrecipe = (WorkshopRecipe) optional.get();
-                this.resultSlot.itemStacks = icraftingrecipe.counts;
+                this.resultSlot.itemStacks = icraftingrecipe.itemStacks;
                 if (this.inv2.canUseRecipe(p_217066_1_, serverplayerentity, icraftingrecipe)) {
                     itemstack = icraftingrecipe.getCraftingResult(this.craftingInv);
                 }

@@ -25,30 +25,38 @@ public class WorkshopRecipe implements IWorkshopRecipe {
     private final NonNullList<Ingredient> recipeItems;
     private final boolean isSimple;
     private final IInventory inventory = new Inventory(ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY);
-    public final NonNullList<ItemStack> counts;
+    public final NonNullList<ItemStack> itemStacks;
     public  NonNullList<Item> items = NonNullList.withSize(3, Items.AIR);
-    private static Item ItemRecipe[] = new Item[3];
+    protected final Item itemRecipe[] = new Item[]{Items.AIR,Items.AIR,Items.AIR};
 
-    public int CItemToInt(Item Item) {
-        int ItemToInt;
-        if (Item ==ItemRecipe[0]) {
-            ItemToInt=0;
-        } else if (Item ==ItemRecipe[1]) {
-            ItemToInt=1;
-        } else if (Item ==ItemRecipe[2]) {
-            ItemToInt=2;
-        } else {ItemToInt=-1;}
-        return ItemToInt;
+    public int CItemToInt(Item item) {
+        int itemToInt = -1;
+        int count = 0;
+        /*
+        if (item == this.itemRecipe[0]) {
+            itemToInt=0;
+        } else if (item == this.itemRecipe[1]) {
+            itemToInt=1;
+        } else if (item == this.itemRecipe[2]) {
+            itemToInt=2;
+        } else {itemToInt=-1;}*/
+        for (ItemStack itemStack : this.itemStacks){
+            if(item == itemStack.getItem()){
+                itemToInt = count;
+            }
+            count++;
+        }
+        return itemToInt;
     }
 
 
-    public WorkshopRecipe(ResourceLocation idIn, String groupIn, ItemStack recipeOutputIn, NonNullList<Ingredient> recipeItemsIn, NonNullList<ItemStack> counts) {
+    public WorkshopRecipe(ResourceLocation idIn, String groupIn, ItemStack recipeOutputIn, NonNullList<Ingredient> recipeItemsIn, NonNullList<ItemStack> itemStacks) {
         this.id = idIn;
         this.group = groupIn;
         this.recipeOutput = recipeOutputIn;
         this.recipeItems = recipeItemsIn;
         this.isSimple = recipeItemsIn.stream().allMatch(Ingredient::isSimple);
-        this.counts = counts;
+        this.itemStacks = itemStacks;
     }
 
     public ResourceLocation getId() {
@@ -82,9 +90,9 @@ public class WorkshopRecipe implements IWorkshopRecipe {
         RecipeItemHelper recipeitemhelper = new RecipeItemHelper();
         java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
         int i = 0;
-        int GetItemRecipe;
-        boolean IsMatchItemCountMain = false;
-        boolean IsMatchItemCount[] = new boolean[3];
+        int getItemRecipe;
+        boolean isMatchItemCountMain = false;
+        boolean isMatchItemCount[] = new boolean[3];
 
         for(int j = 0; j < inv.getSizeInventory(); ++j) {
             ItemStack itemstack = inv.getStackInSlot(j);
@@ -93,17 +101,17 @@ public class WorkshopRecipe implements IWorkshopRecipe {
                 if (isSimple)
                     recipeitemhelper.func_221264_a(itemstack, 1);
                 else inputs.add(itemstack);
-                if (j <= this.counts.size()-1) {
-                    GetItemRecipe=CItemToInt(inv.getStackInSlot(j).getItem());
-                    if (GetItemRecipe!=-1 & GetItemRecipe < this.counts.size()) {
-                    IsMatchItemCount[j] =  itemstack.getCount() >= this.counts.get(GetItemRecipe).getCount();
+                if (j <= this.itemStacks.size()-1) {
+                    getItemRecipe=CItemToInt(inv.getStackInSlot(j).getItem());
+                    if (getItemRecipe!=-1 & getItemRecipe < this.itemStacks.size()) {
+                    isMatchItemCount[j] =  itemstack.getCount() >= this.itemStacks.get(getItemRecipe).getCount();
                     this.items.set(j,inv.getStackInSlot(j) != null ? itemstack.getItem() : Items.AIR);
                     }
                 }
-            } else {IsMatchItemCount[j]=true;}
+            } else {isMatchItemCount[j]=true;}
         }
-        if (IsMatchItemCount[0] & IsMatchItemCount[1] & IsMatchItemCount[2]) {IsMatchItemCountMain=true;}
-        return i == this.recipeItems.size() && (isSimple ? recipeitemhelper.canCraft(this, (IntList)null) : net.minecraftforge.common.util.RecipeMatcher.findMatches(inputs,  this.recipeItems) != null) && IsMatchItemCountMain;
+        if (isMatchItemCount[0] & isMatchItemCount[1] & isMatchItemCount[2]) {isMatchItemCountMain=true;}
+        return i == this.recipeItems.size() && (isSimple ? recipeitemhelper.canCraft(this, (IntList)null) : net.minecraftforge.common.util.RecipeMatcher.findMatches(inputs,  this.recipeItems) != null) && isMatchItemCountMain;
     }
 
     public ItemStack getCraftingResult(IInventory inv) {
@@ -125,10 +133,9 @@ public class WorkshopRecipe implements IWorkshopRecipe {
         public WorkshopRecipe read(ResourceLocation recipeId, JsonObject json) {
             String s = JSONUtils.getString(json, "group", "");
             NonNullList<Ingredient> nonnulllist = readIngredients(JSONUtils.getJsonArray(json, "ingredients"));
-            NonNullList<ItemStack> nonullistCount = readItemstacks(json);//NonNullList.withSize(3, 0);//readInteger(JSONUtils.getJsonArray(json, "counts"));
-            NonNullList<Integer> integers = readInteger(json);
+            NonNullList<ItemStack> nonullistStacks = readItemStacks(json);//NonNullList.withSize(3, 0);//readInteger(JSONUtils.getJsonArray(json, "itemStacks"));
             ItemStack itemstack = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
-            return new WorkshopRecipe(recipeId, s, itemstack, nonnulllist, nonullistCount);
+            return new WorkshopRecipe(recipeId, s, itemstack, nonnulllist, nonullistStacks);
         }
 
         private static NonNullList<Ingredient> readIngredients(JsonArray p_199568_0_) {
@@ -143,10 +150,10 @@ public class WorkshopRecipe implements IWorkshopRecipe {
 
             return nonnulllist;
         }
-
+        /*
         private static NonNullList<Integer> readInteger(JsonObject json){
             NonNullList<Integer> integers = NonNullList.create();
-            JsonArray array1 = JSONUtils.getJsonArray(json, "counts");
+            JsonArray array1 = JSONUtils.getJsonArray(json, "itemStacks");
 
             for(int i = 0; i < array1.size(); ++i) {
                 //Ingredient ingredient = Ingredient.deserialize(array.get(i));
@@ -164,9 +171,11 @@ public class WorkshopRecipe implements IWorkshopRecipe {
             return integers;
         }
 
-        private static NonNullList<ItemStack> readItemstacks(JsonObject json){
+         */
+
+        private static NonNullList<ItemStack> readItemStacks(JsonObject json){
             NonNullList<ItemStack> nonnulllist = NonNullList.create();
-            NonNullList<Integer> integers = NonNullList.create();
+            //NonNullList<Integer> integers = NonNullList.create();
             JsonArray array1 = JSONUtils.getJsonArray(json, "counts");
             JsonArray array2 = JSONUtils.getJsonArray(json, "items");
 
@@ -178,11 +187,13 @@ public class WorkshopRecipe implements IWorkshopRecipe {
                     return new JsonSyntaxException("Unknown item '" + resourcelocation1 + "'");
                 });
                 int count = array1.get(i).getAsInt();
-                ItemRecipe[i]=item;
+
+                //this.itemRecipe[i]=item;
+
                 nonnulllist.add(new ItemStack(item, count));
                 //System.out.print(count);
                 //if (!ingredient.hasNoMatchingItems()) {
-                integers.add(count);
+                //integers.add(count);
                 //}
             }
 
@@ -211,7 +222,7 @@ public class WorkshopRecipe implements IWorkshopRecipe {
             for(Ingredient ingredient : recipe.recipeItems) {
                 ingredient.write(buffer);
             }
-            for(ItemStack stack : recipe.counts){
+            for(ItemStack stack : recipe.itemStacks){
                 buffer.writeItemStack(stack);
             }
 
