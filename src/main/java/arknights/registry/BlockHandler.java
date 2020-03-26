@@ -18,7 +18,7 @@ public class BlockHandler {
     public static final Block TRADINGHOME = new TradingHome(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)).setRegistryName(MODID+":"+"trading_home");
     public static final Block ORIGINITEPRIME_BLOCK = new LeavesBlock(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.3F).sound(SoundType.GLASS).func_226896_b_()).setRegistryName(MODID+":"+"originite_prime_block");
     public static final Block WORKSHOP = new Workshop(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F,6.0F)).setRegistryName(MODID + ":workshop");
-
+    public static final Block ORUNDUM = new LeavesBlock(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.3F).sound(SoundType.GLASS).func_226896_b_()).setRegistryName(MODID + ":orundum");
 
     @SubscribeEvent
     public static void register(RegistryEvent.Register<Block> evt){
@@ -28,6 +28,7 @@ public class BlockHandler {
         r.register(TRADINGHOME);
         r.register(ORIGINITEPRIME_BLOCK);
         r.register(WORKSHOP);
+        r.register(ORUNDUM);
     }
 
     private static Block createBlocks(String name, Material material, float hardness, float resistance){

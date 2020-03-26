@@ -32,7 +32,8 @@ public class ItemHandler {
     public static final Item ORIGINITEPRIME = new OriginitePrime(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID+":originite_prime");
     public static final Item ORIGINIUMSHARD = createItem("originium_shard", 1001, LEGEND);
     public static final Item PUREGOLD = createItem("pure_gold", 1000, EPIC);
-    public static final Item ORUNDUM= createItem("orundum", 44, COMMON);
+    //public static final Item ORUNDUM= createItem("orundum", 44, COMMON);
+    public static final BlockItem ORUNDUM = createBlockItem(BlockHandler.ORUNDUM);
 
     public static final Item TRUESILVER_SWORD = new TruesilverSword(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "truesilver_sword");
     public static final Item APULUPAI = new Apulupai(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "jb");
@@ -88,6 +89,8 @@ public class ItemHandler {
 
     public static final BlockItem TRADINGHOME_ITEM = createBlockItem(BlockHandler.TRADINGHOME);
     public static final BlockItem ORIGINIUMS = createBlockItem(BlockHandler.ORIGINITEPRIME_BLOCK);
+    public static final BlockItem WORKSHOP = createBlockItem(BlockHandler.WORKSHOP);
+
     @SubscribeEvent
     public static void register(RegistryEvent.Register<Item> evt){
         IForgeRegistry<Item> r = evt.getRegistry();
@@ -136,6 +139,7 @@ public class ItemHandler {
 
         r.register(TRADINGHOME_ITEM);
         r.register(ORIGINIUMS);
+        r.register(WORKSHOP);
 
         r.register(EXUSIAI);
     }
