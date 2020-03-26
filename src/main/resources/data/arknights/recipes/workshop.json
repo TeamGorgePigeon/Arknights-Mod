@@ -1,10 +1,10 @@
 {
   "type": "arknights:workshop",
-  "result": { "item": "arknights:originite_prime", "count": 1 },
+  "result": { "item": "arknights:d32_steel", "count": 1 },
   "ingredients": [
-      { "item": "arknights:originium_shard" },
-	  { "item": "arknights:orirock"}
+      { "item": "arknights:manganese_trihydrate" },
+	  { "item": "arknights:grindstone_pentahydrate"}
   ],
   "counts": [3, 2],
-  "items": ["arknights:originium_shard", "arknights:orirock"]
+  "items": ["arknights:manganese_trihydrate", "arknights:grindstone_pentahydrate"]
 }
