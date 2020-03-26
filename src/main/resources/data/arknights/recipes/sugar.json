@@ -1,0 +1,11 @@
+{
+  "type": "arknights:workshop",
+  "result": {"item": "arknights:sugar", "count": 1},
+  "ingredients": [
+    {"item": "arknights:sugar_substitute"}
+  ],
+  "counts":[3],
+  "items": [
+    "arknights:sugar_substitute"
+  ]
+}

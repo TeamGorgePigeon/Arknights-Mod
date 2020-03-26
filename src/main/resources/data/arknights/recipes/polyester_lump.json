@@ -1,0 +1,15 @@
+{
+  "type": "arknights:workshop",
+  "result": {"item": "arknights:polyester_lump", "count": 1},
+  "ingredients": [
+    {"item": "arknights:polyester_pack"},
+    {"item": "arknights:aketon"},
+    {"item": "arknights:loxic_kohl"}
+  ],
+  "counts":[2,1,1],
+  "items": [
+    "arknights:polyester_pack",
+    "arknights:aketon",
+    "arknights:loxic_kohl"
+  ]
+}
