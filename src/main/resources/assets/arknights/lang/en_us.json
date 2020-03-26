@@ -1,0 +1,62 @@
+{
+  "itemGroup.arknights": "Arknights",
+
+  "item.arknights.exusiai": "Operator Exusiai's Contract",
+
+  "item.arknights.originium_shard": "Originium Shard",
+  "item.arknights.originite_prime": "Originite Prime",
+  "item.arknights.pure_gold":"Pure Gold",
+  
+  "item.arknights.jb":"Exusiai's Vector",
+  "item.arknights.truesilver_sword":"Silverash's Truesilver Sword",
+
+  "item.arknights.orirock": "Orirock",
+  "block.arknights.orirock_cube": "Orirock Cube",
+  "item.arknights.orirock_cluster": "Orirock Cluster",
+  "item.arknights.orirock_concentration": "Orirock Concentration",
+
+  "item.arknights.sugar_substitute": "Sugar Substitute",
+  "item.arknights.sugar": "Sugar",
+  "item.arknights.sugar_pack": "Sugar  Pack",
+  "item.arknights.sugar_lump": "Sugar Lump",
+
+  "item.arknights.ester": "Ester",
+  "item.arknights.polyester": "Polyester",
+  "item.arknights.polyester_pack": "Polyester Pack",
+  "item.arknights.polyester_lump": "Polyester Lump",
+
+  "item.arknights.oriron_shard": "Oriron Shard",
+  "item.arknights.oriron": "Oriron",
+  "item.arknights.oriron_cluster": "Oriron Cluster",
+  "item.arknights.oriron_block": "Oriron Block",
+
+  "item.arknights.diketon": "Diketon",
+  "item.arknights.polyketon": "Polyketon",
+  "item.arknights.aketon": "Aketon",
+  "item.arknights.keton_colloid": "Keton Colloid",
+
+  "item.arknights.damaged_device": "Damaged Device",
+  "item.arknights.device": "Device",
+  "item.arknights.integrated_device": "Integrated Device",
+  "item.arknights.optimized_device": "Optimized Device",
+
+  "item.arknights.loxic_kohl": "Loxic Kohl",
+  "item.arknights.white_horse_kohl": "White Horse Kohl",
+
+  "item.arknights.manganese_ore": "Manganese Ore",
+  "item.arknights.manganese_trihydrate": "Manganese Trihydrate",
+
+  "item.arknights.rma70_12": "RMA70-12",
+  "item.arknights.rma70_24": "RMA70-24",
+
+  "item.arknights.grindstone": "Grindstone",
+  "item.arknights.grindstone_pentahydrate": "Grindstone Pentahydrate",
+
+  "item.arknights.d32_steel": "D32 Steel",
+  "item.arknights.bipolar_nanoflake": "Bipolar Nanoflake",
+  "item.arknights.polymerization_preparation": "Polymerization Preparation",
+
+  "block.arknights.originite_prime_block": "Originite Prime(Decoration)",
+  
+  "block.arknights.trading_home":"Factory"
+}
