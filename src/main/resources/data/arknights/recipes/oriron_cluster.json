@@ -1,0 +1,9 @@
+{ 
+"type": "arknights:workshop",
+"result": {"item": "arknights:oriron_cluster", "count": 1},
+"ingredients": [
+{"item": "arknights:oriron"}
+],
+"counts":[4],
+"items": ["arknights:oriron"]
+}
