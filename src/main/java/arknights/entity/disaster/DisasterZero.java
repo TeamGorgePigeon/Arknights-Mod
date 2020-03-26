@@ -28,6 +28,9 @@ public class DisasterZero extends Entity {
     private final ServerBossInfo bossInfo = (ServerBossInfo)(new ServerBossInfo(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
     public DisasterZero(EntityType<?> p_i48580_1_, World p_i48580_2_) {
         super(p_i48580_1_, p_i48580_2_);
+        if(new Random().nextInt(100) >= 98)
+            //this.remove();
+            System.out.print(1);
         //PacketHandler.HANDLER.send(PacketDistributor.ALL.noArg(), new DisasterPacket(true));
     }
 

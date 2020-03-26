@@ -1,0 +1,11 @@
+{
+  "type": "arknights:workshop",
+  "result": {"item": "arknights:originium_prime", "count": 1},
+  "ingredients": [
+    {"item": "arknights:originite_shard"}
+  ],
+  "counts":[18],
+  "items": [
+    "arknights:originite_shard"
+  ]
+}

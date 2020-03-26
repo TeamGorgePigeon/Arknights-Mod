@@ -1,9 +1,0 @@
-{
-  "type": "smelting",
-  "ingredient": {
-    "item": "arknights:solid_originrock"
-  },
-  "result": "arknights:originiums_fragments",
-  "experience": 1.5,
-  "cookingtime": 200
-}

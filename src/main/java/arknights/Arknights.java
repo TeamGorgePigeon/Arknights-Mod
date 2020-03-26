@@ -66,6 +66,7 @@ public class Arknights
     {
         //PacketHandler.HANDLER.registerMessage(PacketHandler.index++, LeftClickPacket.class, LeftClickPacket::encode, LeftClickPacket::decode, LeftClickPacket.Handler::handle);
         // some preinit code
+        EntitySpawnHandler.register();
         PacketHandler.register();
     }
 
