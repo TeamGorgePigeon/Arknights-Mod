@@ -1,9 +1,14 @@
 { 
-"type": "arknights:workshop",
-"result": {"item": "arknights:d32_steel", "count": 1},
-"ingredients": [
-{"item": "arknights:manganese_trihydrate"},{"item": "arknights:grindstone_pentahydrate"},{"item": "arknights:rma70_24"}
-],
-"counts":[1,1,1],
-"items": ["arknights:manganese_trihydrate","arknights:grindstone_pentahydrate","arknights:rma70_24"]
+  "type": "arknights:workshop",
+  "result": {"item": "arknights:d32_steel", "count": 1},
+  "ingredients": [
+    {"item": "arknights:manganese_trihydrate"},
+    {"item": "arknights:grindstone_pentahydrate"},
+    {"item": "arknights:rma70_24"}
+  ],
+  "counts":[1,1,1],
+  "items": [
+    "arknights:manganese_trihydrate",
+    "arknights:grindstone_pentahydrate",
+    "arknights:rma70_24"]
 }
