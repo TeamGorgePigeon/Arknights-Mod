@@ -7,16 +7,16 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 
 public class OperatorRenderer<T extends OperatorBase> extends MobRenderer<OperatorBase, OperatorModel<OperatorBase>> {
-    public static ResourceLocation TEXTURES = null;
+    public ResourceLocation TEXTURES = null;
 
     public OperatorRenderer(EntityRendererManager renderManagerIn, ResourceLocation textures) {
         super(renderManagerIn, new OperatorModel<>(0.0F), 0.3F);
-        TEXTURES = textures;
+        this.TEXTURES = textures;
     }
 
     public OperatorRenderer(EntityRendererManager renderManagerIn, OperatorModel operatorModel, float v, ResourceLocation textures) {
         super(renderManagerIn, operatorModel, v);
-        TEXTURES = textures;
+        this.TEXTURES = textures;
     }
 
     protected float getDeathMaxRotation(OperatorBase entityLivingBaseIn) {
@@ -24,6 +24,6 @@ public class OperatorRenderer<T extends OperatorBase> extends MobRenderer<Operat
     }
 
     public ResourceLocation getEntityTexture(OperatorBase entity) {
-        return TEXTURES;
+        return this.TEXTURES;
     }
 }

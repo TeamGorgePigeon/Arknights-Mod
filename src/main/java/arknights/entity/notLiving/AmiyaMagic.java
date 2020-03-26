@@ -1,5 +1,6 @@
 package arknights.entity.notLiving;
 
+import arknights.registry.EntityHandler;
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -34,7 +35,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class AmiyaMagic extends Entity implements IProjectile {
+public class AmiyaMagic extends MobEntity implements IProjectile {
     private static final DataParameter<Byte> CRITICAL = EntityDataManager.createKey(BulletEntity.class, DataSerializers.BYTE);
     protected static final DataParameter<Optional<UUID>> UUID = EntityDataManager.createKey(BulletEntity.class, DataSerializers.OPTIONAL_UNIQUE_ID);
     private static final DataParameter<Byte> BYTE = EntityDataManager.createKey(BulletEntity.class, DataSerializers.BYTE);
@@ -45,21 +46,31 @@ public class AmiyaMagic extends Entity implements IProjectile {
     private IntOpenHashSet field_213878_az;
     private List<Entity> field_213875_aA;
 
-    public AmiyaMagic(EntityType<?> p_i48580_1_, World p_i48580_2_) {
+    public AmiyaMagic(EntityType<? extends MobEntity> p_i48580_1_, World p_i48580_2_) {
         super(p_i48580_1_, p_i48580_2_);
         this.setNoGravity(true);
+    }
+
+    public AmiyaMagic(EntityType<AmiyaMagic> p_i48547_1_, double p_i48547_2_, double p_i48547_4_, double p_i48547_6_, World p_i48547_8_) {
+        this(p_i48547_1_, p_i48547_8_);
+        this.setPosition(p_i48547_2_, p_i48547_4_, p_i48547_6_);
+    }
+
+    public AmiyaMagic(LivingEntity p_i48548_2_, World p_i48548_3_) {
+        this(EntityHandler.AMIYAMAGIC, p_i48548_2_.func_226277_ct_(), p_i48548_2_.func_226280_cw_() - (double)0.1F, p_i48548_2_.func_226281_cx_(), p_i48548_3_);
+        this.setShooter(p_i48548_2_);
     }
 
     @Override
     protected void registerData() {
         this.dataManager.register(CRITICAL, (byte)0);
-        this.dataManager.register(UUID, Optional.empty());
+        //this.dataManager.register(UUID, Optional.empty());
         this.dataManager.register(BYTE, (byte)0);
 
     }
 
     @Override
-    protected void readAdditional(CompoundNBT compound) {
+    public void readAdditional(CompoundNBT compound) {
         if (compound.contains("damage", 99)) {
             this.damage = compound.getDouble("damage");
         }
@@ -69,7 +80,7 @@ public class AmiyaMagic extends Entity implements IProjectile {
     }
 
     @Override
-    protected void writeAdditional(CompoundNBT compound) {
+    public void writeAdditional(CompoundNBT compound) {
         compound.putDouble("damage", this.damage);
         if (this.shootingEntity != null) {
             compound.putUniqueId("OwnerUUID", this.shootingEntity);
@@ -400,10 +411,6 @@ public class AmiyaMagic extends Entity implements IProjectile {
      */
     public boolean canBeAttackedWithItem() {
         return false;
-    }
-
-    protected float getEyeHeight(Pose p_213316_1_, EntitySize p_213316_2_) {
-        return 0.0F;
     }
 
     /**

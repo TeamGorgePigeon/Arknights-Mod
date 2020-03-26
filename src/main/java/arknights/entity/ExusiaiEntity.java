@@ -25,7 +25,6 @@ import java.util.Random;
 
 public class ExusiaiEntity extends OperatorBase implements IRangedAttackMob{
     private static final Skill skill3 = new Skill(20,30,300, Skill.SkillRecoverType.AUTORECOVER);
-    public static final DataParameter<Boolean> OPERATORATTACKING = EntityDataManager.createKey(ExusiaiEntity.class, DataSerializers.BOOLEAN);
     public ExusiaiModel model;
     private int sp;
     private int tick = 0;
@@ -47,12 +46,6 @@ public class ExusiaiEntity extends OperatorBase implements IRangedAttackMob{
         return this.dataManager.get(OPERATORATTACKING);
     }
 
-    @Override
-    protected void registerData() {
-        super.registerData();
-        this.dataManager.register(OPERATORATTACKING, false);
-    }
-
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(1, new RangedAttackGoal(this, 1.25D, 20, 10.0F));
@@ -67,27 +60,29 @@ public class ExusiaiEntity extends OperatorBase implements IRangedAttackMob{
     }
 
     public void attackEntityWithRangedAttack(LivingEntity target, float var2){
-        double d0 = target.func_226277_ct_() - this.func_226277_ct_();
-        double d1;
-        double d2 = target.func_226281_cx_() - this.func_226281_cx_();
-        double d3 = (double)MathHelper.sqrt(d0 * d0 + d2 * d2);
-        //float f = MathHelper.sqrt(d1 * d1 + d3 * d3) * 0.2F;
+        if(target != this.getOwner()) {
+            double d0 = target.func_226277_ct_() - this.func_226277_ct_();
+            double d1;
+            double d2 = target.func_226281_cx_() - this.func_226281_cx_();
+            double d3 = (double) MathHelper.sqrt(d0 * d0 + d2 * d2);
+            //float f = MathHelper.sqrt(d1 * d1 + d3 * d3) * 0.2F;
 
-        if(!this.isSkill && !world.isRemote()){
-            BulletEntity bulletEntity = new BulletEntity(this, this.world);
-            d1 = target.func_226283_e_(0.3333333333333333D) - bulletEntity.func_226278_cu_();
-            bulletEntity.shoot(d0, d1 + d3 * (double)0.2F, d2, 1.6F, 1.0F);
-            this.playSound(SoundHandler.EXUSIAI_ATTACK, 1.0F, 1.0F);
-            this.world.addEntity(bulletEntity);
-        } else if(this.isSkill) {
-            for(int i = 0;i < 5;i++){
+            if (!this.isSkill && !world.isRemote()) {
                 BulletEntity bulletEntity = new BulletEntity(this, this.world);
                 d1 = target.func_226283_e_(0.3333333333333333D) - bulletEntity.func_226278_cu_();
-                //float f = MathHelper.sqrt(d1 * d1 + d3 * d3) * 0.2F;
-                bulletEntity.shoot(d0, d1 + d3 * (double)0.2F, d2, 1.6F, 1.0F);
+                bulletEntity.shoot(d0, d1 + d3 * (double) 0.2F, d2, 1.6F, 1.0F);
+                this.playSound(SoundHandler.EXUSIAI_ATTACK, 1.0F, 1.0F);
                 this.world.addEntity(bulletEntity);
+            } else if (this.isSkill) {
+                for (int i = 0; i < 5; i++) {
+                    BulletEntity bulletEntity = new BulletEntity(this, this.world);
+                    d1 = target.func_226283_e_(0.3333333333333333D) - bulletEntity.func_226278_cu_();
+                    //float f = MathHelper.sqrt(d1 * d1 + d3 * d3) * 0.2F;
+                    bulletEntity.shoot(d0, d1 + d3 * (double) 0.2F, d2, 1.6F, 1.0F);
+                    this.world.addEntity(bulletEntity);
+                }
+                this.playSound(SoundHandler.EXUSIAI_SKILLATTACK, 1.0F, 1.0F);
             }
-            this.playSound(SoundHandler.EXUSIAI_SKILLATTACK, 1.0F, 1.0F);
         }
 
     }

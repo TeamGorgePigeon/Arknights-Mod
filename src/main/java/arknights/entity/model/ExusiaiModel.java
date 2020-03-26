@@ -29,6 +29,8 @@ public class ExusiaiModel<T extends ExusiaiEntity> extends OperatorModel {
 	  this.bipedWing = new ModelRenderer(this, 64, 16);
 	  this.bipedWing.func_228301_a_(-14.0F, -4.0F, 6.0F, 28.0F, 16.0F, 1.0F, modelSize);
 	  this.bipedWing.setRotationPoint(0, 0, 0);
+
+	  //this.bipedHead.addChild(bipedHalo);
 	  /*
 		Wing = new ModelRenderer(this);
 		Wing.setRotationPoint(0.3326F, 5.4407F, 0.4995F);

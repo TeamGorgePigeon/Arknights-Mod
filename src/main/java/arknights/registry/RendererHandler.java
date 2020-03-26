@@ -1,9 +1,6 @@
 package arknights.registry;
 
-import arknights.renderer.entity.BulletRenderer;
-import arknights.renderer.entity.DisasterRenderer;
-import arknights.renderer.entity.ExusiaiRenderer;
-import arknights.renderer.entity.OriginiumSlugRenderer;
+import arknights.renderer.entity.*;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
@@ -15,10 +12,12 @@ public class RendererHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.ORIGINIUMSLUG, OriginiumSlugRenderer::new);
 
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.BULLET, BulletRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHandler.AMIYAMAGIC, AmiyaMagicRenderer::new);
 
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.DISASTERZERO, DisasterRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.SNOWSTORM, DisasterRenderer::new);
 
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.EXUSIAI, ExusiaiRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHandler.AMIYA, AmiyaRenderer::new);
     }
 }

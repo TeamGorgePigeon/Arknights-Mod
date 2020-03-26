@@ -1,6 +1,7 @@
 package arknights.registry;
 
 import arknights.entity.disaster.DisasterZero;
+import arknights.entity.notLiving.AmiyaMagic;
 import arknights.entity.notLiving.BulletEntity;
 import arknights.entity.notLiving.Meteorite;
 import arknights.entity.living.OriginiumSlugEntity;
@@ -20,10 +21,12 @@ public class EntityHandler {
 
     public static final EntityType<Meteorite> METEORITE = (EntityType<Meteorite>)EntityType.Builder.<Meteorite>create(Meteorite::new, EntityClassification.MISC).build("meteorite").setRegistryName(MODID + ":" + "meteorite");
     public static final EntityType<BulletEntity> BULLET = (EntityType<BulletEntity>)EntityType.Builder.<BulletEntity>create(BulletEntity::new, EntityClassification.MISC).build("bullet").setRegistryName(MODID+ ":bullet");
+    public static final EntityType<AmiyaMagic> AMIYAMAGIC = (EntityType<AmiyaMagic>)EntityType.Builder.<AmiyaMagic>create(AmiyaMagic::new, EntityClassification.MISC).build("amiya_magic").setRegistryName(MODID+ ":amiya_magic");
 
     public static final EntityType<OriginiumSlugEntity> ORIGINIUMSLUG = (EntityType<OriginiumSlugEntity>)EntityType.Builder.<OriginiumSlugEntity>create(OriginiumSlugEntity::new, EntityClassification.MONSTER).size(0.8F, 0.5F).build("originium_slug").setRegistryName(MODID + ":" + "originium_slug");
 
     public static final EntityType<ExusiaiEntity> EXUSIAI = (EntityType<ExusiaiEntity>)EntityType.Builder.<ExusiaiEntity>create(ExusiaiEntity::new, EntityClassification.CREATURE).build("exusiai").setRegistryName(MODID + ":" + "exusiai");
+    public static final EntityType<AmiyaEntity> AMIYA = (EntityType<AmiyaEntity>)EntityType.Builder.<AmiyaEntity>create(AmiyaEntity::new, EntityClassification.CREATURE).build("amiya").setRegistryName(MODID + ":" + "amiya");
 
     @SubscribeEvent
     public static void register(RegistryEvent.Register<EntityType<?>> evt){
@@ -33,9 +36,11 @@ public class EntityHandler {
 
         r.register(METEORITE);
         r.register(BULLET);
+        r.register(AMIYAMAGIC);
 
         r.register(ORIGINIUMSLUG);
 
 		r.register(EXUSIAI);
+		r.register(AMIYA);
     }
 }
