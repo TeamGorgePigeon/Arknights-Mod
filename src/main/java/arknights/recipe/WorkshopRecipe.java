@@ -35,9 +35,9 @@ public class WorkshopRecipe implements IWorkshopRecipe {
             ItemToInt=0;
         } else if (Item ==ItemRecipe[1]) {
             ItemToInt=1;
-        } else {
+        } else if (Item ==ItemRecipe[2]) {
             ItemToInt=2;
-        }
+        } else {ItemToInt=-1;}
         return ItemToInt;
     }
 
@@ -82,6 +82,7 @@ public class WorkshopRecipe implements IWorkshopRecipe {
         RecipeItemHelper recipeitemhelper = new RecipeItemHelper();
         java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
         int i = 0;
+        int GetItemRecipe;
         boolean IsMatchItemCountMain = false;
         boolean IsMatchItemCount[] = new boolean[3];
 
@@ -93,8 +94,11 @@ public class WorkshopRecipe implements IWorkshopRecipe {
                     recipeitemhelper.func_221264_a(itemstack, 1);
                 else inputs.add(itemstack);
                 if (j <= this.counts.size()-1) {
-                    IsMatchItemCount[j] =  itemstack.getCount() >= this.counts.get(CItemToInt(inv.getStackInSlot(j).getItem())).getCount();
+                    GetItemRecipe=CItemToInt(inv.getStackInSlot(j).getItem());
+                    if (GetItemRecipe!=-1) {
+                    IsMatchItemCount[j] =  itemstack.getCount() >= this.counts.get(GetItemRecipe).getCount();
                     this.items.set(j,inv.getStackInSlot(j) != null ? itemstack.getItem() : Items.AIR);
+                    }
                 }
             } else {IsMatchItemCount[j]=true;}
         }
