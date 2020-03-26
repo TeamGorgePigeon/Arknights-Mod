@@ -36,11 +36,11 @@ public class WorkshopContainer extends Container {
         this.inv =  tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(NullPointerException::new);
         this.playerInventory = playerInventoryIn;
 
-        this.resultSlot = new WorkshopResultSlot(this.playerInventory.player, this.inv, this.inv2, 0, 139, 42);
+        this.resultSlot = new WorkshopResultSlot(this.playerInventory.player, this.inv, this.inv2, 0, 66, 53);
         this.addSlot(resultSlot);
-        this.addSlot(new SlotItemHandler(this.inv, 0, 15, 42));
-        this.addSlot(new SlotItemHandler(this.inv, 1, 54, 42));
-        this.addSlot(new SlotItemHandler(this.inv, 2, 93, 42));
+        this.addSlot(new SlotItemHandler(this.inv, 0, 66, 21));
+        this.addSlot(new SlotItemHandler(this.inv, 1, 41, 68));
+        this.addSlot(new SlotItemHandler(this.inv, 2, 92, 68));
 
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 9; ++j) {

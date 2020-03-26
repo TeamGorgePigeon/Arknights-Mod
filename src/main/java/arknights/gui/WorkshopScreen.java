@@ -10,7 +10,7 @@ import net.minecraft.util.text.ITextComponent;
 
 public class WorkshopScreen extends ContainerScreen<WorkshopContainer> {
 
-    private ResourceLocation GUI = new ResourceLocation(Arknights.MODID,"textures/gui/trading_home.png");
+    private ResourceLocation GUI = new ResourceLocation(Arknights.MODID,"textures/gui/workshop.png");
     private final WorkshopContainer container;
     public WorkshopScreen(WorkshopContainer p_i51105_1_, PlayerInventory p_i51105_2_, ITextComponent p_i51105_3_) {
         super(p_i51105_1_, p_i51105_2_, p_i51105_3_);
