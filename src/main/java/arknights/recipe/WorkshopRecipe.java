@@ -95,7 +95,7 @@ public class WorkshopRecipe implements IWorkshopRecipe {
                 else inputs.add(itemstack);
                 if (j <= this.counts.size()-1) {
                     GetItemRecipe=CItemToInt(inv.getStackInSlot(j).getItem());
-                    if (GetItemRecipe!=-1) {
+                    if (GetItemRecipe!=-1 & GetItemRecipe < this.counts.size()) {
                     IsMatchItemCount[j] =  itemstack.getCount() >= this.counts.get(GetItemRecipe).getCount();
                     this.items.set(j,inv.getStackInSlot(j) != null ? itemstack.getItem() : Items.AIR);
                     }
