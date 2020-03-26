@@ -1,6 +1,0 @@
-{
-    "loader": "forge:obj",
-	"__comment": "Add the following line on the same level as a 'model' declaration.",
-    "model": "arknights:models/block/originium_prime_block.obj",
-	"flip-v": true
-}
