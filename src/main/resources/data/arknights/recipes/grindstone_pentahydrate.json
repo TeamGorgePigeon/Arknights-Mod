@@ -1,0 +1,15 @@
+{
+  "type": "arknights:workshop",
+  "result": {"item": "arknights:grindstone_pentahydrate", "count": 1},
+  "ingredients": [
+    {"item": "arknights:grindstone"},
+    {"item": "arknights:oriron_cluster"},
+    {"item": "arknights:integrated_device"}
+  ],
+  "counts":[1,1,1],
+  "items": [
+    "arknights:grindstone",
+    "arknights:oriron_cluster",
+    "arknights:integrated_device"
+  ]
+}

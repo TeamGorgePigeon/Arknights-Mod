@@ -82,7 +82,8 @@ public class WorkshopResultSlot extends Slot {
                 if (!itemstack.isEmpty()) {
                     if (this.itemStacks.get(j) != null) {
                         if (this.field_75239_a.getStackInSlot(i).getItem() == this.itemStacks.get(j).getItem()) {
-                            this.field_75239_a.extractItem(i, this.itemStacks.get(j).getCount(), false);
+                            //this.field_75239_a.extractItem(i, this.itemStacks.get(j).getCount(), false);
+                            this.field_75239_a.getStackInSlot(i).shrink(this.itemStacks.get(j).getCount());
                             count = this.field_75239_a.getStackInSlot(i).getCount();
                             itemstack = this.field_75239_a.getStackInSlot(i);
                         }

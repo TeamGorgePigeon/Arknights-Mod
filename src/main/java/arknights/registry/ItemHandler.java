@@ -84,7 +84,7 @@ public class ItemHandler {
 
     public static final Item D32STEEL = createItem("d32_steel", 179, LEGEND, 62, 1, 68, 1, 49, 1);
     public static final Item BIPOLARNANOFLAKE = createItem("bipolar_nanoflake", 105, LEGEND, 4, 1, 49, 1, 52, 1);
-    public static final Item POLYMERIZATIONPREPERATION = createItem("polymerization_preperation", 115, LEGEND, 56, 1, 59, 2, 0, 0);
+    public static final Item POLYMERIZATIONPREPERATION = createItem("polymerization_preparation", 115, LEGEND, 56, 1, 59, 2, 0, 0);
 
     public static final BlockItem TRADINGHOME_ITEM = createBlockItem(BlockHandler.TRADINGHOME);
     public static final BlockItem ORIGINIUMS = createBlockItem(BlockHandler.ORIGINITEPRIME_BLOCK);
