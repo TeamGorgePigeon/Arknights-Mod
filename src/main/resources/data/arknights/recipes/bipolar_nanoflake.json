@@ -1,0 +1,13 @@
+{
+  "type": "arknights:workshop",
+  "result": {"item": "arknights:bipolar_nanoflake", "count": 1},
+  "ingredients": [
+    {"item": "arknights:optimized_device"},
+    {"item": "arknights:white_horse_kohl"}
+  ],
+  "counts":[1,2],
+  "items": [
+    "arknights:optimized_device",
+    "arknights:white_horse_kohl"
+  ]
+}
