@@ -36,7 +36,7 @@ public class EntitySpawnHandler {
     public static void registerEntityWorldSpawn(EntityType<?> entity, int weight, Biome... biomes) {
         for (Biome biome : biomes) {
             if (biome != null) {
-                biome.getSpawns(entity.getClassification()).add(new Biome.SpawnListEntry(entity, weight, 1, 100));
+                biome.getSpawns(entity.getClassification()).add(new Biome.SpawnListEntry(entity, weight, 1, 5));
             }
         }
     }

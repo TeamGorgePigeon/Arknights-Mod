@@ -46,19 +46,25 @@ public class AmiyaMagic extends MobEntity implements IProjectile {
     private IntOpenHashSet field_213878_az;
     private List<Entity> field_213875_aA;
 
-    public AmiyaMagic(EntityType<? extends MobEntity> p_i48580_1_, World p_i48580_2_) {
-        super(p_i48580_1_, p_i48580_2_);
+    public AmiyaMagic(EntityType<AmiyaMagic> p_i48580_1_, World p_i48580_2_) {
+        super(EntityHandler.AMIYAMAGIC, p_i48580_2_);
+        this.setHealth(this.getMaxHealth());
         this.setNoGravity(true);
     }
 
     public AmiyaMagic(EntityType<AmiyaMagic> p_i48547_1_, double p_i48547_2_, double p_i48547_4_, double p_i48547_6_, World p_i48547_8_) {
-        this(p_i48547_1_, p_i48547_8_);
+        this(EntityHandler.AMIYAMAGIC, p_i48547_8_);
         this.setPosition(p_i48547_2_, p_i48547_4_, p_i48547_6_);
     }
 
     public AmiyaMagic(LivingEntity p_i48548_2_, World p_i48548_3_) {
         this(EntityHandler.AMIYAMAGIC, p_i48548_2_.func_226277_ct_(), p_i48548_2_.func_226280_cw_() - (double)0.1F, p_i48548_2_.func_226281_cx_(), p_i48548_3_);
         this.setShooter(p_i48548_2_);
+    }
+
+    public void registerAttributes() {
+        super.registerAttributes();
+        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1.0D);
     }
 
     @Override
