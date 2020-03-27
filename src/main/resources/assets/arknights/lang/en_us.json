@@ -2,10 +2,12 @@
   "itemGroup.arknights": "Arknights",
 
   "item.arknights.exusiai": "Operator Exusiai's Contract",
+  "item.arknights.amiya": "Operator Amiya's Contract",
 
   "item.arknights.originium_shard": "Originium Shard",
   "item.arknights.originite_prime": "Originite Prime",
   "item.arknights.pure_gold":"Pure Gold",
+  "block.arknights.orundum": "Orundum",
   
   "item.arknights.jb":"Exusiai's Vector",
   "item.arknights.truesilver_sword":"Silverash's Truesilver Sword",
@@ -58,5 +60,6 @@
 
   "block.arknights.originite_prime_block": "Originite Prime(Decoration)",
   
-  "block.arknights.trading_home":"Factory"
+  "block.arknights.trading_home":"Factory",
+  "block.arknights.workshop": "Workshop"
 }
