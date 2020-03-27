@@ -67,13 +67,14 @@ public class Arknights
         //PacketHandler.HANDLER.registerMessage(PacketHandler.index++, LeftClickPacket.class, LeftClickPacket::encode, LeftClickPacket::decode, LeftClickPacket.Handler::handle);
         // some preinit code
         EntitySpawnHandler.register();
-        PacketHandler.register();
+
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
         RendererHandler.register();
         ModelLoaderHandler.myRegister();
+        PacketHandler.register();
         LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }
 
