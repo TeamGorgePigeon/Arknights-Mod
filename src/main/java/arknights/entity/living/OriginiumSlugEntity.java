@@ -12,7 +12,10 @@ import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.LightType;
 import net.minecraft.world.World;
+import net.minecraft.world.lighting.IWorldLightListener;
+import net.minecraft.world.lighting.LightEngine;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -26,7 +29,10 @@ public class OriginiumSlugEntity extends MonsterEntity {
    }
 
    public static boolean spawnCondition (EntityType<? extends OriginiumSlugEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-      return true;
+      //IWorldLightListener skyLight = world.func_225524_e_().getLightEngine(LightType.SKY);
+      int light = world.func_225524_e_().getLightEngine(LightType.SKY).getLightFor(pos);
+      return light > 1;
+
       //return true;
    }
 

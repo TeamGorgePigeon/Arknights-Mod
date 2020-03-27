@@ -1,11 +1,14 @@
 package arknights.entity.disaster;
 
+import arknights.entity.living.OriginiumSlugEntity;
 import arknights.entity.notLiving.Meteorite;
 import arknights.network.PacketHandler;
 import arknights.network.packets.DisasterPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
@@ -14,7 +17,9 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.network.play.server.SSpawnObjectPacket;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BossInfo;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerBossInfo;
 import net.minecraftforge.fml.network.NetworkDirection;
@@ -22,11 +27,11 @@ import net.minecraftforge.fml.network.PacketDistributor;
 
 import java.util.Random;
 
-public class DisasterZero extends Entity {
+public class DisasterZero extends MobEntity {
     private static final DataParameter<Integer> TIME = EntityDataManager.createKey(DisasterZero.class, DataSerializers.VARINT);
     private int time = 500;
     private final ServerBossInfo bossInfo = (ServerBossInfo)(new ServerBossInfo(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
-    public DisasterZero(EntityType<?> p_i48580_1_, World p_i48580_2_) {
+    public DisasterZero(EntityType<? extends MobEntity> p_i48580_1_, World p_i48580_2_) {
         super(p_i48580_1_, p_i48580_2_);
         if(new Random().nextInt(100) >= 98)
             //this.remove();
@@ -34,6 +39,10 @@ public class DisasterZero extends Entity {
         //PacketHandler.HANDLER.send(PacketDistributor.ALL.noArg(), new DisasterPacket(true));
     }
 
+    public static boolean spawnCondition (EntityType<? extends DisasterZero> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return true;
+        //return true;
+    }
     @Override
     public void tick(){
         if(this.time % 5 == 0){
@@ -71,12 +80,12 @@ public class DisasterZero extends Entity {
     }
 
     @Override
-    protected void readAdditional(CompoundNBT compound) {
+    public void readAdditional(CompoundNBT compound) {
         //this.time = compound.getInt("time");
     }
 
     @Override
-    protected void writeAdditional(CompoundNBT compound) {
+    public void writeAdditional(CompoundNBT compound) {
         //compound.putInt("time", time);
     }
 
