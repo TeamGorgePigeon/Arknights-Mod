@@ -28,6 +28,7 @@ public class ItemHandler {
     public static Map<Integer, Item> mapOfId = new HashMap<>();
 
     public static final Item EXUSIAI = new Exusiai(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":exusiai");
+    public static final Item AMIYA = new Amiya(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":amiya");
 
     public static final Item ORIGINITEPRIME = new OriginitePrime(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID+":originite_prime");
     public static final Item ORIGINIUMSHARD = createItem("originium_shard", 1001, LEGEND);
@@ -142,6 +143,7 @@ public class ItemHandler {
         r.register(WORKSHOP);
 
         r.register(EXUSIAI);
+        r.register(AMIYA);
     }
 
     private static Item createItem(String name, int id, TextFormatting color, int item1, int num1, int item2, int num2, int item3, int num3){

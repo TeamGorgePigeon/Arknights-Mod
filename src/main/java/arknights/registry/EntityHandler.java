@@ -7,8 +7,10 @@ import arknights.entity.notLiving.Meteorite;
 import arknights.entity.living.OriginiumSlugEntity;
 import arknights.entity.disaster.SnowStorm;
 import arknights.entity.*;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -26,10 +28,16 @@ public class EntityHandler {
     public static final EntityType<BulletEntity> BULLET = (EntityType<BulletEntity>)EntityType.Builder.<BulletEntity>create(BulletEntity::new, EntityClassification.MISC).build("bullet").setRegistryName(MODID+ ":bullet");
     public static final EntityType<AmiyaMagic> AMIYAMAGIC = (EntityType<AmiyaMagic>)EntityType.Builder.<AmiyaMagic>create(AmiyaMagic::new, EntityClassification.MISC).build("amiya_magic").setRegistryName(MODID+ ":amiya_magic");
 
-    public static final EntityType<OriginiumSlugEntity> ORIGINIUMSLUG = (EntityType<OriginiumSlugEntity>)EntityType.Builder.<OriginiumSlugEntity>create(OriginiumSlugEntity::new, EntityClassification.MONSTER).size(0.8F, 0.5F).build("originium_slug").setRegistryName(MODID + ":" + "originium_slug");
+    //public static final EntityType<OriginiumSlugEntity> ORIGINIUMSLUG = (EntityType<OriginiumSlugEntity>)EntityType.Builder.<OriginiumSlugEntity>create(OriginiumSlugEntity::new, EntityClassification.MONSTER).size(0.8F, 0.5F).build("originium_slug").setRegistryName(MODID + ":" + "originium_slug");
+    public static final EntityType<OriginiumSlugEntity> ORIGINIUMSLUG = registerEntity(MODID + ":" + "originium_slug", EntityType.Builder.create(OriginiumSlugEntity::new, EntityClassification.MONSTER).size(0.8F, 0.5F));
+
 
     public static final EntityType<ExusiaiEntity> EXUSIAI = (EntityType<ExusiaiEntity>)EntityType.Builder.<ExusiaiEntity>create(ExusiaiEntity::new, EntityClassification.CREATURE).build("exusiai").setRegistryName(MODID + ":" + "exusiai");
     public static final EntityType<AmiyaEntity> AMIYA = (EntityType<AmiyaEntity>)EntityType.Builder.<AmiyaEntity>create(AmiyaEntity::new, EntityClassification.CREATURE).build("amiya").setRegistryName(MODID + ":" + "amiya");
+
+    private static <T extends Entity> EntityType<T> registerEntity(String key, EntityType.Builder<T> builder) {
+        return Registry.register(Registry.ENTITY_TYPE, key, builder.build(key));
+    }
 
     @SubscribeEvent
     public static void register(RegistryEvent.Register<EntityType<?>> evt){
@@ -39,9 +47,9 @@ public class EntityHandler {
 
         r.register(METEORITE);
         r.register(BULLET);
-        r.register(AMIYAMAGIC);
+        //r.register(AMIYAMAGIC);
 
-        r.register(ORIGINIUMSLUG);
+        //r.register(ORIGINIUMSLUG.setRegistryName(MODID + ":" + "originium_slug"));
 
 		r.register(EXUSIAI);
 		r.register(AMIYA);

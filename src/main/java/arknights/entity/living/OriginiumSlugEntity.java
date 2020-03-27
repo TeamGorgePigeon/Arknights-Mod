@@ -1,5 +1,6 @@
 package arknights.entity.living;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.merchant.villager.AbstractVillagerEntity;
@@ -22,6 +23,11 @@ public class OriginiumSlugEntity extends MonsterEntity {
 
    public OriginiumSlugEntity(EntityType<? extends OriginiumSlugEntity> typeIn, World worldIn) {
       super(typeIn, worldIn);
+   }
+
+   public static boolean spawnCondition (EntityType<? extends OriginiumSlugEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
+      //return world.getBlockState(pos.down()).getBlock() == Blocks.GRASS_BLOCK;
+      return true;
    }
 
    protected void registerGoals() {
