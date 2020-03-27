@@ -3,6 +3,7 @@ package arknights.registry;
 import arknights.block.TradingHome;
 import arknights.block.Workshop;
 import net.minecraft.block.Block;
+import net.minecraft.block.GlassBlock;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -18,7 +19,7 @@ public class BlockHandler {
     public static final Block TRADINGHOME = new TradingHome(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)).setRegistryName(MODID+":"+"trading_home");
     public static final Block ORIGINITEPRIME_BLOCK = new LeavesBlock(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.3F).sound(SoundType.GLASS).func_226896_b_()).setRegistryName(MODID+":"+"originite_prime_block");
     public static final Block WORKSHOP = new Workshop(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F,6.0F)).setRegistryName(MODID + ":workshop");
-    public static final Block ORUNDUM = new LeavesBlock(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.3F).sound(SoundType.GLASS).func_226896_b_()).setRegistryName(MODID + ":orundum");
+    public static final Block ORUNDUM = new GlassBlock(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.3F).sound(SoundType.GLASS).func_226896_b_()).setRegistryName(MODID + ":orundum");
 
     @SubscribeEvent
     public static void register(RegistryEvent.Register<Block> evt){

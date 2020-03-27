@@ -2,10 +2,12 @@
   "itemGroup.arknights": "明日方舟",
 
   "item.arknights.exusiai": "招聘合同『能天使』",
+  "item.arknights.amiya": "招聘合同『阿米娅』",
 
   "item.arknights.originium_shard": "源石碎片",
   "item.arknights.originite_prime": "至纯源石",
   "item.arknights.pure_gold":"赤金",
+  "block.arknights.orundum": "合成玉",
   
   "item.arknights.jb":"『能天使』Vector",
   "item.arknights.truesilver_sword":"『银灰』真银剑",
@@ -58,5 +60,6 @@
 
   "block.arknights.originite_prime_block": "至纯源石(装饰)",
   
-  "block.arknights.trading_home":"制造站"
+  "block.arknights.trading_home":"制造站",
+  "block.arknights.workshop": "加工站"
 }
