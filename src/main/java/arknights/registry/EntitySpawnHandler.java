@@ -12,7 +12,7 @@ import static net.minecraft.world.biome.Biomes.*;
 public class EntitySpawnHandler {
     public static void register(){
         EntitySpawnPlacementRegistry.register(EntityHandler.ORIGINIUMSLUG, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, OriginiumSlugEntity::spawnCondition);
-        PLAINS.getSpawns(EntityClassification.MONSTER).clear();
+        //PLAINS.getSpawns(EntityClassification.MONSTER).clear();
         //PLAINS.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EntityHandler.ORIGINIUMSLUG, 100, 1, 10));
 
         /*
@@ -25,7 +25,7 @@ public class EntitySpawnHandler {
                 SNOWY_BEACH, SNOWY_TAIGA, SNOWY_TAIGA_HILLS, ICE_SPIKES, SNOWY_TAIGA_MOUNTAINS);*/
 
 
-        registerEntityWorldSpawn(EntityHandler.ORIGINIUMSLUG, 100, PLAINS, DESERT, MOUNTAINS, FOREST, TAIGA, SWAMP, NETHER, BEACH, DESERT_HILLS, WOODED_HILLS,
+        registerEntityWorldSpawn(EntityHandler.ORIGINIUMSLUG, 75, PLAINS, DESERT, MOUNTAINS, FOREST, TAIGA, SWAMP, NETHER, BEACH, DESERT_HILLS, WOODED_HILLS,
                 TAIGA_HILLS, MOUNTAIN_EDGE, JUNGLE, JUNGLE_HILLS, JUNGLE_EDGE, STONE_SHORE, BIRCH_FOREST,
                 BIRCH_FOREST_HILLS, DARK_FOREST, GIANT_TREE_TAIGA, GIANT_TREE_TAIGA_HILLS, WOODED_MOUNTAINS, SAVANNA, SAVANNA_PLATEAU, BADLANDS, WOODED_BADLANDS_PLATEAU, BADLANDS_PLATEAU, GRAVELLY_MOUNTAINS,
                 TAIGA_MOUNTAINS, SWAMP_HILLS, MODIFIED_JUNGLE, MODIFIED_JUNGLE_EDGE, TALL_BIRCH_FOREST, TALL_BIRCH_HILLS,

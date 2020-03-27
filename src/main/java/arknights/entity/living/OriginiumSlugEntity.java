@@ -26,8 +26,8 @@ public class OriginiumSlugEntity extends MonsterEntity {
    }
 
    public static boolean spawnCondition (EntityType<? extends OriginiumSlugEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-      //return world.getBlockState(pos.down()).getBlock() == Blocks.GRASS_BLOCK;
       return true;
+      //return true;
    }
 
    protected void registerGoals() {
