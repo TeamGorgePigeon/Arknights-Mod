@@ -15,7 +15,7 @@ import static net.minecraft.world.biome.Biomes.*;
 public class EntitySpawnHandler {
     public static void register(){
         EntitySpawnPlacementRegistry.register(EntityHandler.ORIGINIUMSLUG, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, OriginiumSlugEntity::spawnCondition);
-        EntitySpawnPlacementRegistry.register(EntityHandler.DISASTERZERO, EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, DisasterZero::spawnCondition);
+        //EntitySpawnPlacementRegistry.register(EntityHandler.DISASTERZERO, EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, DisasterZero::spawnCondition);
         //PLAINS.getSpawns(EntityClassification.MONSTER).clear();
         //PLAINS.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EntityHandler.ORIGINIUMSLUG, 100, 1, 10));
 
