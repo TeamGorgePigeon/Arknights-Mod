@@ -30,7 +30,7 @@ public class EntityHandler {
 
     //public static final EntityType<OriginiumSlugEntity> ORIGINIUMSLUG = (EntityType<OriginiumSlugEntity>)EntityType.Builder.<OriginiumSlugEntity>create(OriginiumSlugEntity::new, EntityClassification.MONSTER).size(0.8F, 0.5F).build("originium_slug").setRegistryName(MODID + ":" + "originium_slug");
     public static final EntityType<OriginiumSlugEntity> ORIGINIUMSLUG = registerEntity(MODID + ":" + "originium_slug", EntityType.Builder.create(OriginiumSlugEntity::new, EntityClassification.MONSTER).size(0.8F, 0.5F));
-
+    public static final EntityType<CrownslayerEntity> CROWNSLAYER = (EntityType<CrownslayerEntity>)EntityType.Builder.<CrownslayerEntity>create(CrownslayerEntity::new, EntityClassification.CREATURE).build("crownslayer").setRegistryName(MODID + ":" + "crownslayer");
 
     public static final EntityType<ExusiaiEntity> EXUSIAI = (EntityType<ExusiaiEntity>)EntityType.Builder.<ExusiaiEntity>create(ExusiaiEntity::new, EntityClassification.CREATURE).build("exusiai").setRegistryName(MODID + ":" + "exusiai");
     public static final EntityType<AmiyaEntity> AMIYA = (EntityType<AmiyaEntity>)EntityType.Builder.<AmiyaEntity>create(AmiyaEntity::new, EntityClassification.CREATURE).build("amiya").setRegistryName(MODID + ":" + "amiya");
@@ -53,6 +53,7 @@ public class EntityHandler {
 
 		r.register(EXUSIAI);
 		r.register(AMIYA);
+        r.register(CROWNSLAYER);
 
 
         /*registerEntityWorldSpawn(ORIGINIUMSLUG, 1, Biomes.SNOWY_TAIGA, Biomes.ICE_SPIKES, Biomes.SNOWY_TUNDRA,

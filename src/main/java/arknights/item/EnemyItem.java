@@ -12,7 +12,6 @@ import net.minecraft.item.UseAction;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -22,12 +21,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class OperatorItem extends Item {
-    protected OperatorBase operator;
+public class EnemyItem extends Item {
+    protected OperatorBase enemy;
     public int id;
     public boolean isUsed;
     public int cd = 0;
-    public OperatorItem(Properties p_i48487_1_) {
+    public EnemyItem(Properties p_i48487_1_) {
         super(p_i48487_1_);
     }
 
@@ -48,7 +47,7 @@ public class OperatorItem extends Item {
         return ActionResult.func_226249_b_(itemstack);
     }
 
-    public void newOperator(World world){
+    public void newEnemy(World world){
 
     }
 
@@ -60,15 +59,6 @@ public class OperatorItem extends Item {
         @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         //String playerName = entityLiving.getScoreboardName()
-        if(!worldIn.isRemote()){
-            Vec3d pos = entityLiving.getPositionVec();
-            this.newOperator(entityLiving.world);
-            this.operator.setOwnerId(entityLiving.getUniqueID());
-            this.operator.setPosition(pos.x, pos.y, pos.z);
-            this.operator.setPositionAndRotation(pos.x, pos.y, pos.z, entityLiving.rotationYaw, entityLiving.rotationPitch);
-            worldIn.addEntity(this.operator);
-            stack.shrink(1);
-        }
         return stack;
     }
 

@@ -37,6 +37,7 @@ public class ItemHandler {
     public static final BlockItem ORUNDUM = createBlockItem(BlockHandler.ORUNDUM);
 
     public static final Item TRUESILVER_SWORD = new TruesilverSword(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "truesilver_sword");
+    public static final Item CROWNSLAYER_KNIFE = new CrownslayerKnife(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "crownslayer_knife");
     public static final Item APULUPAI = new Apulupai(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "jb");
 
 
@@ -137,6 +138,7 @@ public class ItemHandler {
         r.register(POLYMERIZATIONPREPERATION);
         r.register(APULUPAI);
         r.register(TRUESILVER_SWORD);
+        r.register(CROWNSLAYER_KNIFE);
 
         r.register(TRADINGHOME_ITEM);
         r.register(ORIGINIUMS);

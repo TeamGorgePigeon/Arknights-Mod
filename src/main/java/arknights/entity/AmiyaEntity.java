@@ -2,12 +2,9 @@ package arknights.entity;
 
 import arknights.entity.notLiving.AmiyaMagic;
 import arknights.registry.EntityHandler;
-import arknights.registry.ItemHandler;
-import arknights.registry.SoundHandler;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;

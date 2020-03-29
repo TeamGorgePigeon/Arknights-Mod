@@ -92,17 +92,6 @@ public class OriginiumSlugEntity extends MonsterEntity {
       }
    }
 
-
-   public static boolean func_223331_b(EntityType<OriginiumSlugEntity> p_223331_0_, IWorld p_223331_1_, SpawnReason p_223331_2_, BlockPos p_223331_3_, Random p_223331_4_) {
-      if (func_223324_d(p_223331_0_, p_223331_1_, p_223331_2_, p_223331_3_, p_223331_4_)) {
-         PlayerEntity playerentity = p_223331_1_.getClosestPlayer((double) p_223331_3_.getX() + 0.5D, (double) p_223331_3_.getY() + 0.5D, (double) p_223331_3_.getZ() + 0.5D, 5.0D, true);
-         return playerentity == null;
-      } else {
-         return false;
-      }
-   }
-
-
    static class SummonOriginiumSlugGoal extends Goal {
       private final OriginiumSlugEntity originiumslug;
       private int lookForFriends;

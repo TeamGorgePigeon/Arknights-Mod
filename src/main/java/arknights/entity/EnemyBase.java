@@ -1,6 +1,7 @@
 package arknights.entity;
 
-import arknights.item.OperatorItem;
+import arknights.item.EnemyItem;
+import arknights.registry.EntityHandler;
 import arknights.registry.SoundHandler;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
@@ -22,17 +23,17 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class OperatorBase extends TameableEntity {
-    private SummonOperatorGoal summonOperator;
+public class EnemyBase extends MonsterEntity {
+    private SummonEnemyGoal summonEnemy;
     public Item item = Items.AIR;
-    public static final DataParameter<Boolean> OPERATORATTACKING = EntityDataManager.createKey(ExusiaiEntity.class, DataSerializers.BOOLEAN);
+    //public static final DataParameter<Boolean> OPERATORATTACKING = EntityDataManager.createKey(ExusiaiEntity.class, DataSerializers.BOOLEAN);
 
 
-    public OperatorBase(EntityType<? extends TameableEntity> p_i48574_1_, World p_i48574_2_) {
+    public EnemyBase(EntityType<? extends MonsterEntity> p_i48574_1_, World p_i48574_2_) {
         super(p_i48574_1_, p_i48574_2_);
     }
 
-    public OperatorBase(EntityType<? extends TameableEntity> p_i48574_1_, World p_i48574_2_, Item item) {
+    public EnemyBase(EntityType<? extends MonsterEntity> p_i48574_1_, World p_i48574_2_,Item item) {
         super(p_i48574_1_, p_i48574_2_);
         this.item = item;
     }
@@ -44,29 +45,21 @@ public class OperatorBase extends TameableEntity {
         this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(1, new RandomWalkingGoal(this, 1.0F));
         this.goalSelector.addGoal(1, new RandomSwimmingGoal(this, 1.0F, 120));
-        this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
         this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setCallsForHelp());
-        this.goalSelector.addGoal(3, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
-        this.summonOperator = new OperatorBase.SummonOperatorGoal(this);
+        this.summonEnemy = new EnemyBase.SummonEnemyGoal(this);
         this.goalSelector.addGoal(1, new SwimGoal(this));
-        this.goalSelector.addGoal(3, this.summonOperator);
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MonsterEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, EnderDragonEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, WitherEntity.class, true));
+        this.goalSelector.addGoal(3, this.summonEnemy);
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MobEntity.class, true));
     }
 
     @Override
     protected void registerData() {
         super.registerData();
-        this.dataManager.register(OPERATORATTACKING, false);
+        //this.dataManager.register(OPERATORATTACKING, false);
     }
 
     @Nullable
     @Override
-    public AgeableEntity createChild(AgeableEntity ageableEntity) {
-        return null;
-    }
 
     protected void registerAttributes() {
         super.registerAttributes();
@@ -76,17 +69,17 @@ public class OperatorBase extends TameableEntity {
     }
 
     public void onDeath(DamageSource cause) {
-        if(this.item instanceof OperatorItem && !world.isRemote()){
+        if(this.item instanceof EnemyItem && !world.isRemote()){
             ItemEntity entity = new ItemEntity(world, this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), new ItemStack(this.item, 1));
             world.addEntity(entity);
         }
     }
 
-    static class SummonOperatorGoal extends Goal {
-        private final OperatorBase operatorBase;
+    static class SummonEnemyGoal extends Goal {
+        private final EnemyBase enemyBase;
 
-        public SummonOperatorGoal(OperatorBase operatorBaseIn) {
-            this.operatorBase = operatorBaseIn;
+        public SummonEnemyGoal(EnemyBase enemyBaseIn) {
+            this.enemyBase = enemyBaseIn;
         }
 
         @Override

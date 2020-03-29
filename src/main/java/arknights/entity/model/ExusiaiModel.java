@@ -14,7 +14,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ExusiaiModel<T extends ExusiaiEntity> extends OperatorModel {
+public class ExusiaiModel<T extends ExusiaiEntity> extends HumanModel {
    private List<ModelRenderer> field_228286_w_ = Lists.newArrayList();
    private final ModelRenderer bipedHalo;
    private final ModelRenderer bipedWing;

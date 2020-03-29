@@ -19,5 +19,6 @@ public class RendererHandler {
 
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.EXUSIAI, ExusiaiRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.AMIYA, AmiyaRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHandler.CROWNSLAYER, CrownslayerRenderer::new);
     }
 }

@@ -1,7 +1,5 @@
 package arknights.entity.model;
 
-import arknights.entity.ExusiaiEntity;
-import arknights.entity.OperatorBase;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -16,7 +14,7 @@ import net.minecraft.util.HandSide;
 import java.util.List;
 import java.util.Random;
 
-public class OperatorModel<T extends LivingEntity> extends BipedModel<T> {
+public class HumanModel<T extends LivingEntity> extends BipedModel<T> {
     private List<ModelRenderer> field_228286_w_ = Lists.newArrayList();
     public final ModelRenderer bipedLeftArmwear;
     public final ModelRenderer bipedRightArmwear;
@@ -27,7 +25,7 @@ public class OperatorModel<T extends LivingEntity> extends BipedModel<T> {
     //private final ModelRenderer bipedHalo;
 
 
-    public OperatorModel(float modelSize) {
+    public HumanModel(float modelSize) {
         super(RenderType::func_228644_e_, modelSize, 0.0F, 128, 64);
         this.bipedDeadmau5Head = new ModelRenderer(this, 24, 0);
         this.bipedDeadmau5Head.func_228301_a_(-3.0F, -6.0F, -1.0F, 6.0F, 6.0F, 1.0F, modelSize);

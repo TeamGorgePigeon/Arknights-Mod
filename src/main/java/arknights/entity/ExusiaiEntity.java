@@ -11,12 +11,6 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
@@ -29,6 +23,7 @@ public class ExusiaiEntity extends OperatorBase implements IRangedAttackMob{
     private int sp;
     private int tick = 0;
     private boolean isSkill = false;
+
 
     public ExusiaiEntity(EntityType<? extends ExusiaiEntity> typeIn, World worldIn) {
         super(typeIn, worldIn);
