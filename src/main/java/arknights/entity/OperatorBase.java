@@ -54,6 +54,7 @@ public class OperatorBase extends TameableEntity {
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MonsterEntity.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, EnderDragonEntity.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, WitherEntity.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, EnemyBase.class, true));
     }
 
     @Override

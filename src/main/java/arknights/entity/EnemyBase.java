@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class EnemyBase extends MonsterEntity {
+public class EnemyBase extends CreatureEntity {
     private SummonEnemyGoal summonEnemy;
     //public static final DataParameter<Boolean> OPERATORATTACKING = EntityDataManager.createKey(ExusiaiEntity.class, DataSerializers.BOOLEAN);
 
