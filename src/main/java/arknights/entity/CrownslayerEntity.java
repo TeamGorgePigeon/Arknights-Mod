@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class CrownslayerEntity extends EnemyBase {
+public class CrownslayerEntity extends MeleeEnemy {
     public CrownslayerModel model;
 
 
@@ -21,13 +21,8 @@ public class CrownslayerEntity extends EnemyBase {
         this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemHandler.CROWNSLAYER_KNIFE));
     }
 
-    public CrownslayerEntity(World world, Item item){
-        super(EntityHandler.CROWNSLAYER, world, item);
-        this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemHandler.CROWNSLAYER_KNIFE));
-    }
-
-
-    protected void registerGoals() {
+    @Override
+    public void registerGoals() {
         super.registerGoals();
     }
 

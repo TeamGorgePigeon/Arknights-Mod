@@ -25,7 +25,6 @@ import javax.annotation.Nullable;
 
 public class EnemyBase extends MonsterEntity {
     private SummonEnemyGoal summonEnemy;
-    public Item item = Items.AIR;
     //public static final DataParameter<Boolean> OPERATORATTACKING = EntityDataManager.createKey(ExusiaiEntity.class, DataSerializers.BOOLEAN);
 
 
@@ -33,12 +32,7 @@ public class EnemyBase extends MonsterEntity {
         super(p_i48574_1_, p_i48574_2_);
     }
 
-    public EnemyBase(EntityType<? extends MonsterEntity> p_i48574_1_, World p_i48574_2_,Item item) {
-        super(p_i48574_1_, p_i48574_2_);
-        this.item = item;
-    }
-
-    protected void registerGoals() {
+    public void registerGoals() {
         this.goalSelector.addGoal(1, new SwimGoal(this));
         //this.goalSelector.addGoal(2, this.sitGoal);
         this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
@@ -49,7 +43,8 @@ public class EnemyBase extends MonsterEntity {
         this.summonEnemy = new EnemyBase.SummonEnemyGoal(this);
         this.goalSelector.addGoal(1, new SwimGoal(this));
         this.goalSelector.addGoal(3, this.summonEnemy);
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MobEntity.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, OperatorBase.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
     }
 
     @Override
@@ -66,13 +61,6 @@ public class EnemyBase extends MonsterEntity {
         this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
         this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
         //this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
-    }
-
-    public void onDeath(DamageSource cause) {
-        if(this.item instanceof EnemyItem && !world.isRemote()){
-            ItemEntity entity = new ItemEntity(world, this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), new ItemStack(this.item, 1));
-            world.addEntity(entity);
-        }
     }
 
     static class SummonEnemyGoal extends Goal {
