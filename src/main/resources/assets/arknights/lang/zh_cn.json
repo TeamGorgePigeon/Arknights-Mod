@@ -61,5 +61,10 @@
   "block.arknights.originite_prime_block": "至纯源石(装饰)",
   
   "block.arknights.trading_home":"制造站",
-  "block.arknights.workshop": "加工站"
+  "block.arknights.workshop": "加工站",
+
+  "entity.arknights.exusiai":"能天使",
+  "entity.arknights.amiya":"阿米娅",
+  "entity.arknights.originium_slug":"源石虫",
+  "entity.arknights.crownslayer":"弑君者"
 }
