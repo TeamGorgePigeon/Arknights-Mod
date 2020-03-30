@@ -20,7 +20,7 @@ public class OperatorRenderer<T extends OperatorBase> extends MobRenderer<Operat
     }
 
     protected float getDeathMaxRotation(OperatorBase entityLivingBaseIn) {
-        return 180.0F;
+        return 90.0F;
     }
 
     public ResourceLocation getEntityTexture(OperatorBase entity) {

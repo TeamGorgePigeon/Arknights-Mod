@@ -1,7 +1,5 @@
 package arknights.entity;
 
-import arknights.item.EnemyItem;
-import arknights.registry.EntityHandler;
 import arknights.registry.SoundHandler;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
@@ -23,7 +21,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class EnemyBase extends CreatureEntity {
+public class EnemyBase extends MonsterEntity {
     private SummonEnemyGoal summonEnemy;
     //public static final DataParameter<Boolean> OPERATORATTACKING = EntityDataManager.createKey(ExusiaiEntity.class, DataSerializers.BOOLEAN);
 
@@ -76,8 +74,8 @@ public class EnemyBase extends CreatureEntity {
         }
     }
 
-        public SoundEvent getDeathSound() {
-            return SoundHandler.OPERATOR_DEAD;
-        }
+        //public SoundEvent getDeathSound() {
+            //return SoundHandler.OPERATOR_DEAD;
+        //}
 }
 

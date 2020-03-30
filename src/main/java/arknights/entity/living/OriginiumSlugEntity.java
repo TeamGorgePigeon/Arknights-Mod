@@ -110,11 +110,6 @@ public class OriginiumSlugEntity extends MonsterEntity {
       public boolean shouldExecute() {
          return this.lookForFriends > 0;
       }
-
-      @Nullable
-      public AxisAlignedBB getCollisionBox(Entity entityIn) {
-         return new AxisAlignedBB(-4.0, -3.0, -5.0, 4.0, 3.0, 5.0);
-      }
    }
 }
 

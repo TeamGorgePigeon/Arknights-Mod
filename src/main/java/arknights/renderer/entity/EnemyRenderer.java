@@ -21,7 +21,7 @@ public class EnemyRenderer<T extends EnemyBase> extends MobRenderer<EnemyBase, H
     }
 
     protected float getDeathMaxRotation(EnemyBase entityLivingBaseIn) {
-        return 180.0F;
+        return 90.0F;
     }
 
     public ResourceLocation getEntityTexture(EnemyBase entity) {

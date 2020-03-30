@@ -5,11 +5,13 @@ import arknights.item.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +28,8 @@ public class ItemHandler {
     static TextFormatting LEGEND = GOLD;
 
     public static Map<Integer, Item> mapOfId = new HashMap<>();
+
+    public static final Item CROWNSLAYER = new SpawnEggItem(EntityHandler.CROWNSLAYER, 0 , 12326679, new Item.Properties().group(ARKNIGHTS)).setRegistryName(EntityHandler.CROWNSLAYER.getRegistryName());
 
     public static final Item EXUSIAI = new Exusiai(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":exusiai");
     public static final Item AMIYA = new Amiya(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":amiya");
@@ -146,6 +150,8 @@ public class ItemHandler {
 
         r.register(EXUSIAI);
         r.register(AMIYA);
+
+        r.register(CROWNSLAYER);
     }
 
     private static Item createItem(String name, int id, TextFormatting color, int item1, int num1, int item2, int num2, int item3, int num3){
