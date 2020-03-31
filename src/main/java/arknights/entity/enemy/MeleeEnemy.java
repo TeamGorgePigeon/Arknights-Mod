@@ -13,7 +13,7 @@ public class MeleeEnemy extends EnemyBase {
     @Override
     public void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 2.0D, false));
+        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.0D, false));
     }
 
 }

@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class ExusiaiEntity extends OperatorBase implements IRangedAttackMob{
+public class ExusiaiEntity extends RangeOperator{
     private static final Skill skill3 = new Skill(20,30,300, Skill.SkillRecoverType.AUTORECOVER);
     public ExusiaiModel model;
     private int sp;
@@ -39,11 +39,6 @@ public class ExusiaiEntity extends OperatorBase implements IRangedAttackMob{
 
     public boolean isAttacking(){
         return this.dataManager.get(OPERATORATTACKING);
-    }
-
-    protected void registerGoals() {
-        super.registerGoals();
-        this.goalSelector.addGoal(1, new RangedAttackGoal(this, 1.25D, 20, 10.0F));
     }
 
     /**

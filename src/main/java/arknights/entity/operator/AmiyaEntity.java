@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class AmiyaEntity extends OperatorBase implements IRangedAttackMob {
+public class AmiyaEntity extends RangeOperator {
     public AmiyaEntity(EntityType<? extends AmiyaEntity> typeIn, World worldIn) {
         super(typeIn, worldIn);
     }
@@ -17,12 +17,6 @@ public class AmiyaEntity extends OperatorBase implements IRangedAttackMob {
     public AmiyaEntity(World world, Item item){
         super(EntityHandler.AMIYA, world, item);
     }
-
-    protected void registerGoals() {
-        super.registerGoals();
-        //this.goalSelector.addGoal(1, new RangedAttackGoal(this, 1.25D, 20, 10.0F));
-    }
-
 
     @Override
     public void attackEntityWithRangedAttack(LivingEntity target, float v) {
