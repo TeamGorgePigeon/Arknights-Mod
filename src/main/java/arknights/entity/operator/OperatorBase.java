@@ -27,7 +27,9 @@ public class OperatorBase extends TameableEntity {
     private SummonOperatorGoal summonOperator;
     public Item item = Items.AIR;
     public static final DataParameter<Boolean> OPERATORATTACKING = EntityDataManager.createKey(ExusiaiEntity.class, DataSerializers.BOOLEAN);
-
+    protected int sp;
+    protected int tick = 0;
+    protected boolean isSkill = false;
 
     public OperatorBase(EntityType<? extends TameableEntity> p_i48574_1_, World p_i48574_2_) {
         super(p_i48574_1_, p_i48574_2_);
@@ -36,6 +38,10 @@ public class OperatorBase extends TameableEntity {
     public OperatorBase(EntityType<? extends TameableEntity> p_i48574_1_, World p_i48574_2_, Item item) {
         super(p_i48574_1_, p_i48574_2_);
         this.item = item;
+    }
+
+    protected void yell(){
+
     }
 
     protected void registerGoals() {

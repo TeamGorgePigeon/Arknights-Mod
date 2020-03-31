@@ -20,10 +20,6 @@ import java.util.Random;
 public class ExusiaiEntity extends RangeOperator{
     private static final Skill skill3 = new Skill(20,30,300, Skill.SkillRecoverType.AUTORECOVER);
     public ExusiaiModel model;
-    private int sp;
-    private int tick = 0;
-    private boolean isSkill = false;
-
 
     public ExusiaiEntity(EntityType<? extends ExusiaiEntity> typeIn, World worldIn) {
         super(typeIn, worldIn);
@@ -77,6 +73,25 @@ public class ExusiaiEntity extends RangeOperator{
 
     }
 
+    protected void yell(){
+        switch (new Random().nextInt(4)) {
+            case 0:
+                this.playSound(SoundHandler.EXUSIAI_SKILL1, 1.0F, 1.0F);
+                break;
+            case 1:
+                this.playSound(SoundHandler.EXUSIAI_SKILL2, 1.0F, 1.0F);
+                break;
+            case 2:
+                this.playSound(SoundHandler.EXUSIAI_SKILL3, 1.0F, 1.0F);
+                break;
+            case 3:
+                this.playSound(SoundHandler.EXUSIAI_SKILL4, 1.0F, 1.0F);
+                break;
+            default:
+                break;
+        }
+    }
+
     public void livingTick() {
         if(!world.isRemote()) {
             this.dataManager.set(OPERATORATTACKING, (this.getAttackTarget() != null));
@@ -89,22 +104,7 @@ public class ExusiaiEntity extends RangeOperator{
                 this.sp = 0;
                 this.isSkill = true;
                 this.tick = 0;
-                switch (new Random().nextInt(4)) {
-                    case 0:
-                        this.playSound(SoundHandler.EXUSIAI_SKILL1, 1.0F, 1.0F);
-                        break;
-                    case 1:
-                        this.playSound(SoundHandler.EXUSIAI_SKILL2, 1.0F, 1.0F);
-                        break;
-                    case 2:
-                        this.playSound(SoundHandler.EXUSIAI_SKILL3, 1.0F, 1.0F);
-                        break;
-                    case 3:
-                        this.playSound(SoundHandler.EXUSIAI_SKILL4, 1.0F, 1.0F);
-                        break;
-                    default:
-                        break;
-                }
+                this.yell();
             }
             if (this.tick >= skill3.maxSkillTime && this.isSkill) {
                 this.tick = 0;
