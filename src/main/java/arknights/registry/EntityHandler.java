@@ -1,5 +1,6 @@
 package arknights.registry;
 
+import arknights.entity.enemy.FaustEntity;
 import arknights.entity.disaster.*;
 import arknights.entity.enemy.*;
 import arknights.entity.notLiving.*;
@@ -27,6 +28,7 @@ public class EntityHandler {
     //public static final EntityType<OriginiumSlugEntity> ORIGINIUMSLUG = (EntityType<OriginiumSlugEntity>)EntityType.Builder.<OriginiumSlugEntity>create(OriginiumSlugEntity::new, EntityClassification.MONSTER).size(0.8F, 0.5F).build("originium_slug").setRegistryName(MODID + ":" + "originium_slug");
     public static final EntityType<OriginiumSlugEntity> ORIGINIUMSLUG = registerEntity(MODID + ":" + "originium_slug", EntityType.Builder.create(OriginiumSlugEntity::new, EntityClassification.MONSTER).size(0.8F, 0.5F));
     public static final EntityType<CrownslayerEntity> CROWNSLAYER = (EntityType<CrownslayerEntity>)EntityType.Builder.<CrownslayerEntity>create(CrownslayerEntity::new, EntityClassification.CREATURE).build("crownslayer").setRegistryName(MODID + ":" + "crownslayer");
+    public static final EntityType<FaustEntity> FAUST = (EntityType<FaustEntity>)EntityType.Builder.<FaustEntity>create(FaustEntity::new, EntityClassification.CREATURE).build("faust").setRegistryName(MODID + ":" + "faust");
 
     public static final EntityType<ProjektRedEntity> PROJEKTRED=(EntityType<ProjektRedEntity>)EntityType.Builder.<ProjektRedEntity>create(ProjektRedEntity::new, EntityClassification.CREATURE).build("projektred").setRegistryName(MODID + ":" + "projektred");
     public static final EntityType<ExusiaiEntity> EXUSIAI = (EntityType<ExusiaiEntity>)EntityType.Builder.<ExusiaiEntity>create(ExusiaiEntity::new, EntityClassification.CREATURE).build("exusiai").setRegistryName(MODID + ":" + "exusiai");
@@ -54,6 +56,7 @@ public class EntityHandler {
         r.register(SHAW);
 
         r.register(CROWNSLAYER);
+        r.register(FAUST);
 
 
         /*registerEntityWorldSpawn(ORIGINIUMSLUG, 1, Biomes.SNOWY_TAIGA, Biomes.ICE_SPIKES, Biomes.SNOWY_TUNDRA,

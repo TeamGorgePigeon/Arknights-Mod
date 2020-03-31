@@ -11,6 +11,7 @@ public class RendererHandler {
     public static void register(){
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.ORIGINIUMSLUG, OriginiumSlugRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.CROWNSLAYER, CrownslayerRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHandler.FAUST, FaustRenderer::new);
 
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.BULLET, BulletRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.AMIYAMAGIC, AmiyaMagicRenderer::new);
