@@ -61,5 +61,10 @@
   "block.arknights.originite_prime_block": "Originite Prime(Decoration)",
   
   "block.arknights.trading_home":"Factory",
-  "block.arknights.workshop": "Workshop"
+  "block.arknights.workshop": "Workshop",
+
+  "entity.arknights.exusiai":"Exusiai",
+  "entity.arknights.amiya":"Amiya",
+  "entity.arknights.originium_slug":"Originium Slug",
+  "entity.arknights.crownslayer":"Crownslayer"
 }
