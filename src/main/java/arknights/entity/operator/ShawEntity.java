@@ -1,6 +1,7 @@
 package arknights.entity.operator;
 
-import arknights.entity.model.ProjektRedModel;
+import arknights.entity.model.CrownslayerModel;
+import arknights.entity.model.ShawModel;
 import arknights.registry.ItemHandler;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -10,13 +11,13 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class ProjektRedEntity extends OperatorBase {
-    public ProjektRedModel model;
+public class ShawEntity extends OperatorBase {
+    public ShawModel model;
 
 
-    public ProjektRedEntity(EntityType<? extends ProjektRedEntity> typeIn, World worldIn) {
+    public ShawEntity(EntityType<? extends ShawEntity> typeIn, World worldIn) {
         super(typeIn, worldIn);
-        this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemHandler.PROJEKTRED_KNIFE));
+        this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemHandler.SHAW_AXE));
     }
 
     @Override

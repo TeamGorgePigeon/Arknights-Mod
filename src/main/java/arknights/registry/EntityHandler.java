@@ -1,15 +1,9 @@
 package arknights.registry;
 
-import arknights.entity.operator.ProjektRedEntity;
-import arknights.entity.disaster.DisasterZero;
-import arknights.entity.enemy.CrownslayerEntity;
-import arknights.entity.notLiving.AmiyaMagic;
-import arknights.entity.notLiving.BulletEntity;
-import arknights.entity.notLiving.Meteorite;
-import arknights.entity.enemy.OriginiumSlugEntity;
-import arknights.entity.disaster.SnowStorm;
-import arknights.entity.operator.AmiyaEntity;
-import arknights.entity.operator.ExusiaiEntity;
+import arknights.entity.disaster.*;
+import arknights.entity.enemy.*;
+import arknights.entity.notLiving.*;
+import arknights.entity.operator.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -37,7 +31,7 @@ public class EntityHandler {
     public static final EntityType<ProjektRedEntity> PROJEKTRED=(EntityType<ProjektRedEntity>)EntityType.Builder.<ProjektRedEntity>create(ProjektRedEntity::new, EntityClassification.CREATURE).build("projektred").setRegistryName(MODID + ":" + "projektred");
     public static final EntityType<ExusiaiEntity> EXUSIAI = (EntityType<ExusiaiEntity>)EntityType.Builder.<ExusiaiEntity>create(ExusiaiEntity::new, EntityClassification.CREATURE).build("exusiai").setRegistryName(MODID + ":" + "exusiai");
     public static final EntityType<AmiyaEntity> AMIYA = (EntityType<AmiyaEntity>)EntityType.Builder.<AmiyaEntity>create(AmiyaEntity::new, EntityClassification.CREATURE).build("amiya").setRegistryName(MODID + ":" + "amiya");
-
+    public static final EntityType<ShawEntity> SHAW = (EntityType<ShawEntity>)EntityType.Builder.<ShawEntity>create(ShawEntity::new, EntityClassification.CREATURE).build("shaw").setRegistryName(MODID + ":" + "shaw");
     private static <T extends Entity> EntityType<T> registerEntity(String key, EntityType.Builder<T> builder) {
         return Registry.register(Registry.ENTITY_TYPE, key, builder.build(key));
     }
@@ -56,9 +50,10 @@ public class EntityHandler {
 
 		r.register(EXUSIAI);
 		r.register(AMIYA);
-        r.register(CROWNSLAYER);
         r.register(PROJEKTRED);
+        r.register(SHAW);
 
+        r.register(CROWNSLAYER);
 
 
         /*registerEntityWorldSpawn(ORIGINIUMSLUG, 1, Biomes.SNOWY_TAIGA, Biomes.ICE_SPIKES, Biomes.SNOWY_TUNDRA,

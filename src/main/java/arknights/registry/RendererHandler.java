@@ -10,6 +10,7 @@ public class RendererHandler {
     @SubscribeEvent
     public static void register(){
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.ORIGINIUMSLUG, OriginiumSlugRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHandler.CROWNSLAYER, CrownslayerRenderer::new);
 
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.BULLET, BulletRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.AMIYAMAGIC, AmiyaMagicRenderer::new);
@@ -20,6 +21,7 @@ public class RendererHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.EXUSIAI, ExusiaiRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.AMIYA, AmiyaRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.PROJEKTRED, ProjektRedRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityHandler.CROWNSLAYER, CrownslayerRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHandler.SHAW, ShawRenderer::new);
+
     }
 }

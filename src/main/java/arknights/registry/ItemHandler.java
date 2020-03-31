@@ -42,8 +42,8 @@ public class ItemHandler {
     public static final Item PROJEKTRED_KNIFE= new ProjektRedKnife(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "projektred_knife");
     public static final Item CROWNSLAYER_KNIFE = new CrownslayerKnife(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "crownslayer_knife");
     public static final Item APULUPAI = new Apulupai(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "jb");
-
-
+    public static final Item SHAW_PUMP = new ShawPump(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "shaw_pump");
+    public static final Item SHAW_AXE = new ShawAxe(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "shaw_axe");
     public static final Item ORIROCK = createItem("orirock", 1, COMMON);
     public static final OrirockCube ORIROCKCUBE = (OrirockCube) new OrirockCube(BlockHandler.ORIROCKCUBE, new Item.Properties().group(ARKNIGHTS)).setRegistryName(BlockHandler.ORIROCKCUBE.getRegistryName());
     public static final Item ORIROCKCLUSTER = createItem("orirock_cluster", 3, RARE, 2, 5);
@@ -152,6 +152,8 @@ public class ItemHandler {
         r.register(AMIYA);
 
         r.register(CROWNSLAYER);
+        r.register(SHAW_PUMP);
+        r.register(SHAW_AXE);
     }
 
     private static Item createItem(String name, int id, TextFormatting color, int item1, int num1, int item2, int num2, int item3, int num3){
