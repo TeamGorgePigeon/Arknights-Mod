@@ -29,7 +29,6 @@ import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.ai.goal.RangedCrossbowAttackGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.monster.AbstractIllagerEntity;
 import net.minecraft.entity.monster.AbstractRaiderEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
@@ -51,27 +50,23 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.Difficulty;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 import net.minecraft.world.raid.Raid;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class FaustEntity extends AbstractIllagerEntity implements ICrossbowUser, IRangedAttackMob {
+public class FaustEntity extends CrossBowEnemy implements ICrossbowUser, IRangedAttackMob {
     private static final DataParameter<Boolean> DATA_CHARGING_STATE = EntityDataManager.createKey(FaustEntity.class, DataSerializers.BOOLEAN);
     private final Inventory inventory = new Inventory(5);
+    protected Raid raid;
 
     public FaustEntity(EntityType<? extends FaustEntity> p_i50198_1_, World p_i50198_2_) {
         super(p_i50198_1_, p_i50198_2_);
     }
 
-    protected void registerGoals() {
+    public void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new SwimGoal(this));
-        this.goalSelector.addGoal(2, new AbstractRaiderEntity.FindTargetGoal(this, 10.0F));
         this.goalSelector.addGoal(3, new RangedCrossbowAttackGoal<>(this, 1.0D, 8.0F));
         this.goalSelector.addGoal(8, new RandomWalkingGoal(this, 0.6D));
         this.goalSelector.addGoal(9, new LookAtGoal(this, PlayerEntity.class, 15.0F, 1.0F));
@@ -92,6 +87,26 @@ public class FaustEntity extends AbstractIllagerEntity implements ICrossbowUser,
     protected void registerData() {
         super.registerData();
         this.dataManager.register(DATA_CHARGING_STATE, false);
+    }
+
+    @Override
+    public void func_213660_a(int p_213660_1_, boolean p_213660_2_) {
+        Raid raid = this.getRaid();
+        boolean flag = this.rand.nextFloat() <= raid.func_221308_w();
+        if (flag) {
+            ItemStack itemstack = new ItemStack(Items.CROSSBOW);
+            Map<Enchantment, Integer> map = Maps.newHashMap();
+            if (p_213660_1_ > raid.getWaves(Difficulty.NORMAL)) {
+                map.put(Enchantments.QUICK_CHARGE, 2);
+            } else if (p_213660_1_ > raid.getWaves(Difficulty.EASY)) {
+                map.put(Enchantments.QUICK_CHARGE, 1);
+            }
+
+            map.put(Enchantments.MULTISHOT, 1);
+            EnchantmentHelper.setEnchantments(map, itemstack);
+            this.setItemStackToSlot(EquipmentSlotType.MAINHAND, itemstack);
+        }
+
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -118,13 +133,13 @@ public class FaustEntity extends AbstractIllagerEntity implements ICrossbowUser,
     }
 
     @OnlyIn(Dist.CLIENT)
-    public AbstractIllagerEntity.ArmPose getArmPose() {
+    public CrossBowEnemy.ArmPose getArmPose() {
         if (this.isCharging()) {
-            return AbstractIllagerEntity.ArmPose.CROSSBOW_CHARGE;
+            return CrossBowEnemy.ArmPose.CROSSBOW_CHARGE;
         } else if (this.isHolding(Items.CROSSBOW)) {
-            return AbstractIllagerEntity.ArmPose.CROSSBOW_HOLD;
+            return CrossBowEnemy.ArmPose.CROSSBOW_HOLD;
         } else {
-            return this.isAggressive() ? AbstractIllagerEntity.ArmPose.ATTACKING : AbstractIllagerEntity.ArmPose.NEUTRAL;
+            return this.isAggressive() ? CrossBowEnemy.ArmPose.ATTACKING : CrossBowEnemy.ArmPose.NEUTRAL;
         }
     }
 
@@ -168,6 +183,7 @@ public class FaustEntity extends AbstractIllagerEntity implements ICrossbowUser,
     public SoundEvent getRaidLossSound() {
         return null;
     }
+
 
     /**
      * Gives armor or weapon for entity based on given DifficultyInstance
@@ -263,6 +279,15 @@ public class FaustEntity extends AbstractIllagerEntity implements ICrossbowUser,
         return this.isRaidActive() && p_213672_1_ == Items.WHITE_BANNER;
     }
 
+    @Nullable
+    public Raid getRaid() {
+        return this.raid;
+    }
+
+    public boolean isRaidActive() {
+        return this.getRaid() != null && this.getRaid().isActive();
+    }
+
     public boolean replaceItemInInventory(int inventorySlot, ItemStack itemStackIn) {
         if (super.replaceItemInInventory(inventorySlot, itemStackIn)) {
             return true;
@@ -276,25 +301,5 @@ public class FaustEntity extends AbstractIllagerEntity implements ICrossbowUser,
             }
         }
     }
-
-    public void func_213660_a(int p_213660_1_, boolean p_213660_2_) {
-        Raid raid = this.getRaid();
-        boolean flag = this.rand.nextFloat() <= raid.func_221308_w();
-        if (flag) {
-            ItemStack itemstack = new ItemStack(Items.CROSSBOW);
-            Map<Enchantment, Integer> map = Maps.newHashMap();
-            if (p_213660_1_ > raid.getWaves(Difficulty.NORMAL)) {
-                map.put(Enchantments.QUICK_CHARGE, 2);
-            } else if (p_213660_1_ > raid.getWaves(Difficulty.EASY)) {
-                map.put(Enchantments.QUICK_CHARGE, 1);
-            }
-
-            map.put(Enchantments.MULTISHOT, 1);
-            EnchantmentHelper.setEnchantments(map, itemstack);
-            this.setItemStackToSlot(EquipmentSlotType.MAINHAND, itemstack);
-        }
-
-    }
-
-
+    
 }
