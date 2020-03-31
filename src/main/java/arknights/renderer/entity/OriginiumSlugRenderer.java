@@ -2,7 +2,7 @@ package arknights.renderer.entity;
 
 import arknights.entity.model.OriginiumSlugModel;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
-import arknights.entity.living.OriginiumSlugEntity;
+import arknights.entity.enemy.OriginiumSlugEntity;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;

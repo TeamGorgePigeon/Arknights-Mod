@@ -1,6 +1,5 @@
 package arknights.registry;
 
-import arknights.entity.ExusiaiEntity;
 import arknights.item.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -11,7 +10,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -1,6 +1,5 @@
-package arknights.entity.living;
+package arknights.entity.enemy;
 
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.merchant.villager.AbstractVillagerEntity;
@@ -9,15 +8,11 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
-import net.minecraft.world.lighting.IWorldLightListener;
-import net.minecraft.world.lighting.LightEngine;
 
-import javax.annotation.Nullable;
 import java.util.Random;
 
 public class OriginiumSlugEntity extends MonsterEntity {

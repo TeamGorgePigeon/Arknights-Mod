@@ -1,9 +1,8 @@
-package arknights.entity;
+package arknights.entity.enemy;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
 public class MeleeEnemy extends EnemyBase {

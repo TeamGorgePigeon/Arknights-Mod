@@ -1,7 +1,6 @@
 package arknights.renderer.entity;
 
-import arknights.entity.EnemyBase;
-import arknights.entity.OperatorBase;
+import arknights.entity.enemy.EnemyBase;
 import arknights.entity.model.HumanModel;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

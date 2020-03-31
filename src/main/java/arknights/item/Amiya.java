@@ -1,6 +1,6 @@
 package arknights.item;
 
-import arknights.entity.AmiyaEntity;
+import arknights.entity.operator.AmiyaEntity;
 import net.minecraft.world.World;
 
 public class Amiya extends OperatorItem {

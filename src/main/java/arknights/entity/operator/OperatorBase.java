@@ -1,5 +1,6 @@
-package arknights.entity;
+package arknights.entity.operator;
 
+import arknights.entity.enemy.EnemyBase;
 import arknights.item.OperatorItem;
 import arknights.registry.SoundHandler;
 import net.minecraft.entity.*;

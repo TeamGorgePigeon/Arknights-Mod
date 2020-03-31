@@ -1,12 +1,10 @@
-package arknights.entity;
+package arknights.entity.enemy;
 
 import arknights.entity.model.CrownslayerModel;
-import arknights.registry.EntityHandler;
 import arknights.registry.ItemHandler;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 

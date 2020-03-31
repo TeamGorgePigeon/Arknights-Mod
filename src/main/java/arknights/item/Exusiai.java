@@ -1,6 +1,6 @@
 package arknights.item;
 
-import arknights.entity.ExusiaiEntity;
+import arknights.entity.operator.ExusiaiEntity;
 import net.minecraft.world.World;
 
 public class Exusiai extends OperatorItem {

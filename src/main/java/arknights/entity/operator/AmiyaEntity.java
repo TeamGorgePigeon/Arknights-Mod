@@ -1,4 +1,4 @@
-package arknights.entity;
+package arknights.entity.operator;
 
 import arknights.entity.notLiving.AmiyaMagic;
 import arknights.registry.EntityHandler;

@@ -1,6 +1,6 @@
 package arknights.entity.model;
 
-import arknights.entity.ExusiaiEntity;
+import arknights.entity.operator.ExusiaiEntity;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;

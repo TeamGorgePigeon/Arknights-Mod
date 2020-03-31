@@ -1,12 +1,14 @@
 package arknights.registry;
 
 import arknights.entity.disaster.DisasterZero;
+import arknights.entity.enemy.CrownslayerEntity;
 import arknights.entity.notLiving.AmiyaMagic;
 import arknights.entity.notLiving.BulletEntity;
 import arknights.entity.notLiving.Meteorite;
-import arknights.entity.living.OriginiumSlugEntity;
+import arknights.entity.enemy.OriginiumSlugEntity;
 import arknights.entity.disaster.SnowStorm;
-import arknights.entity.*;
+import arknights.entity.operator.AmiyaEntity;
+import arknights.entity.operator.ExusiaiEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -18,7 +20,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 
 import static arknights.Arknights.MODID;
-import static net.minecraft.world.biome.Biomes.*;
 
 public class EntityHandler {
     public static final EntityType<DisasterZero> DISASTERZERO = (EntityType<DisasterZero>) EntityType.Builder.<DisasterZero>create(DisasterZero::new, EntityClassification.MISC).build("disaster_zero").setRegistryName(MODID + ":disaster_zero");

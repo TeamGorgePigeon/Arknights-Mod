@@ -1,6 +1,6 @@
 package arknights.item;
 
-import arknights.entity.OperatorBase;
+import arknights.entity.operator.OperatorBase;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;

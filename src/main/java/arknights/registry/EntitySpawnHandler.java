@@ -1,13 +1,10 @@
 package arknights.registry;
 
-import arknights.entity.disaster.DisasterZero;
-import arknights.entity.living.OriginiumSlugEntity;
-import net.minecraft.entity.EntityClassification;
+import arknights.entity.enemy.OriginiumSlugEntity;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.Heightmap;
 
 import static net.minecraft.world.biome.Biomes.*;
