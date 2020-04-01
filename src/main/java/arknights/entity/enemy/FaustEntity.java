@@ -1,6 +1,8 @@
 package arknights.entity.enemy;
 
 import arknights.entity.operator.OperatorBase;
+import arknights.item.FaustCrossBow;
+import arknights.registry.ItemHandler;
 import com.google.common.collect.Maps;
 import java.util.Map;
 import javax.annotation.Nullable;
@@ -66,7 +68,6 @@ public class FaustEntity extends CrossBowEnemy {
 
     public void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(3, new RangedCrossbowAttackGoal<>(this, 1.0D, 8.0F));
     }
 
     protected void registerAttributes() {
@@ -156,7 +157,7 @@ public class FaustEntity extends CrossBowEnemy {
      * Gives armor or weapon for entity based on given DifficultyInstance
      */
     protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
-        ItemStack itemstack = new ItemStack(Items.CROSSBOW);
+        ItemStack itemstack = new ItemStack(ItemHandler.FAUST_CROSSBOW);
         this.setItemStackToSlot(EquipmentSlotType.MAINHAND, itemstack);
     }
 
@@ -180,8 +181,8 @@ public class FaustEntity extends CrossBowEnemy {
     public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
         Hand hand = ProjectileHelper.getHandWith(this, Items.CROSSBOW);
         ItemStack itemstack = this.getHeldItem(hand);
-        if (this.isHolding(Items.CROSSBOW)) {
-            CrossbowItem.fireProjectiles(this.world, this, hand, itemstack, 1.6F, (float)(14 - this.world.getDifficulty().getId() * 4));
+        if (this.isHolding(ItemHandler.FAUST_CROSSBOW)) {
+            FaustCrossBow.fireProjectiles(this.world, this, hand, itemstack, 1.6F, (float)(14 - this.world.getDifficulty().getId() * 4));
         }
 
         this.idleTime = 0;

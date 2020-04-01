@@ -1,5 +1,6 @@
 package arknights.entity.enemy;
 
+import arknights.entity.ai.EnemyCrossbowAttackGoal;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ICrossbowUser;
@@ -19,10 +20,12 @@ public abstract class CrossBowEnemy extends EnemyBase implements ICrossbowUser, 
 
    public void registerGoals() {
       super.registerGoals();
+      this.goalSelector.addGoal(2, new EnemyCrossbowAttackGoal<>(this, 1.0D, 8.0F));
+
    }
 
    public CreatureAttribute getCreatureAttribute() {
-      return CreatureAttribute.ILLAGER;
+      return CreatureAttribute.UNDEFINED;
    }
 
    @OnlyIn(Dist.CLIENT)
