@@ -1,9 +1,7 @@
 {
 	"__comment": "Designed by Tao0lu with Cubik Studio - https://cubik.studio",
 	"textures": {
-		"particle": "blocks/particle",
-		"texture": "blocks/texture",
-		"untitled12_atlas": "blocks/untitled12_atlas"
+		"untitled12_atlas": "arknights:item/faust_crossbow_arrow"
 	},
 	"elements": [ 	 
 		{
