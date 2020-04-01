@@ -23,6 +23,8 @@ public class RendererHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.AMIYA, AmiyaRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.PROJEKTRED, ProjektRedRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.SHAW, ShawRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHandler.ROPE, RopeRenderer::new);
 
+        RenderingRegistry.registerEntityRenderingHandler(EntityHandler.HOOK, HookRenderer::new);
     }
 }

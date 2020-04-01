@@ -2,6 +2,8 @@ package arknights.entity.enemy;
 
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ICrossbowUser;
+import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.AbstractRaiderEntity;
 import net.minecraft.entity.monster.MonsterEntity;
@@ -10,12 +12,12 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 
-public abstract class CrossBowEnemy extends AbstractRaiderEntity {
+public abstract class CrossBowEnemy extends EnemyBase implements ICrossbowUser, IRangedAttackMob {
    protected CrossBowEnemy(EntityType<? extends CrossBowEnemy> type, World worldIn) {
       super(type, worldIn);
    }
 
-   protected void registerGoals() {
+   public void registerGoals() {
       super.registerGoals();
    }
 
@@ -38,18 +40,5 @@ public abstract class CrossBowEnemy extends AbstractRaiderEntity {
       CROSSBOW_CHARGE,
       CELEBRATING,
       NEUTRAL;
-   }
-
-   public class RaidOpenDoorGoal extends OpenDoorGoal {
-      public RaidOpenDoorGoal(AbstractRaiderEntity p_i51284_2_) {
-         super(p_i51284_2_, false);
-      }
-
-      /**
-       * Returns whether the EntityAIBase should begin execution.
-       */
-      public boolean shouldExecute() {
-         return super.shouldExecute() && CrossBowEnemy.this.isRaidActive();
-      }
    }
 }

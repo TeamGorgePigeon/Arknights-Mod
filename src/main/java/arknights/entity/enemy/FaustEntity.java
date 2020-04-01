@@ -55,7 +55,7 @@ import net.minecraft.world.raid.Raid;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class FaustEntity extends CrossBowEnemy implements ICrossbowUser, IRangedAttackMob {
+public class FaustEntity extends CrossBowEnemy {
     private static final DataParameter<Boolean> DATA_CHARGING_STATE = EntityDataManager.createKey(FaustEntity.class, DataSerializers.BOOLEAN);
     private final Inventory inventory = new Inventory(5);
     protected Raid raid;
@@ -66,14 +66,7 @@ public class FaustEntity extends CrossBowEnemy implements ICrossbowUser, IRanged
 
     public void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(0, new SwimGoal(this));
         this.goalSelector.addGoal(3, new RangedCrossbowAttackGoal<>(this, 1.0D, 8.0F));
-        this.goalSelector.addGoal(8, new RandomWalkingGoal(this, 0.6D));
-        this.goalSelector.addGoal(9, new LookAtGoal(this, PlayerEntity.class, 15.0F, 1.0F));
-        this.goalSelector.addGoal(10, new LookAtGoal(this, MobEntity.class, 15.0F));
-        this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, AbstractRaiderEntity.class)).setCallsForHelp());
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, OperatorBase.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
     }
 
     protected void registerAttributes() {
@@ -87,26 +80,6 @@ public class FaustEntity extends CrossBowEnemy implements ICrossbowUser, IRanged
     protected void registerData() {
         super.registerData();
         this.dataManager.register(DATA_CHARGING_STATE, false);
-    }
-
-    @Override
-    public void func_213660_a(int p_213660_1_, boolean p_213660_2_) {
-        Raid raid = this.getRaid();
-        boolean flag = this.rand.nextFloat() <= raid.func_221308_w();
-        if (flag) {
-            ItemStack itemstack = new ItemStack(Items.CROSSBOW);
-            Map<Enchantment, Integer> map = Maps.newHashMap();
-            if (p_213660_1_ > raid.getWaves(Difficulty.NORMAL)) {
-                map.put(Enchantments.QUICK_CHARGE, 2);
-            } else if (p_213660_1_ > raid.getWaves(Difficulty.EASY)) {
-                map.put(Enchantments.QUICK_CHARGE, 1);
-            }
-
-            map.put(Enchantments.MULTISHOT, 1);
-            EnchantmentHelper.setEnchantments(map, itemstack);
-            this.setItemStackToSlot(EquipmentSlotType.MAINHAND, itemstack);
-        }
-
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -179,23 +152,11 @@ public class FaustEntity extends CrossBowEnemy implements ICrossbowUser, IRanged
         return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
-    @Override
-    public SoundEvent getRaidLossSound() {
-        return null;
-    }
-
-
     /**
      * Gives armor or weapon for entity based on given DifficultyInstance
      */
     protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
         ItemStack itemstack = new ItemStack(Items.CROSSBOW);
-        if (this.rand.nextInt(300) == 0) {
-            Map<Enchantment, Integer> map = Maps.newHashMap();
-            map.put(Enchantments.PIERCING, 1);
-            EnchantmentHelper.setEnchantments(map, itemstack);
-        }
-
         this.setItemStackToSlot(EquipmentSlotType.MAINHAND, itemstack);
     }
 
@@ -252,54 +213,4 @@ public class FaustEntity extends CrossBowEnemy implements ICrossbowUser, IRanged
         vector3f1.func_214905_a(quaternion1);
         return vector3f1;
     }
-
-    /**
-     * Tests if this entity should pickup a weapon or an armor. Entity drops current weapon or armor if the new one is
-     * better.
-     */
-    protected void updateEquipmentIfNeeded(ItemEntity itemEntity) {
-        ItemStack itemstack = itemEntity.getItem();
-        if (itemstack.getItem() instanceof BannerItem) {
-            super.updateEquipmentIfNeeded(itemEntity);
-        } else {
-            Item item = itemstack.getItem();
-            if (this.func_213672_b(item)) {
-                ItemStack itemstack1 = this.inventory.addItem(itemstack);
-                if (itemstack1.isEmpty()) {
-                    itemEntity.remove();
-                } else {
-                    itemstack.setCount(itemstack1.getCount());
-                }
-            }
-        }
-
-    }
-
-    private boolean func_213672_b(Item p_213672_1_) {
-        return this.isRaidActive() && p_213672_1_ == Items.WHITE_BANNER;
-    }
-
-    @Nullable
-    public Raid getRaid() {
-        return this.raid;
-    }
-
-    public boolean isRaidActive() {
-        return this.getRaid() != null && this.getRaid().isActive();
-    }
-
-    public boolean replaceItemInInventory(int inventorySlot, ItemStack itemStackIn) {
-        if (super.replaceItemInInventory(inventorySlot, itemStackIn)) {
-            return true;
-        } else {
-            int i = inventorySlot - 300;
-            if (i >= 0 && i < this.inventory.getSizeInventory()) {
-                this.inventory.setInventorySlotContents(i, itemStackIn);
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-    
 }

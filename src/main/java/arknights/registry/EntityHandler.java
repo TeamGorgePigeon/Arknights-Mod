@@ -5,6 +5,7 @@ import arknights.entity.disaster.*;
 import arknights.entity.enemy.*;
 import arknights.entity.notLiving.*;
 import arknights.entity.operator.*;
+import arknights.entity.special.Hook;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -18,6 +19,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 import static arknights.Arknights.MODID;
 
 public class EntityHandler {
+    public static final EntityType<Hook> HOOK = (EntityType<Hook>) EntityType.Builder.<Hook>create(Hook::new, EntityClassification.MISC).build("hook").setRegistryName(MODID + ":hook");
+
     public static final EntityType<DisasterZero> DISASTERZERO = (EntityType<DisasterZero>) EntityType.Builder.<DisasterZero>create(DisasterZero::new, EntityClassification.MISC).build("disaster_zero").setRegistryName(MODID + ":disaster_zero");
     public static final EntityType<SnowStorm> SNOWSTORM = (EntityType<SnowStorm>) EntityType.Builder.<SnowStorm>create(SnowStorm::new, EntityClassification.MISC).build("snowstorm").setRegistryName(MODID + ":snowstorm");
 
@@ -34,6 +37,8 @@ public class EntityHandler {
     public static final EntityType<ExusiaiEntity> EXUSIAI = (EntityType<ExusiaiEntity>)EntityType.Builder.<ExusiaiEntity>create(ExusiaiEntity::new, EntityClassification.CREATURE).build("exusiai").setRegistryName(MODID + ":" + "exusiai");
     public static final EntityType<AmiyaEntity> AMIYA = (EntityType<AmiyaEntity>)EntityType.Builder.<AmiyaEntity>create(AmiyaEntity::new, EntityClassification.CREATURE).build("amiya").setRegistryName(MODID + ":" + "amiya");
     public static final EntityType<ShawEntity> SHAW = (EntityType<ShawEntity>)EntityType.Builder.<ShawEntity>create(ShawEntity::new, EntityClassification.CREATURE).build("shaw").setRegistryName(MODID + ":" + "shaw");
+    public static final EntityType<RopeEntity> ROPE = (EntityType<RopeEntity>)EntityType.Builder.<RopeEntity>create(RopeEntity::new, EntityClassification.CREATURE).build("rope").setRegistryName(MODID + ":" + "rope");
+
     private static <T extends Entity> EntityType<T> registerEntity(String key, EntityType.Builder<T> builder) {
         return Registry.register(Registry.ENTITY_TYPE, key, builder.build(key));
     }
@@ -41,6 +46,8 @@ public class EntityHandler {
     @SubscribeEvent
     public static void register(RegistryEvent.Register<EntityType<?>> evt){
         IForgeRegistry<EntityType<?>> r = evt.getRegistry();
+        r.register(HOOK);
+
         r.register(DISASTERZERO);
         r.register(SNOWSTORM);
 
@@ -50,6 +57,7 @@ public class EntityHandler {
 
         //r.register(ORIGINIUMSLUG.setRegistryName(MODID + ":" + "originium_slug"));
 
+        r.register(ROPE);
 		r.register(EXUSIAI);
 		r.register(AMIYA);
         r.register(PROJEKTRED);
