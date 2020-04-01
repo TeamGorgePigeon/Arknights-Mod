@@ -3,6 +3,7 @@ package arknights.registry;
 import arknights.item.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.text.TextFormatting;
@@ -44,6 +45,8 @@ public class ItemHandler {
     public static final Item APULUPAI = new Apulupai(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "jb");
     public static final Item SHAW_PUMP = new ShawPump(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "shaw_pump");
     public static final Item SHAW_AXE = new ShawAxe(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "shaw_axe");
+    public static final Item FAUST_CROSSBOW = new CrossbowItem(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "faust_crossbow");
+
     public static final Item ORIROCK = createItem("orirock", 1, COMMON);
     public static final OrirockCube ORIROCKCUBE = (OrirockCube) new OrirockCube(BlockHandler.ORIROCKCUBE, new Item.Properties().group(ARKNIGHTS)).setRegistryName(BlockHandler.ORIROCKCUBE.getRegistryName());
     public static final Item ORIROCKCLUSTER = createItem("orirock_cluster", 3, RARE, 2, 5);
@@ -154,6 +157,7 @@ public class ItemHandler {
         r.register(CROWNSLAYER);
         r.register(SHAW_PUMP);
         r.register(SHAW_AXE);
+        r.register(FAUST_CROSSBOW);
     }
 
     private static Item createItem(String name, int id, TextFormatting color, int item1, int num1, int item2, int num2, int item3, int num3){
