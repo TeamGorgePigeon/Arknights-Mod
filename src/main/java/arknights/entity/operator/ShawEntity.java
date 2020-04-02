@@ -16,10 +16,13 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Random;
 
 public class ShawEntity extends MeleeOperator {
@@ -68,6 +71,7 @@ public class ShawEntity extends MeleeOperator {
 
     @Override
     public boolean attackEntityAsMob(Entity entityIn) {
+        this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemHandler.SHAW_AXE));
         float f = 3.0f;//(float) this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue();
         float f1 = (float) this.getAttribute(SharedMonsterAttributes.ATTACK_KNOCKBACK).getValue();
         if (entityIn instanceof LivingEntity) {
@@ -81,7 +85,12 @@ public class ShawEntity extends MeleeOperator {
         boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), f);
         if (flag && !this.isSkill) {
             if (f1 > 0.0F && entityIn instanceof LivingEntity) {
-                ((LivingEntity) entityIn).knockBack(this, f1 * 0.5F, (double) MathHelper.sin(this.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(this.rotationYaw * ((float) Math.PI / 180F))));
+                Vec3d vec3d = this.getPositionVec();
+                List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(vec3d.x - 3, vec3d.y - 0.5, vec3d.z - 3, vec3d.x + 3, vec3d.y + 0.5, vec3d.z + 3));
+                for (int k2 = 0; k2 < list.size(); ++k2) {
+                    Entity entity = list.get(k2);
+                    ((LivingEntity) entity).knockBack(this, f1 * 0.5F, (double) MathHelper.sin(this.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(this.rotationYaw * ((float) Math.PI / 180F))));
+                }
                 this.setMotion(this.getMotion().mul(0.6D, 1.0D, 0.6D));
             }
             if (entityIn instanceof PlayerEntity) {
@@ -99,7 +108,13 @@ public class ShawEntity extends MeleeOperator {
             this.applyEnchantments(this, entityIn);
             this.setLastAttackedEntity(entityIn);
         } else {
-            ((LivingEntity) entityIn).knockBack(this, 5.0F, (double) MathHelper.sin(this.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(this.rotationYaw * ((float) Math.PI / 180F))));
+            this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemHandler.SHAW_PUMP));
+            Vec3d vec3d = this.getPositionVec();
+            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(vec3d.x - 3, vec3d.y - 0.5, vec3d.z - 3, vec3d.x + 3, vec3d.y + 0.5, vec3d.z + 3));
+            for (int k2 = 0; k2 < list.size(); ++k2) {
+                Entity entity = list.get(k2);
+                ((LivingEntity) entity).knockBack(this, 5.0F, (double) MathHelper.sin(this.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(this.rotationYaw * ((float) Math.PI / 180F))));
+            }
             this.setMotion(this.getMotion().mul(0.6D, 1.0D, 0.6D));
             this.isSkill = false;
             this.tick = 0;
