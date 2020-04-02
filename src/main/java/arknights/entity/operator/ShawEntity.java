@@ -61,6 +61,7 @@ public class ShawEntity extends MeleeOperator {
                 this.sp++;
             }
             if (this.sp >= skill1.spCost) {
+                this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemHandler.SHAW_PUMP));
                 this.sp = 0;
                 this.isSkill = true;
                 this.tick = 0;
@@ -71,7 +72,6 @@ public class ShawEntity extends MeleeOperator {
 
     @Override
     public boolean attackEntityAsMob(Entity entityIn) {
-        this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemHandler.SHAW_AXE));
         float f = 3.0f;//(float) this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue();
         float f1 = (float) this.getAttribute(SharedMonsterAttributes.ATTACK_KNOCKBACK).getValue();
         if (entityIn instanceof LivingEntity) {
@@ -108,7 +108,6 @@ public class ShawEntity extends MeleeOperator {
             this.applyEnchantments(this, entityIn);
             this.setLastAttackedEntity(entityIn);
         } else {
-            this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemHandler.SHAW_PUMP));
             Vec3d vec3d = this.getPositionVec();
             List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(vec3d.x - 3, vec3d.y - 0.5, vec3d.z - 3, vec3d.x + 3, vec3d.y + 0.5, vec3d.z + 3));
             for (int k2 = 0; k2 < list.size(); ++k2) {
@@ -119,6 +118,7 @@ public class ShawEntity extends MeleeOperator {
             this.isSkill = false;
             this.tick = 0;
         }
+        this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemHandler.SHAW_AXE));
         return flag;
     }
 
