@@ -3,14 +3,17 @@ package arknights;
 import arknights.event.EventHandler;
 import arknights.network.PacketHandler;
 import arknights.registry.*;
+import arknights.world.OrirockGen;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -67,7 +70,11 @@ public class Arknights
         //PacketHandler.HANDLER.registerMessage(PacketHandler.index++, LeftClickPacket.class, LeftClickPacket::encode, LeftClickPacket::decode, LeftClickPacket.Handler::handle);
         // some preinit code
         EntitySpawnHandler.register();
-
+        for(Biome biome : Registry.BIOME){
+            if(biome != Biomes.NETHER && biome != Biomes.THE_VOID && biome != Biomes.THE_END && biome != Biomes.SMALL_END_ISLANDS && biome != Biomes.END_MIDLANDS && biome != Biomes.END_HIGHLANDS && biome != Biomes.END_BARRENS) {
+                OrirockGen.addOrirocks(biome);
+            }
+        }
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
