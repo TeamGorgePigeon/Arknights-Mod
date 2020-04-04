@@ -24,6 +24,7 @@ public class Apulupai extends GunItem implements IForgeItem{
     private int s1_rank, s2_rank, s3_rank;
     private int level;
     private SoundEvent event;
+    private int SkillCD =600;
     private boolean pressed;
     private int tick = 0;
     private int tick2 = 0;
@@ -58,7 +59,7 @@ public class Apulupai extends GunItem implements IForgeItem{
     @Override
     public void inventoryTick(@Nonnull ItemStack stack, World world, @Nonnull Entity entity, int par4, boolean par5) {
         //System.out.print(this.tick + "\t" + this.pressed + "\n");
-        if(this.tick == 599 && !this.isSkill){
+        if(this.tick == SkillCD-1 && !this.isSkill){
             this.isSkill = true;
             this.tick = 0;
             if (!((PlayerEntity) entity).isCreative()) {
@@ -91,7 +92,7 @@ public class Apulupai extends GunItem implements IForgeItem{
             }
         }
 
-        if(this.tick>=300 && this.isSkill){
+        if(this.tick>=SkillCD/2 && this.isSkill){
             this.isSkill = false;
             this.tick = 0;
             if (!((PlayerEntity) entity).isCreative()) {
@@ -99,7 +100,7 @@ public class Apulupai extends GunItem implements IForgeItem{
                 stack.damageItem(stack.getMaxDamage() - 10, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
             }
         }
-        if(this.pressed && this.tick2%delay == 1){
+        if(this.pressed && this.tick2%this.delay == 1){
             if (isFirstUsing && !((PlayerEntity) entity).isCreative()) {
                 stack.damageItem( -stack.getMaxDamage() - 1, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity)entity).getActiveHand()));
                 stack.damageItem(stack.getMaxDamage() - 10, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
@@ -113,7 +114,7 @@ public class Apulupai extends GunItem implements IForgeItem{
                 if (!((PlayerEntity) entity).isCreative()) {
                     stack.damageItem(-stack.getMaxDamage() - 1, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
                     stack.damageItem(stack.getMaxDamage() - 10, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
-                    stack.damageItem(-(this.tick * stack.getMaxDamage()) / 600, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
+                    stack.damageItem(-(this.tick * stack.getMaxDamage()) / SkillCD, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
                 }
                 world.playSound(null, entity.func_226277_ct_(), entity.func_226278_cu_(), entity.func_226281_cx_(), SoundHandler.EXUSIAI_ATTACK, SoundCategory.NEUTRAL, 1.0F, 1.0F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.4F);
             } else {

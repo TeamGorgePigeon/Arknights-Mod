@@ -29,6 +29,7 @@ public class ItemHandler {
     public static Map<Integer, Item> mapOfId = new HashMap<>();
 
     public static final Item CROWNSLAYER = new SpawnEggItem(EntityHandler.CROWNSLAYER, 0 , 12326679, new Item.Properties().group(ARKNIGHTS)).setRegistryName(EntityHandler.CROWNSLAYER.getRegistryName());
+    public static final Item ORIGINIUMSLUG = new SpawnEggItem(EntityHandler.ORIGINIUMSLUG, 0 , 16776960, new Item.Properties().group(ARKNIGHTS)).setRegistryName(EntityHandler.ORIGINIUMSLUG.getRegistryName());
 
     public static final Item EXUSIAI = new Exusiai(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":exusiai");
     public static final Item AMIYA = new Amiya(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":amiya");
@@ -105,6 +106,7 @@ public class ItemHandler {
         r.register(ORIGINITEPRIME);
         r.register(ORIGINIUMSHARD);
         r.register(PUREGOLD);
+        r.register(ORUNDUM);
 
         r.register(ORIROCK);
         r.register(ORIROCKCUBE);
@@ -119,7 +121,6 @@ public class ItemHandler {
         r.register(POLYESTERPACK);
         r.register(POLYESTERLUMP);
         r.register(ORIRONSHARD);
-        r.register(ORUNDUM);
         r.register(ORIRON);
         r.register(ORIRONCLUSTER);
         r.register(ORIRONBLOCK);
@@ -142,10 +143,14 @@ public class ItemHandler {
         r.register(D32STEEL);
         r.register(BIPOLARNANOFLAKE);
         r.register(POLYMERIZATIONPREPERATION);
+
         r.register(APULUPAI);
         r.register(TRUESILVER_SWORD);
         r.register(CROWNSLAYER_KNIFE);
         r.register(PROJEKTRED_KNIFE);
+        r.register(SHAW_PUMP);
+        r.register(SHAW_AXE);
+        r.register(FAUST_CROSSBOW);
 
         r.register(TRADINGHOME_ITEM);
         r.register(ORIGINIUMS);
@@ -155,9 +160,8 @@ public class ItemHandler {
         r.register(AMIYA);
 
         r.register(CROWNSLAYER);
-        r.register(SHAW_PUMP);
-        r.register(SHAW_AXE);
-        r.register(FAUST_CROSSBOW);
+        r.register(ORIGINIUMSLUG);
+
     }
 
     private static Item createItem(String name, int id, TextFormatting color, int item1, int num1, int item2, int num2, int item3, int num3){
