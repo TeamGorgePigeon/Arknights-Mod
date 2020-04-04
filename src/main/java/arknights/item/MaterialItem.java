@@ -38,6 +38,7 @@ public class MaterialItem extends Item {
 
     @Override
     public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
+        super.addInformation(stack, world, tooltip, flag);
         tooltip.set(0, tooltip.get(0).applyTextStyle(this.color));
     }
 }

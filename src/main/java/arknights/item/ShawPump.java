@@ -1,7 +1,5 @@
 package arknights.item;
 
-import arknights.registry.SoundHandler;
-import arknights.utils.MyMathHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -10,19 +8,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.item.UseAction;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
-public class ShawPump extends BaseItem {
+public class ShawPump extends GunItem {
 
     private static final Rarity RARITY = Rarity.UNCOMMON;
 
@@ -83,6 +78,7 @@ public class ShawPump extends BaseItem {
                 ((LivingEntity) entity).knockBack(playerEntity, 5.0F, (double) MathHelper.sin(playerEntity.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(playerEntity.rotationYaw * ((float) Math.PI / 180F))));
                 }
             }
+        p_213357_2_.damageItem( 1, playerEntity, (user) -> user.sendBreakAnimation(playerEntity.getActiveHand()));
         return p_213357_2_;
         }
 }

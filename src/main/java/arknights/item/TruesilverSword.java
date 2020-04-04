@@ -69,6 +69,7 @@ public class TruesilverSword extends SwordItem {
 
     @Override
     public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.damageItem( 1, attacker, (user) -> user.sendBreakAnimation(attacker.getActiveHand()));
         return true;
     }
 
@@ -105,6 +106,7 @@ public class TruesilverSword extends SwordItem {
 
          */
         p_213357_1_.playSound(null, playerEntity.func_226277_ct_(), playerEntity.func_226278_cu_(), playerEntity.func_226281_cx_(), SoundHandler.TRUESILVER_SLASH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+        p_213357_2_.damageItem( 10, playerEntity, (user) -> user.sendBreakAnimation(playerEntity.getActiveHand()));
         return p_213357_2_;
     }
     @OnlyIn(Dist.CLIENT)

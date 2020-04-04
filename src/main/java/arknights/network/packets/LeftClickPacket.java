@@ -1,6 +1,6 @@
 package arknights.network.packets;
 
-import arknights.item.BaseItem;
+import arknights.item.GunItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
@@ -26,8 +26,8 @@ public class LeftClickPacket {
             ctx.get().enqueueWork(() -> {
                 PlayerEntity player = ctx.get().getSender();
                 ItemStack item = player.getHeldItemMainhand();
-                if(!item.isEmpty() && (item.getItem() instanceof BaseItem)){
-                    ((BaseItem) item.getItem()).leftClick(player, player.getEntityWorld(), item, pressed);
+                if(!item.isEmpty() && (item.getItem() instanceof GunItem)){
+                    ((GunItem) item.getItem()).leftClick(player, player.getEntityWorld(), item, pressed);
                 }
             });
             ctx.get().setPacketHandled(true);

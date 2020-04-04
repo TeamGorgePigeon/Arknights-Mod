@@ -1,14 +1,8 @@
 package arknights.item;
 
-import arknights.Arknights;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.TNTEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
-import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.item.*;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
@@ -16,19 +10,16 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
 import static net.minecraft.potion.Effects.*;
 
-public class OriginitePrime extends BaseItem {
+public class OriginitePrime extends Item {
     List<Pair<EffectInstance, Float>> effects = new ArrayList<>();
     String playerName = null;
 
@@ -36,29 +27,6 @@ public class OriginitePrime extends BaseItem {
         super(p_i48476_1_);
     }
 
-    @Override
-    public void leftClick(LivingEntity livingEntity, World worldIn, ItemStack stack, boolean pressed){
-
-        /*Vec3d pos = livingEntity.getPositionVec();
-        if(!worldIn.isRemote){
-
-            ArrowEntity arrowEntity = new ArrowEntity(worldIn, livingEntity);
-            arrowEntity.setPosition(pos.x, pos.y, pos.z);
-            arrowEntity.setNoGravity(true);
-            worldIn.addEntity(arrowEntity);
-            arrowEntity.shoot(livingEntity, livingEntity.rotationPitch, livingEntity.rotationYaw, 0.0F, 0.1F * 3.0F, 1.0F);
-
-            FireballEntity fireballEntity = new FireballEntity(worldIn, livingEntity, 0, 0, 0);
-            fireballEntity.setPosition(pos.x, pos.y, pos.z);
-            float f = -MathHelper.sin(livingEntity.rotationYaw * ((float)Math.PI / 180F)) * MathHelper.cos(livingEntity.rotationPitch * ((float)Math.PI / 180F));
-            float f1 = -MathHelper.sin(livingEntity.rotationPitch * ((float)Math.PI / 180F));
-            float f2 = MathHelper.cos(livingEntity.rotationYaw * ((float)Math.PI / 180F)) * MathHelper.cos(livingEntity.rotationPitch * ((float)Math.PI / 180F));
-            Vec3d vec3d = new Vec3d(f, f1, f2);
-            fireballEntity.setMotion(vec3d);
-            worldIn.addEntity(fireballEntity);
-
-        } */
-    }
     @Override
     public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
         tooltip.set(0, tooltip.get(0).applyTextStyle(TextFormatting.GOLD));

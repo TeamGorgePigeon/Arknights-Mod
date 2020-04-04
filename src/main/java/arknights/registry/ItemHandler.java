@@ -42,10 +42,10 @@ public class ItemHandler {
     public static final Item TRUESILVER_SWORD = new TruesilverSword(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "truesilver_sword");
     public static final Item PROJEKTRED_KNIFE= new ProjektRedKnife(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "projektred_knife");
     public static final Item CROWNSLAYER_KNIFE = new CrownslayerKnife(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "crownslayer_knife");
-    public static final Item APULUPAI = new Apulupai(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "jb");
-    public static final Item SHAW_PUMP = new ShawPump(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "shaw_pump");
+    public static final Item APULUPAI = new Apulupai(new Item.Properties().group(ARKNIGHTS).maxDamage(512)).setRegistryName(MODID + ":" + "jb");
+    public static final Item SHAW_PUMP = new ShawPump(new Item.Properties().group(ARKNIGHTS).maxDamage(256)).setRegistryName(MODID + ":" + "shaw_pump");
     public static final Item SHAW_AXE = new ShawAxe(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "shaw_axe");
-    public static final Item FAUST_CROSSBOW = new FaustCrossBow(new Item.Properties().maxStackSize(1).group(ARKNIGHTS).maxDamage(9999)).setRegistryName(MODID + ":" + "faust_crossbow");
+    public static final Item FAUST_CROSSBOW = new FaustCrossBow(new Item.Properties().maxStackSize(1).group(ARKNIGHTS).maxDamage(1024)).setRegistryName(MODID + ":" + "faust_crossbow");
 
     public static final Item ORIROCK = createItem("orirock", 1, COMMON);
     public static final OrirockCube ORIROCKCUBE = (OrirockCube) new OrirockCube(BlockHandler.ORIROCKCUBE, new Item.Properties().group(ARKNIGHTS)).setRegistryName(BlockHandler.ORIROCKCUBE.getRegistryName());

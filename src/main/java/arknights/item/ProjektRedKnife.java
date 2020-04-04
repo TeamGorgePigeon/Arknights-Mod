@@ -54,7 +54,7 @@ public class ProjektRedKnife extends SwordItem {
 
     @Override
     public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        stack.damageItem(stack.getMaxDamage() + 1, attacker, (user) -> user.sendBreakAnimation(attacker.getActiveHand()));
+        stack.damageItem( 1, attacker, (user) -> user.sendBreakAnimation(attacker.getActiveHand()));
         return true;
     }
 
