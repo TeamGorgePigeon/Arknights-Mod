@@ -2,16 +2,26 @@ package arknights.entity.operator;
 
 import arknights.entity.model.ProjektRedModel;
 import arknights.registry.ItemHandler;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.security.acl.Owner;
+import java.util.List;
 
-public class ProjektRedEntity extends OperatorBase {
+public class ProjektRedEntity extends MeleeOperator {
     public ProjektRedModel model;
+    public boolean onSpawn=true;
 
 
     public ProjektRedEntity(EntityType<? extends ProjektRedEntity> typeIn, World worldIn) {
@@ -34,8 +44,24 @@ public class ProjektRedEntity extends OperatorBase {
 
 
     public void livingTick() {
-
+        if (onSpawn) {
+            Vec3d vec3d = this.getPositionVec();
+            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(vec3d.x - 8, vec3d.y - 2, vec3d.z - 8, vec3d.x + 8, vec3d.y + 2, vec3d.z + 8));
+            for (int k2 = 0; k2 < list.size(); ++k2) {
+                Entity entity = list.get(k2);
+                if (entity instanceof LivingEntity && entity != this.getOwner()) {
+                    ((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.SLOWNESS, 60, 255));
+                    entity.attackEntityFrom(DamageSource.causeMobDamage(this), 10);
+                }
+            }
+            onSpawn=false;
+        }
         super.livingTick();
+    }
+
+    public boolean attackEntityAsMob(Entity entityIn) {
+        boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 5);
+        return flag;
     }
 
     @Override

@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class OriginiumSlugEntity extends MonsterEntity {
+public class OriginiumSlugEntity extends EnemyBase {
    private OriginiumSlugEntity.SummonOriginiumSlugGoal summonOriginiumSlug;
    public EntitySize size;
 
@@ -27,25 +27,7 @@ public class OriginiumSlugEntity extends MonsterEntity {
       //IWorldLightListener skyLight = world.func_225524_e_().getLightEngine(LightType.SKY);
       int light = world.func_225524_e_().getLightEngine(LightType.SKY).getLightFor(pos);
       return light > 1;
-
       //return true;
-   }
-
-   protected void registerGoals() {
-      this.summonOriginiumSlug = new OriginiumSlugEntity.SummonOriginiumSlugGoal(this);
-      this.goalSelector.addGoal(10, new LookAtGoal(this, AnimalEntity.class, 8.0F));
-      this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
-      this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
-      this.goalSelector.addGoal(10, new LookAtGoal(this, AbstractVillagerEntity.class, 8.0F));
-      this.goalSelector.addGoal(10, new RandomWalkingGoal(this, 1.0F));
-      this.goalSelector.addGoal(1, new SwimGoal(this));
-      this.goalSelector.addGoal(10, new RandomSwimmingGoal(this, 1.0F, 120));
-      this.goalSelector.addGoal(3, this.summonOriginiumSlug);
-      this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.0D, false));
-      this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)).setCallsForHelp());
-      this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AnimalEntity.class, true));
-      this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-      this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AbstractVillagerEntity.class, true));
    }
 
    /**

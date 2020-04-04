@@ -18,6 +18,6 @@ public class MeleeOperator extends OperatorBase {
     @Override
     public void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.0D, false));
+        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, false));
     }
 }

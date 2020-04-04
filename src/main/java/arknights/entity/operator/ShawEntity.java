@@ -112,7 +112,9 @@ public class ShawEntity extends MeleeOperator {
             List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(vec3d.x - 3, vec3d.y - 0.5, vec3d.z - 3, vec3d.x + 3, vec3d.y + 0.5, vec3d.z + 3));
             for (int k2 = 0; k2 < list.size(); ++k2) {
                 Entity entity = list.get(k2);
-                ((LivingEntity) entity).knockBack(this, 5.0F, (double) MathHelper.sin(this.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(this.rotationYaw * ((float) Math.PI / 180F))));
+                if (entity instanceof LivingEntity) {
+                    ((LivingEntity) entity).knockBack(this, 5.0F, (double) MathHelper.sin(this.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(this.rotationYaw * ((float) Math.PI / 180F))));
+                }
             }
             this.setMotion(this.getMotion().mul(0.6D, 1.0D, 0.6D));
             this.isSkill = false;

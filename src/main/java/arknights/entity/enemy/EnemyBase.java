@@ -20,17 +20,16 @@ public class EnemyBase extends MonsterEntity {
 
     public void registerGoals() {
         this.goalSelector.addGoal(1, new SwimGoal(this));
-        //this.goalSelector.addGoal(2, this.sitGoal);
         this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
-        this.goalSelector.addGoal(1, new RandomWalkingGoal(this, 1.0F));
-        this.goalSelector.addGoal(1, new RandomSwimmingGoal(this, 1.0F, 120));
-        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setCallsForHelp());
+        this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 1.0F));
+        this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0F, 120));
+        this.targetSelector.addGoal(2, (new HurtByTargetGoal(this)).setCallsForHelp());
         this.summonEnemy = new EnemyBase.SummonEnemyGoal(this);
-        this.goalSelector.addGoal(1, new SwimGoal(this));
+        this.goalSelector.addGoal(3, new SwimGoal(this));
         this.goalSelector.addGoal(3, this.summonEnemy);
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, OperatorBase.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, OperatorBase.class, true));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
     }
 
     @Override

@@ -45,23 +45,22 @@ public class OperatorBase extends TameableEntity {
     }
 
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new SwimGoal(this));
         //this.goalSelector.addGoal(2, this.sitGoal);
         this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
-        this.goalSelector.addGoal(1, new RandomWalkingGoal(this, 1.0F));
-        this.goalSelector.addGoal(1, new RandomSwimmingGoal(this, 1.0F, 120));
+        this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 1.0F));
+        this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0F, 120));
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
         this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setCallsForHelp());
         this.goalSelector.addGoal(3, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
         this.summonOperator = new OperatorBase.SummonOperatorGoal(this);
-        this.goalSelector.addGoal(1, new SwimGoal(this));
+        this.goalSelector.addGoal(3, new SwimGoal(this));
         this.goalSelector.addGoal(3, this.summonOperator);
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MonsterEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, EnderDragonEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, WitherEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, EnemyBase.class, true));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, MonsterEntity.class, true));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EnderDragonEntity.class, true));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, WitherEntity.class, true));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EnemyBase.class, true));
     }
 
     @Override
