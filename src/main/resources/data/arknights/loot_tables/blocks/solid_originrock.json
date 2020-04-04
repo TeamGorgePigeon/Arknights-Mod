@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "arknights:solid_originrock"
+          "name": "arknights:orirock_cube"
         }
       ],
       "conditions": [
