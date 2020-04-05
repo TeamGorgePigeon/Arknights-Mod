@@ -13,9 +13,10 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
-public class OriginiumSlugEntity extends EnemyBase {
+public class OriginiumSlugEntity extends MeleeEnemy {
    private OriginiumSlugEntity.SummonOriginiumSlugGoal summonOriginiumSlug;
    public EntitySize size;
 
@@ -42,12 +43,6 @@ public class OriginiumSlugEntity extends EnemyBase {
       return 0.1F;
    }
 
-   protected void registerAttributes() {
-      super.registerAttributes();
-      this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
-      this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-      this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
-   }
 
    protected boolean func_225502_at_() {
       return false;
@@ -87,6 +82,11 @@ public class OriginiumSlugEntity extends EnemyBase {
       public boolean shouldExecute() {
          return this.lookForFriends > 0;
       }
+   }
+
+   @Override
+   public void setAttackTarget(@Nullable LivingEntity entitylivingbaseIn) {
+      super.setAttackTarget(entitylivingbaseIn); //Forge: Moved down to allow event handlers to write data manager values.
    }
 }
 

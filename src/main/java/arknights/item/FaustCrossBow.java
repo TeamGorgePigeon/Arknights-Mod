@@ -29,13 +29,14 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.extensions.IForgeItem;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
 
-public class FaustCrossBow extends ShootableItem {
+public class FaustCrossBow extends ShootableItem implements IForgeItem  {
     private boolean field_220034_c = false;
     private boolean field_220035_d = false;
 

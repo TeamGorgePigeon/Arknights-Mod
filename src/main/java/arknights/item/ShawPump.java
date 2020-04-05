@@ -22,10 +22,10 @@ public class ShawPump extends GunItem {
 
     private static final Rarity RARITY = Rarity.UNCOMMON;
     private int tick = 0;
-    private int SkillCD = 100;//Skill CD
-    private boolean isSkill = false;
+    private int SkillCD = 300;//Skill CD
     private boolean lastisCreative = false;
     private boolean isFirstUsing = true;
+    private boolean isSkill = false;
 
     public ShawPump(Properties p_i48487_1_) {
         super(p_i48487_1_);
@@ -59,7 +59,12 @@ public class ShawPump extends GunItem {
     }
 
     public ItemStack onPumpUsing(World world, ItemStack stack, PlayerEntity playerEntity) {
-        if (this.tick >= 98 && !world.isRemote()) {
+        if (isSkill | playerEntity.isCreative() && !world.isRemote()) {
+            if (!playerEntity.isCreative()) {
+                stack.damageItem(-stack.getMaxDamage() - 1,  playerEntity, (user) -> user.sendBreakAnimation(playerEntity.getActiveHand()));
+                stack.damageItem(stack.getMaxDamage() - 10,  playerEntity, (user) -> user.sendBreakAnimation(playerEntity.getActiveHand()));
+                stack.damageItem(-stack.getMaxDamage() + 20,  playerEntity, (user) -> user.sendBreakAnimation(playerEntity.getActiveHand()));
+            }
             Vec3d vec3d = playerEntity.getPositionVec();
             List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(playerEntity, new AxisAlignedBB(vec3d.x - 3, vec3d.y - 0.5, vec3d.z - 3, vec3d.x + 3, vec3d.y + 0.5, vec3d.z + 3));
             boolean isAnyEntity = false;
@@ -77,16 +82,16 @@ public class ShawPump extends GunItem {
                     //System.out.print(entityAngle + " " + (playerEntity.rotationYaw % 360 > 180 ? playerEntity.rotationYaw % 360 - 360 : playerEntity.rotationYaw % 360) + " " + Math.abs(entityAngle - (playerEntity.rotationYaw % 360 > 180 ? playerEntity.rotationYaw % 360 - 360 : playerEntity.rotationYaw % 360)) + "\n");
                     //System.out.print(MyMathHelper.in360(entityAngle) + " " + MyMathHelper.in360(playerEntity.rotationYaw) + " " + Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(playerEntity.rotationYaw)) + "\n");
                     //if(entity.getDistance(playerEntity) <= 3 && Math.abs(entityAngle - (playerEntity.rotationYaw % 360 > 180 ? playerEntity.rotationYaw % 360 - 360 : playerEntity.rotationYaw % 360)) <= 90){
-                    if (entity instanceof LivingEntity) {
+                    if (entity instanceof LivingEntity && !(entity instanceof PlayerEntity)) {
                         isAnyEntity=true;
                         ((LivingEntity) entity).knockBack(playerEntity, 5.0F, (double) MathHelper.sin(playerEntity.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(playerEntity.rotationYaw * ((float) Math.PI / 180F))));
-                        System.out.print(entity + "\n");
                     }
                 }
-                if (isAnyEntity){
+                if (isAnyEntity && !(playerEntity.isCreative())){
                     this.isSkill = false;
                     this.tick = 0;
-                    stack.damageItem(stack.getMaxDamage() - stack.getDamage() - 1, playerEntity, (user) -> user.sendBreakAnimation(playerEntity.getActiveHand()));
+                    stack.damageItem(-stack.getMaxDamage() - 1, playerEntity, (user) -> user.sendBreakAnimation(playerEntity.getActiveHand()));
+                    stack.damageItem(stack.getMaxDamage() - 10, playerEntity, (user) -> user.sendBreakAnimation(playerEntity.getActiveHand()));
                 }
             }
         }
@@ -95,11 +100,9 @@ public class ShawPump extends GunItem {
 
     @Override
     public void inventoryTick(@Nonnull ItemStack stack, World world, @Nonnull Entity entity, int par4, boolean par5) {
-        System.out.print(this.isSkill + "\t" + this.tick + "\n");
         if (((PlayerEntity) entity).isCreative()){
             this.lastisCreative=true;
             this.isSkill = true;
-            this.tick = 99;
         } else {
             if (this.lastisCreative | this.isFirstUsing) {
                 this.tick = 0;
@@ -107,18 +110,20 @@ public class ShawPump extends GunItem {
                 this.isFirstUsing=false;
                 this.lastisCreative=false;
             }
-            if (this.tick >= 99 && !this.isSkill) {
+            if (this.tick == SkillCD-1 && !this.isSkill) {
                 this.isSkill = true;
-                //stack.damageItem(stack.getMaxDamage() - stack.getDamage() - 1, (PlayerEntity)entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
-                stack.damageItem(- stack.getMaxDamage() + stack.getDamage(), (PlayerEntity)entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
+                stack.damageItem(-stack.getMaxDamage() - 1, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
+                stack.damageItem(stack.getMaxDamage() - 10, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
+                stack.damageItem(-stack.getMaxDamage() + 20, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
             }
 
-            if (this.tick < 99 && !this.isSkill ) {
-                stack.damageItem(-2, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
-                this.tick++;
+            if (this.tick < SkillCD-1 && this.tick % 19 == 1 &&!this.isSkill ) {
+                stack.damageItem(-stack.getMaxDamage() - 1, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
+                stack.damageItem(stack.getMaxDamage() - 10, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
+                stack.damageItem(-(this.tick * stack.getMaxDamage()) / SkillCD, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
             }
 
-
+            this.tick++;
 
             if (((PlayerEntity) entity).getHeldItemMainhand().getItem() != this) {
                 this.tick = 0;

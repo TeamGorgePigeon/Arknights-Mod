@@ -44,7 +44,7 @@ public class ItemHandler {
     public static final Item PROJEKTRED_KNIFE= new ProjektRedKnife(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "projektred_knife");
     public static final Item CROWNSLAYER_KNIFE = new CrownslayerKnife(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "crownslayer_knife");
     public static final Item APULUPAI = new Apulupai(new Item.Properties().group(ARKNIGHTS).maxDamage(512)).setRegistryName(MODID + ":" + "jb");
-    public static final Item SHAW_PUMP = new ShawPump(new Item.Properties().group(ARKNIGHTS).maxDamage(100)).setRegistryName(MODID + ":" + "shaw_pump");
+    public static final Item SHAW_PUMP = new ShawPump(new Item.Properties().group(ARKNIGHTS).maxDamage(600)).setRegistryName(MODID + ":" + "shaw_pump");
     public static final Item SHAW_AXE = new ShawAxe(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":" + "shaw_axe");
     public static final Item FAUST_CROSSBOW = new FaustCrossBow(new Item.Properties().maxStackSize(1).group(ARKNIGHTS).maxDamage(1024)).setRegistryName(MODID + ":" + "faust_crossbow");
 
