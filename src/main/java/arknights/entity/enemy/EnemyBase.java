@@ -1,13 +1,21 @@
 package arknights.entity.enemy;
 
 import arknights.entity.operator.OperatorBase;
+import arknights.item.OperatorItem;
+import arknights.registry.ItemHandler;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.world.World;
+import org.omg.CORBA.INTERNAL;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class EnemyBase extends MonsterEntity {
     private SummonEnemyGoal summonEnemy;
@@ -59,6 +67,147 @@ public class EnemyBase extends MonsterEntity {
         public boolean shouldExecute() {
             return false;
         }
+    }
+
+    public void DropItem(int level,int maxDropItem) {
+        int random;
+        int randomDropItem = new Random().nextInt(maxDropItem);
+        for (int i=1;i<=randomDropItem;i++) {
+            if (!world.isRemote()) {
+                random = new Random().nextInt(150);
+                if (random < 50) {
+                    switch (new Random().nextInt(5)) {
+                        case 0:
+                            SummonItem(ItemHandler.ORIRONSHARD);
+                            break;
+                        case 1:
+                            SummonItem(ItemHandler.SUGARSUBSTITUTE);
+                            break;
+                        case 2:
+                            SummonItem(ItemHandler.ESTER);
+                            break;
+                        case 3:
+                            SummonItem(ItemHandler.ORIROCK);
+                            break;
+                        case 4:
+                            SummonItem(ItemHandler.DIKETON);
+                            break;
+                        case 5:
+                            SummonItem(ItemHandler.DAMAGEDDEVICE);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                if (level >= 2) {
+                    if (random >= 50 && random <= 90) {
+                        switch (new Random().nextInt(5)) {
+                            case 0:
+                                SummonItem(ItemHandler.ORIRON);
+                                break;
+                            case 1:
+                                SummonItem(ItemHandler.SUGAR);
+                                break;
+                            case 2:
+                                SummonItem(ItemHandler.POLYESTER);
+                                break;
+                            case 3:
+                                SummonItem(ItemHandler.ORIROCK);
+                                break;
+                            case 4:
+                                SummonItem(ItemHandler.POLYKETON);
+                                break;
+                            case 5:
+                                SummonItem(ItemHandler.DEVICE);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                if (level >= 3) {
+                    if (random > 90 && random <= 98) {
+                        switch (new Random().nextInt(9)) {
+                            case 0:
+                                SummonItem(ItemHandler.ORIRONCLUSTER);
+                                break;
+                            case 1:
+                                SummonItem(ItemHandler.SUGARPACK);
+                                break;
+                            case 2:
+                                SummonItem(ItemHandler.POLYESTERPACK);
+                                break;
+                            case 3:
+                                SummonItem(ItemHandler.ORIROCKCLUSTER);
+                                break;
+                            case 4:
+                                SummonItem(ItemHandler.AKETON);
+                                break;
+                            case 5:
+                                SummonItem(ItemHandler.INTEGRATEDDEVICE);
+                                break;
+                            case 6:
+                                SummonItem(ItemHandler.RMA7012);
+                                break;
+                            case 7:
+                                SummonItem(ItemHandler.GRINDSTONE);
+                                break;
+                            case 8:
+                                SummonItem(ItemHandler.MANGANESEORE);
+                                break;
+                            case 9:
+                                SummonItem(ItemHandler.LOXICKOHL);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                if (level == 4) {
+                    if (random > 98 && random <= 100) {
+                        switch (new Random().nextInt(9)) {
+                            case 0:
+                                SummonItem(ItemHandler.ORIRONBLOCK);
+                                break;
+                            case 1:
+                                SummonItem(ItemHandler.SUGARLUMP);
+                                break;
+                            case 2:
+                                SummonItem(ItemHandler.POLYESTERLUMP);
+                                break;
+                            case 3:
+                                SummonItem(ItemHandler.ORIROCKCONCENTRATION);
+                                break;
+                            case 4:
+                                SummonItem(ItemHandler.KETONCOLLOID);
+                                break;
+                            case 5:
+                                SummonItem(ItemHandler.OPTMIZEDDEVICE);
+                                break;
+                            case 6:
+                                SummonItem(ItemHandler.RMA7024);
+                                break;
+                            case 7:
+                                SummonItem(ItemHandler.GRINDSTONEPENTAHYDRATE);
+                                break;
+                            case 8:
+                                SummonItem(ItemHandler.MANGANESETRIHYDRATE);
+                                break;
+                            case 9:
+                                SummonItem(ItemHandler.WHITEHORSEKOHL);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void SummonItem(IItemProvider Item) {
+        ItemEntity entity = new ItemEntity(world, this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), new ItemStack(Item, 1));
+        world.addEntity(entity);
     }
 
     protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {

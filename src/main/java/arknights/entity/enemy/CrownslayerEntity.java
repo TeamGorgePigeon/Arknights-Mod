@@ -7,6 +7,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -35,6 +36,9 @@ public class CrownslayerEntity extends MeleeEnemy {
         this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
     }
 
+    public void onDeath(DamageSource source) {
+        DropItem(3,5);
+    }
 
     public void livingTick() {
 

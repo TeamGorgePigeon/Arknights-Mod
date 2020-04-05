@@ -64,6 +64,10 @@ public class OriginiumSlugEntity extends MeleeEnemy {
       }
    }
 
+   public void onDeath(DamageSource source) {
+      DropItem(2,5);
+   }
+
    static class SummonOriginiumSlugGoal extends Goal {
       private final OriginiumSlugEntity originiumslug;
       private int lookForFriends;
