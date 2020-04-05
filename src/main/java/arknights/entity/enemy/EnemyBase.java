@@ -112,7 +112,7 @@ public class EnemyBase extends MonsterEntity {
                                 SummonItem(ItemHandler.POLYESTER);
                                 break;
                             case 3:
-                                SummonItem(ItemHandler.ORIROCK);
+                                SummonItem(ItemHandler.ORIROCKCUBE);
                                 break;
                             case 4:
                                 SummonItem(ItemHandler.POLYKETON);
