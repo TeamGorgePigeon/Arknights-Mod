@@ -22,7 +22,7 @@ public class ShawPump extends GunItem {
 
     private static final Rarity RARITY = Rarity.UNCOMMON;
     private int tick = 0;
-    private int SkillCD = 300;//Skill CD
+    private int SkillCD = 100;//Skill CD
     private boolean isSkill = false;
     private boolean lastisCreative = false;
     private boolean isFirstUsing = true;
@@ -59,7 +59,7 @@ public class ShawPump extends GunItem {
     }
 
     public ItemStack onPumpUsing(World p_213357_1_, ItemStack stack, PlayerEntity playerEntity) {
-        if (isSkill) {
+        if (this.tick >= 98) {
             Vec3d vec3d = playerEntity.getPositionVec();
             List<Entity> list = p_213357_1_.getEntitiesWithinAABBExcludingEntity(playerEntity, new AxisAlignedBB(vec3d.x - 3, vec3d.y - 0.5, vec3d.z - 3, vec3d.x + 3, vec3d.y + 0.5, vec3d.z + 3));
             boolean isAnyEntity = false;
@@ -85,8 +85,7 @@ public class ShawPump extends GunItem {
                 if (isAnyEntity){
                     this.isSkill = false;
                     this.tick = 0;
-                    stack.damageItem(-stack.getMaxDamage() - 1, playerEntity, (user) -> user.sendBreakAnimation(playerEntity.getActiveHand()));
-                    stack.damageItem(stack.getMaxDamage() - 10, playerEntity, (user) -> user.sendBreakAnimation(playerEntity.getActiveHand()));
+                    stack.damageItem(stack.getMaxDamage() - stack.getDamage() - 1, playerEntity, (user) -> user.sendBreakAnimation(playerEntity.getActiveHand()));
                 }
             }
         }
@@ -105,20 +104,18 @@ public class ShawPump extends GunItem {
                 this.isFirstUsing=false;
                 this.lastisCreative=false;
             }
-            if (this.tick == SkillCD-1 && !this.isSkill) {
+            if (this.tick >= SkillCD-1 && !this.isSkill) {
                 this.isSkill = true;
-                stack.damageItem(-stack.getMaxDamage() - 1, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
-                stack.damageItem(stack.getMaxDamage() - 10, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
-                stack.damageItem(-stack.getMaxDamage() + 20, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
+                stack.damageItem(stack.getMaxDamage() - stack.getDamage() - 1, (PlayerEntity)entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
+                stack.damageItem(-stack.getMaxDamage(), (PlayerEntity)entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
             }
 
             if (this.tick < SkillCD-1 && this.tick % 19 == 1 &&!this.isSkill ) {
-                stack.damageItem(-stack.getMaxDamage() - 1, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
-                stack.damageItem(stack.getMaxDamage() - 10, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
-                stack.damageItem(-(this.tick * stack.getMaxDamage()) / SkillCD, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
+                stack.damageItem(-2, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
+                this.tick++;
             }
 
-            this.tick++;
+
 
             if (((PlayerEntity) entity).getHeldItemMainhand().getItem() != this) {
                 this.tick = 0;
