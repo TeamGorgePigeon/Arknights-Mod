@@ -102,6 +102,9 @@ public class OperatorBase extends TameableEntity {
         }
     }
 
+    protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
+        return 1.75F;
+    }
         public SoundEvent getDeathSound() {
             return SoundHandler.OPERATOR_DEAD;
         }

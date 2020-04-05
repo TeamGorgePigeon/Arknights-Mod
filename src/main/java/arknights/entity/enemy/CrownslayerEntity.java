@@ -4,6 +4,7 @@ import arknights.entity.model.CrownslayerModel;
 import arknights.registry.ItemHandler;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -30,6 +31,8 @@ public class CrownslayerEntity extends MeleeEnemy {
 
     protected void registerAttributes() {
         super.registerAttributes();
+        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
+        this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
     }
 
 
