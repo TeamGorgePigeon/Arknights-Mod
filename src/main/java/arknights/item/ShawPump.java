@@ -58,10 +58,10 @@ public class ShawPump extends GunItem {
         return !player.isCreative();
     }
 
-    public ItemStack onPumpUsing(World p_213357_1_, ItemStack stack, PlayerEntity playerEntity) {
-        if (this.tick >= 98) {
+    public ItemStack onPumpUsing(World world, ItemStack stack, PlayerEntity playerEntity) {
+        if (this.tick >= 98 && !world.isRemote()) {
             Vec3d vec3d = playerEntity.getPositionVec();
-            List<Entity> list = p_213357_1_.getEntitiesWithinAABBExcludingEntity(playerEntity, new AxisAlignedBB(vec3d.x - 3, vec3d.y - 0.5, vec3d.z - 3, vec3d.x + 3, vec3d.y + 0.5, vec3d.z + 3));
+            List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(playerEntity, new AxisAlignedBB(vec3d.x - 3, vec3d.y - 0.5, vec3d.z - 3, vec3d.x + 3, vec3d.y + 0.5, vec3d.z + 3));
             boolean isAnyEntity = false;
             //Mian2 Chao3
             //double angle = playerEntity.rotationYaw;
@@ -80,6 +80,7 @@ public class ShawPump extends GunItem {
                     if (entity instanceof LivingEntity) {
                         isAnyEntity=true;
                         ((LivingEntity) entity).knockBack(playerEntity, 5.0F, (double) MathHelper.sin(playerEntity.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(playerEntity.rotationYaw * ((float) Math.PI / 180F))));
+                        System.out.print(entity + "\n");
                     }
                 }
                 if (isAnyEntity){
@@ -94,9 +95,11 @@ public class ShawPump extends GunItem {
 
     @Override
     public void inventoryTick(@Nonnull ItemStack stack, World world, @Nonnull Entity entity, int par4, boolean par5) {
+        System.out.print(this.isSkill + "\t" + this.tick + "\n");
         if (((PlayerEntity) entity).isCreative()){
             this.lastisCreative=true;
             this.isSkill = true;
+            this.tick = 99;
         } else {
             if (this.lastisCreative | this.isFirstUsing) {
                 this.tick = 0;
@@ -104,13 +107,13 @@ public class ShawPump extends GunItem {
                 this.isFirstUsing=false;
                 this.lastisCreative=false;
             }
-            if (this.tick >= SkillCD-1 && !this.isSkill) {
+            if (this.tick >= 99 && !this.isSkill) {
                 this.isSkill = true;
-                stack.damageItem(stack.getMaxDamage() - stack.getDamage() - 1, (PlayerEntity)entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
-                stack.damageItem(-stack.getMaxDamage(), (PlayerEntity)entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
+                //stack.damageItem(stack.getMaxDamage() - stack.getDamage() - 1, (PlayerEntity)entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
+                stack.damageItem(- stack.getMaxDamage() + stack.getDamage(), (PlayerEntity)entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
             }
 
-            if (this.tick < SkillCD-1 && this.tick % 19 == 1 &&!this.isSkill ) {
+            if (this.tick < 99 && !this.isSkill ) {
                 stack.damageItem(-2, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
                 this.tick++;
             }
