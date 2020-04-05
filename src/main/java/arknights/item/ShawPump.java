@@ -59,7 +59,7 @@ public class ShawPump extends GunItem {
     }
 
     public ItemStack onPumpUsing(World world, ItemStack stack, PlayerEntity playerEntity) {
-        if (isSkill | playerEntity.isCreative() && !world.isRemote()) {
+        if (isSkill && !world.isRemote()) {
             if (!playerEntity.isCreative()) {
                 stack.damageItem(-stack.getMaxDamage() - 1,  playerEntity, (user) -> user.sendBreakAnimation(playerEntity.getActiveHand()));
                 stack.damageItem(stack.getMaxDamage() - 10,  playerEntity, (user) -> user.sendBreakAnimation(playerEntity.getActiveHand()));
