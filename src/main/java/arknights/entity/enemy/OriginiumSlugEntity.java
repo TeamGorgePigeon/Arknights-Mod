@@ -60,7 +60,7 @@ public class OriginiumSlugEntity extends MeleeEnemy {
    }
 
    public void onDeath(DamageSource source) {
-      DropItem(2,5);
+      DropItem(1,3);
    }
 
    static class SummonOriginiumSlugGoal extends Goal {

@@ -74,131 +74,23 @@ public class EnemyBase extends MonsterEntity {
         int randomDropItem = new Random().nextInt(maxDropItem);
         for (int i=1;i<=randomDropItem;i++) {
             if (!world.isRemote()) {
-                random = new Random().nextInt(150);
+                random = new Random().nextInt(200);
                 if (random < 50) {
-                    switch (new Random().nextInt(5)) {
-                        case 0:
-                            SummonItem(ItemHandler.ORIRONSHARD);
-                            break;
-                        case 1:
-                            SummonItem(ItemHandler.SUGARSUBSTITUTE);
-                            break;
-                        case 2:
-                            SummonItem(ItemHandler.ESTER);
-                            break;
-                        case 3:
-                            SummonItem(ItemHandler.ORIROCK);
-                            break;
-                        case 4:
-                            SummonItem(ItemHandler.DIKETON);
-                            break;
-                        case 5:
-                            SummonItem(ItemHandler.DAMAGEDDEVICE);
-                            break;
-                        default:
-                            break;
-                    }
+                    SummonItem(ItemHandler._whiteMaterial.get(new Random().nextInt(ItemHandler._whiteMaterial.size())));
                 }
                 if (level >= 2) {
                     if (random >= 50 && random <= 90) {
-                        switch (new Random().nextInt(5)) {
-                            case 0:
-                                SummonItem(ItemHandler.ORIRON);
-                                break;
-                            case 1:
-                                SummonItem(ItemHandler.SUGAR);
-                                break;
-                            case 2:
-                                SummonItem(ItemHandler.POLYESTER);
-                                break;
-                            case 3:
-                                SummonItem(ItemHandler.ORIROCKCUBE);
-                                break;
-                            case 4:
-                                SummonItem(ItemHandler.POLYKETON);
-                                break;
-                            case 5:
-                                SummonItem(ItemHandler.DEVICE);
-                                break;
-                            default:
-                                break;
-                        }
+                        SummonItem(ItemHandler._greenMaterial.get(new Random().nextInt(ItemHandler._greenMaterial.size())));
                     }
                 }
                 if (level >= 3) {
                     if (random > 90 && random <= 98) {
-                        switch (new Random().nextInt(9)) {
-                            case 0:
-                                SummonItem(ItemHandler.ORIRONCLUSTER);
-                                break;
-                            case 1:
-                                SummonItem(ItemHandler.SUGARPACK);
-                                break;
-                            case 2:
-                                SummonItem(ItemHandler.POLYESTERPACK);
-                                break;
-                            case 3:
-                                SummonItem(ItemHandler.ORIROCKCLUSTER);
-                                break;
-                            case 4:
-                                SummonItem(ItemHandler.AKETON);
-                                break;
-                            case 5:
-                                SummonItem(ItemHandler.INTEGRATEDDEVICE);
-                                break;
-                            case 6:
-                                SummonItem(ItemHandler.RMA7012);
-                                break;
-                            case 7:
-                                SummonItem(ItemHandler.GRINDSTONE);
-                                break;
-                            case 8:
-                                SummonItem(ItemHandler.MANGANESEORE);
-                                break;
-                            case 9:
-                                SummonItem(ItemHandler.LOXICKOHL);
-                                break;
-                            default:
-                                break;
-                        }
+                        SummonItem(ItemHandler._blueMaterial.get(new Random().nextInt(ItemHandler._blueMaterial.size())));
                     }
                 }
                 if (level == 4) {
                     if (random > 98 && random <= 100) {
-                        switch (new Random().nextInt(9)) {
-                            case 0:
-                                SummonItem(ItemHandler.ORIRONBLOCK);
-                                break;
-                            case 1:
-                                SummonItem(ItemHandler.SUGARLUMP);
-                                break;
-                            case 2:
-                                SummonItem(ItemHandler.POLYESTERLUMP);
-                                break;
-                            case 3:
-                                SummonItem(ItemHandler.ORIROCKCONCENTRATION);
-                                break;
-                            case 4:
-                                SummonItem(ItemHandler.KETONCOLLOID);
-                                break;
-                            case 5:
-                                SummonItem(ItemHandler.OPTMIZEDDEVICE);
-                                break;
-                            case 6:
-                                SummonItem(ItemHandler.RMA7024);
-                                break;
-                            case 7:
-                                SummonItem(ItemHandler.GRINDSTONEPENTAHYDRATE);
-                                break;
-                            case 8:
-                                SummonItem(ItemHandler.MANGANESETRIHYDRATE);
-                                break;
-                            case 9:
-                                SummonItem(ItemHandler.WHITEHORSEKOHL);
-                                break;
-                            default:
-                                break;
-                        }
+                        SummonItem(ItemHandler._purpleMaterial.get(new Random().nextInt(ItemHandler._purpleMaterial.size())));
                     }
                 }
             }
