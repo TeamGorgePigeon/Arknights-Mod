@@ -38,6 +38,7 @@ public class EntityHandler {
     public static final EntityType<AmiyaEntity> AMIYA = (EntityType<AmiyaEntity>)EntityType.Builder.<AmiyaEntity>create(AmiyaEntity::new, EntityClassification.CREATURE).build("amiya").setRegistryName(MODID + ":" + "amiya");
     public static final EntityType<ShawEntity> SHAW = (EntityType<ShawEntity>)EntityType.Builder.<ShawEntity>create(ShawEntity::new, EntityClassification.CREATURE).build("shaw").setRegistryName(MODID + ":" + "shaw");
     public static final EntityType<RopeEntity> ROPE = (EntityType<RopeEntity>)EntityType.Builder.<RopeEntity>create(RopeEntity::new, EntityClassification.CREATURE).build("rope").setRegistryName(MODID + ":" + "rope");
+    public static final EntityType<AnselEntity> ANSEL = (EntityType<AnselEntity>)EntityType.Builder.<AnselEntity>create(AnselEntity::new, EntityClassification.CREATURE).build("ansel").setRegistryName(MODID + ":" + "ansel");
 
     private static <T extends Entity> EntityType<T> registerEntity(String key, EntityType.Builder<T> builder) {
         return Registry.register(Registry.ENTITY_TYPE, key, builder.build(key));
@@ -62,6 +63,7 @@ public class EntityHandler {
 		r.register(AMIYA);
         r.register(PROJEKTRED);
         r.register(SHAW);
+        r.register(ANSEL);
 
         r.register(CROWNSLAYER);
         r.register(FAUST);
