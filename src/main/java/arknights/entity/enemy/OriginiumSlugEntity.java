@@ -2,10 +2,6 @@ package arknights.entity.enemy;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.merchant.villager.AbstractVillagerEntity;
-import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.math.BlockPos;
@@ -48,7 +44,6 @@ public class OriginiumSlugEntity extends MeleeEnemy {
       return false;
    }
 
-
    /**
     * Called when the entity is attacked.
     */
@@ -82,7 +77,6 @@ public class OriginiumSlugEntity extends MeleeEnemy {
          }
 
       }
-
       public boolean shouldExecute() {
          return this.lookForFriends > 0;
       }
