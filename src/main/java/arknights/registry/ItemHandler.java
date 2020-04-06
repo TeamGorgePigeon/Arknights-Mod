@@ -33,6 +33,10 @@ public class ItemHandler {
     public static List<Item> _5Star = new ArrayList<>();
     public static List<Item> _6Star = new ArrayList<>();
 
+    public static List<Item> _whiteMaterial = new ArrayList<>();
+    public static List<Item> _greenMaterial = new ArrayList<>();
+    public static List<Item> _blueMaterial = new ArrayList<>();
+    public static List<Item> _purpleMaterial = new ArrayList<>();
 
     public static Map<Integer, Item> mapOfId = new HashMap<>();
 
@@ -116,38 +120,38 @@ public class ItemHandler {
         r.register(PUREGOLD);
         r.register(ORUNDUM);
 
-        r.register(ORIROCK);
-        r.register(ORIROCKCUBE);
-        r.register(ORIROCKCLUSTER);
-        r.register(ORIROCKCONCENTRATION);
-        r.register(SUGARSUBSTITUTE);
-        r.register(SUGAR);
-        r.register(SUGARPACK);
-        r.register(SUGARLUMP);
-        r.register(ESTER);
-        r.register(POLYESTER);
-        r.register(POLYESTERPACK);
-        r.register(POLYESTERLUMP);
-        r.register(ORIRONSHARD);
-        r.register(ORIRON);
-        r.register(ORIRONCLUSTER);
-        r.register(ORIRONBLOCK);
-        r.register(DIKETON);
-        r.register(POLYKETON);
-        r.register(AKETON);
-        r.register(KETONCOLLOID);
-        r.register(DAMAGEDDEVICE);
-        r.register(DEVICE);
-        r.register(INTEGRATEDDEVICE);
-        r.register(OPTMIZEDDEVICE);
-        r.register(LOXICKOHL);
-        r.register(WHITEHORSEKOHL);
-        r.register(MANGANESEORE);
-        r.register(MANGANESETRIHYDRATE);
-        r.register(RMA7012);
-        r.register(RMA7024);
-        r.register(GRINDSTONE);
-        r.register(GRINDSTONEPENTAHYDRATE);
+        registerWhiteMaterial(r,ORIROCK);
+        registerGreenMaterial(r,ORIROCKCUBE);
+        registerBlueMaterial(r,ORIROCKCLUSTER);
+        registerPurpleMaterial(r,ORIROCKCONCENTRATION);
+        registerWhiteMaterial(r,SUGARSUBSTITUTE);
+        registerGreenMaterial(r,SUGAR);
+        registerBlueMaterial(r,SUGARPACK);
+        registerPurpleMaterial(r,SUGARLUMP);
+        registerWhiteMaterial(r,ESTER);
+        registerGreenMaterial(r,POLYESTER);
+        registerBlueMaterial(r,POLYESTERPACK);
+        registerPurpleMaterial(r,POLYESTERLUMP);
+        registerWhiteMaterial(r,ORIRONSHARD);
+        registerGreenMaterial(r,ORIRON);
+        registerBlueMaterial(r,ORIRONCLUSTER);
+        registerPurpleMaterial(r,ORIRONBLOCK);
+        registerWhiteMaterial(r,DIKETON);
+        registerGreenMaterial(r,POLYKETON);
+        registerBlueMaterial(r,AKETON);
+        registerPurpleMaterial(r,KETONCOLLOID);
+        registerWhiteMaterial(r,DAMAGEDDEVICE);
+        registerGreenMaterial(r,DEVICE);
+        registerBlueMaterial(r,INTEGRATEDDEVICE);
+        registerPurpleMaterial(r,OPTMIZEDDEVICE);
+        registerBlueMaterial(r,LOXICKOHL);
+        registerPurpleMaterial(r,WHITEHORSEKOHL);
+        registerBlueMaterial(r,MANGANESEORE);
+        registerPurpleMaterial(r,MANGANESETRIHYDRATE);
+        registerBlueMaterial(r,RMA7012);
+        registerPurpleMaterial(r,RMA7024);
+        registerBlueMaterial(r,GRINDSTONE);
+        registerPurpleMaterial(r,GRINDSTONEPENTAHYDRATE);
         r.register(D32STEEL);
         r.register(BIPOLARNANOFLAKE);
         r.register(POLYMERIZATIONPREPERATION);
@@ -172,6 +176,22 @@ public class ItemHandler {
         r.register(CROWNSLAYER);
         r.register(ORIGINIUMSLUG);
 
+    }
+    private static void registerWhiteMaterial(IForgeRegistry<Item> r, Item item){
+        r.register(item);
+        _whiteMaterial.add(item);
+    }
+    private static void registerGreenMaterial(IForgeRegistry<Item> r, Item item){
+        r.register(item);
+        _greenMaterial.add(item);
+    }
+    private static void registerBlueMaterial(IForgeRegistry<Item> r, Item item){
+        r.register(item);
+        _blueMaterial.add(item);
+    }
+    private static void registerPurpleMaterial(IForgeRegistry<Item> r, Item item){
+        r.register(item);
+        _purpleMaterial.add(item);
     }
 
     private static void register3Operator(IForgeRegistry<Item> r, Item item){
