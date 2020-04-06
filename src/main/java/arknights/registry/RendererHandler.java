@@ -24,6 +24,7 @@ public class RendererHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.PROJEKTRED, ProjektRedRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.SHAW, ShawRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.ROPE, RopeRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHandler.ANSEL,AnselRenderer::new);
 
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.HOOK, HookRenderer::new);
     }
