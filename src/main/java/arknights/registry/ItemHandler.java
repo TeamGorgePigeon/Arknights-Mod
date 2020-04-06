@@ -11,7 +11,9 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static arknights.Arknights.ARKNIGHTS;
@@ -25,6 +27,12 @@ public class ItemHandler {
     static TextFormatting RARE = AQUA;
     static TextFormatting EPIC = LIGHT_PURPLE;
     static TextFormatting LEGEND = GOLD;
+
+    public static List<Item> _3Star = new ArrayList<>();
+    public static List<Item> _4Star = new ArrayList<>();
+    public static List<Item> _5Star = new ArrayList<>();
+    public static List<Item> _6Star = new ArrayList<>();
+
 
     public static Map<Integer, Item> mapOfId = new HashMap<>();
 
@@ -156,14 +164,32 @@ public class ItemHandler {
         r.register(ORIGINIUMS);
         r.register(WORKSHOP);
 
-        r.register(EXUSIAI);
-        r.register(AMIYA);
+        //r.register(EXUSIAI);
+        //r.register(AMIYA);
+        register5Operator(r, AMIYA);
+        register6Operator(r, EXUSIAI);
 
         r.register(CROWNSLAYER);
         r.register(ORIGINIUMSLUG);
 
     }
 
+    private static void register3Operator(IForgeRegistry<Item> r, Item item){
+        r.register(item);
+        _3Star.add(item);
+    }
+    private static void register4Operator(IForgeRegistry<Item> r, Item item){
+        r.register(item);
+        _4Star.add(item);
+    }
+    private static void register5Operator(IForgeRegistry<Item> r, Item item){
+        r.register(item);
+        _5Star.add(item);
+    }
+    private static void register6Operator(IForgeRegistry<Item> r, Item item){
+        r.register(item);
+        _6Star.add(item);
+    }
     private static Item createItem(String name, int id, TextFormatting color, int item1, int num1, int item2, int num2, int item3, int num3){
         MaterialItem item = (MaterialItem) new MaterialItem(new Item.Properties().group(ARKNIGHTS), id, color, item1, num1, item2, num2, item3, num3).setRegistryName(MODID + ":" + name);
         mapOfId.put(id, item);
