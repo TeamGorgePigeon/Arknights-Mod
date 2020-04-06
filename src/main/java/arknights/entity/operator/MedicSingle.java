@@ -1,5 +1,6 @@
 package arknights.entity.operator;
 
+import arknights.entity.ai.MedicSingleHealTarget;
 import arknights.entity.enemy.EnemyBase;
 import arknights.item.OperatorItem;
 import arknights.registry.SoundHandler;
@@ -54,7 +55,7 @@ public abstract class MedicSingle extends TameableEntity implements IRangedAttac
         this.summonOperator = new MedicSingle.SummonOperatorGoal(this);
         this.goalSelector.addGoal(3, new SwimGoal(this));
         this.goalSelector.addGoal(3, this.summonOperator);
-
+        this.targetSelector.addGoal(1, new MedicSingleHealTarget(this, true));
     }
 
     @Override
