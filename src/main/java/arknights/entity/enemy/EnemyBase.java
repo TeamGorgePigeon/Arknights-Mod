@@ -76,28 +76,28 @@ public class EnemyBase extends MonsterEntity {
             if (!world.isRemote()) {
                 random = new Random().nextInt(200);
                 if (random < 50) {
-                    SummonItem(ItemHandler._whiteMaterial.get(new Random().nextInt(ItemHandler._whiteMaterial.size())));
+                    summonItem(ItemHandler._whiteMaterial.get(new Random().nextInt(ItemHandler._whiteMaterial.size())));
                 }
                 if (level >= 2) {
                     if (random >= 50 && random <= 90) {
-                        SummonItem(ItemHandler._greenMaterial.get(new Random().nextInt(ItemHandler._greenMaterial.size())));
+                        summonItem(ItemHandler._greenMaterial.get(new Random().nextInt(ItemHandler._greenMaterial.size())));
                     }
                 }
                 if (level >= 3) {
                     if (random > 90 && random <= 98) {
-                        SummonItem(ItemHandler._blueMaterial.get(new Random().nextInt(ItemHandler._blueMaterial.size())));
+                        summonItem(ItemHandler._blueMaterial.get(new Random().nextInt(ItemHandler._blueMaterial.size())));
                     }
                 }
                 if (level == 4) {
                     if (random > 98 && random <= 100) {
-                        SummonItem(ItemHandler._purpleMaterial.get(new Random().nextInt(ItemHandler._purpleMaterial.size())));
+                        summonItem(ItemHandler._purpleMaterial.get(new Random().nextInt(ItemHandler._purpleMaterial.size())));
                     }
                 }
             }
         }
     }
 
-    public void SummonItem(IItemProvider Item) {
+    public void summonItem(IItemProvider Item) {
         ItemEntity entity = new ItemEntity(world, this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), new ItemStack(Item, 1));
         world.addEntity(entity);
     }
