@@ -23,6 +23,9 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 public abstract class MedicSingle extends OperatorBase implements IRangedAttackMob {
     private MedicSingle.SummonOperatorGoal summonOperator;
@@ -31,6 +34,7 @@ public abstract class MedicSingle extends OperatorBase implements IRangedAttackM
     protected int sp;
     protected int tick = 0;
     protected boolean isSkill = false;
+    protected List<LivingEntity> targets = new ArrayList<>();
 
     public MedicSingle(EntityType<? extends TameableEntity> p_i48574_1_, World p_i48574_2_) {
         super(p_i48574_1_, p_i48574_2_);
@@ -45,6 +49,44 @@ public abstract class MedicSingle extends OperatorBase implements IRangedAttackM
 
     }
 
+    public void tick(){
+        super.tick();
+        if(this.tick % 20 == 1) {
+            float hp = 0;
+            int i = 0;
+            int n = 0;
+            if (!this.world.<LivingEntity>getEntitiesWithinAABB(PlayerEntity.class, this.getBoundingBox().grow(16, 4.0D, 16), null).isEmpty()) {
+                for (LivingEntity entity : this.world.getEntitiesWithinAABB(PlayerEntity.class, this.getBoundingBox().grow(16, 4.0D, 16), null)) {
+                    if (entity == this.getOwner() && !this.targets.contains(entity)) {
+                        this.targets.add(entity);
+                    }
+                }
+            }
+            if (!this.world.<LivingEntity>getEntitiesWithinAABB(OperatorBase.class, this.getBoundingBox().grow(16, 4.0D, 16), null).isEmpty()) {
+                for (LivingEntity entity : this.world.<LivingEntity>getEntitiesWithinAABB(OperatorBase.class, this.getBoundingBox().grow(16, 4.0D, 16), null)) {
+                    if (entity != null) {
+                        if (((OperatorBase) entity).getOwner() == this.getOwner() && !this.targets.contains(entity)) {
+                            this.targets.add(entity);
+                        }
+                    }
+                }
+            }
+            if (this.targets.size() > 0) {
+                for (LivingEntity entity : this.targets) {
+                    if (entity.getHealth() > hp) {
+                        hp = entity.getHealth();
+                        n = i;
+                    }
+                    i++;
+                }
+                this.setAttackTarget(this.targets.get(n));
+            } else {
+                //this.nearestTarget = null;
+            }
+        }
+        this.tick++;
+    }
+
     protected void registerGoals() {
         //this.goalSelector.addGoal(2, this.sitGoal);
         this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
@@ -56,7 +98,7 @@ public abstract class MedicSingle extends OperatorBase implements IRangedAttackM
         this.goalSelector.addGoal(3, new SwimGoal(this));
         this.goalSelector.addGoal(3, this.summonOperator);
         this.goalSelector.addGoal(1, new RangedAttackGoal(this, 1.25D, 20, 10.0F));
-        this.targetSelector.addGoal(1, new MedicSingleHealTarget(this, true));
+        //this.targetSelector.addGoal(1, new MedicSingleHealTarget(this, true));
     }
 
     @Override
