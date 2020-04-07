@@ -33,10 +33,12 @@ public class OperatorBase extends TameableEntity {
 
     public OperatorBase(EntityType<? extends TameableEntity> p_i48574_1_, World p_i48574_2_) {
         super(p_i48574_1_, p_i48574_2_);
+        this.setCustomName(this.getDisplayName());
     }
 
     public OperatorBase(EntityType<? extends TameableEntity> p_i48574_1_, World p_i48574_2_, Item item) {
         super(p_i48574_1_, p_i48574_2_);
+        this.setCustomName(this.getDisplayName());
         this.item = item;
     }
 
@@ -46,7 +48,6 @@ public class OperatorBase extends TameableEntity {
 
     protected void registerGoals() {
         //this.goalSelector.addGoal(2, this.sitGoal);
-        this.setCustomName(this.getDisplayName());
         this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 1.0F));

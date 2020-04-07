@@ -24,10 +24,10 @@ public class EnemyBase extends MonsterEntity {
 
     public EnemyBase(EntityType<? extends MonsterEntity> p_i48574_1_, World p_i48574_2_) {
         super(p_i48574_1_, p_i48574_2_);
+        this.setCustomName(this.getDisplayName());
     }
 
     public void registerGoals() {
-        this.setCustomName(this.getDisplayName());
         this.goalSelector.addGoal(1, new SwimGoal(this));
         this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
