@@ -52,7 +52,7 @@ public abstract class MedicSingle extends OperatorBase implements IRangedAttackM
     public void tick(){
         super.tick();
         if(this.tick % 20 == 1) {
-            float hp = 0;
+            float hp = 65536;
             int i = 0;
             int n = 0;
             if (!this.world.<LivingEntity>getEntitiesWithinAABB(PlayerEntity.class, this.getBoundingBox().grow(16, 4.0D, 16), null).isEmpty()) {
@@ -73,7 +73,7 @@ public abstract class MedicSingle extends OperatorBase implements IRangedAttackM
             }
             if (this.targets.size() > 0) {
                 for (LivingEntity entity : this.targets) {
-                    if (entity.getHealth() > hp) {
+                    if (entity.getHealth() < hp) {
                         hp = entity.getHealth();
                         n = i;
                     }
