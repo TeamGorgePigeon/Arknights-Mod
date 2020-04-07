@@ -46,6 +46,7 @@ public class OperatorBase extends TameableEntity {
 
     protected void registerGoals() {
         //this.goalSelector.addGoal(2, this.sitGoal);
+        this.setCustomName(this.getDisplayName());
         this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 1.0F));

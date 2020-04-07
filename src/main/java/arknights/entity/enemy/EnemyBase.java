@@ -27,6 +27,7 @@ public class EnemyBase extends MonsterEntity {
     }
 
     public void registerGoals() {
+        this.setCustomName(this.getDisplayName());
         this.goalSelector.addGoal(1, new SwimGoal(this));
         this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
