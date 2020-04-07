@@ -14,6 +14,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.function.Predicate;
@@ -22,7 +23,7 @@ public class MedicSingleHealTarget<T extends LivingEntity> extends TargetGoal {
     //protected final Class<T> targetClass;
     protected final int targetChance;
     protected LivingEntity nearestTarget;
-    private List<LivingEntity> targets;
+    private List<LivingEntity> targets = new ArrayList<>();
     /** This filter is applied to the Entity search. Only matching entities will be targeted. */
     protected EntityPredicate targetEntitySelector;
 
@@ -39,7 +40,7 @@ public class MedicSingleHealTarget<T extends LivingEntity> extends TargetGoal {
         //this.targetClass = p_i50315_2_;
         this.targetChance = p_i50315_3_;
         this.setMutexFlags(EnumSet.of(Goal.Flag.TARGET));
-        this.targetEntitySelector = (new EntityPredicate()).setDistance(this.getTargetDistance()).setCustomPredicate(p_i50315_6_);
+        this.targetEntitySelector = (new EntityPredicate()).setDistance(16).setCustomPredicate(p_i50315_6_);
     }
 
     /**
@@ -62,15 +63,23 @@ public class MedicSingleHealTarget<T extends LivingEntity> extends TargetGoal {
         float hp = 0;
         int i = 0;
         int n = 0;
-        for(T entity : this.goalOwner.world.<T>getEntitiesWithinAABB((EntityType<T>) EntityType.PLAYER, this.getTargetableArea(this.getTargetDistance()), (Predicate<T>)null)){
-            if(entity == ((MedicSingle)this.goalOwner).getOwner()){
-                this.targets.add(entity);
+        if(!this.goalOwner.world.<T>getEntitiesWithinAABB((Class<? extends T>) PlayerEntity.class, this.getTargetableArea(16), (Predicate<T>)null).isEmpty()){
+          for(T entity : this.goalOwner.world.<T>getEntitiesWithinAABB((Class<? extends T>) PlayerEntity.class, this.getTargetableArea(16), (Predicate<T>)null)) {
+             if (entity == ((MedicSingle) this.goalOwner).getOwner()) {
+                    this.targets.add(entity);
+              }
             }
         }
-        for(T entity : this.goalOwner.world.<T>getEntitiesWithinAABB((Class<? extends T>) OperatorBase.class, this.getTargetableArea(this.getTargetDistance()), (Predicate<T>)null)){
-            this.targets.add(entity);
+        if(!this.goalOwner.world.<T>getEntitiesWithinAABB((Class<? extends T>) OperatorBase.class, this.getTargetableArea(16), (Predicate<T>)null).isEmpty()) {
+            for (T entity : this.goalOwner.world.<T>getEntitiesWithinAABB((Class<? extends T>) OperatorBase.class, this.getTargetableArea(16), (Predicate<T>) null)) {
+                if (entity != null) {
+                    if (((OperatorBase) entity).getOwner() == ((MedicSingle) this.goalOwner).getOwner()) {
+                        this.targets.add(entity);
+                    }
+                }
+            }
         }
-        if(this.targets != null) {
+        if(this.targets.size() > 0) {
             for (LivingEntity entity : this.targets) {
                 if (entity.getHealth() > hp) {
                     hp = entity.getHealth();
@@ -78,7 +87,9 @@ public class MedicSingleHealTarget<T extends LivingEntity> extends TargetGoal {
                 }
                 i++;
             }
-            this.target = this.targets.get(n);
+            this.nearestTarget = this.targets.get(n);
+        } else {
+            this.nearestTarget = null;
         }
         /*
         if (this.targetClass != PlayerEntity.class && this.targetClass != ServerPlayerEntity.class) {

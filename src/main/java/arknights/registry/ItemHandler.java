@@ -43,6 +43,7 @@ public class ItemHandler {
     public static final Item CROWNSLAYER = new SpawnEggItem(EntityHandler.CROWNSLAYER, 0 , 12326679, new Item.Properties().group(ARKNIGHTS)).setRegistryName(EntityHandler.CROWNSLAYER.getRegistryName());
     public static final Item ORIGINIUMSLUG = new SpawnEggItem(EntityHandler.ORIGINIUMSLUG, 0 , 16776960, new Item.Properties().group(ARKNIGHTS)).setRegistryName(EntityHandler.ORIGINIUMSLUG.getRegistryName());
 
+    public static final Item ANSEL = new Ansel(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":ansel");
     public static final Item EXUSIAI = new Exusiai(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":exusiai");
     public static final Item AMIYA = new Amiya(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":amiya");
 
@@ -170,6 +171,7 @@ public class ItemHandler {
 
         //r.register(EXUSIAI);
         //r.register(AMIYA);
+        register3Operator(r, ANSEL);
         register5Operator(r, AMIYA);
         register6Operator(r, EXUSIAI);
 

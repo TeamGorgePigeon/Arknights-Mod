@@ -1,6 +1,8 @@
 package arknights.registry;
 
 import arknights.renderer.entity.*;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
@@ -24,7 +26,9 @@ public class RendererHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.PROJEKTRED, ProjektRedRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.SHAW, ShawRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.ROPE, RopeRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHandler.ANSEL, AnselRenderer::new);
 
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.HOOK, HookRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHandler.ANSELHEALPACK, renderManager -> new SpriteRenderer<>(renderManager, Minecraft.getInstance().getItemRenderer()));
     }
 }

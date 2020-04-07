@@ -1,5 +1,6 @@
 package arknights.registry;
 
+import arknights.entity.AnselHealPack;
 import arknights.entity.enemy.FaustEntity;
 import arknights.entity.disaster.*;
 import arknights.entity.enemy.*;
@@ -40,6 +41,9 @@ public class EntityHandler {
     public static final EntityType<RopeEntity> ROPE = (EntityType<RopeEntity>)EntityType.Builder.<RopeEntity>create(RopeEntity::new, EntityClassification.CREATURE).build("rope").setRegistryName(MODID + ":" + "rope");
     public static final EntityType<AnselEntity> ANSEL = (EntityType<AnselEntity>)EntityType.Builder.<AnselEntity>create(AnselEntity::new, EntityClassification.CREATURE).build("ansel").setRegistryName(MODID + ":" + "ansel");
 
+    public static final EntityType<AnselHealPack> ANSELHEALPACK = (EntityType<AnselHealPack>)EntityType.Builder.<AnselHealPack>create(AnselHealPack::new, EntityClassification.MISC).build("ansel_heal_pack").setRegistryName(MODID + ":" + "ansel_heal_pack");
+
+
     private static <T extends Entity> EntityType<T> registerEntity(String key, EntityType.Builder<T> builder) {
         return Registry.register(Registry.ENTITY_TYPE, key, builder.build(key));
     }
@@ -64,6 +68,8 @@ public class EntityHandler {
         r.register(PROJEKTRED);
         r.register(SHAW);
         r.register(ANSEL);
+
+        r.register(ANSELHEALPACK);
 
         r.register(CROWNSLAYER);
         r.register(FAUST);

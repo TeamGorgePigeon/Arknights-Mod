@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public abstract class MedicSingle extends TameableEntity implements IRangedAttackMob {
+public abstract class MedicSingle extends OperatorBase implements IRangedAttackMob {
     private MedicSingle.SummonOperatorGoal summonOperator;
     public Item item = Items.AIR;
     public static final DataParameter<Boolean> OPERATORATTACKING = EntityDataManager.createKey(ExusiaiEntity.class, DataSerializers.BOOLEAN);
@@ -55,6 +55,7 @@ public abstract class MedicSingle extends TameableEntity implements IRangedAttac
         this.summonOperator = new MedicSingle.SummonOperatorGoal(this);
         this.goalSelector.addGoal(3, new SwimGoal(this));
         this.goalSelector.addGoal(3, this.summonOperator);
+        this.goalSelector.addGoal(1, new RangedAttackGoal(this, 1.25D, 20, 10.0F));
         this.targetSelector.addGoal(1, new MedicSingleHealTarget(this, true));
     }
 
