@@ -15,6 +15,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -29,8 +30,8 @@ public class OperatorItem extends Item {
     public boolean isUsed;
     public int cd = 0;
     public int level = 1;
-    public int eliteLevel = 1;
-    public int trust  = 1;
+    public int eliteLevel = 0;
+    public int trust  = 0;
     public OperatorItem(Properties p_i48487_1_) {
         super(p_i48487_1_);
     }
@@ -67,7 +68,7 @@ public class OperatorItem extends Item {
         if(!worldIn.isRemote()){
             Vec3d pos = entityLiving.getPositionVec();
             this.newOperator(entityLiving.world);
-            this.operator.readAdditional(stack.getTag());
+            this.operator.writeAdditional(stack.getTag());
             this.operator.setOwnerId(entityLiving.getUniqueID());
             this.operator.setPosition(pos.x, pos.y, pos.z);
             this.operator.setPositionAndRotation(pos.x, pos.y, pos.z, entityLiving.rotationYaw, entityLiving.rotationPitch);
@@ -85,5 +86,11 @@ public class OperatorItem extends Item {
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
         super.addInformation(stack, world, tooltip, flags);
+        if (stack.getTag() != null) {
+            this.eliteLevel = stack.getTag().getInt("EliteLevel");
+            this.level = stack.getTag().getInt("Level");
+            this.trust = stack.getTag().getInt("Trust");
+        }
+        tooltip.add(new TranslationTextComponent("Elite:"+this.eliteLevel+" Level:"+this.level+" Trust:"+this.trust));
     }
 }

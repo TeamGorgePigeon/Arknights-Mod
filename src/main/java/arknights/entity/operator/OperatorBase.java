@@ -32,9 +32,9 @@ public class OperatorBase extends TameableEntity {
     protected int sp;
     protected int tick = 0;
     protected boolean isSkill = false;
-    private int eliteLevel=1;
+    private int eliteLevel=0;
     private int level=1;
-    private int trust=1;
+    private int trust=0;
 
     public OperatorBase(EntityType<? extends TameableEntity> p_i48574_1_, World p_i48574_2_) {
         super(p_i48574_1_, p_i48574_2_);
