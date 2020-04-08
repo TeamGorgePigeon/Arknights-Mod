@@ -14,11 +14,13 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -30,15 +32,16 @@ public class OperatorBase extends TameableEntity {
     protected int sp;
     protected int tick = 0;
     protected boolean isSkill = false;
+    private int eliteLevel=0;
+    private int level=0;
+    private int trust=0;
 
     public OperatorBase(EntityType<? extends TameableEntity> p_i48574_1_, World p_i48574_2_) {
         super(p_i48574_1_, p_i48574_2_);
-        this.setCustomName(this.getDisplayName());
     }
 
     public OperatorBase(EntityType<? extends TameableEntity> p_i48574_1_, World p_i48574_2_, Item item) {
         super(p_i48574_1_, p_i48574_2_);
-        this.setCustomName(this.getDisplayName());
         this.item = item;
     }
 
@@ -102,6 +105,29 @@ public class OperatorBase extends TameableEntity {
         public boolean shouldExecute() {
             return false;
         }
+    }
+
+    public void writeAdditional(CompoundNBT compound) {
+        super.writeAdditional(compound);
+        compound.putInt("EliteLevel", this.eliteLevel);
+        compound.putInt("Level", this.level);
+        compound.putInt("Trust", this.trust);
+    }
+
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
+
+     public void readAdditional(CompoundNBT compound) {
+        super.readAdditional(compound);
+        this.eliteLevel = compound.getInt("EliteLevel");
+        this.level = compound.getInt("Level");
+        this.trust = compound.getInt("Trust");
+        loadName();
+    }
+
+    public void loadName() {
+        this.setCustomName(new TranslationTextComponent("Elite."+this.eliteLevel+" Lv."+this.level+" "+this.getDisplayName().getString()));
     }
 
     protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
