@@ -63,11 +63,22 @@ public class OperatorItem extends Item {
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+        if(!stack.hasTag()){
+            CompoundNBT compoundNBT = new CompoundNBT();
+            compoundNBT.putInt("Level", this.level);
+            compoundNBT.putInt("EliteLevel", this.eliteLevel);
+            compoundNBT.putInt("Trust", this.trust);
+            stack.setTag(compoundNBT);
+        }
         //String playerName = entityLiving.getScoreboardName()
         if(!worldIn.isRemote()){
             Vec3d pos = entityLiving.getPositionVec();
             this.newOperator(entityLiving.world);
-            this.operator.readAdditional(stack.getTag());
+            //this.operator.readAdditional(stack.getTag());
+            this.operator.level = stack.getTag().getInt("Level");
+            this.operator.eliteLevel = stack.getTag().getInt("EliteLevel");
+            this.operator.trust = stack.getTag().getInt("Trust");
+
             this.operator.setOwnerId(entityLiving.getUniqueID());
             this.operator.setPosition(pos.x, pos.y, pos.z);
             this.operator.setPositionAndRotation(pos.x, pos.y, pos.z, entityLiving.rotationYaw, entityLiving.rotationPitch);
