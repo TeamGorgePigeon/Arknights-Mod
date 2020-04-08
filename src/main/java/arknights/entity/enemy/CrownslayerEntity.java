@@ -37,7 +37,7 @@ public class CrownslayerEntity extends MeleeEnemy {
     }
 
     public void onDeath(DamageSource source) {
-        DropItem(3,5);
+        dropItem(3,5);
     }
 
     public void livingTick() {

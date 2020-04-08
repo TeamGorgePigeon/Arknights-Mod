@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -27,6 +28,9 @@ public class OperatorItem extends Item {
     public int id;
     public boolean isUsed;
     public int cd = 0;
+    public int level = 1;
+    public int eliteLevel = 1;
+    public int trust  = 1;
     public OperatorItem(Properties p_i48487_1_) {
         super(p_i48487_1_);
     }
@@ -57,12 +61,13 @@ public class OperatorItem extends Item {
         if(this.cd>0)this.cd--;
     }
 
-        @Override
+    @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         //String playerName = entityLiving.getScoreboardName()
         if(!worldIn.isRemote()){
             Vec3d pos = entityLiving.getPositionVec();
             this.newOperator(entityLiving.world);
+            this.operator.readAdditional(stack.getTag());
             this.operator.setOwnerId(entityLiving.getUniqueID());
             this.operator.setPosition(pos.x, pos.y, pos.z);
             this.operator.setPositionAndRotation(pos.x, pos.y, pos.z, entityLiving.rotationYaw, entityLiving.rotationPitch);

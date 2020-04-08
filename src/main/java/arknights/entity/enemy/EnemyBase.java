@@ -70,7 +70,7 @@ public class EnemyBase extends MonsterEntity {
         }
     }
 
-    public void DropItem(int level,int maxDropItem) {
+    public void dropItem(int level, int maxDropItem) {
         int random;
         int randomDropItem = new Random().nextInt(maxDropItem);
         for (int i=1;i<=randomDropItem;i++) {

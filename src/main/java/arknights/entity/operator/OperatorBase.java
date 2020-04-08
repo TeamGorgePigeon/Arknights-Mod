@@ -32,9 +32,9 @@ public class OperatorBase extends TameableEntity {
     protected int sp;
     protected int tick = 0;
     protected boolean isSkill = false;
-    private int eliteLevel=0;
-    private int level=0;
-    private int trust=0;
+    private int eliteLevel=1;
+    private int level=1;
+    private int trust=1;
 
     public OperatorBase(EntityType<? extends TameableEntity> p_i48574_1_, World p_i48574_2_) {
         super(p_i48574_1_, p_i48574_2_);
@@ -89,7 +89,13 @@ public class OperatorBase extends TameableEntity {
 
     public void onDeath(DamageSource cause) {
         if(this.item instanceof OperatorItem && !world.isRemote()){
-            ItemEntity entity = new ItemEntity(world, this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), new ItemStack(this.item, 1));
+            ItemStack itemStack = new ItemStack(this.item, 1);
+            CompoundNBT compound = new CompoundNBT();
+            compound.putInt("EliteLevel", this.eliteLevel);
+            compound.putInt("Level", this.level);
+            compound.putInt("Trust", this.trust);
+            itemStack.setTag(compound);
+            ItemEntity entity = new ItemEntity(world, this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), itemStack);
             world.addEntity(entity);
         }
     }
