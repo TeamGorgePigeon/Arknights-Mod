@@ -68,7 +68,14 @@ public class OperatorItem extends Item {
         if(!worldIn.isRemote()){
             Vec3d pos = entityLiving.getPositionVec();
             this.newOperator(entityLiving.world);
-            this.operator.writeAdditional(stack.getTag());
+            if (stack.getTag() == null) {
+                CompoundNBT compound = new CompoundNBT();
+                compound.putInt("EliteLevel", this.eliteLevel);
+                compound.putInt("Level", this.level);
+                compound.putInt("Trust", this.trust);
+                stack.setTag(compound);
+            }
+            this.operator.readAdditional(stack.getTag());
             this.operator.setOwnerId(entityLiving.getUniqueID());
             this.operator.setPosition(pos.x, pos.y, pos.z);
             this.operator.setPositionAndRotation(pos.x, pos.y, pos.z, entityLiving.rotationYaw, entityLiving.rotationPitch);
