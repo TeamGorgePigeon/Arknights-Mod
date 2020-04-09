@@ -32,6 +32,8 @@ public class OperatorItem extends Item {
     public int level = 1;
     public int eliteLevel = 0;
     public int trust  = 0;
+    public int xp=0;
+
     public OperatorItem(Properties p_i48487_1_) {
         super(p_i48487_1_);
     }
@@ -73,6 +75,7 @@ public class OperatorItem extends Item {
                 compound.putInt("EliteLevel", this.eliteLevel);
                 compound.putInt("Level", this.level);
                 compound.putInt("Trust", this.trust);
+                compound.putInt("Xp", this.xp);
                 stack.setTag(compound);
             }
             this.operator.readAdditional(stack.getTag());
@@ -97,6 +100,7 @@ public class OperatorItem extends Item {
             this.eliteLevel = stack.getTag().getInt("EliteLevel");
             this.level = stack.getTag().getInt("Level");
             this.trust = stack.getTag().getInt("Trust");
+            this.xp = stack.getTag().getInt("Xp");
         }
         tooltip.add(new TranslationTextComponent("Elite:"+this.eliteLevel+" Level:"+this.level+" Trust:"+this.trust));
     }

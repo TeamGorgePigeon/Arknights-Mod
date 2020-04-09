@@ -35,6 +35,7 @@ public class OperatorBase extends TameableEntity {
     private int eliteLevel=0;
     private int level=1;
     private int trust=0;
+    private int xp=0;
 
     public OperatorBase(EntityType<? extends TameableEntity> p_i48574_1_, World p_i48574_2_) {
         super(p_i48574_1_, p_i48574_2_);
@@ -94,6 +95,7 @@ public class OperatorBase extends TameableEntity {
             compound.putInt("EliteLevel", this.eliteLevel);
             compound.putInt("Level", this.level);
             compound.putInt("Trust", this.trust);
+            compound.putInt("Xp", this.xp);
             itemStack.setTag(compound);
             ItemEntity entity = new ItemEntity(world, this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), itemStack);
             world.addEntity(entity);
@@ -118,6 +120,7 @@ public class OperatorBase extends TameableEntity {
         compound.putInt("EliteLevel", this.eliteLevel);
         compound.putInt("Level", this.level);
         compound.putInt("Trust", this.trust);
+        compound.putInt("Xp", this.xp);
     }
 
     /**
@@ -129,6 +132,7 @@ public class OperatorBase extends TameableEntity {
         this.eliteLevel = compound.getInt("EliteLevel");
         this.level = compound.getInt("Level");
         this.trust = compound.getInt("Trust");
+        this.xp = compound.getInt("Xp");
         loadName();
     }
 
