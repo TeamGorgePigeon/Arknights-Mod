@@ -1,8 +1,12 @@
 package arknights.recipe;
 
 import arknights.Arknights;
+import arknights.network.PacketHandler;
+import arknights.network.packets.UpdateDecrCount;
+import arknights.network.packets.UpdateWindowPacket;
 import arknights.registry.RecipeHandler;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.IRecipeHolder;
 import net.minecraft.inventory.Inventory;
@@ -11,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
+import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -24,6 +29,7 @@ public class WorkshopResultSlot extends Slot {
     private int amountCrafted;
     public WorkshopRecipe workshopRecipe;
     public NonNullList<ItemStack> itemStacks = NonNullList.create();
+    public int decrCount = 0;
 
     public WorkshopResultSlot(PlayerEntity player, IItemHandler craftingInventory, IInventory inventoryIn, int slotIndex, int xPosition, int yPosition) {
         super(inventoryIn, slotIndex, xPosition, yPosition);
@@ -77,30 +83,34 @@ public class WorkshopResultSlot extends Slot {
         for (int i = 0; i < nonnulllist.size(); ++i) {
             ItemStack itemstack = this.field_75239_a.getStackInSlot(i);
             ItemStack itemstack1 = nonnulllist.get(i);
-            int count = this.field_75239_a.getStackInSlot(i).getCount();
+            int count;// = this.field_75239_a.getStackInSlot(i).getCount();
+            int decrCount = 0;
             for(int j = 0; j < this.itemStacks.size(); ++j) {
                 if (!itemstack.isEmpty()) {
                     if (this.itemStacks.get(j) != null) {
                         if (this.field_75239_a.getStackInSlot(i).getItem() == this.itemStacks.get(j).getItem()) {
                             //this.field_75239_a.extractItem(i, this.itemStacks.get(j).getCount(), false);
-                            this.field_75239_a.getStackInSlot(i).shrink(this.itemStacks.get(j).getCount());
-                            count = this.field_75239_a.getStackInSlot(i).getCount();
-                            itemstack = this.field_75239_a.getStackInSlot(i);
+                            this.decrCount = this.itemStacks.get(j).getCount();
+                            PacketHandler.HANDLER.sendTo(new UpdateDecrCount(this.itemStacks.get(j).getCount()), ((ServerPlayerEntity)this.player).connection.netManager, NetworkDirection.PLAY_TO_CLIENT);
                         }
                     }
                     //System.out.print(this.itemStacks.get(j).getItem() + "\t" + this.field_75239_a.getStackInSlot(i).getItem() + "\n");
                 }
             }
-                if (!itemstack1.isEmpty()) {
-                    if (itemstack.isEmpty()) {
-                        this.field_75239_a.insertItem(i, itemstack1, false);
-                    } else if (ItemStack.areItemsEqual(itemstack, itemstack1) && ItemStack.areItemStackTagsEqual(itemstack, itemstack1)) {
-                        itemstack1.grow(itemstack.getCount());
-                        this.field_75239_a.insertItem(i, itemstack1, false);
-                    } else if (!this.player.inventory.addItemStackToInventory(itemstack1)) {
-                        this.player.dropItem(itemstack1, false);
-                    }
+            this.field_75239_a.getStackInSlot(i).shrink(this.decrCount);
+            System.out.print(decrCount);
+            count = this.field_75239_a.getStackInSlot(i).getCount();
+            itemstack = this.field_75239_a.getStackInSlot(i);
+            if (!itemstack1.isEmpty()) {
+                if (itemstack.isEmpty()) {
+                    this.field_75239_a.insertItem(i, itemstack1, false);
+                } else if (ItemStack.areItemsEqual(itemstack, itemstack1) && ItemStack.areItemStackTagsEqual(itemstack, itemstack1)) {
+                    itemstack1.grow(itemstack.getCount());
+                    this.field_75239_a.insertItem(i, itemstack1, false);
+                } else if (!this.player.inventory.addItemStackToInventory(itemstack1)) {
+                    this.player.dropItem(itemstack1, false);
                 }
+            }
             this.field_75239_a.getStackInSlot(i).setCount(count);
         }
         return stack;

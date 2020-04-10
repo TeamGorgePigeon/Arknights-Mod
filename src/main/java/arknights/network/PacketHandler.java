@@ -3,6 +3,7 @@ package arknights.network;
 import arknights.Arknights;
 import arknights.network.packets.DisasterPacket;
 import arknights.network.packets.LeftClickPacket;
+import arknights.network.packets.UpdateDecrCount;
 import arknights.network.packets.UpdateWindowPacket;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkRegistry;
@@ -24,6 +25,7 @@ public final class PacketHandler {
         HANDLER.registerMessage(id++, LeftClickPacket.class, LeftClickPacket::encode, LeftClickPacket::decode, LeftClickPacket.Handler::handle);
         HANDLER.registerMessage(id++, UpdateWindowPacket.class, UpdateWindowPacket::encode, UpdateWindowPacket::decode, UpdateWindowPacket.Handler::handle);
         HANDLER.registerMessage(id++, DisasterPacket.class, DisasterPacket::encode, DisasterPacket::decode, DisasterPacket.Handler::handle);
+        HANDLER.registerMessage(id++, UpdateDecrCount.class, UpdateDecrCount::encode, UpdateDecrCount::decode, UpdateDecrCount.Handler::handle);
         //HANDLER.registerMessage(id++, EntityStatuePacket.class, EntityStatuePacket::encode, EntityStatuePacket::decode, EntityStatuePacket.Handler::handle);
     }
 }

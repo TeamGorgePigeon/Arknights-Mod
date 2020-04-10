@@ -1,8 +1,10 @@
 package arknights.registry;
 
 import arknights.container.TradingHomeContainer;
+import arknights.container.UpgradeContainer;
 import arknights.container.WorkshopContainer;
 import arknights.gui.TradingHomeScreen;
+import arknights.gui.UpgradeScreen;
 import arknights.gui.WorkshopScreen;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.inventory.container.ContainerType;
@@ -18,6 +20,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class ContainerHandler {
     public static ContainerType<TradingHomeContainer> TRADINGHOMECONTAINER = IForgeContainerType.create(TradingHomeContainer::fromNetwork);
     public static ContainerType<WorkshopContainer> WORKSHOPCONTAINER = IForgeContainerType.create(WorkshopContainer::fromNetwork);
+    public static ContainerType<UpgradeContainer> UPGRADECONTAINER = IForgeContainerType.create(UpgradeContainer::fromNetwork);
+
 
     public static void register(RegistryEvent.Register<ContainerType<?>> evt){
         IForgeRegistry r = evt.getRegistry();
@@ -26,9 +30,11 @@ public class ContainerHandler {
             //ScreenManager.registerFactory(TRADINGHOMECONTAINER, TradingHomeScreen::new);
             ScreenManager.registerFactory(TRADINGHOMECONTAINER, TradingHomeScreen::new);
             ScreenManager.registerFactory(WORKSHOPCONTAINER, WorkshopScreen::new);
+            ScreenManager.registerFactory(UPGRADECONTAINER, UpgradeScreen::new);
         });
 
         r.register(WORKSHOPCONTAINER.setRegistryName(BlockHandler.WORKSHOP.getRegistryName()));
+        r.register(UPGRADECONTAINER.setRegistryName(BlockHandler.UPGRADE.getRegistryName()));
     }
 
 }

@@ -2,6 +2,7 @@ package arknights.registry;
 
 import arknights.block.OriginiumPrimeBlock;
 import arknights.block.TradingHome;
+import arknights.block.UpgradeBlock;
 import arknights.block.Workshop;
 import net.minecraft.block.Block;
 import net.minecraft.block.GlassBlock;
@@ -21,6 +22,7 @@ public class BlockHandler {
     public static final Block ORIGINITEPRIME_BLOCK = new OriginiumPrimeBlock(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.3F).sound(SoundType.GLASS).func_226896_b_()).setRegistryName(MODID+":"+"originite_prime_block");
     public static final Block WORKSHOP = new Workshop(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F,6.0F)).setRegistryName(MODID + ":workshop");
     public static final Block ORUNDUM = new GlassBlock(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.3F).sound(SoundType.GLASS).func_226896_b_()).setRegistryName(MODID + ":orundum");
+    public static final Block UPGRADE = new UpgradeBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F,6.0F)).setRegistryName(MODID + ":upgrade");
 
     @SubscribeEvent
     public static void register(RegistryEvent.Register<Block> evt){
@@ -31,6 +33,7 @@ public class BlockHandler {
         r.register(ORIGINITEPRIME_BLOCK);
         r.register(WORKSHOP);
         r.register(ORUNDUM);
+        r.register(UPGRADE);
     }
 
     private static Block createBlocks(String name, Material material, float hardness, float resistance){
