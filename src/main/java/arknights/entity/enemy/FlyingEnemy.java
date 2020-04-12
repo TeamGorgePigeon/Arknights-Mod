@@ -93,6 +93,7 @@ public class FlyingEnemy extends FlyingEntity implements IMob {
 
 
     public void registerGoals() {
+        this.goalSelector.addGoal(2, new FlyingEnemy.BulletAttackGoal());
         this.goalSelector.addGoal(3, new FlyingEnemy.OrbitPointGoal());
         this.targetSelector.addGoal(1, new AttackEntityGoal());
     }
@@ -359,4 +360,3 @@ public class FlyingEnemy extends FlyingEntity implements IMob {
         return flag;
     }
 }
-
