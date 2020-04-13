@@ -13,7 +13,7 @@ import net.minecraft.entity.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MonsterUAVModel extends EntityModel {
+public class MonsterUAVModel<T extends Entity> extends EntityModel<T> {
     private final ModelRenderer[] body = new ModelRenderer[6];
     private final ModelRenderer[] gun = new ModelRenderer[2];
     private final ModelRenderer leftwing;
@@ -26,8 +26,8 @@ public class MonsterUAVModel extends EntityModel {
     private final ModelRenderer[] wingfan2 = new ModelRenderer[2];
 
     public MonsterUAVModel() {
-        textureWidth = 16;
-        textureHeight = 16;
+        textureWidth = 64;
+        textureHeight = 64;
 
         //body = new ModelRenderer(this);
         for(ModelRenderer modelRenderer : this.body){

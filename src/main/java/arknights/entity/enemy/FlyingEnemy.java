@@ -360,3 +360,4 @@ public class FlyingEnemy extends FlyingEntity implements IMob {
         return flag;
     }
 }
+
