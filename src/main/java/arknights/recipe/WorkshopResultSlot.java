@@ -90,8 +90,8 @@ public class WorkshopResultSlot extends Slot {
                     if (this.itemStacks.get(j) != null) {
                         if (this.field_75239_a.getStackInSlot(i).getItem() == this.itemStacks.get(j).getItem()) {
                             //this.field_75239_a.extractItem(i, this.itemStacks.get(j).getCount(), false);
-                            this.decrCount = this.itemStacks.get(j).getCount();
                             PacketHandler.HANDLER.sendTo(new UpdateDecrCount(this.itemStacks.get(j).getCount()), ((ServerPlayerEntity)this.player).connection.netManager, NetworkDirection.PLAY_TO_CLIENT);
+                            this.decrCount = this.itemStacks.get(j).getCount();
                         }
                     }
                     //System.out.print(this.itemStacks.get(j).getItem() + "\t" + this.field_75239_a.getStackInSlot(i).getItem() + "\n");
