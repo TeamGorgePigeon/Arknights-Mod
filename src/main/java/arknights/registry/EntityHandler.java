@@ -74,7 +74,7 @@ public class EntityHandler {
 
         r.register(CROWNSLAYER);
         r.register(FAUST);
-        r.register(MONSTERUAV);
+        //r.register(MONSTERUAV);
 
 
         /*registerEntityWorldSpawn(ORIGINIUMSLUG, 1, Biomes.SNOWY_TAIGA, Biomes.ICE_SPIKES, Biomes.SNOWY_TUNDRA,

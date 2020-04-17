@@ -1,12 +1,14 @@
 package arknights.entity.operator;
 
 import arknights.entity.model.ProjektRedModel;
+import arknights.registry.EntityHandler;
 import arknights.registry.ItemHandler;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -34,6 +36,9 @@ public class ProjektRedEntity extends MeleeOperator {
         super.registerGoals();
     }
 
+    public ProjektRedEntity(World world, Item item){
+        super(EntityHandler.PROJEKTRED, world, item);
+    }
     /**
      * Returns the Y Offset of this entity.
      */

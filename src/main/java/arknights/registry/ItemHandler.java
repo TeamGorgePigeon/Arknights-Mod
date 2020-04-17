@@ -10,6 +10,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
+import sun.security.provider.SHA;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,6 +47,8 @@ public class ItemHandler {
     public static final Item ANSEL = new Ansel(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":ansel");
     public static final Item EXUSIAI = new Exusiai(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":exusiai");
     public static final Item AMIYA = new Amiya(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":amiya");
+    public static final Item SHAW = new Shaw(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":shaw");
+    public static final Item PROJEKTRED = new ProjektRed(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID + ":projektred");
 
     public static final Item ORIGINITEPRIME = new OriginitePrime(new Item.Properties().group(ARKNIGHTS)).setRegistryName(MODID+":originite_prime");
     public static final Item ORIGINIUMSHARD = createItem("originium_shard", 1001, LEGEND);
@@ -172,7 +175,9 @@ public class ItemHandler {
         //r.register(EXUSIAI);
         //r.register(AMIYA);
         register3Operator(r, ANSEL);
+        register4Operator(r, SHAW);
         register5Operator(r, AMIYA);
+        register5Operator(r,PROJEKTRED);
         register6Operator(r, EXUSIAI);
 
         r.register(CROWNSLAYER);

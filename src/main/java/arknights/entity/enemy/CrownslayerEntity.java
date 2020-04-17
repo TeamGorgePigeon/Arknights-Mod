@@ -2,15 +2,17 @@ package arknights.entity.enemy;
 
 import arknights.entity.model.CrownslayerModel;
 import arknights.registry.ItemHandler;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class CrownslayerEntity extends MeleeEnemy {
     public CrownslayerModel model;
@@ -50,5 +52,11 @@ public class CrownslayerEntity extends MeleeEnemy {
         super.setAttackTarget(entitylivingbaseIn); //Forge: Moved down to allow event handlers to write data manager values.
     }
 
+    public static boolean spawnCondition (EntityType<? extends CrownslayerEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        //IWorldLightListener skyLight = world.func_225524_e_().getLightEngine(LightType.SKY);
+        int light = world.func_225524_e_().getLightEngine(LightType.SKY).getLightFor(pos);
+        return light > 1;
+        //return true;
+    }
 }
 
