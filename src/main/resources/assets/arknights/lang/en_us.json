@@ -66,5 +66,10 @@
   "entity.arknights.exusiai":"Exusiai",
   "entity.arknights.amiya":"Amiya",
   "entity.arknights.originium_slug":"Originium Slug",
-  "entity.arknights.crownslayer":"Crownslayer"
+  "entity.arknights.crownslayer":"Crownslayer",
+
+  "death.attack.bullet": "%1$s was shot by %2$s",
+  "info.skill": "Right click to use the skill.",
+  "info.elitelevel": "Elite.",
+  "info.level": "Lv."
 }

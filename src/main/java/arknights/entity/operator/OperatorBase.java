@@ -137,7 +137,14 @@ public class OperatorBase extends TameableEntity {
     }
 
     public void loadName() {
-        this.setCustomName(new TranslationTextComponent("Elite."+this.eliteLevel+" Lv."+this.level+" "+this.getDisplayName().getString()));
+        this.setCustomName(null);
+        String level=new TranslationTextComponent("info.level").getString();
+        String eliteLevel=new TranslationTextComponent("info.elitelevel").getString();
+        if (this.eliteLevel==0) {
+            this.setCustomName(new TranslationTextComponent(level + this.level + " " + this.getDisplayName().getString()));
+        } else {
+            this.setCustomName(new TranslationTextComponent(eliteLevel + this.eliteLevel + " " + level + this.level + " " + this.getDisplayName().getString()));
+        }
     }
 
     protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {

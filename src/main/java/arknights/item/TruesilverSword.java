@@ -92,7 +92,9 @@ public class TruesilverSword extends SwordItem {
                 //System.out.print(MyMathHelper.in360(entityAngle) + " " + MyMathHelper.in360(playerEntity.rotationYaw) + " " + Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(playerEntity.rotationYaw)) + "\n");
                 //if(entity.getDistance(playerEntity) <= 3 && Math.abs(entityAngle - (playerEntity.rotationYaw % 360 > 180 ? playerEntity.rotationYaw % 360 - 360 : playerEntity.rotationYaw % 360)) <= 90){
                 if ((Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(playerEntity.rotationYaw)) <= 90 || Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(playerEntity.rotationYaw)) >= 270) && entity.getDistance(playerEntity) <= 3) {//Use MyMathHelper in utils to calculate the angle, and make sure only attack entities in front of you. Distance means the range, you can change it.
-                    entity.attackEntityFrom(DamageSource.causeMobDamage(playerEntity), 10);
+                    if (entity instanceof LivingEntity) {
+                        entity.attackEntityFrom(DamageSource.causeMobDamage(playerEntity), 10);
+                    }
                 }
             }
         /*
@@ -153,7 +155,7 @@ public class TruesilverSword extends SwordItem {
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flags) {
         super.addInformation(stack, world, tooltip, flags);
-        tooltip.add(new TranslationTextComponent("右键发动技能"));
+        tooltip.add(new TranslationTextComponent("info.skill"));
     }
 }
 
