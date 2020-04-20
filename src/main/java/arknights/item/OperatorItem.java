@@ -102,6 +102,13 @@ public class OperatorItem extends Item {
             this.trust = stack.getTag().getInt("Trust");
             this.xp = stack.getTag().getInt("Xp");
         }
-        tooltip.add(new TranslationTextComponent("Elite:"+this.eliteLevel+" Level:"+this.level+" Trust:"+this.trust));
+        String level=new TranslationTextComponent("info.level").getString();
+        String eliteLevel=new TranslationTextComponent("info.elitelevel").getString();
+        String trust=new TranslationTextComponent("info.trust").getString();
+        if (this.eliteLevel==0) {
+            tooltip.add(new TranslationTextComponent(level + this.level + " " + trust + ":" + this.trust + "%"));
+        } else {
+            tooltip.add(new TranslationTextComponent(eliteLevel + this.eliteLevel + " " + level + this.level + " " + trust + ":" + this.trust + "%"));
+        }
     }
 }

@@ -1,8 +1,14 @@
 {
   "itemGroup.arknights": "明日方舟",
 
-  "item.arknights.exusiai": "招聘合同『能天使』",
   "item.arknights.amiya": "招聘合同『阿米娅』",
+  "item.arknights.ansel":"招聘合同『安塞尔』",
+  "item.arknights.exusiai": "招聘合同『能天使』",
+  "item.arknights.projektred":"招聘合同『红』",
+  "item.arknights.shaw":"招聘合同『阿消』",
+
+  "item.arknights.crownslayer":"弑君者刷怪蛋",
+  "item.arknights.originium_slug":"源石虫刷怪蛋",
 
   "item.arknights.originium_shard": "源石碎片",
   "item.arknights.originite_prime": "至纯源石",
@@ -11,6 +17,10 @@
   
   "item.arknights.jb":"『能天使』Vector",
   "item.arknights.truesilver_sword":"『银灰』真银剑",
+  "item.arknights.crownslayer_knife":"『弑君者』匕首",
+  "item.arknights.projektred_knife":"『红』匕首",
+  "item.arknights.shaw_pump":"『阿消』蒸汽水泵",
+  "item.arknights.shaw_axe":"『阿消』消防斧",
 
   "item.arknights.orirock": "源岩",
   "block.arknights.orirock_cube": "固源岩",
@@ -61,15 +71,21 @@
   "block.arknights.originite_prime_block": "至纯源石(装饰)",
   
   "block.arknights.trading_home":"制造站",
-  "block.arknights.workshop": "加工站",
+  "block.arknights.workshop":"加工站",
 
-  "entity.arknights.exusiai":"能天使",
   "entity.arknights.amiya":"阿米娅",
-  "entity.arknights.originium_slug":"源石虫",
-  "entity.arknights.crownslayer":"弑君者",
+  "entity.arknights.ansel":"安塞尔",
+  "entity.arknights.exusiai":"能天使",
+  "entity.arknights.projektred":"红",
+  "entity.arknights.shaw":"阿消",
 
-  "death.attack.bullet": "%1$s 被 %2$s 击中",
-  "info.skill": "右键使用技能",
-  "info.elitelevel": "精英",
-  "info.level": "等级"
+  "entity.arknights.crownslayer":"弑君者",
+  "entity.arknights.originium_slug":"源石虫",
+
+  "death.attack.bullet":"%1$s 被 %2$s 击中",
+  "info.skill":"右键使用技能",
+  "info.elitelevel":"精英",
+  "info.level":"等级",
+  "info.trust":"信赖",
+  "info.of":"的"
 }

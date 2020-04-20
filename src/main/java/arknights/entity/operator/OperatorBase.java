@@ -1,8 +1,11 @@
 package arknights.entity.operator;
 
+import arknights.container.UpgradeContainer;
 import arknights.entity.enemy.EnemyBase;
 import arknights.item.OperatorItem;
 import arknights.registry.SoundHandler;
+import arknights.tileentity.TradingHomeEntity;
+import arknights.tileentity.UpgradeEntity;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.boss.WitherEntity;
@@ -11,6 +14,8 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -18,12 +23,17 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.NetworkHooks;
+import org.lwjgl.system.CallbackI;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 public class OperatorBase extends TameableEntity {
     private SummonOperatorGoal summonOperator;
@@ -36,6 +46,8 @@ public class OperatorBase extends TameableEntity {
     private int level=1;
     private int trust=0;
     private int xp=0;
+    public boolean onSpawn=true;
+    private UpgradeEntity upgradeEntity;
 
     public OperatorBase(EntityType<? extends TameableEntity> p_i48574_1_, World p_i48574_2_) {
         super(p_i48574_1_, p_i48574_2_);
@@ -75,6 +87,14 @@ public class OperatorBase extends TameableEntity {
         this.dataManager.register(OPERATORATTACKING, false);
     }
 
+    public void livingTick() {
+        if (onSpawn) {
+            loadName();
+            onSpawn=false;
+        }
+        super.livingTick();
+    }
+
     @Nullable
     @Override
     public AgeableEntity createChild(AgeableEntity ageableEntity) {
@@ -97,7 +117,7 @@ public class OperatorBase extends TameableEntity {
             compound.putInt("Trust", this.trust);
             compound.putInt("Xp", this.xp);
             itemStack.setTag(compound);
-            ItemEntity entity = new ItemEntity(world, this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), itemStack);
+            ItemEntity entity = new ItemEntity(world, this.getOwner().getPosition().getX(), this.getOwner().getPosition().getY(), this.getOwner().getPosition().getZ(), itemStack);
             world.addEntity(entity);
         }
     }
@@ -133,17 +153,25 @@ public class OperatorBase extends TameableEntity {
         this.level = compound.getInt("Level");
         this.trust = compound.getInt("Trust");
         this.xp = compound.getInt("Xp");
-        loadName();
+    }
+
+    public boolean processInteract(PlayerEntity player, Hand hand) {
+        if (!world.isRemote) {
+            player.openContainer((INamedContainerProvider) new UpgradeContainer(1,player.inventory, upgradeEntity));
+        }
+         return true;
     }
 
     public void loadName() {
-        this.setCustomName(null);
-        String level=new TranslationTextComponent("info.level").getString();
-        String eliteLevel=new TranslationTextComponent("info.elitelevel").getString();
-        if (this.eliteLevel==0) {
-            this.setCustomName(new TranslationTextComponent(level + this.level + " " + this.getDisplayName().getString()));
-        } else {
-            this.setCustomName(new TranslationTextComponent(eliteLevel + this.eliteLevel + " " + level + this.level + " " + this.getDisplayName().getString()));
+        if (!world.isRemote) {
+            this.setCustomName(null);
+            if (this.getOwner() != null) {
+                String displayOwner = this.getOwner().getDisplayName().getString();
+                String of = new TranslationTextComponent("info.of").getString();
+                this.setCustomName(new TranslationTextComponent(displayOwner + " " + of + " " + this.getDisplayName().getString()));
+            } else {
+                this.setCustomName(new TranslationTextComponent(this.getDisplayName().getString()));
+            }
         }
     }
 

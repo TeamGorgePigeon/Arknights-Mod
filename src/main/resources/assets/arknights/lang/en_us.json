@@ -1,8 +1,14 @@
 {
   "itemGroup.arknights": "Arknights",
 
-  "item.arknights.exusiai": "Operator Exusiai's Contract",
   "item.arknights.amiya": "Operator Amiya's Contract",
+  "item.arknights.ansel":"Operator Ansel's Contract",
+  "item.arknights.exusiai": "Operator Exusiai's Contract",
+  "item.arknights.projektred":"Operator Projektred's Contract",
+  "item.arknights.shaw":"Operator Shaw's Contract",
+
+  "item.arknights.crownslayer":"Crownslayer Spawn Egg",
+  "item.arknights.originium_slug":"Originium Slug Spawn Egg",
 
   "item.arknights.originium_shard": "Originium Shard",
   "item.arknights.originite_prime": "Originite Prime",
@@ -11,6 +17,10 @@
   
   "item.arknights.jb":"Exusiai's Vector",
   "item.arknights.truesilver_sword":"Silverash's Truesilver Sword",
+  "item.arknights.crownslayer_knife":"Crownslayer's Knife",
+  "item.arknights.projektred_knife":"Projektred's Knife",
+  "item.arknights.shaw_pump":"Shaw's Pump",
+  "item.arknights.shaw_axe":"Shaw's Axe",
 
   "item.arknights.orirock": "Orirock",
   "block.arknights.orirock_cube": "Orirock Cube",
@@ -63,13 +73,19 @@
   "block.arknights.trading_home":"Factory",
   "block.arknights.workshop": "Workshop",
 
-  "entity.arknights.exusiai":"Exusiai",
   "entity.arknights.amiya":"Amiya",
-  "entity.arknights.originium_slug":"Originium Slug",
+  "entity.arknights.ansel":"Anse",
+  "entity.arknights.exusiai":"Exusiai",
+  "entity.arknights.projektred":"Projektred",
+  "entity.arknights.shaw":"Shaw",
+
   "entity.arknights.crownslayer":"Crownslayer",
+  "entity.arknights.originium_slug":"Originium Slug",
 
   "death.attack.bullet": "%1$s was shot by %2$s",
   "info.skill": "Right click to use the skill.",
   "info.elitelevel": "Elite.",
-  "info.level": "Lv."
+  "info.level": "Lv.",
+  "info.trust": "Trust",
+  "info.of": "'s"
 }
