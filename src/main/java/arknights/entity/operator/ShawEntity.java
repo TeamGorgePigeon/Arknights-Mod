@@ -1,11 +1,9 @@
 package arknights.entity.operator;
 
 import arknights.Skill;
-import arknights.entity.model.CrownslayerModel;
 import arknights.entity.model.ShawModel;
 import arknights.registry.EntityHandler;
 import arknights.registry.ItemHandler;
-import arknights.registry.SoundHandler;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -23,7 +21,6 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Random;
 
 public class ShawEntity extends MeleeOperator {
     public ShawModel model;

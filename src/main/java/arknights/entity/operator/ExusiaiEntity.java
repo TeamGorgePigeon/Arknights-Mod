@@ -46,7 +46,7 @@ public class ExusiaiEntity extends RangeOperator{
     }
 
     public void attackEntityWithRangedAttack(LivingEntity target, float var2){
-        if(target != this.getOwner()) {
+        if(!(target instanceof OperatorBase) && target != this.getOwner()) {
             double deltaX = target.func_226277_ct_() - this.func_226277_ct_();
             double deltaY;
             double deltaZ = target.func_226281_cx_() - this.func_226281_cx_();

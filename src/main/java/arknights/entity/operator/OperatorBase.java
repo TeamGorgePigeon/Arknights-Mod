@@ -1,11 +1,13 @@
 package arknights.entity.operator;
 
 import arknights.container.UpgradeContainer;
+import arknights.container.WorkshopContainer;
 import arknights.entity.enemy.EnemyBase;
 import arknights.item.OperatorItem;
 import arknights.registry.SoundHandler;
 import arknights.tileentity.TradingHomeEntity;
 import arknights.tileentity.UpgradeEntity;
+import arknights.tileentity.WorkshopEntity;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.boss.WitherEntity;
@@ -16,6 +18,7 @@ import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.inventory.container.SimpleNamedContainerProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -27,6 +30,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -157,7 +161,11 @@ public class OperatorBase extends TameableEntity {
 
     public boolean processInteract(PlayerEntity player, Hand hand) {
         if (!world.isRemote) {
-            player.openContainer((INamedContainerProvider) new UpgradeContainer(1,player.inventory, upgradeEntity));
+            BlockPos pos=player.getPosition();
+            player.openContainer(new SimpleNamedContainerProvider((p_213701_1_, p_213701_2_, p_213701_3_) -> {
+                return new UpgradeContainer(p_213701_1_, p_213701_2_);
+            }, new TranslationTextComponent(this.getDisplayName().getString())));
+            //NetworkHooks.openGui((ServerPlayerEntity) player, , pos);
         }
          return true;
     }
@@ -168,7 +176,7 @@ public class OperatorBase extends TameableEntity {
             if (this.getOwner() != null) {
                 String displayOwner = this.getOwner().getDisplayName().getString();
                 String of = new TranslationTextComponent("info.of").getString();
-                this.setCustomName(new TranslationTextComponent(displayOwner + " " + of + " " + this.getDisplayName().getString()));
+                this.setCustomName(new TranslationTextComponent(displayOwner  + of + " " + this.getDisplayName().getString()));
             } else {
                 this.setCustomName(new TranslationTextComponent(this.getDisplayName().getString()));
             }

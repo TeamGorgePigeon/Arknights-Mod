@@ -90,6 +90,7 @@ public class WorkshopResultSlot extends Slot {
                     if (this.itemStacks.get(j) != null) {
                         if (this.field_75239_a.getStackInSlot(i).getItem() == this.itemStacks.get(j).getItem()) {
                             //this.field_75239_a.extractItem(i, this.itemStacks.get(j).getCount(), false);
+
                             PacketHandler.HANDLER.sendTo(new UpdateDecrCount(this.itemStacks.get(j).getCount()), ((ServerPlayerEntity)this.player).connection.netManager, NetworkDirection.PLAY_TO_CLIENT);
                             this.decrCount = this.itemStacks.get(j).getCount();
                         }

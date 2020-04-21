@@ -3,7 +3,6 @@ package arknights.entity.operator;
 import arknights.entity.model.ProjektRedModel;
 import arknights.registry.EntityHandler;
 import arknights.registry.ItemHandler;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -18,7 +17,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.security.acl.Owner;
 import java.util.List;
 
 public class ProjektRedEntity extends MeleeOperator {
@@ -54,7 +52,7 @@ public class ProjektRedEntity extends MeleeOperator {
             List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(vec3d.x - 8, vec3d.y - 2, vec3d.z - 8, vec3d.x + 8, vec3d.y + 2, vec3d.z + 8));
             for (int k2 = 0; k2 < list.size(); ++k2) {
                 Entity entity = list.get(k2);
-                if (entity instanceof LivingEntity && entity != this.getOwner()) {
+                if (entity instanceof LivingEntity && entity != this.getOwner() && !(entity instanceof OperatorBase)) {
                     ((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.SLOWNESS, 60, 255));
                     entity.attackEntityFrom(DamageSource.causeMobDamage(this), 10);
                 }
@@ -62,11 +60,6 @@ public class ProjektRedEntity extends MeleeOperator {
             onSpawn=false;
         }
         super.livingTick();
-    }
-
-    public boolean attackEntityAsMob(Entity entityIn) {
-        boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 5);
-        return flag;
     }
 
     @Override

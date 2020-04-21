@@ -35,7 +35,7 @@ public class UpgradeEntity extends TileEntity implements INamedContainerProvider
     @Nullable
     @Override
     public Container createMenu(int i, PlayerInventory playerInventory, PlayerEntity playerEntity) {
-        return new UpgradeContainer(i, playerInventory, this);
+        return new UpgradeContainer(i, playerInventory);
     }
 
     @Override
