@@ -77,7 +77,7 @@ public class TruesilverSword extends SwordItem {
     public ItemStack onSwordSwing(World p_213357_1_, ItemStack p_213357_2_, PlayerEntity playerEntity) {
         if (this.isSkill) {
             Vec3d vec3d = playerEntity.getPositionVec();
-            List<Entity> list = p_213357_1_.getEntitiesWithinAABBExcludingEntity(playerEntity, new AxisAlignedBB(vec3d.x - 7, vec3d.y - 0.5, vec3d.z - 7, vec3d.x + 7, vec3d.y + 0.5, vec3d.z + 7));
+            List<Entity> list = p_213357_1_.getEntitiesWithinAABBExcludingEntity(playerEntity, new AxisAlignedBB(vec3d.x - 10D, vec3d.y - 0.75D, vec3d.z - 10D, vec3d.x + 10D, vec3d.y + 0.75D, vec3d.z + 10D));
             //Mian2 Chao3
             //double angle = playerEntity.rotationYaw;
             //System.out.print(angle + "\t");
@@ -93,9 +93,9 @@ public class TruesilverSword extends SwordItem {
                 //System.out.print(entityAngle + " " + (playerEntity.rotationYaw % 360 > 180 ? playerEntity.rotationYaw % 360 - 360 : playerEntity.rotationYaw % 360) + " " + Math.abs(entityAngle - (playerEntity.rotationYaw % 360 > 180 ? playerEntity.rotationYaw % 360 - 360 : playerEntity.rotationYaw % 360)) + "\n");
                 //System.out.print(MyMathHelper.in360(entityAngle) + " " + MyMathHelper.in360(playerEntity.rotationYaw) + " " + Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(playerEntity.rotationYaw)) + "\n");
                 //if(entity.getDistance(playerEntity) <= 3 && Math.abs(entityAngle - (playerEntity.rotationYaw % 360 > 180 ? playerEntity.rotationYaw % 360 - 360 : playerEntity.rotationYaw % 360)) <= 90){
-                if ((Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(playerEntity.rotationYaw)) <= 90 || Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(playerEntity.rotationYaw)) >= 270) && entity.getDistance(playerEntity) <= 3) {//Use MyMathHelper in utils to calculate the angle, and make sure only attack entities in front of you. Distance means the range, you can change it.
+                if ((Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(playerEntity.rotationYaw)) <= 90 || Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(playerEntity.rotationYaw)) >= 270) && entity.getDistance(playerEntity) <= 8) {//Use MyMathHelper in utils to calculate the angle, and make sure only attack entities in front of you. Distance means the range, you can change it.
                     if (entity instanceof LivingEntity) {
-                        entity.attackEntityFrom(DamageSource.causeMobDamage(playerEntity), 10);
+                        entity.attackEntityFrom(DamageSource.causeMobDamage(playerEntity), 8);
                     }
                 }
             }
@@ -108,12 +108,12 @@ public class TruesilverSword extends SwordItem {
         }
 
          */
-        float R=5;
+        float R=2;
         double faceAngle=MyMathHelper.in360(playerEntity.rotationYaw)*Math.PI/180;
             for (double angle=faceAngle; angle<=faceAngle+Math.PI; angle=angle+Math.PI/180) {
-                double plusx=Math.cos(angle)*R;
-                double plusz=Math.sin(angle)*R;
-                p_213357_1_.addParticle(ParticleTypes.CLOUD ,vec3d.x+plusx, vec3d.y+1, vec3d.z+plusz,0.0D , 0.0D, 0.0D);
+                double cos=Math.cos(angle);
+                double sin=Math.sin(angle);
+                p_213357_1_.addParticle(ParticleTypes.CLOUD ,vec3d.x+cos*R, vec3d.y+1, vec3d.z + sin*R,0.5*cos , 0.0D, 0.5*sin);
             }
             /*
             double rx1=-R*Math.cos(faceAngle)*Math.cos(faceAngle)/Math.tan(0.5*Math.PI-faceAngle);
@@ -132,8 +132,8 @@ public class TruesilverSword extends SwordItem {
 
                     }
                 }
-            }*/
-            System.out.print(MyMathHelper.in360(playerEntity.rotationYaw)+" ");
+            }
+            System.out.print(MyMathHelper.in360(playerEntity.rotationYaw)+" ");*/
             p_213357_1_.playSound(null, playerEntity.func_226277_ct_(), playerEntity.func_226278_cu_(), playerEntity.func_226281_cx_(), SoundHandler.TRUESILVER_SLASH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
         }
         return p_213357_2_;
