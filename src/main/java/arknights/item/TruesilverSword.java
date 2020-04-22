@@ -3,11 +3,13 @@ package arknights.item;
 import arknights.registry.SoundHandler;
 import arknights.utils.MyMathHelper;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -75,7 +77,7 @@ public class TruesilverSword extends SwordItem {
     public ItemStack onSwordSwing(World p_213357_1_, ItemStack p_213357_2_, PlayerEntity playerEntity) {
         if (this.isSkill) {
             Vec3d vec3d = playerEntity.getPositionVec();
-            List<Entity> list = p_213357_1_.getEntitiesWithinAABBExcludingEntity(playerEntity, new AxisAlignedBB(vec3d.x - 5, vec3d.y - 0.5, vec3d.z - 5, vec3d.x + 5, vec3d.y + 0.5, vec3d.z + 5));
+            List<Entity> list = p_213357_1_.getEntitiesWithinAABBExcludingEntity(playerEntity, new AxisAlignedBB(vec3d.x - 7, vec3d.y - 0.5, vec3d.z - 7, vec3d.x + 7, vec3d.y + 0.5, vec3d.z + 7));
             //Mian2 Chao3
             //double angle = playerEntity.rotationYaw;
             //System.out.print(angle + "\t");
@@ -106,6 +108,32 @@ public class TruesilverSword extends SwordItem {
         }
 
          */
+        float R=5;
+        double faceAngle=MyMathHelper.in360(playerEntity.rotationYaw)*Math.PI/180;
+            for (double angle=faceAngle; angle<=faceAngle+Math.PI; angle=angle+Math.PI/180) {
+                double plusx=Math.cos(angle)*R;
+                double plusz=Math.sin(angle)*R;
+                p_213357_1_.addParticle(ParticleTypes.CLOUD ,vec3d.x+plusx, vec3d.y+1, vec3d.z+plusz,0.0D , 0.0D, 0.0D);
+            }
+            /*
+            double rx1=-R*Math.cos(faceAngle)*Math.cos(faceAngle)/Math.tan(0.5*Math.PI-faceAngle);
+            double rx2=R*Math.cos(faceAngle)*Math.cos(faceAngle)/Math.tan(0.5*Math.PI-faceAngle);
+            double ry1=-R*Math.cos(faceAngle)*Math.sin(faceAngle)/Math.tan(0.5*Math.PI-faceAngle);
+            double ry2=R*Math.cos(faceAngle)*Math.sin(faceAngle)/Math.tan(0.5*Math.PI-faceAngle);
+            for (float x=-R;x<=R;x= (float) (x+0.2)) {
+                for (float z=-R;z<=R;z= (float) (z+0.2)) {
+                    if (rx1 < rx2) {
+                        if (ry1 < ry2) {
+
+                        } else {
+
+                        }
+                    } else {
+
+                    }
+                }
+            }*/
+            System.out.print(MyMathHelper.in360(playerEntity.rotationYaw)+" ");
             p_213357_1_.playSound(null, playerEntity.func_226277_ct_(), playerEntity.func_226278_cu_(), playerEntity.func_226281_cx_(), SoundHandler.TRUESILVER_SLASH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
         }
         return p_213357_2_;
