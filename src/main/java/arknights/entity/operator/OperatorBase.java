@@ -159,6 +159,7 @@ public class OperatorBase extends TameableEntity {
         this.xp = compound.getInt("Xp");
     }
 
+    /*
     public boolean processInteract(PlayerEntity player, Hand hand) {
         if (!world.isRemote) {
             BlockPos pos=player.getPosition();
@@ -168,7 +169,7 @@ public class OperatorBase extends TameableEntity {
             //NetworkHooks.openGui((ServerPlayerEntity) player, , pos);
         }
          return true;
-    }
+    }*/
 
     public void loadName() {
         if (!world.isRemote) {
