@@ -9,9 +9,11 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.extensions.IForgeItem;
 
@@ -67,7 +69,7 @@ public class Apulupai extends GunItem implements IForgeItem{
             stack.damageItem( stack.getMaxDamage()-10, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity)entity).getActiveHand()));
             stack.damageItem( -stack.getMaxDamage()+20, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity)entity).getActiveHand()));
             }
-
+            /*
             switch (new Random().nextInt(4)){
                 case 0:
                     world.playSound(null, entity.func_226277_ct_(), entity.func_226278_cu_(), entity.func_226281_cx_(), SoundHandler.EXUSIAI_SKILL1, SoundCategory.NEUTRAL, 1.0F, 1.0F);
@@ -90,6 +92,7 @@ public class Apulupai extends GunItem implements IForgeItem{
                     //System.out.print(4);
                     break;
             }
+             */
         }
 
         if(this.tick>=SkillCD/2 && this.isSkill){
@@ -110,6 +113,8 @@ public class Apulupai extends GunItem implements IForgeItem{
             arrowEntity.setNoGravity(true);
             arrowEntity.shoot(entity, entity.rotationPitch, entity.rotationYaw, 0.0F, 1.6F, 1.0F);
             world.addEntity(arrowEntity);
+            Vec3d vec3d= entity.getPositionVec();
+            world.addParticle(ParticleTypes.SMOKE,vec3d.x,vec3d.y+1,vec3d.z,0.25,0.25,0.25);
             if(!this.isSkill){
                 if (!((PlayerEntity) entity).isCreative()) {
                     stack.damageItem(-stack.getMaxDamage() - 1, (PlayerEntity) entity, (user) -> user.sendBreakAnimation(((PlayerEntity) entity).getActiveHand()));
@@ -123,10 +128,12 @@ public class Apulupai extends GunItem implements IForgeItem{
                     arrowEntity2.setNoGravity(true);
                     arrowEntity2.shoot(entity, entity.rotationPitch, entity.rotationYaw, 0.0F, 2.0F, 1.0F);
                     world.addEntity(arrowEntity2);
+                    world.addParticle(ParticleTypes.SMOKE,vec3d.x,vec3d.y+1,vec3d.z,0.25,0.25,0.25);
                 }
                 world.playSound(null, entity.func_226277_ct_(), entity.func_226278_cu_(), entity.func_226281_cx_(), SoundHandler.EXUSIAI_SKILLATTACK, SoundCategory.NEUTRAL, 1.0F, 1.0F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.4F);
                 this.tick2 += 4;
             }
+
         }
         if(this.pressed){
             this.tick2++;

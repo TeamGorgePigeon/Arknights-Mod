@@ -77,7 +77,7 @@ public class TruesilverSword extends SwordItem {
     public ItemStack onSwordSwing(World p_213357_1_, ItemStack p_213357_2_, PlayerEntity playerEntity) {
         if (this.isSkill) {
             Vec3d vec3d = playerEntity.getPositionVec();
-            List<Entity> list = p_213357_1_.getEntitiesWithinAABBExcludingEntity(playerEntity, new AxisAlignedBB(vec3d.x - 10D, vec3d.y - 0.75D, vec3d.z - 10D, vec3d.x + 10D, vec3d.y + 0.75D, vec3d.z + 10D));
+            List<Entity> list = p_213357_1_.getEntitiesWithinAABBExcludingEntity(playerEntity, new AxisAlignedBB(vec3d.x - 10D, vec3d.y - 0.75D, vec3d.z - 10D, vec3d.x + 10D, vec3d.y + 1.75D, vec3d.z + 10D));
             //Mian2 Chao3
             //double angle = playerEntity.rotationYaw;
             //System.out.print(angle + "\t");

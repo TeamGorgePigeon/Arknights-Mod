@@ -69,55 +69,58 @@ public class ShawEntity extends MeleeOperator {
 
     @Override
     public boolean attackEntityAsMob(Entity entityIn) {
-        float f = 3.0f;//(float) this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue();
-        float f1 = (float) this.getAttribute(SharedMonsterAttributes.ATTACK_KNOCKBACK).getValue();
-        if (entityIn instanceof LivingEntity) {
-            f += EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((LivingEntity) entityIn).getCreatureAttribute());
-            f1 += (float) EnchantmentHelper.getKnockbackModifier(this);
-        }
-        int i = EnchantmentHelper.getFireAspectModifier(this);
-        if (i > 0) {
-            entityIn.setFire(i * 4);
-        }
-        boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), f);
-        if (flag && !this.isSkill) {
-            if (f1 > 0.0F && entityIn instanceof LivingEntity) {
+        boolean flag =true;
+        if (entityIn instanceof OperatorBase) {
+            float f = 3.0f;//(float) this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue();
+            float f1 = (float) this.getAttribute(SharedMonsterAttributes.ATTACK_KNOCKBACK).getValue();
+            if (entityIn instanceof LivingEntity) {
+                f += EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((LivingEntity) entityIn).getCreatureAttribute());
+                f1 += (float) EnchantmentHelper.getKnockbackModifier(this);
+            }
+            int i = EnchantmentHelper.getFireAspectModifier(this);
+            if (i > 0) {
+                entityIn.setFire(i * 4);
+            }
+            flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), f);
+            if (flag && !this.isSkill) {
+                if (f1 > 0.0F && entityIn instanceof LivingEntity) {
+                    Vec3d vec3d = this.getPositionVec();
+                    List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(vec3d.x - 3, vec3d.y - 0.5, vec3d.z - 3, vec3d.x + 3, vec3d.y + 0.5, vec3d.z + 3));
+                    for (int k2 = 0; k2 < list.size(); ++k2) {
+                        Entity entity = list.get(k2);
+                        ((LivingEntity) entity).knockBack(this, f1 * 0.5F, (double) MathHelper.sin(this.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(this.rotationYaw * ((float) Math.PI / 180F))));
+                    }
+                    this.setMotion(this.getMotion().mul(0.6D, 1.0D, 0.6D));
+                }
+                if (entityIn instanceof PlayerEntity) {
+                    PlayerEntity playerentity = (PlayerEntity) entityIn;
+                    ItemStack itemstack = this.getHeldItemMainhand();
+                    ItemStack itemstack1 = playerentity.isHandActive() ? playerentity.getActiveItemStack() : ItemStack.EMPTY;
+                    if (!itemstack.isEmpty() && !itemstack1.isEmpty() && itemstack.canDisableShield(itemstack1, playerentity, this) && itemstack1.isShield(playerentity)) {
+                        float f2 = 0.25F + (float) EnchantmentHelper.getEfficiencyModifier(this) * 0.05F;
+                        if (this.rand.nextFloat() < f2) {
+                            playerentity.getCooldownTracker().setCooldown(itemstack.getItem(), 100);
+                            this.world.setEntityState(playerentity, (byte) 30);
+                        }
+                    }
+                }
+                this.applyEnchantments(this, entityIn);
+                this.setLastAttackedEntity(entityIn);
+            } else {
                 Vec3d vec3d = this.getPositionVec();
                 List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(vec3d.x - 3, vec3d.y - 0.5, vec3d.z - 3, vec3d.x + 3, vec3d.y + 0.5, vec3d.z + 3));
                 for (int k2 = 0; k2 < list.size(); ++k2) {
                     Entity entity = list.get(k2);
-                    ((LivingEntity) entity).knockBack(this, f1 * 0.5F, (double) MathHelper.sin(this.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(this.rotationYaw * ((float) Math.PI / 180F))));
-                }
-                this.setMotion(this.getMotion().mul(0.6D, 1.0D, 0.6D));
-            }
-            if (entityIn instanceof PlayerEntity) {
-                PlayerEntity playerentity = (PlayerEntity) entityIn;
-                ItemStack itemstack = this.getHeldItemMainhand();
-                ItemStack itemstack1 = playerentity.isHandActive() ? playerentity.getActiveItemStack() : ItemStack.EMPTY;
-                if (!itemstack.isEmpty() && !itemstack1.isEmpty() && itemstack.canDisableShield(itemstack1, playerentity, this) && itemstack1.isShield(playerentity)) {
-                    float f2 = 0.25F + (float) EnchantmentHelper.getEfficiencyModifier(this) * 0.05F;
-                    if (this.rand.nextFloat() < f2) {
-                        playerentity.getCooldownTracker().setCooldown(itemstack.getItem(), 100);
-                        this.world.setEntityState(playerentity, (byte) 30);
+                    if (entity instanceof LivingEntity) {
+                        ((LivingEntity) entity).knockBack(this, 5.0F, (double) MathHelper.sin(this.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(this.rotationYaw * ((float) Math.PI / 180F))));
                     }
                 }
+                this.setMotion(this.getMotion().mul(0.6D, 1.0D, 0.6D));
+                this.isSkill = false;
+                this.tick = 0;
             }
-            this.applyEnchantments(this, entityIn);
-            this.setLastAttackedEntity(entityIn);
-        } else {
-            Vec3d vec3d = this.getPositionVec();
-            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(vec3d.x - 3, vec3d.y - 0.5, vec3d.z - 3, vec3d.x + 3, vec3d.y + 0.5, vec3d.z + 3));
-            for (int k2 = 0; k2 < list.size(); ++k2) {
-                Entity entity = list.get(k2);
-                if (entity instanceof LivingEntity) {
-                    ((LivingEntity) entity).knockBack(this, 5.0F, (double) MathHelper.sin(this.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(this.rotationYaw * ((float) Math.PI / 180F))));
-                }
-            }
-            this.setMotion(this.getMotion().mul(0.6D, 1.0D, 0.6D));
-            this.isSkill = false;
-            this.tick = 0;
+            this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemHandler.SHAW_AXE));
         }
-        this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemHandler.SHAW_AXE));
         return flag;
     }
 

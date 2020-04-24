@@ -1,5 +1,6 @@
 package arknights.item;
 
+import arknights.utils.MyMathHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -8,6 +9,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.item.UseAction;
+import net.minecraft.particles.ParticleTypes;
+import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -65,13 +68,13 @@ public class ShawPump extends GunItem {
     }
 
     public ItemStack onPumpUsing(World world, ItemStack stack, PlayerEntity playerEntity) {
+        Vec3d vec3d = playerEntity.getPositionVec();
         if (isSkill && !world.isRemote()) {
             if (!playerEntity.isCreative()) {
                 stack.damageItem(-stack.getMaxDamage() - 1,  playerEntity, (user) -> user.sendBreakAnimation(playerEntity.getActiveHand()));
                 stack.damageItem(stack.getMaxDamage() - 10,  playerEntity, (user) -> user.sendBreakAnimation(playerEntity.getActiveHand()));
                 stack.damageItem(-stack.getMaxDamage() + 20,  playerEntity, (user) -> user.sendBreakAnimation(playerEntity.getActiveHand()));
             }
-            Vec3d vec3d = playerEntity.getPositionVec();
             List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(playerEntity, new AxisAlignedBB(vec3d.x - 3, vec3d.y - 0.5, vec3d.z - 3, vec3d.x + 3, vec3d.y + 0.5, vec3d.z + 3));
             boolean isAnyEntity = false;
             //Mian2 Chao3
@@ -100,6 +103,13 @@ public class ShawPump extends GunItem {
                     stack.damageItem(stack.getMaxDamage() - 10, playerEntity, (user) -> user.sendBreakAnimation(playerEntity.getActiveHand()));
                 }
             }
+        }
+        float R=2;
+        double faceAngle= MyMathHelper.in360(playerEntity.rotationYaw)*Math.PI/180;
+        for (double angle=faceAngle+Math.PI/4; angle<=faceAngle+Math.PI/2; angle=angle+Math.PI/180) {
+            double cos=Math.cos(angle);
+            double sin=Math.sin(angle);
+            world.addParticle(ParticleTypes.UNDERWATER,vec3d.x+cos*R, vec3d.y+1, vec3d.z + sin*R,0.5*cos , 0.0D, 0.5*sin);
         }
         return stack;
         }

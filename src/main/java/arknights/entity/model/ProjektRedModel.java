@@ -1,6 +1,6 @@
 package arknights.entity.model;
 
-public class ProjektRedModel extends HumanModel {
+public class ProjektRedModel extends WomanModel {
     /*ModelRenderer ear = new ModelRenderer(this, 0, 0);
     ModelRenderer ear2 = new ModelRenderer(this, 0, 0);
     ModelRenderer trueEar = new ModelRenderer(this, 92, 54);*/

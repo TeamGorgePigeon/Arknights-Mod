@@ -92,7 +92,7 @@ public class WorkshopRecipe implements IWorkshopRecipe {
         int i = 0;
         int getItemRecipe;
         boolean isMatchItemCountMain = false;
-        boolean isMatchItemCount[] = new boolean[3];
+        boolean[] isMatchItemCount = new boolean[3];
 
         for(int j = 0; j < inv.getSizeInventory(); ++j) {
             ItemStack itemstack = inv.getStackInSlot(j);
@@ -105,7 +105,8 @@ public class WorkshopRecipe implements IWorkshopRecipe {
                     getItemRecipe=CItemToInt(inv.getStackInSlot(j).getItem());
                     if (getItemRecipe!=-1 & getItemRecipe < this.itemStacks.size()) {
                     isMatchItemCount[j] =  itemstack.getCount() >= this.itemStacks.get(getItemRecipe).getCount();
-                    this.items.set(j,inv.getStackInSlot(j) != null ? itemstack.getItem() : Items.AIR);
+                        inv.getStackInSlot(j);
+                        this.items.set(j, itemstack.getItem());
                     }
                 }
             } else {isMatchItemCount[j]=true;}

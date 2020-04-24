@@ -100,6 +100,7 @@ public class WorkshopContainer extends Container {
             itemstack = itemstack1.copy();
 
             final int containerSlots = this.inventorySlots.size() - player.inventory.mainInventory.size();
+
             if (index < containerSlots) {
                 if (!mergeItemStack(itemstack1, containerSlots, this.inventorySlots.size(), true)) {
                     return ItemStack.EMPTY;

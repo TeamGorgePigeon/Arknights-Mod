@@ -14,7 +14,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ExusiaiModel<T extends ExusiaiEntity> extends HumanModel {
+public class ExusiaiModel<T extends ExusiaiEntity> extends WomanModel {
    private List<ModelRenderer> field_228286_w_ = Lists.newArrayList();
    private final ModelRenderer bipedHalo;
    private final ModelRenderer bipedWing;
@@ -63,7 +63,7 @@ public class ExusiaiModel<T extends ExusiaiEntity> extends HumanModel {
             //this.leftArmPose = BipedModel.ArmPose.BOW_AND_ARROW;
            this.bipedLeftArm.copyModelAngles(this.bipedRightArm);
         } else {
-            this.rightArmPose = ArmPose.EMPTY;
+            this.rightArmPose = ArmPose.ITEM;
             this.leftArmPose = ArmPose.EMPTY;
         }
 

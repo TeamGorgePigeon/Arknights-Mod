@@ -1,5 +1,6 @@
 package arknights.entity.model;
 
+import arknights.entity.operator.ExusiaiEntity;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -28,32 +29,36 @@ public class HumanModel<T extends LivingEntity> extends BipedModel<T> {
     public HumanModel(float modelSize) {
         super(RenderType::func_228644_e_, modelSize, 0.0F, 128, 64);
         this.bipedDeadmau5Head = new ModelRenderer(this, 24, 0);
-        this.bipedDeadmau5Head.func_228301_a_(-3.0F, -6.0F, -1.0F, 6.0F, 6.0F, 1.0F, modelSize);
+        this.bipedDeadmau5Head.func_228301_a_(-3.0F, -6.0F, -1.0F, 6.0F, 6.0F, 1.0F, modelSize-0.1F);
 
         this.bipedLeftArm = new ModelRenderer(this, 32, 48);
-        this.bipedLeftArm.func_228301_a_(-1.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, modelSize);
+        this.bipedLeftArm.func_228301_a_(-1.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, modelSize-0.1F);
         this.bipedLeftArm.setRotationPoint(5.0F, 2.5F, 0.0F);
         this.bipedRightArm = new ModelRenderer(this, 40, 16);
-        this.bipedRightArm.func_228301_a_(-2.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, modelSize);
+        this.bipedRightArm.func_228301_a_(-2.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, modelSize-0.1F);
         this.bipedRightArm.setRotationPoint(-5.0F, 2.5F, 0.0F);
         this.bipedLeftArmwear = new ModelRenderer(this, 48, 48);
-        this.bipedLeftArmwear.func_228301_a_(-1.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, modelSize + 0.25F);
+        this.bipedLeftArmwear.func_228301_a_(-1.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, modelSize-0.1F + 0.25F);
         this.bipedLeftArmwear.setRotationPoint(5.0F, 2.5F, 0.0F);
         this.bipedRightArmwear = new ModelRenderer(this, 40, 32);
-        this.bipedRightArmwear.func_228301_a_(-2.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, modelSize + 0.25F);
+        this.bipedRightArmwear.func_228301_a_(-2.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, modelSize-0.1F + 0.25F);
         this.bipedRightArmwear.setRotationPoint(-5.0F, 2.5F, 10.0F);
 
         this.bipedLeftLeg = new ModelRenderer(this, 16, 48);
-        this.bipedLeftLeg.func_228301_a_(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, modelSize);
+        this.bipedLeftLeg.func_228301_a_(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, modelSize-0.3F);
         this.bipedLeftLeg.setRotationPoint(1.9F, 12.0F, 0.0F);
+        this.bipedRightLeg = new ModelRenderer(this, 0, 16);
+        this.bipedRightLeg.func_228301_a_(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, modelSize-0.3F);
+        this.bipedRightLeg.setRotationPoint(-1.9F, 12.0F, 0.0F);
         this.bipedLeftLegwear = new ModelRenderer(this, 0, 48);
-        this.bipedLeftLegwear.func_228301_a_(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, modelSize + 0.25F);
+        this.bipedLeftLegwear.func_228301_a_(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, modelSize-0.3F + 0.25F);
         this.bipedLeftLegwear.setRotationPoint(1.9F, 12.0F, 0.0F);
         this.bipedRightLegwear = new ModelRenderer(this, 0, 32);
-        this.bipedRightLegwear.func_228301_a_(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, modelSize + 0.25F);
+        this.bipedRightLegwear.func_228301_a_(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, modelSize-0.5F + 0.25F);
         this.bipedRightLegwear.setRotationPoint(-1.9F, 12.0F, 0.0F);
+
         this.bipedBodyWear = new ModelRenderer(this, 16, 32);
-        this.bipedBodyWear.func_228301_a_(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, modelSize + 0.25F);
+        this.bipedBodyWear.func_228301_a_(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, modelSize-0.2F + 0.25F);
         this.bipedBodyWear.setRotationPoint(0.0F, 0.0F, 0.0F);
 
         //this.bipedHalo = new ModelRenderer(this, 65, 0);
@@ -109,10 +114,6 @@ public class HumanModel<T extends LivingEntity> extends BipedModel<T> {
         this.bipedDeadmau5Head.showModel = visible;
     }
 
-    public void setLivingAnimations(T entityIn, float limbSwing, float limbSwingAmount, float partialTick){
-        super.setLivingAnimations(entityIn, limbSwing, limbSwingAmount, partialTick);
-    }
-
     public void func_225599_a_(HandSide p_225599_1_, MatrixStack p_225599_2_) {
         ModelRenderer modelrenderer = this.getArmForSide(p_225599_1_);
         float f = 0.5F * (float)(p_225599_1_ == HandSide.RIGHT ? 1 : -1);
@@ -121,7 +122,6 @@ public class HumanModel<T extends LivingEntity> extends BipedModel<T> {
         modelrenderer.rotationPointX -= f;
 
     }
-
     public ModelRenderer func_228288_a_(Random p_228288_1_) {
         return this.field_228286_w_.get(p_228288_1_.nextInt(this.field_228286_w_.size()));
     }
@@ -133,4 +133,5 @@ public class HumanModel<T extends LivingEntity> extends BipedModel<T> {
 
         this.field_228286_w_.add(p_accept_1_);
     }
+
 }

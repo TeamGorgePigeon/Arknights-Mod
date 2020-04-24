@@ -5,7 +5,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.HandSide;
 
-public class ShawModel extends HumanModel {
+public class ShawModel extends WomanModel {
     /*ModelRenderer ear = new ModelRenderer(this, 0, 0);
     ModelRenderer ear2 = new ModelRenderer(this, 0, 0);
     ModelRenderer trueEar = new ModelRenderer(this, 92, 54);*/

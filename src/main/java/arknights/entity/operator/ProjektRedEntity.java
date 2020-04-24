@@ -10,7 +10,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particles.BlockParticleData;
+import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
@@ -105,8 +108,10 @@ public class ProjektRedEntity extends MeleeOperator {
         effectParticle[75] = ".....................................................................##########.......................................................................";
         effectParticle[76] = "......................................................................#######.........................................................................";
         effectParticle[77] = "........................................................................###...........................................................................";
+
         double startX=vec3d.x-75;
         double startY=vec3d.y+77/2;
+
         for (int y=1;y<=77;y++) {
             for (int x=1;x<=effectParticle[1].length()-1;x++){
                 //System.out.print("x="+x+"y="+y);

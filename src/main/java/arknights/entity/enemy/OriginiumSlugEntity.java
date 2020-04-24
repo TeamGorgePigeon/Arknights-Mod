@@ -30,6 +30,11 @@ public class OriginiumSlugEntity extends MeleeEnemy {
    /**
     * Returns the Y Offset of this entity.
     */
+   protected void registerAttributes() {
+      super.registerAttributes();
+      this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
+      this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
+   }
 
    public double getYOffset() {
       return 0.1D;
