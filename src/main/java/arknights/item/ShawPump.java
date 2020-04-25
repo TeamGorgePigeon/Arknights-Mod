@@ -1,5 +1,6 @@
 package arknights.item;
 
+import arknights.registry.SoundHandler;
 import arknights.utils.MyMathHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -13,6 +14,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -91,9 +93,13 @@ public class ShawPump extends GunItem {
                     //System.out.print(entityAngle + " " + (playerEntity.rotationYaw % 360 > 180 ? playerEntity.rotationYaw % 360 - 360 : playerEntity.rotationYaw % 360) + " " + Math.abs(entityAngle - (playerEntity.rotationYaw % 360 > 180 ? playerEntity.rotationYaw % 360 - 360 : playerEntity.rotationYaw % 360)) + "\n");
                     //System.out.print(MyMathHelper.in360(entityAngle) + " " + MyMathHelper.in360(playerEntity.rotationYaw) + " " + Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(playerEntity.rotationYaw)) + "\n");
                     //if(entity.getDistance(playerEntity) <= 3 && Math.abs(entityAngle - (playerEntity.rotationYaw % 360 > 180 ? playerEntity.rotationYaw % 360 - 360 : playerEntity.rotationYaw % 360)) <= 90){
-                    if (entity instanceof LivingEntity && !(entity instanceof PlayerEntity)) {
-                        isAnyEntity=true;
-                        ((LivingEntity) entity).knockBack(playerEntity, 5.0F, (double) MathHelper.sin(playerEntity.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(playerEntity.rotationYaw * ((float) Math.PI / 180F))));
+                    Vec3d pos = entity.getPositionVec();
+                    double entityAngle = -Math.toDegrees(Math.atan2(pos.x - playerEntity.getPositionVec().x, pos.z - playerEntity.getPositionVec().z));
+                    if ((Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(playerEntity.rotationYaw)) <= 90 || Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(playerEntity.rotationYaw)) >= 270) && entity.getDistance(playerEntity) <= 3) {
+                        if (entity instanceof LivingEntity && !(entity instanceof PlayerEntity)) {
+                            isAnyEntity = true;
+                            ((LivingEntity) entity).knockBack(playerEntity, 5.0F, (double) MathHelper.sin(playerEntity.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(playerEntity.rotationYaw * ((float) Math.PI / 180F))));
+                        }
                     }
                 }
                 if (isAnyEntity && !(playerEntity.isCreative())){
@@ -104,13 +110,20 @@ public class ShawPump extends GunItem {
                 }
             }
         }
-        float R=2;
         double faceAngle= MyMathHelper.in360(playerEntity.rotationYaw)*Math.PI/180;
-        for (double angle=faceAngle+Math.PI/4; angle<=faceAngle+Math.PI/2; angle=angle+Math.PI/180) {
-            double cos=Math.cos(angle);
-            double sin=Math.sin(angle);
-            world.addParticle(ParticleTypes.UNDERWATER,vec3d.x+cos*R, vec3d.y+1, vec3d.z + sin*R,0.5*cos , 0.0D, 0.5*sin);
+        for (float R=0;R<=2;R=R+0.2F) {
+            for (double angle = faceAngle + Math.PI*1/4; angle <= faceAngle + Math.PI * 3 / 4; angle = angle + Math.PI / 180) {
+                double cos = Math.cos(angle);
+                double sin = Math.sin(angle);
+                world.addParticle(ParticleTypes.BUBBLE, vec3d.x + cos * R, vec3d.y + 0.8F, vec3d.z + sin * R, 0, 0.0D, 0);
+                world.addParticle(ParticleTypes.BUBBLE, vec3d.x + cos * R, vec3d.y + 1F, vec3d.z + sin * R, 0, 0.0D, 0);
+                world.addParticle(ParticleTypes.BUBBLE, vec3d.x + cos * R, vec3d.y + 1.2F, vec3d.z + sin * R, 0, 0.0D, 0);
+                world.addParticle(new RedstoneParticleData(	0F,0F,200F,1F), vec3d.x + cos * R, vec3d.y + 0.8F, vec3d.z + sin * R, 0, 0, 0);
+                world.addParticle(new RedstoneParticleData(	0F,0F,200F,1F), vec3d.x + cos * R, vec3d.y + 1F, vec3d.z + sin * R, 0, 0, 0);
+                world.addParticle(new RedstoneParticleData(	0F,0F,200F,1F), vec3d.x + cos * R, vec3d.y + 1.2F, vec3d.z + sin * R, 0, 0, 0);
+            }
         }
+        world.playSound(null, playerEntity.func_226277_ct_(), playerEntity.func_226278_cu_(), playerEntity.func_226281_cx_(), SoundHandler.SKILL_HYDRAULIC, SoundCategory.NEUTRAL, 1.0F, 1.0F);
         return stack;
         }
 

@@ -13,6 +13,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import static arknights.Arknights.MODID;
 
 public class BlockHandler {
+    public static final Block REUNION_BANNER = createBlocks("reunion_banner", Material.WOOL, 0.5F, 3.0F);
     public static final Block ORIGINIUMS_ORE = createBlocks("originiums_ore", Material.GLASS, 3.0F, 3.0F);//new Block(Block.Properties.create(Material.GLASS).hardnessAndResistance(3.0F, 3.0F)).setRegistryName(MODID+":"+"originiums_ore");
     public static final Block ORIROCKCUBE = createBlocks("orirock_cube", Material.ROCK, 1.5F, 6.0F);//new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)).setRegistryName(MODID+":"+"solid_originrock");
     public static final Block TRADINGHOME = new TradingHome(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6.0F)).setRegistryName(MODID+":"+"trading_home");
@@ -32,6 +33,7 @@ public class BlockHandler {
         r.register(WORKSHOP);
         r.register(ORUNDUM);
         r.register(UPGRADE);
+        r.register(REUNION_BANNER);
         r.register(HEADHUNTINGBAGGAGE_BLOCK);
     }
 

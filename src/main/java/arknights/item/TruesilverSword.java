@@ -134,7 +134,7 @@ public class TruesilverSword extends SwordItem {
                 }
             }
             System.out.print(MyMathHelper.in360(playerEntity.rotationYaw)+" ");*/
-            p_213357_1_.playSound(null, playerEntity.func_226277_ct_(), playerEntity.func_226278_cu_(), playerEntity.func_226281_cx_(), SoundHandler.TRUESILVER_SLASH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+            p_213357_1_.playSound(null, playerEntity.func_226277_ct_(), playerEntity.func_226278_cu_(), playerEntity.func_226281_cx_(), SoundHandler.SKILL_TRUESILVER_SLASH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
         }
         return p_213357_2_;
     }

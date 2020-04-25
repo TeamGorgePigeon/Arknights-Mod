@@ -1,38 +1,97 @@
 {
-    "vehicle_n":
+    "exusiai_attack":
     {
-        "sounds": [ "arknights:exusiai/vehicle_n" ],
-        "subtitle": "arknights.subtitle.vehicle_n"
+        "sounds": [ "arknights:exusiai/attack" ],
+        "subtitle": "arknights.subtitle.exusiai_attack"
     },
-	"vehicle_h":
+	"exusiai_skill_attack":
 	{
-		"sounds": [ "arknights:exusiai/vehicle_h" ],
-		"subtitle": "arknights.subtitle.vehicle_h"
+		"sounds": [ "arknights:exusiai/skill_attack" ],
+		"subtitle": "arknights.subtitle.exusiai_skill_attack"
 	},
-	"103_skill1":
+	"exusiai_combating1":
 	{
-		"sounds": [ "arknights:exusiai/skill1" ],
-		"subtitle": "arknights.subtitle.skill1"
+		"sounds": [ "arknights:exusiai/combating1" ],
+		"subtitle": "arknights.subtitle.exusiai_combating1"
 	},
-	"103_skill2":
+	"exusiai_combating2":
 	{
-		"sounds": [ "arknights:exusiai/skill2" ],
-		"subtitle": "arknights.subtitle.skill2"
+		"sounds": [ "arknights:exusiai/combating2" ],
+		"subtitle": "arknights.subtitle.exusiai_combating2"
 	},
-	"103_skill3":
+	"exusiai_combating3":
 	{
-		"sounds": [ "arknights:exusiai/skill3" ],
-		"subtitle": "arknights.subtitle.skill3"
+		"sounds": [ "arknights:exusiai/combating3" ],
+		"subtitle": "arknights.subtitle.exusiai_combating3"
 	},
-	"103_skill4":
+	"exusiai_combating4":
 	{
-		"sounds": [ "arknights:exusiai/skill4" ],
-		"subtitle": "arknights.subtitle.skill4"
+		"sounds": [ "arknights:exusiai/combating4" ],
+		"subtitle": "arknights.subtitle.exusiai_combating4"
 	},
-	"truesilver_slash":
+
+	"shaw_combating1":
 	{
-		"sounds": [ "arknights:silverash/truesilver_slash" ],
-		"subtitle": "arknights.subtitle.truesilver_slash"
+		"sounds": [ "arknights:shaw/combating1" ],
+		"subtitle": "arknights.subtitle.shaw_combating1"
+	},
+	"shaw_combating2":
+	{
+		"sounds": [ "arknights:shaw/combating2" ],
+		"subtitle": "arknights.subtitle.shaw_combating2"
+	},
+	"shaw_combating3":
+	{
+		"sounds": [ "arknights:shaw/combating3" ],
+		"subtitle": "arknights.subtitle.shaw_combating3"
+	},
+	"shaw_combating4":
+	{
+		"sounds": [ "arknights:shaw/combating4" ],
+		"subtitle": "arknights.subtitle.shaw_combating4"
+	},
+
+	"projektred_combating1":
+	{
+		"sounds": [ "arknights:projektred/combating1" ],
+		"subtitle": "arknights.subtitle.projektred_combating1"
+	},
+	"projektred_combating2":
+	{
+		"sounds": [ "arknights:projektred/combating2" ],
+		"subtitle": "arknights.subtitle.projektred_combating2"
+	},
+	"projektred_combating3":
+	{
+		"sounds": [ "arknights:projektred/combating3" ],
+		"subtitle": "arknights.subtitle.projektred_combating3"
+	},
+	"projektred_combating4":
+	{
+		"sounds": [ "arknights:projektred/combating4" ],
+		"subtitle": "arknights.subtitle.projektred_combating4"
+	},
+
+	"skill_wolfroar":
+	{
+		"sounds": [ "arknights:projektred/skill_wolfroar" ],
+		"subtitle": "arknights.subtitle.skill_wolfroar"
+	},
+	"skill_hydraulic":
+	{
+		"sounds": [ "arknights:shaw/skill_hydraulic" ],
+		"subtitle": "arknights.subtitle.skill_hydraulic"
+	},
+	"skill_truesilver_slash":
+	{
+		"sounds": [ "arknights:silverash/skill_truesilver_slash" ],
+		"subtitle": "arknights.subtitle.skill_truesilver_slash"
+	},
+
+	"enemy_dead":
+	{
+		"sounds": [ "arknights:enemy_dead" ],
+		"subtitle": "arknights.subtitle.enemy_dead"
 	},
 	"operator_dead":
 	{

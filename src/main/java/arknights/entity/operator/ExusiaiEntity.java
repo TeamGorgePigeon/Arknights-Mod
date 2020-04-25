@@ -76,16 +76,16 @@ public class ExusiaiEntity extends RangeOperator{
     protected void yell(){
         switch (new Random().nextInt(4)) {
             case 0:
-                this.playSound(SoundHandler.EXUSIAI_SKILL1, 1.0F, 1.0F);
+                this.playSound(SoundHandler.EXUSIAI_COMBATING1, 1.0F, 1.0F);
                 break;
             case 1:
-                this.playSound(SoundHandler.EXUSIAI_SKILL2, 1.0F, 1.0F);
+                this.playSound(SoundHandler.EXUSIAI_COMBATING2, 1.0F, 1.0F);
                 break;
             case 2:
-                this.playSound(SoundHandler.EXUSIAI_SKILL3, 1.0F, 1.0F);
+                this.playSound(SoundHandler.EXUSIAI_COMBATING3, 1.0F, 1.0F);
                 break;
             case 3:
-                this.playSound(SoundHandler.EXUSIAI_SKILL4, 1.0F, 1.0F);
+                this.playSound(SoundHandler.EXUSIAI_COMBATING4, 1.0F, 1.0F);
                 break;
             default:
                 break;

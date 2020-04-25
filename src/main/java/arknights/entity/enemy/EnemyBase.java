@@ -3,6 +3,7 @@ package arknights.entity.enemy;
 import arknights.entity.operator.OperatorBase;
 import arknights.item.OperatorItem;
 import arknights.registry.ItemHandler;
+import arknights.registry.SoundHandler;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.item.ItemEntity;
@@ -11,6 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IItemProvider;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import org.omg.CORBA.INTERNAL;
 
@@ -106,8 +108,6 @@ public class EnemyBase extends MonsterEntity {
     protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
         return 1.75F;
     }
-        //public SoundEvent getDeathSound() {
-            //return SoundHandler.OPERATOR_DEAD;
-        //}
+        public SoundEvent getDeathSound() { return SoundHandler.ENEMY_DEAD; }
 }
 

@@ -17,11 +17,11 @@ public class WomanModel<T extends LivingEntity> extends HumanModel<T> {
     public WomanModel(float modelSize) {
         super(modelSize);
         this.naizi = new ModelRenderer(this,12, 23);
-        naizi.rotateAngleX=-1.8326F;
-        naizi.rotateAngleY=0.0F;
-        naizi.rotateAngleZ=0.0F;
-        naizi.func_228301_a_(-3.0F, -1.5F, -1.5F, 6F, 3F, 3F, modelSize+0.3F);
-        naizi.setRotationPoint(0.0F, 3.5F, -0.5F);
+        this.naizi.rotateAngleX=-1.8326F;
+        this.naizi.rotateAngleY=0.0F;
+        this.naizi.rotateAngleZ=0.0F;
+        this.naizi.func_228301_a_(-3.0F, -1.5F, -1.5F, 6F, 3F, 3F, modelSize+0.3F);
+        this.naizi.setRotationPoint(0.0F, 3.5F, -0.5F);
     }
     public void func_225597_a_(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
         super.func_225597_a_(p_225597_1_, p_225597_2_, p_225597_3_, p_225597_4_, p_225597_5_, p_225597_6_);
