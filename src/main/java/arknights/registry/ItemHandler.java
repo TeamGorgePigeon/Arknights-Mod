@@ -166,7 +166,7 @@ public class ItemHandler {
         r.register(PROJEKTRED_KNIFE);
         r.register(SHAW_PUMP);
         r.register(SHAW_AXE);
-        r.register(FAUST_CROSSBOW);
+        //todo:r.register(FAUST_CROSSBOW);
 
         r.register(TRADINGHOME_ITEM);
         r.register(ORIGINIUMS);
@@ -176,7 +176,7 @@ public class ItemHandler {
         //r.register(AMIYA);
         register3Operator(r, ANSEL);
         register4Operator(r, SHAW);
-        register5Operator(r, AMIYA);
+        //todo:register5Operator(r, AMIYA);
         register5Operator(r,PROJEKTRED);
         register6Operator(r, EXUSIAI);
 

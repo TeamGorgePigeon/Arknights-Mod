@@ -1,4 +1,15 @@
 {
+	"ansel_combating1":
+	{
+		"sounds": [ "arknights:ansel/combating1" ],
+		"subtitle": "arknights.subtitle.ansel_combating1"
+	},
+	"ansel_combating2":
+	{
+		"sounds": [ "arknights:ansel/combating2" ],
+		"subtitle": "arknights.subtitle.ansel_combating2"
+	},
+
     "exusiai_attack":
     {
         "sounds": [ "arknights:exusiai/attack" ],

@@ -2,6 +2,7 @@ package arknights.entity.operator;
 
 import arknights.entity.AnselHealPack;
 import arknights.registry.EntityHandler;
+import arknights.registry.SoundHandler;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.TameableEntity;
@@ -10,7 +11,10 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 public class AnselEntity extends MedicSingle {
+    protected int tick = 0;
     public AnselEntity(EntityType<? extends TameableEntity> p_i48574_1_, World p_i48574_2_) {
         super(p_i48574_1_, p_i48574_2_);
     }
@@ -19,7 +23,29 @@ public class AnselEntity extends MedicSingle {
         super(EntityHandler.ANSEL, p_i48574_2_, item);
     }
 
+    public void livingTick() {
+        super.livingTick();
+        if(!world.isRemote()) {
+            this.tick++;
+            if (this.tick == 599 ) {
+                this.tick=0;
+                this.yell();
+            }
+        }
+    }
 
+    protected void yell(){
+        switch (new Random().nextInt(2)) {
+            case 0:
+                this.playSound(SoundHandler.ANSEL_COMBATING1, 1.0F, 1.0F);
+                break;
+            case 1:
+                this.playSound(SoundHandler.ANSEL_COMBATING2, 1.0F, 1.0F);
+                break;
+            default:
+                break;
+        }
+    }
 
     @Override
     public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {

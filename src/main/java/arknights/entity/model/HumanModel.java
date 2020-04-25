@@ -31,36 +31,53 @@ public class HumanModel<T extends LivingEntity> extends BipedModel<T> {
         this.bipedDeadmau5Head = new ModelRenderer(this, 24, 0);
         this.bipedDeadmau5Head.func_228301_a_(-3.0F, -6.0F, -1.0F, 6.0F, 6.0F, 1.0F, modelSize-0.1F);
 
+        this.bipedHead = new ModelRenderer(this, 0, 0);
+        this.bipedHead.func_228301_a_(-4.0F, -6.7055F, -3.8955F, 8, 8, 8, modelSize-0.6F);
+        this.bipedHead.setRotationPoint(0.0F, 0.0F, 0.0F);
+
+        this.bipedHeadwear = new ModelRenderer(this, 32, 0);
+        this.bipedHeadwear.func_228301_a_( -4.0F, -6.7055F, -3.8955F, 8, 8, 8, modelSize-0.1F);
+        this.bipedHeadwear.setRotationPoint(0.0F, 0.0F, 0.0F);
+
         this.bipedLeftArm = new ModelRenderer(this, 32, 48);
-        this.bipedLeftArm.func_228301_a_(-1.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, modelSize-0.1F);
-        this.bipedLeftArm.setRotationPoint(5.0F, 2.5F, 0.0F);
+        this.bipedLeftArm.func_228301_a_(-1.5F, -1.8F, -2.0F, 3, 12, 4, modelSize-0.25F);
+        this.bipedLeftArm.setRotationPoint(5.0F, 3.0F, 0.0F);
+
         this.bipedRightArm = new ModelRenderer(this, 40, 16);
-        this.bipedRightArm.func_228301_a_(-2.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, modelSize-0.1F);
-        this.bipedRightArm.setRotationPoint(-5.0F, 2.5F, 0.0F);
+        this.bipedRightArm.func_228301_a_(-1.5F, -1.2F, -2.0F, 3, 12, 4, modelSize-0.25F);
+        this.bipedRightArm.setRotationPoint(-5.0F, 2.0F, 0.0F);
+
         this.bipedLeftArmwear = new ModelRenderer(this, 48, 48);
-        this.bipedLeftArmwear.func_228301_a_(-1.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, modelSize-0.1F + 0.25F);
-        this.bipedLeftArmwear.setRotationPoint(5.0F, 2.5F, 0.0F);
+        this.bipedLeftArmwear.func_228301_a_(-1.5F, -1.8F, -2.0F, 3, 12, 4, modelSize);
+        this.bipedLeftArmwear.setRotationPoint(5.0F, 3.0F, 0.0F);
+
         this.bipedRightArmwear = new ModelRenderer(this, 40, 32);
-        this.bipedRightArmwear.func_228301_a_(-2.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, modelSize-0.1F + 0.25F);
-        this.bipedRightArmwear.setRotationPoint(-5.0F, 2.5F, 10.0F);
+        this.bipedRightArmwear.func_228301_a_(-1.5F, -1.2F, -2.0F, 3, 12, 4, modelSize);
+        this.bipedRightArmwear.setRotationPoint(-5.0F, 2.0F, 0.0F);
 
         this.bipedLeftLeg = new ModelRenderer(this, 16, 48);
-        this.bipedLeftLeg.func_228301_a_(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, modelSize-0.3F);
+        this.bipedLeftLeg.func_228301_a_(-2.0F, 0.0F, -2.0F, 4, 12, 4, modelSize-0.5F);
         this.bipedLeftLeg.setRotationPoint(1.9F, 12.0F, 0.0F);
+
         this.bipedRightLeg = new ModelRenderer(this, 0, 16);
-        this.bipedRightLeg.func_228301_a_(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, modelSize-0.3F);
+        this.bipedRightLeg.func_228301_a_(-2.0F, 0.0F, -2.0F, 4, 12, 4, modelSize-0.5F);
         this.bipedRightLeg.setRotationPoint(-1.9F, 12.0F, 0.0F);
+
         this.bipedLeftLegwear = new ModelRenderer(this, 0, 48);
-        this.bipedLeftLegwear.func_228301_a_(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, modelSize-0.3F + 0.25F);
+        this.bipedLeftLegwear.func_228301_a_(-2.0F, 0.0F, -2.0F, 4, 12, 4, modelSize-0.25F);
         this.bipedLeftLegwear.setRotationPoint(1.9F, 12.0F, 0.0F);
+
         this.bipedRightLegwear = new ModelRenderer(this, 0, 32);
-        this.bipedRightLegwear.func_228301_a_(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, modelSize-0.5F + 0.25F);
+        this.bipedRightLegwear.func_228301_a_(-2.0F, 0.0F, -2.0F, 4, 12, 4, modelSize-0.25F);
         this.bipedRightLegwear.setRotationPoint(-1.9F, 12.0F, 0.0F);
 
-        this.bipedBodyWear = new ModelRenderer(this, 16, 32);
-        this.bipedBodyWear.func_228301_a_(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, modelSize-0.2F + 0.25F);
-        this.bipedBodyWear.setRotationPoint(0.0F, 0.0F, 0.0F);
+        this.bipedBody = new ModelRenderer(this, 16, 16);
+        this.bipedBody.func_228301_a_(-4.0F, 0.8F, -2.0F, 8, 12, 4, modelSize-0.3F);
+        this.bipedBody.setRotationPoint(0.0F, 1.0F, 0.0F);
 
+        this.bipedBodyWear = new ModelRenderer(this, 16, 32);
+        this.bipedBodyWear.func_228301_a_( -4.0F, 1.3F, -2.0F, 8, 10, 4, modelSize-0.2F);
+        this.bipedBodyWear.setRotationPoint(0.0F, 1.0F, 0.0F);
         //this.bipedHalo = new ModelRenderer(this, 65, 0);
         //this.bipedHalo.setRotationPoint(0.0F, 24.0F, 0.0F);
         //this.bipedHalo.func_228301_a_(-4.0F, -33.0F, -4.0F, 8.0F, 8.0F, 0.0F, modelSize );
@@ -102,10 +119,13 @@ public class HumanModel<T extends LivingEntity> extends BipedModel<T> {
         this.bipedLeftArmwear.copyModelAngles(this.bipedLeftArm);
         this.bipedRightArmwear.copyModelAngles(this.bipedRightArm);
         this.bipedBodyWear.copyModelAngles(this.bipedBody);
+        this.bipedHeadwear.copyModelAngles(this.bipedHead);
     }
 
     public void setVisible(boolean visible) {
         super.setVisible(visible);
+        this.bipedHead.showModel = visible;
+        this.bipedHeadwear.showModel = visible;
         this.bipedLeftArmwear.showModel = visible;
         this.bipedRightArmwear.showModel = visible;
         this.bipedLeftLegwear.showModel = visible;

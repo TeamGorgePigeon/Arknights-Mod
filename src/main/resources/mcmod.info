@@ -1,12 +1,12 @@
 [{
 	"modid": "arknights",
 	"name": "Arknights",
-	"description": "An interesting mod.",
-	"version": "0.0.0.0",
-	"mcversion": "1.15.1",
+	"description": "Minecraft Arknights Mod",
+	"version": "0.0.0.1",
+	"mcversion": "1.15.2",
 	"logoFile": "assets/arknights/textures/logo.png",
 	"url": "",
 	"updateJSON": "",
-	"authorList": ["NGYF"],
+	"authorList": ["NGYF,Tao0Lu"],
 	"credits": ""
 }]

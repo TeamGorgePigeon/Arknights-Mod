@@ -24,7 +24,7 @@ public class ExusiaiModel<T extends ExusiaiEntity> extends WomanModel {
 
 	  this.bipedHalo = new ModelRenderer(this, 64, 0);
 	  this.bipedHalo.func_228301_a_(-4.0F, -9.0F, -4.0F, 8.0F, 1.0F, 8.0F, modelSize );
-	  this.bipedHalo.setRotationPoint(this.bipedHead.rotationPointX, this.bipedHead.rotationPointY, this.bipedHead.rotationPointZ);
+	  this.bipedHalo.setRotationPoint(this.bipedHead.rotationPointX, this.bipedHead.rotationPointY+2.0F, this.bipedHead.rotationPointZ);
 
 	  this.bipedWing = new ModelRenderer(this, 64, 16);
 	  this.bipedWing.func_228301_a_(-14.0F, -4.0F, 6.0F, 28.0F, 16.0F, 1.0F, modelSize);

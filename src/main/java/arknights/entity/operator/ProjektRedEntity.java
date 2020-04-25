@@ -165,13 +165,8 @@ public class ProjektRedEntity extends MeleeOperator {
         }
         if(!world.isRemote()) {
             this.tick++;
-            if (this.tick % 19 == 2 && !this.isSkill) {
-                this.sp++;
-            }
-            if (this.sp >= skill1.spCost) {
-                this.sp = 0;
-                this.isSkill = true;
-                this.tick = 0;
+            if (this.tick == 600 ) {
+                this.tick=0;
                 this.yell();
             }
         }

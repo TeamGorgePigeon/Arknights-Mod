@@ -16,16 +16,15 @@ public class WomanModel<T extends LivingEntity> extends HumanModel<T> {
     private final ModelRenderer naizi;
     public WomanModel(float modelSize) {
         super(modelSize);
-        this.naizi = new ModelRenderer(this,12, 23);
-        this.naizi.rotateAngleX=-1.8326F;
-        this.naizi.rotateAngleY=0.0F;
-        this.naizi.rotateAngleZ=0.0F;
-        this.naizi.func_228301_a_(-3.0F, -1.5F, -1.5F, 6F, 3F, 3F, modelSize+0.3F);
-        this.naizi.setRotationPoint(0.0F, 3.5F, -0.5F);
+        this.naizi = new ModelRenderer(this,17, 18);
+        naizi.setRotationPoint(0.0F, 24.0F, 0.0F);
+        this.naizi.func_228301_a_(-4.0F, -21.3291F, 3.2555F, 8, 3, 3, modelSize-0.5F);
     }
     public void func_225597_a_(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
         super.func_225597_a_(p_225597_1_, p_225597_2_, p_225597_3_, p_225597_4_, p_225597_5_, p_225597_6_);
-        this.naizi.copyModelAngles(this.bipedBody);
+        this.naizi.rotateAngleX=0.2967F;
+        this.naizi.rotateAngleY=0.0F;
+        this.naizi.rotateAngleZ=0.0F;
     }
     @Override
     protected Iterable<ModelRenderer> func_225600_b_() {

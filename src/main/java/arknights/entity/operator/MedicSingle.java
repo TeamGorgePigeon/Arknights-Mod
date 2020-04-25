@@ -45,10 +45,6 @@ public abstract class MedicSingle extends OperatorBase implements IRangedAttackM
         this.item = item;
     }
 
-    protected void yell(){
-
-    }
-
     public void tick(){
         super.tick();
         if(this.tick % 20 == 1) {

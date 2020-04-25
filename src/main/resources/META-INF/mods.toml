@@ -8,7 +8,7 @@ modLoader="javafml" #mandatory
 # A version range to match for said mod loader - for regular FML @Mod it will be the forge version
 loaderVersion="[30,)" #mandatory (28 is current forge version)
 # A URL to refer people to when problems occur with this mod
-issueTrackerURL="https://gitee.com/ngyf/Arknights-Mod" #optional
+issueTrackerURL="https://github.com/TeamGrainPigeon/Minecraft-Arknights-Mod" #optional
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 # The modid of the mod
@@ -18,19 +18,28 @@ version="${file.jarVersion}" #mandatory
  # A display name for the mod
 displayName="Arknights" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
-updateJSONURL="https://gitee.com/ngyf/Arknights-Mod" #optional
+updateJSONURL="https://github.com/TeamGrainPigeon/Minecraft-Arknights-Mod" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
-displayURL="https://gitee.com/ngyf/Arknights-Mod" #optional
+displayURL="https://github.com/TeamGrainPigeon/Minecraft-Arknights-Mod" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="arknights.png" #optional
 # A text field displayed in the mod UI
-credits="感谢黄金之匣美工社提供的干员皮肤，GrakePCH大佬的源石、合成玉模型" #optional
+credits="NGYF, Tao0Lu\n感谢黄金之匣美工社提供的干员皮肤，GrakePCH大佬的源石、合成玉模型\nThank Team The Gold Chest for the Operator Skin,GrakePCH for the originium and the orundum models." #optional
 # A text field displayed in the mod UI
 authors="NGYF, Tao0Lu" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
 
-我的世界明日方舟mod，让明日方舟成为真正的方舟
+我的世界明日方舟mod，让明日方舟成为真正的方舟。
+Minecraft Arknights Mod,show the Arknights in the Minecraft.
+
+本mod为明日方舟爱好者所编写，与hypergryph(鹰角网络)和mojang没有任何附属关系。
+mod开源且不收取任何费用，部分模型和文件来自开源项目，或者来源其他并已经授权。
+本mod的源码和其他文件仅做学习交流使用，不得擅自修改闭源或者其他用于商业用途的行为。
+
+This mod has no affiliation with hypergryph and mojang.
+This mod is open source and free. Some models and files are from open source projects or from other sources and have been authorized.
+The source code and other files of this mod are only used for learning and exchange, and they are not allowed to modify the closed source or other behaviors used for commercial purposes without authorization.
 
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
