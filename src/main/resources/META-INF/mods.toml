@@ -35,11 +35,11 @@ Minecraft Arknights Mod,show the Arknights in the Minecraft.
 
 本mod为明日方舟爱好者所编写，与hypergryph(鹰角网络)和mojang没有任何附属关系。
 mod开源且不收取任何费用，部分模型和文件来自开源项目，或者来源其他并已经授权。
-本mod的源码和其他文件仅做学习交流使用，不得擅自修改闭源或者其他用于商业用途的行为。
+由于黄金之匣美工社提供的干员皮肤遵循CC-BY-NC-SA 4.0协议，不得擅自用于商业用途。
 
 This mod has no affiliation with hypergryph and mojang.
 This mod is open source and free. Some models and files are from open source projects or from other sources and have been authorized.
-The source code and other files of this mod are only used for learning and exchange, and they are not allowed to modify the closed source or other behaviors used for commercial purposes without authorization.
+As the skin provided by Team The Gold Chest follows the CC-BY-NC-SA 4.0 agreement, it shall not be used for commercial purposes without authorization.
 
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.

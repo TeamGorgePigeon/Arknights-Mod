@@ -177,6 +177,7 @@ public class OperatorBase extends TameableEntity {
             if (this.getOwner() != null) {
                 String displayOwner = this.getOwner().getDisplayName().getString();
                 String of = new TranslationTextComponent("info.of").getString();
+                if (of=="'s")
                 this.setCustomName(new TranslationTextComponent(displayOwner  + of + " " + this.getDisplayName().getString()));
             } else {
                 this.setCustomName(new TranslationTextComponent(this.getDisplayName().getString()));
