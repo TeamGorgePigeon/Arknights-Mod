@@ -33,6 +33,7 @@ public class EntityHandler {
     public static final EntityType<OriginiumSlugEntity> ORIGINIUMSLUG = registerEntity(MODID + ":" + "originium_slug", EntityType.Builder.create(OriginiumSlugEntity::new, EntityClassification.MONSTER).size(0.8F, 0.5F));
     public static final EntityType<CrownslayerEntity> CROWNSLAYER = (EntityType<CrownslayerEntity>)EntityType.Builder.<CrownslayerEntity>create(CrownslayerEntity::new, EntityClassification.CREATURE).build("crownslayer").setRegistryName(MODID + ":" + "crownslayer");
     public static final EntityType<FaustEntity> FAUST = (EntityType<FaustEntity>)EntityType.Builder.<FaustEntity>create(FaustEntity::new, EntityClassification.CREATURE).build("faust").setRegistryName(MODID + ":" + "faust");
+    public static final EntityType<EnemyWEntity> EnemyW = (EntityType<EnemyWEntity>)EntityType.Builder.<EnemyWEntity>create(EnemyWEntity::new, EntityClassification.CREATURE).build("enemyw").setRegistryName(MODID + ":" + "enemyw");
     public static final EntityType<FlyingEnemy> MONSTERUAV = (EntityType<FlyingEnemy>)EntityType.Builder.<FlyingEnemy>create(FlyingEnemy::new, EntityClassification.CREATURE).build("monster_uav").setRegistryName(MODID + ":" + "monster_uav");
 
     public static final EntityType<ProjektRedEntity> PROJEKTRED=(EntityType<ProjektRedEntity>)EntityType.Builder.<ProjektRedEntity>create(ProjektRedEntity::new, EntityClassification.CREATURE).build("projektred").setRegistryName(MODID + ":" + "projektred");
@@ -74,7 +75,8 @@ public class EntityHandler {
 
         r.register(CROWNSLAYER);
         r.register(FAUST);
-        //r.register(MONSTERUAV);
+        r.register(EnemyW);
+        r.register(MONSTERUAV);
 
 
         /*registerEntityWorldSpawn(ORIGINIUMSLUG, 1, Biomes.SNOWY_TAIGA, Biomes.ICE_SPIKES, Biomes.SNOWY_TUNDRA,

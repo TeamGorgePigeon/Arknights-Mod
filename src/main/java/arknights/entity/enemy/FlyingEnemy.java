@@ -209,6 +209,10 @@ public class FlyingEnemy extends FlyingEntity implements IMob {
         }
     }
 
+    public int getFlyingEnemySize() {
+        return this.dataManager.get(SIZE);
+    }
+
     protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
         return 1.75F;
     }

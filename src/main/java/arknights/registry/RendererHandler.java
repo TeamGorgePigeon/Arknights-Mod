@@ -14,6 +14,7 @@ public class RendererHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.ORIGINIUMSLUG, OriginiumSlugRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.CROWNSLAYER, CrownslayerRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.FAUST, FaustRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHandler.EnemyW, WRenderer::new);
         //RenderingRegistry.registerEntityRenderingHandler(EntityHandler.MONSTERUAV, MonsterUAVRenderer::new);
 
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.BULLET, BulletRenderer::new);
