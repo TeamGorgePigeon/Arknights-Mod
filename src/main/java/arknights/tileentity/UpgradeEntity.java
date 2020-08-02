@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -29,7 +30,7 @@ public class UpgradeEntity extends TileEntity implements INamedContainerProvider
 
     @Override
     public ITextComponent getDisplayName() {
-        return null;
+        return new TranslationTextComponent("Update");
     }
 
     @Nullable
