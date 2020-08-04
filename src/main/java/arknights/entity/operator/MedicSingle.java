@@ -5,6 +5,7 @@ import arknights.entity.enemy.EnemyBase;
 import arknights.item.OperatorItem;
 import arknights.registry.SoundHandler;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.boss.WitherEntity;
@@ -98,12 +99,16 @@ public abstract class MedicSingle extends OperatorBase implements IRangedAttackM
         //this.targetSelector.addGoal(1, new MedicSingleHealTarget(this, true));
     }
 
+    public static AttributeModifierMap.MutableAttribute registerAttributes() {
+        return TameableEntity.func_233639_cI_()
+                .func_233815_a_(Attributes.field_233818_a_, 20.0D)
+                .func_233815_a_(Attributes.field_233821_d_, 0.3D)
+                .func_233815_a_(Attributes.field_233823_f_, 5.0D);
+    }
+
     @Override
     protected void registerData() {
         super.registerData();
-        this.getAttribute(Attributes.field_233818_a_).setBaseValue(20.0D);
-        this.setHealth(20.0F);
-        this.getAttribute(Attributes.field_233821_d_).setBaseValue(0.3D);
         this.dataManager.register(OPERATORATTACKING, false);
     }
 

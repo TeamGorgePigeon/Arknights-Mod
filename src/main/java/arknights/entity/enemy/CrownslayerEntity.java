@@ -3,7 +3,9 @@ package arknights.entity.enemy;
 import arknights.entity.model.CrownslayerModel;
 import arknights.registry.ItemHandler;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -32,12 +34,16 @@ public class CrownslayerEntity extends MeleeEnemy {
     /**
      * Returns the Y Offset of this entity.
      */
+    public static AttributeModifierMap.MutableAttribute registerAttributes() {
+        return MonsterEntity.func_234295_eP_()
+                .func_233815_a_(Attributes.field_233818_a_, 25.0D)
+                .func_233815_a_(Attributes.field_233821_d_, 0.3D)
+                .func_233815_a_(Attributes.field_233823_f_, 5.0D);
+    }
+
     @Override
     protected void registerData() {
         super.registerData();
-        this.getAttribute(Attributes.field_233818_a_).setBaseValue(25.0D);
-        this.setHealth(25.0F);
-        this.getAttribute(Attributes.field_233823_f_).setBaseValue(5.0D);
         //this.dataManager.register(OPERATORATTACKING, false);
     }
 

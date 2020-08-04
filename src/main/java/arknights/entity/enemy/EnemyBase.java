@@ -45,20 +45,16 @@ public class EnemyBase extends MonsterEntity {
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
     }
 
-    public static AttributeModifierMap.MutableAttribute func_234305_eI_() {
-        return MonsterEntity.func_234295_eP_().func_233815_a_(Attributes.field_233818_a_, 16.0D).func_233815_a_(Attributes.field_233821_d_, (double)0.3F);
-    }
-
-    public static AttributeModifierMap.MutableAttribute func_234278_m_() {
-        return MonsterEntity.func_234295_eP_().func_233815_a_(Attributes.field_233821_d_, 0.25D);
+    public static AttributeModifierMap.MutableAttribute registerAttributes() {
+        return MonsterEntity.func_234295_eP_()
+                .func_233815_a_(Attributes.field_233818_a_, 20.0D)
+                .func_233815_a_(Attributes.field_233821_d_, 0.3D)
+                .func_233815_a_(Attributes.field_233823_f_, 5.0D);
     }
 
     @Override
     protected void registerData() {
         super.registerData();
-        this.getAttribute(Attributes.field_233818_a_).setBaseValue(20.0D);
-        this.setHealth(20.0F);
-        this.getAttribute(Attributes.field_233821_d_).setBaseValue(0.3D);
         //this.dataManager.register(OPERATORATTACKING, false);
     }
 

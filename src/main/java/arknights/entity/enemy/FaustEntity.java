@@ -5,7 +5,9 @@ import arknights.registry.ItemHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -47,15 +49,17 @@ public class FaustEntity extends CrossBowEnemy {
         super.registerGoals();
     }
 
+    public static AttributeModifierMap.MutableAttribute registerAttributes() {
+        return MonsterEntity.func_234295_eP_()
+                .func_233815_a_(Attributes.field_233818_a_, 30.0D)
+                .func_233815_a_(Attributes.field_233821_d_, 0.35D)
+                .func_233815_a_(Attributes.field_233823_f_, 20.0D)
+                .func_233815_a_(Attributes.field_233819_b_, 32.0D);
+    }
 
     protected void registerData() {
         super.registerData();
         this.dataManager.register(DATA_CHARGING_STATE, false);
-        this.getAttribute(Attributes.field_233821_d_).setBaseValue((double)0.35F);
-        this.getAttribute(Attributes.field_233818_a_).setBaseValue(30.0D);
-        this.setHealth(20.0F);
-        this.getAttribute(Attributes.field_233823_f_).setBaseValue(20.0D);
-        this.getAttribute(Attributes.field_233819_b_).setBaseValue(32.0D);
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -4,11 +4,13 @@ package arknights.entity.enemy;
 import arknights.entity.operator.OperatorBase;
 import arknights.registry.SoundHandler;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.LookController;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.monster.PhantomEntity;
 import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -100,12 +102,15 @@ public class FlyingEnemy extends FlyingEntity implements IMob {
         this.targetSelector.addGoal(1, new AttackEntityGoal());
     }
 
+    public static AttributeModifierMap.MutableAttribute registerAttributes() {
+        return MonsterEntity.func_234295_eP_()
+                .func_233815_a_(Attributes.field_233818_a_, 20.0D)
+                .func_233815_a_(Attributes.field_233821_d_, 0.3D);
+    }
+
     @Override
     protected void registerData() {
         super.registerData();
-        this.getAttribute(Attributes.field_233818_a_).setBaseValue(20.0D);
-        this.setHealth(20.0F);
-        this.getAttribute(Attributes.field_233821_d_).setBaseValue(0.3D);
         //this.dataManager.register(OPERATORATTACKING, false);
     }
 

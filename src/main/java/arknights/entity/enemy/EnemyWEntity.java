@@ -5,8 +5,10 @@ import arknights.registry.SoundHandler;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
@@ -51,11 +53,14 @@ public class EnemyWEntity extends RangeEnemy {
     /**
      * Returns the Y Offset of this entity.
      */
+    public static AttributeModifierMap.MutableAttribute registerAttributes() {
+        return MonsterEntity.func_234295_eP_()
+                .func_233815_a_(Attributes.field_233818_a_, 40.0D);
+    }
+
     @Override
     protected void registerData() {
         super.registerData();
-        this.getAttribute(Attributes.field_233818_a_).setBaseValue(40.0D);
-        this.setHealth(40.0F);
         //this.dataManager.register(OPERATORATTACKING, false);
     }
 

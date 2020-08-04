@@ -4,6 +4,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.math.BlockPos;
@@ -33,16 +34,16 @@ public class OriginiumSlugEntity extends MeleeEnemy {
     * Returns the Y Offset of this entity.
     */
 
-   public static AttributeModifierMap.MutableAttribute func_234278_m_() {
-      return MobEntity.func_233666_p_().func_233815_a_(Attributes.field_233818_a_, 8.0D).func_233815_a_(Attributes.field_233821_d_, (double)0.23F);
+   public static AttributeModifierMap.MutableAttribute registerAttributes() {
+      return MonsterEntity.func_234295_eP_()
+              .func_233815_a_(Attributes.field_233818_a_, 8.0D)
+              .func_233815_a_(Attributes.field_233821_d_, 0.3D)
+              .func_233815_a_(Attributes.field_233823_f_, 3.0D);
    }
+
    @Override
    protected void registerData() {
       super.registerData();
-      this.getAttribute(Attributes.field_233818_a_).setBaseValue(8.0D);
-      this.setHealth(8.0F);
-      this.getAttribute(Attributes.field_233821_d_).setBaseValue(0.3D);
-      this.getAttribute(Attributes.field_233823_f_).setBaseValue(3.0D);
       //this.dataManager.register(OPERATORATTACKING, false);
    }
 
