@@ -1,6 +1,7 @@
 package arknights.tileentity;
 
 import arknights.container.UpgradeContainer;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -44,11 +45,9 @@ public class UpgradeEntity extends TileEntity implements INamedContainerProvider
         return write(new CompoundNBT());
     }
 
-    @Override
-    public void read(@Nonnull CompoundNBT nbt) {
-        super.read(nbt);
+    public void func_230337_a_(BlockState blockState, CompoundNBT nbt) {
+        super.func_230337_a_(blockState, nbt);
     }
-
     @Nonnull
     @Override
     public CompoundNBT write( CompoundNBT nbt) {

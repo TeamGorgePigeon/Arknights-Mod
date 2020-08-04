@@ -3,6 +3,7 @@ package arknights.tileentity;
 import arknights.container.TradingHomeContainer;
 import arknights.registry.ItemHandler;
 import arknights.registry.TileEntityHandler;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
@@ -54,19 +55,18 @@ public class TradingHomeEntity extends TileEntity implements ITickableTileEntity
         return write(new CompoundNBT());
     }
 
-    @Override
-    public void read(@Nonnull CompoundNBT nbt) {
-        super.read(nbt);
-        inventory.deserializeNBT(nbt);
-        CompoundNBT time = getUpdateTag().getCompound("time");
-    }
-
     @Nonnull
     @Override
     public CompoundNBT write( CompoundNBT nbt) {
         nbt = super.write(nbt);
-        nbt.merge(inventory.serializeNBT());
+
         return nbt;
+    }
+
+    public void func_230337_a_(BlockState blockState, CompoundNBT nbt) {
+        super.func_230337_a_(blockState, nbt);
+        inventory.deserializeNBT(nbt);
+        CompoundNBT time = getUpdateTag().getCompound("time");
     }
 
     private boolean canManufacture(){

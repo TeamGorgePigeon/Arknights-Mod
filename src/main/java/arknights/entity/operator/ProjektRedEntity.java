@@ -16,7 +16,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -45,15 +45,10 @@ public class ProjektRedEntity extends MeleeOperator {
      * Returns the Y Offset of this entity.
      */
 
-    protected void registerAttributes() {
-        super.registerAttributes();
-    }
-
-
     public void livingTick() {
         super.livingTick();
         if (onSpawn) {
-            Vec3d vec3d = this.getPositionVec();
+            Vector3d vec3d = this.getPositionVec();
             List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(vec3d.x - 8, vec3d.y - 2, vec3d.z - 8, vec3d.x + 8, vec3d.y + 2, vec3d.z + 8));
             for (int k2 = 0; k2 < list.size(); ++k2) {
                 Entity entity = list.get(k2);

@@ -38,7 +38,7 @@ public class EnemyCrossbowAttackGoal<T extends MonsterEntity & IRangedAttackMob 
     }
 
     private boolean func_220745_g() {
-        return this.field_220748_a.isHolding(ItemHandler.FAUST_CROSSBOW);
+        return this.field_220748_a.getHeldItemMainhand().getItem()==ItemHandler.FAUST_CROSSBOW;
     }
 
     /**

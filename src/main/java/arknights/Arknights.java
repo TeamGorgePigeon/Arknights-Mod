@@ -71,7 +71,7 @@ public class Arknights
         // some preinit code
         EntitySpawnHandler.register();
         for(Biome biome : Registry.BIOME){
-            if(biome != Biomes.NETHER && biome != Biomes.THE_VOID && biome != Biomes.THE_END && biome != Biomes.SMALL_END_ISLANDS && biome != Biomes.END_MIDLANDS && biome != Biomes.END_HIGHLANDS && biome != Biomes.END_BARRENS) {
+            if(biome != Biomes.field_235254_j_ && biome != Biomes.THE_VOID && biome != Biomes.THE_END && biome != Biomes.SMALL_END_ISLANDS && biome != Biomes.END_MIDLANDS && biome != Biomes.END_HIGHLANDS && biome != Biomes.END_BARRENS) {
                 OrirockGen.addOrirocks(biome);
             }
         }
@@ -88,7 +88,7 @@ public class Arknights
     private void enqueueIMC(final InterModEnqueueEvent event)
     {
         // some example code to dispatch IMC to another mod
-        InterModComms.sendTo("examplemod", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
+        InterModComms.sendTo("arknights", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
     }
 
     private void processIMC(final InterModProcessEvent event)
@@ -107,6 +107,7 @@ public class Arknights
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
     // Event bus for receiving Registry Events)
+    
     @Mod.EventBusSubscriber(modid = Arknights.MODID, bus=Mod.EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents {
         @SubscribeEvent

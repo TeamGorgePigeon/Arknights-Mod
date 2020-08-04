@@ -23,11 +23,11 @@ public class ExusiaiModel<T extends ExusiaiEntity> extends WomanModel {
       super(modelSize);
 
 	  this.bipedHalo = new ModelRenderer(this, 64, 0);
-	  this.bipedHalo.func_228301_a_(-4.0F, -9.0F, -4.0F, 8.0F, 1.0F, 8.0F, modelSize );
+	  this.bipedHalo.addBox(-4.0F, -9.0F, -4.0F, 8.0F, 1.0F, 8.0F, modelSize );
 	  this.bipedHalo.setRotationPoint(this.bipedHead.rotationPointX, this.bipedHead.rotationPointY+2.0F, this.bipedHead.rotationPointZ);
 
 	  this.bipedWing = new ModelRenderer(this, 64, 16);
-	  this.bipedWing.func_228301_a_(-14.0F, -4.0F, 6.0F, 28.0F, 16.0F, 1.0F, modelSize);
+	  this.bipedWing.addBox(-14.0F, -4.0F, 6.0F, 28.0F, 16.0F, 1.0F, modelSize);
 	  this.bipedWing.setRotationPoint(0, 0, 0);
 
 	  //this.bipedHead.addChild(bipedHalo);
@@ -52,8 +52,8 @@ public class ExusiaiModel<T extends ExusiaiEntity> extends WomanModel {
 
 
    @Override
-    protected Iterable<ModelRenderer> func_225600_b_() {
-        return Iterables.concat(super.func_225600_b_(), ImmutableList.of(this.bipedHalo, this.bipedWing));
+    protected Iterable<ModelRenderer> getBodyParts() {
+        return Iterables.concat(super.getBodyParts(), ImmutableList.of(this.bipedHalo, this.bipedWing));
     }
 
     @Override
@@ -74,7 +74,7 @@ public class ExusiaiModel<T extends ExusiaiEntity> extends WomanModel {
         float f = p_225599_1_ == HandSide.RIGHT ? 1.0F : -1.0F;
         ModelRenderer modelrenderer = this.getArmForSide(p_225599_1_);
         modelrenderer.rotationPointX += f;
-        modelrenderer.func_228307_a_(p_225599_2_);
+        modelrenderer.translateRotate(p_225599_2_);
         modelrenderer.rotationPointX -= f;
         this.bipedHalo.copyModelAngles(this.bipedHeadwear);
         this.bipedWing.copyModelAngles(this.bipedBodyWear);

@@ -1,5 +1,5 @@
 package arknights.entity.notLiving;
-
+/*
 import arknights.registry.EntityHandler;
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
@@ -8,9 +8,11 @@ import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -26,6 +28,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.IndirectEntityDamageSource;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
@@ -35,7 +38,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class AmiyaMagic extends MobEntity implements IProjectile {
+public class AmiyaMagic extends MobEntity implements ProjectileEntity {
     private static final DataParameter<Byte> CRITICAL = EntityDataManager.createKey(BulletEntity.class, DataSerializers.BYTE);
     protected static final DataParameter<Optional<UUID>> UUID = EntityDataManager.createKey(BulletEntity.class, DataSerializers.OPTIONAL_UNIQUE_ID);
     private static final DataParameter<Byte> BYTE = EntityDataManager.createKey(BulletEntity.class, DataSerializers.BYTE);
@@ -62,17 +65,12 @@ public class AmiyaMagic extends MobEntity implements IProjectile {
         this.setShooter(p_i48548_2_);
     }
 
-    public void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1.0D);
-    }
-
     @Override
     protected void registerData() {
         this.dataManager.register(CRITICAL, (byte)0);
+        this.getAttribute(Attributes.field_233818_a_).setBaseValue(1.0D);
         //this.dataManager.register(UUID, Optional.empty());
         this.dataManager.register(BYTE, (byte)0);
-
     }
 
     @Override
@@ -109,9 +107,10 @@ public class AmiyaMagic extends MobEntity implements IProjectile {
     /**
      * Similar to setArrowHeading, it's point the throwable entity to a x, y, z direction.
      */
+/*
     @Override
     public void shoot(double x, double y, double z, float velocity, float inaccuracy) {
-        Vec3d vec3d = (new Vec3d(x, y, z)).normalize().add(this.rand.nextGaussian() * (double)0.0075F * (double)inaccuracy, this.rand.nextGaussian() * (double)0.0075F * (double)inaccuracy, this.rand.nextGaussian() * (double)0.0075F * (double)inaccuracy).scale((double)velocity);
+        Vector3d vec3d = (new Vector3d(x, y, z)).normalize().add(this.rand.nextGaussian() * (double)0.0075F * (double)inaccuracy, this.rand.nextGaussian() * (double)0.0075F * (double)inaccuracy, this.rand.nextGaussian() * (double)0.0075F * (double)inaccuracy).scale((double)velocity);
         this.setMotion(vec3d);
         float f = MathHelper.sqrt(func_213296_b(vec3d));
         this.rotationYaw = (float)(MathHelper.atan2(vec3d.x, vec3d.z) * (double)(180F / (float)Math.PI));
@@ -415,6 +414,7 @@ public class AmiyaMagic extends MobEntity implements IProjectile {
     /**
      * Returns true if it's possible to attack this entity with an item.
      */
+/*
     public boolean canBeAttackedWithItem() {
         return false;
     }
@@ -422,6 +422,7 @@ public class AmiyaMagic extends MobEntity implements IProjectile {
     /**
      * Whether the arrow has a stream of critical hit particles flying behind it.
      */
+/*
     public void setIsCritical(boolean critical) {
         this.func_203049_a(1, critical);
     }
@@ -443,6 +444,7 @@ public class AmiyaMagic extends MobEntity implements IProjectile {
     /**
      * Whether the arrow has a stream of critical hit particles flying behind it.
      */
+/*
     public boolean getIsCritical() {
         byte b0 = this.dataManager.get(CRITICAL);
         return (b0 & 1) != 0;
@@ -484,3 +486,4 @@ public class AmiyaMagic extends MobEntity implements IProjectile {
         }
     }
 }
+*/

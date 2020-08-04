@@ -1,21 +1,20 @@
-package arknights.renderer.entity;
+/*package arknights.renderer.entity;
 
 import arknights.entity.operator.RopeEntity;
 import arknights.entity.special.Hook;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.*;
+import com.sun.javafx.geom.Matrix3f;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.FishingBobberEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.HandSide;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Matrix4f;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.vector.Vector3f;
 
 public class HookRenderer extends EntityRenderer<Hook> {
     private static final ResourceLocation BOBBER = new ResourceLocation("textures/entity/fishing_hook.png");
@@ -25,27 +24,27 @@ public class HookRenderer extends EntityRenderer<Hook> {
         super(renderManagerIn);
     }
 
-    public void func_225623_a_(Hook p_225623_1_, float p_225623_2_, float p_225623_3_, MatrixStack p_225623_4_, IRenderTypeBuffer p_225623_5_, int p_225623_6_) {
-        RopeEntity angler = p_225623_1_.getAngler();
+    public void render(Hook entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
+        RopeEntity angler = entityIn.getAngler();
         if (angler != null) {
-            p_225623_4_.func_227860_a_();
-            p_225623_4_.func_227860_a_();
-            p_225623_4_.func_227862_a_(0.5F, 0.5F, 0.5F);
-            p_225623_4_.func_227863_a_(this.renderManager.func_229098_b_());
-            p_225623_4_.func_227863_a_(Vector3f.field_229181_d_.func_229187_a_(180.0F));
-            MatrixStack.Entry matrixstack$entry = p_225623_4_.func_227866_c_();
+            matrixStackIn.push();
+            matrixStackIn.push();
+            matrixStackIn.scale(0.5F, 0.5F, 0.5F);
+            matrixStackIn.rotate(this.renderManager.func_229098_b_());
+            matrixStackIn.rotate(Vector3f.field_229181_d_.func_229187_a_(180.0F));
+            MatrixStack.Entry matrixstack$entry = matrixStackIn.func_227866_c_();
             Matrix4f matrix4f = matrixstack$entry.func_227870_a_();
             Matrix3f matrix3f = matrixstack$entry.func_227872_b_();
-            IVertexBuilder ivertexbuilder = p_225623_5_.getBuffer(field_229103_e_);
-            func_229106_a_(ivertexbuilder, matrix4f, matrix3f, p_225623_6_, 0.0F, 0, 0, 1);
-            func_229106_a_(ivertexbuilder, matrix4f, matrix3f, p_225623_6_, 1.0F, 0, 1, 1);
-            func_229106_a_(ivertexbuilder, matrix4f, matrix3f, p_225623_6_, 1.0F, 1, 1, 0);
-            func_229106_a_(ivertexbuilder, matrix4f, matrix3f, p_225623_6_, 0.0F, 1, 0, 0);
-            p_225623_4_.func_227865_b_();
+            IVertexBuilder ivertexbuilder = bufferIn.getBuffer(field_229103_e_);
+            func_229106_a_(ivertexbuilder, matrix4f, matrix3f, packedLightIn, 0.0F, 0, 0, 1);
+            func_229106_a_(ivertexbuilder, matrix4f, matrix3f, packedLightIn, 1.0F, 0, 1, 1);
+            func_229106_a_(ivertexbuilder, matrix4f, matrix3f, packedLightIn, 1.0F, 1, 1, 0);
+            func_229106_a_(ivertexbuilder, matrix4f, matrix3f, packedLightIn, 0.0F, 1, 0, 0);
+            matrixStackIn.pop();
 
-            float f = angler.getSwingProgress(p_225623_3_);
+            float f = angler.getSwingProgress(partialTicks);
             float f1 = MathHelper.sin(MathHelper.sqrt(f) * (float)Math.PI);
-            float f2 = MathHelper.lerp(p_225623_3_, angler.prevRenderYawOffset, angler.renderYawOffset) * ((float)Math.PI / 180F);
+            float f2 = MathHelper.lerp(partialTicks, angler.prevRenderYawOffset, angler.renderYawOffset) * ((float)Math.PI / 180F);
             double d0 = (double)MathHelper.sin(f2);
             double d1 = (double)MathHelper.cos(f2);
             double d2 = 0.35D;
@@ -57,30 +56,30 @@ public class HookRenderer extends EntityRenderer<Hook> {
             if ((this.renderManager.options == null || this.renderManager.options.thirdPersonView <= 0)) {
                 double d7 = this.renderManager.options.fov;
                 d7 = d7 / 100.0D;
-                Vec3d vec3d = new Vec3d(-0.36D * d7, -0.045D * d7, 0.4D);
-                vec3d = vec3d.rotatePitch(-MathHelper.lerp(p_225623_3_, angler.prevRotationPitch, angler.rotationPitch) * ((float)Math.PI / 180F));
-                vec3d = vec3d.rotateYaw(-MathHelper.lerp(p_225623_3_, angler.prevRotationYaw, angler.rotationYaw) * ((float)Math.PI / 180F));
+                Vector3d vec3d = new Vector3d(-0.36D * d7, -0.045D * d7, 0.4D);
+                vec3d = vec3d.rotatePitch(-MathHelper.lerp(partialTicks, angler.prevRotationPitch, angler.rotationPitch) * ((float)Math.PI / 180F));
+                vec3d = vec3d.rotateYaw(-MathHelper.lerp(partialTicks, angler.prevRotationYaw, angler.rotationYaw) * ((float)Math.PI / 180F));
                 vec3d = vec3d.rotateYaw(f1 * 0.5F);
                 vec3d = vec3d.rotatePitch(-f1 * 0.7F);
-                d4 = MathHelper.lerp((double)p_225623_3_, angler.prevPosX, angler.func_226277_ct_()) + vec3d.x;
-                d5 = MathHelper.lerp((double)p_225623_3_, angler.prevPosY, angler.func_226278_cu_()) + vec3d.y;
-                d6 = MathHelper.lerp((double)p_225623_3_, angler.prevPosZ, angler.func_226281_cx_()) + vec3d.z;
+                d4 = MathHelper.lerp((double)partialTicks, angler.prevPosX, angler.getPosX()) + vec3d.x;
+                d5 = MathHelper.lerp((double)partialTicks, angler.prevPosY, angler.getPosY()) + vec3d.y;
+                d6 = MathHelper.lerp((double)partialTicks, angler.prevPosZ, angler.getPosZ()) + vec3d.z;
                 f3 = angler.getEyeHeight();
             } else {
-                d4 = MathHelper.lerp((double)p_225623_3_, angler.prevPosX, angler.func_226277_ct_()) - d1 * d2 - d0 * 0.8D;
-                d5 = angler.prevPosY + (double)angler.getEyeHeight() + (angler.func_226278_cu_() - angler.prevPosY) * (double)p_225623_3_ - 0.45D;
-                d6 = MathHelper.lerp((double)p_225623_3_, angler.prevPosZ, angler.func_226281_cx_()) - d0 * d2 + d1 * 0.8D;
+                d4 = MathHelper.lerp((double)partialTicks, angler.prevPosX, angler.getPosX()) - d1 * d2 - d0 * 0.8D;
+                d5 = angler.prevPosY + (double)angler.getEyeHeight() + (angler.getPosY() - angler.prevPosY) * (double)partialTicks - 0.45D;
+                d6 = MathHelper.lerp((double)partialTicks, angler.prevPosZ, angler.getPosZ() - d0 * d2 + d1 * 0.8D;
                 f3 = angler.isCrouching() ? -0.1875F : 0.0F;
             }
 
-            double d9 = MathHelper.lerp((double)p_225623_3_, p_225623_1_.prevPosX, p_225623_1_.func_226277_ct_());
-            double d10 = MathHelper.lerp((double)p_225623_3_, p_225623_1_.prevPosY, p_225623_1_.func_226278_cu_()) + 0.25D;
-            double d8 = MathHelper.lerp((double)p_225623_3_, p_225623_1_.prevPosZ, p_225623_1_.func_226281_cx_());
+            double d9 = MathHelper.lerp((double)partialTicks, entityIn.prevPosX, entityIn.getPosX());
+            double d10 = MathHelper.lerp((double)partialTicks, entityIn.prevPosY, entityIn.getPosY()) + 0.25D;
+            double d8 = MathHelper.lerp((double)partialTicks, entityIn.prevPosZ, entityIn.getPosZ());
             float f4 = (float)(d4 - d9);
             float f5 = (float)(d5 - d10) + f3;
             float f6 = (float)(d6 - d8);
-            IVertexBuilder ivertexbuilder1 = p_225623_5_.getBuffer(RenderType.func_228659_m_());
-            Matrix4f matrix4f1 = p_225623_4_.func_227866_c_().func_227870_a_();
+            IVertexBuilder ivertexbuilder1 = bufferIn.getBuffer(RenderType.func_228659_m_());
+            Matrix4f matrix4f1 = matrixStackIn.func_227866_c_().func_227870_a_();
             int j = 16;
 
             for(int k = 0; k < 16; ++k) {
@@ -88,8 +87,8 @@ public class HookRenderer extends EntityRenderer<Hook> {
                 func_229104_a_(f4, f5, f6, ivertexbuilder1, matrix4f1, func_229105_a_(k + 1, 16));
             }
 
-            p_225623_4_.func_227865_b_();
-            super.func_225623_a_(p_225623_1_, p_225623_2_, p_225623_3_, p_225623_4_, p_225623_5_, p_225623_6_);
+            matrixStackIn.pop();
+            super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
         }
     }
 
@@ -109,3 +108,4 @@ public class HookRenderer extends EntityRenderer<Hook> {
         return BOBBER;
     }
 }
+*/

@@ -2,7 +2,7 @@ package arknights.entity.operator;
 
 import arknights.Skill;
 import arknights.entity.model.ExusiaiModel;
-import arknights.entity.notLiving.BulletEntity;
+//import arknights.entity.notLiving.BulletEntity;
 import arknights.registry.EntityHandler;
 import arknights.registry.ItemHandler;
 import arknights.registry.SoundHandler;
@@ -41,28 +41,26 @@ public class ExusiaiEntity extends RangeOperator{
      * Returns the Y Offset of this entity.
      */
 
-    protected void registerAttributes() {
-        super.registerAttributes();
-    }
-
     public void attackEntityWithRangedAttack(LivingEntity target, float var2){
+        /*
         if(!(target instanceof OperatorBase) && target != this.getOwner()) {
-            double deltaX = target.func_226277_ct_() - this.func_226277_ct_();
+            double deltaX = target.getPosX() - this.getPosX();
             double deltaY;
-            double deltaZ = target.func_226281_cx_() - this.func_226281_cx_();
+            double deltaZ = target.getPosZ() - this.getPosZ();
             double distance = (double) MathHelper.sqrt(deltaX * deltaX + deltaZ * deltaZ);
             //float f = MathHelper.sqrt(deltaY * deltaY + distance * distance) * 0.2F;
 
             if (!this.isSkill && !world.isRemote()) {
                 BulletEntity bulletEntity = new BulletEntity(this, this.world);
-                deltaY = target.func_226283_e_(0.3333333333333333D) - bulletEntity.func_226278_cu_();
+
+                deltaY = target.getPosYHeight(0.3333333333333333D) - bulletEntity.getPosY();
                 bulletEntity.shoot(deltaX, deltaY, deltaZ, 1.6F, 1.0F);
                 this.playSound(SoundHandler.EXUSIAI_ATTACK, 1.0F, 1.0F);
                 this.world.addEntity(bulletEntity);
             } else if (this.isSkill) {
                 for (int i = 0; i < 5; i++) {
                     BulletEntity bulletEntity = new BulletEntity(this, this.world);
-                    deltaY = target.func_226283_e_(0.3333333333333333D) - bulletEntity.func_226278_cu_();
+                    deltaY = target.getPosYHeight(0.3333333333333333D) - bulletEntity.getPosY();
                     //float f = MathHelper.sqrt(deltaY * deltaY + distance * distance) * 0.2F;
                     bulletEntity.shoot(deltaX, deltaY, deltaZ, 1.6F, 1.0F);
                     this.world.addEntity(bulletEntity);
@@ -70,7 +68,7 @@ public class ExusiaiEntity extends RangeOperator{
                 this.playSound(SoundHandler.EXUSIAI_SKILLATTACK, 1.0F, 1.0F);
             }
         }
-
+*/
     }
 
     protected void yell(){

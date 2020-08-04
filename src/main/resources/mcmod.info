@@ -1,12 +1,12 @@
 [{
 	"modid": "arknights",
-	"name": "Arknights",
+	"name": "Arknights Mod",
 	"description": "Minecraft Arknights Mod",
 	"version": "0.0.0.1",
-	"mcversion": "1.15.2",
+	"mcversion": "1.16.1",
 	"logoFile": "assets/arknights/textures/logo.png",
-	"url": "",
-	"updateJSON": "",
+	"url": "https://github.com/TeamGrainPigeon/Minecraft-Arknights-Mod",
+	"updateJSON": "https://github.com/TeamGrainPigeon/Minecraft-Arknights-Mod",
 	"authorList": ["NGYF,Tao0Lu"],
 	"credits": ""
 }]

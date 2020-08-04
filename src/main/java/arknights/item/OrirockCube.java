@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -23,6 +24,6 @@ public class OrirockCube extends BlockItem {
     @Override
     public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
         super.addInformation(stack, world, tooltip, flag);
-        tooltip.set(0, tooltip.get(0).applyTextStyle(TextFormatting.YELLOW));
+        tooltip.set(0, new TranslationTextComponent(tooltip.get(0).getString()).func_240699_a_(TextFormatting.YELLOW));
     }
 }

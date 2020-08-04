@@ -10,18 +10,17 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particles.ItemParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -50,14 +49,9 @@ public class ShawEntity extends MeleeOperator {
      * Returns the Y Offset of this entity.
      */
 
-    protected void registerAttributes() {
-        super.registerAttributes();
-        //this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
-    }
-
 
     public void livingTick() {
-        if(!world.isRemote()) {
+        if(!this.world.isRemote) {
             this.dataManager.set(OPERATORATTACKING, (this.getAttackTarget() != null));
             this.tick++;
             if (this.tick % 19 == 2 && !this.isSkill) {
@@ -95,11 +89,11 @@ public class ShawEntity extends MeleeOperator {
 
     @Override
     public boolean attackEntityAsMob(Entity entityIn) {
-        Vec3d vec3d = this.getPositionVec();
+        Vector3d vec3d = this.getPositionVec();
         boolean flag =true;
         if (!(entityIn instanceof OperatorBase)) {
             float f = 3.0f;//(float) this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue();
-            float f1 = (float) this.getAttribute(SharedMonsterAttributes.ATTACK_KNOCKBACK).getValue();
+            float f1 = (float) this.getAttribute(Attributes.field_233824_g_).getValue();
             if (entityIn instanceof LivingEntity) {
                 f += EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((LivingEntity) entityIn).getCreatureAttribute());
                 f1 += (float) EnchantmentHelper.getKnockbackModifier(this);
@@ -114,11 +108,11 @@ public class ShawEntity extends MeleeOperator {
                     List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(vec3d.x - 3, vec3d.y - 0.5, vec3d.z - 3, vec3d.x + 3, vec3d.y + 0.5, vec3d.z + 3));
                     for (int k2 = 0; k2 < list.size(); ++k2) {
                         Entity entity = list.get(k2);
-                        Vec3d pos = entity.getPositionVec();
+                        Vector3d pos = entity.getPositionVec();
                         double entityAngle = -Math.toDegrees(Math.atan2(pos.x - this.getPositionVec().x, pos.z - this.getPositionVec().z));
                         if ((Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(this.rotationYaw)) <= 90 || Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(this.rotationYaw)) >= 270) && entity.getDistance(this) <= 3) {
                             if (entity instanceof LivingEntity && !(entity instanceof OperatorBase)) {
-                                ((LivingEntity) entity).knockBack(this, 5.0F, (double) MathHelper.sin(this.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(this.rotationYaw * ((float) Math.PI / 180F))));
+                                ((LivingEntity) entity).func_233627_a_( 5.0F, (double) MathHelper.sin(this.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(this.rotationYaw * ((float) Math.PI / 180F))));
                             }
                         }
                     }
@@ -142,11 +136,11 @@ public class ShawEntity extends MeleeOperator {
                 List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(vec3d.x - 3, vec3d.y - 0.5, vec3d.z - 3, vec3d.x + 3, vec3d.y + 0.5, vec3d.z + 3));
                 for (int k2 = 0; k2 < list.size(); ++k2) {
                     Entity entity = list.get(k2);
-                    Vec3d pos = entity.getPositionVec();
+                    Vector3d pos = entity.getPositionVec();
                     double entityAngle = -Math.toDegrees(Math.atan2(pos.x - this.getPositionVec().x, pos.z - this.getPositionVec().z));
                     if ((Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(this.rotationYaw)) <= 90 || Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(this.rotationYaw)) >= 270) && entity.getDistance(this) <= 3) {
                         if (entity instanceof LivingEntity && !(entity instanceof OperatorBase)) {
-                            ((LivingEntity) entity).knockBack(this, 5.0F, (double) MathHelper.sin(this.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(this.rotationYaw * ((float) Math.PI / 180F))));
+                            ((LivingEntity) entity).func_233627_a_( 5.0F, (double) MathHelper.sin(this.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(this.rotationYaw * ((float) Math.PI / 180F))));
                         }
                     }
                 }
@@ -156,18 +150,18 @@ public class ShawEntity extends MeleeOperator {
             }
             this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemHandler.SHAW_AXE));
         }
-        if (this.isSkill && this.world.isRemote) {
+        if (this.isSkill && !this.world.isRemote) {
             double faceAngle = MyMathHelper.in360(this.rotationYaw) * Math.PI / 180;
             for (float R = 0; R <= 2; R = R + 0.2F) {
                 for (double angle = faceAngle + Math.PI * 1 / 4; angle <= faceAngle + Math.PI * 3 / 4; angle = angle + Math.PI / 180) {
                     double cos = Math.cos(angle);
                     double sin = Math.sin(angle);
-                    this.world.addParticle(ParticleTypes.CRIT,vec3d.x + cos * R, vec3d.y + 0.8F, vec3d.z + sin * R, 0, 0.0D, 0);
-                    this.world.addParticle(ParticleTypes.BUBBLE, vec3d.x + cos * R, vec3d.y + 1F, vec3d.z + sin * R, 0, 0.0D, 0);
-                    this.world.addParticle(ParticleTypes.BUBBLE, vec3d.x + cos * R, vec3d.y + 1.2F, vec3d.z + sin * R, 0, 0.0D, 0);
-                    this.world.addParticle(new RedstoneParticleData(0F, 0F, 200F, 1F), vec3d.x + cos * R, vec3d.y + 0.8F, vec3d.z + sin * R, 0, 0, 0);
-                    this.world.addParticle(new RedstoneParticleData(0F, 0F, 200F, 1F), vec3d.x + cos * R, vec3d.y + 1F, vec3d.z + sin * R, 0, 0, 0);
-                    this.world.addParticle(new RedstoneParticleData(0F, 0F, 200F, 1F), vec3d.x + cos * R, vec3d.y + 1.2F, vec3d.z + sin * R, 0, 0, 0);
+                    this.getEntityWorld().addParticle(ParticleTypes.CRIT,vec3d.x + cos * R, vec3d.y + 0.8F, vec3d.z + sin * R, 0, 0.0D, 0);
+                    this.getEntityWorld().addParticle(ParticleTypes.BUBBLE, vec3d.x + cos * R, vec3d.y + 1F, vec3d.z + sin * R, 0, 0.0D, 0);
+                    this.getEntityWorld().addParticle(ParticleTypes.BUBBLE, vec3d.x + cos * R, vec3d.y + 1.2F, vec3d.z + sin * R, 0, 0.0D, 0);
+                    this.getEntityWorld().addParticle(new RedstoneParticleData(0F, 0F, 200F, 1F), vec3d.x + cos * R, vec3d.y + 0.8F, vec3d.z + sin * R, 0, 0, 0);
+                    this.getEntityWorld().addParticle(new RedstoneParticleData(0F, 0F, 200F, 1F), vec3d.x + cos * R, vec3d.y + 1F, vec3d.z + sin * R, 0, 0, 0);
+                    this.getEntityWorld().addParticle(new RedstoneParticleData(0F, 0F, 200F, 1F), vec3d.x + cos * R, vec3d.y + 1.2F, vec3d.z + sin * R, 0, 0, 0);
                 }
             }
         }

@@ -1,13 +1,15 @@
 package arknights.entity.enemy;
 
-import arknights.entity.notLiving.BulletEntity;
+//import arknights.entity.notLiving.BulletEntity;
 import arknights.entity.operator.OperatorBase;
 import arknights.registry.SoundHandler;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.LookController;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.monster.PhantomEntity;
 import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
@@ -18,7 +20,7 @@ import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 
 import java.util.EnumSet;
@@ -28,7 +30,7 @@ public class FlyingEnemy extends FlyingEntity implements IMob {
     private SummonEnemyGoal summonEnemy;
     protected int tick = 0;
     private static final DataParameter<Integer> SIZE = EntityDataManager.createKey(FlyingEnemy.class, DataSerializers.VARINT);
-    private Vec3d orbitOffset = Vec3d.ZERO;
+    private Vector3d orbitOffset = Vector3d.ZERO;
     private BlockPos orbitPosition = BlockPos.ZERO;
     private FlyingEnemy.AttackPhase attackPhase =FlyingEnemy.AttackPhase.CIRCLE;
     //public static final DataParameter<Boolean> OPERATORATTACKING = EntityDataManager.createKey(ExusiaiEntity.class, DataSerializers.BOOLEAN);
@@ -61,16 +63,16 @@ public class FlyingEnemy extends FlyingEntity implements IMob {
                 return false;
             } else {
                 this.tickDelay = 60;
-                Vec3d vec3d = FlyingEnemy.this.getPositionVec();
+                Vector3d vec3d = FlyingEnemy.this.getPositionVec();
                 List<Entity> list = FlyingEnemy.this.world.getEntitiesWithinAABBExcludingEntity(FlyingEnemy.this, new AxisAlignedBB(vec3d.x - 16, vec3d.y - 16, vec3d.z - 16, vec3d.x + 16, vec3d.y + 16, vec3d.z + 16));
                 if (!list.isEmpty()) {
                     list.sort((p_203140_0_, p_203140_1_) -> {
-                        return p_203140_0_.func_226278_cu_() > p_203140_1_.func_226278_cu_() ? -1 : 1;
+                        return p_203140_0_.getPosY() > p_203140_1_.getPosY() ? -1 : 1;
                     });
 
                     for(Entity entity : list) {
                         if (entity instanceof OperatorBase | entity instanceof PlayerEntity) {
-                            if (FlyingEnemy.this.func_213344_a((LivingEntity) entity, EntityPredicate.DEFAULT)) {
+                            if (FlyingEnemy.this.canAttack((LivingEntity) entity, EntityPredicate.DEFAULT)) {
                                 FlyingEnemy.this.setAttackTarget((LivingEntity) entity);
                                 return true;
                             }
@@ -87,7 +89,7 @@ public class FlyingEnemy extends FlyingEntity implements IMob {
          */
         public boolean shouldContinueExecuting() {
             LivingEntity livingentity = FlyingEnemy.this.getAttackTarget();
-            return livingentity != null ? FlyingEnemy.this.func_213344_a(livingentity, EntityPredicate.DEFAULT) : false;
+            return livingentity != null ? FlyingEnemy.this.canAttack(livingentity, EntityPredicate.DEFAULT) : false;
         }
     }
 
@@ -101,16 +103,10 @@ public class FlyingEnemy extends FlyingEntity implements IMob {
     @Override
     protected void registerData() {
         super.registerData();
+        this.getAttribute(Attributes.field_233818_a_).setBaseValue(20.0D);
+        this.setHealth(20.0F);
+        this.getAttribute(Attributes.field_233821_d_).setBaseValue(0.3D);
         //this.dataManager.register(OPERATORATTACKING, false);
-    }
-
-    @Override
-
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-        //this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
     }
 
     static class SummonEnemyGoal extends Goal {
@@ -132,7 +128,7 @@ public class FlyingEnemy extends FlyingEntity implements IMob {
         }
 
         protected boolean func_203146_f() {
-            return FlyingEnemy.this.orbitOffset.squareDistanceTo(FlyingEnemy.this.func_226277_ct_(), FlyingEnemy.this.func_226278_cu_(), FlyingEnemy.this.func_226281_cx_()) < 4.0D;
+            return FlyingEnemy.this.orbitOffset.squareDistanceTo(FlyingEnemy.this.getPosX(), FlyingEnemy.this.getPosY(), FlyingEnemy.this.getPosZ()) < 4.0D;
         }
     }
 
@@ -187,12 +183,12 @@ public class FlyingEnemy extends FlyingEntity implements IMob {
                 this.func_203148_i();
             }
 
-            if (FlyingEnemy.this.orbitOffset.y < FlyingEnemy.this.func_226278_cu_() && !FlyingEnemy.this.world.isAirBlock((new BlockPos(FlyingEnemy.this)).down(1))) {
+            if (FlyingEnemy.this.orbitOffset.y < FlyingEnemy.this.getPosY() && !FlyingEnemy.this.world.isAirBlock(FlyingEnemy.this.func_233580_cy_().down(1))) {
                 this.field_203152_e = Math.max(1.0F, this.field_203152_e);
                 this.func_203148_i();
             }
 
-            if (FlyingEnemy.this.orbitOffset.y > FlyingEnemy.this.func_226278_cu_() && !FlyingEnemy.this.world.isAirBlock((new BlockPos(FlyingEnemy.this)).up(1))) {
+            if (FlyingEnemy.this.orbitOffset.y > FlyingEnemy.this.getPosY() && !FlyingEnemy.this.world.isAirBlock(FlyingEnemy.this.func_233580_cy_().up(1)))  {
                 this.field_203152_e = Math.min(-1.0F, this.field_203152_e);
                 this.func_203148_i();
             }
@@ -201,11 +197,11 @@ public class FlyingEnemy extends FlyingEntity implements IMob {
 
         private void func_203148_i() {
             if (BlockPos.ZERO.equals(FlyingEnemy.this.orbitPosition)) {
-                FlyingEnemy.this.orbitPosition = new BlockPos(FlyingEnemy.this);
+                FlyingEnemy.this.orbitPosition = FlyingEnemy.this.func_233580_cy_();
             }
 
             this.field_203150_c += this.field_203153_f * 15.0F * ((float)Math.PI / 180F);
-            FlyingEnemy.this.orbitOffset = (new Vec3d(FlyingEnemy.this.orbitPosition)).add((double)(this.field_203151_d * MathHelper.cos(this.field_203150_c)), (double)(-4.0F + this.field_203152_e), (double)(this.field_203151_d * MathHelper.sin(this.field_203150_c)));
+            FlyingEnemy.this.orbitOffset = Vector3d.func_237491_b_(FlyingEnemy.this.orbitPosition).add((double)(this.field_203151_d * MathHelper.cos(this.field_203150_c)), (double)(-4.0F + this.field_203152_e), (double)(this.field_203151_d * MathHelper.sin(this.field_203150_c)));
         }
     }
 
@@ -283,7 +279,7 @@ public class FlyingEnemy extends FlyingEntity implements IMob {
                 if (FlyingEnemy.this.getBoundingBox().grow((double) 0.2F).intersects(livingentity.getBoundingBox())) {
                     FlyingEnemy.this.attackEntityWithRangedAttack(livingentity);
                     FlyingEnemy.this.attackPhase = FlyingEnemy.AttackPhase.CIRCLE;
-                    FlyingEnemy.this.world.playEvent(1039, new BlockPos(FlyingEnemy.this), 0);
+                    FlyingEnemy.this.world.playEvent(1039, FlyingEnemy.this.func_233580_cy_(), 0);
                 } else if (FlyingEnemy.this.collidedHorizontally || FlyingEnemy.this.hurtTime > 0) {
                     FlyingEnemy.this.attackPhase = FlyingEnemy.AttackPhase.CIRCLE;
                 }
@@ -304,9 +300,9 @@ public class FlyingEnemy extends FlyingEntity implements IMob {
                 this.speedFactor = 0.1F;
             }
 
-            float f = (float)(FlyingEnemy.this.orbitOffset.x - FlyingEnemy.this.func_226277_ct_());
-            float f1 = (float)(FlyingEnemy.this.orbitOffset.y - FlyingEnemy.this.func_226278_cu_());
-            float f2 = (float)(FlyingEnemy.this.orbitOffset.z - FlyingEnemy.this.func_226281_cx_());
+            float f = (float)(FlyingEnemy.this.orbitOffset.x - FlyingEnemy.this.getPosX());
+            float f1 = (float)(FlyingEnemy.this.orbitOffset.y - FlyingEnemy.this.getPosY());
+            float f2 = (float)(FlyingEnemy.this.orbitOffset.z - FlyingEnemy.this.getPosZ());
             double d0 = (double)MathHelper.sqrt(f * f + f2 * f2);
             double d1 = 1.0D - (double)MathHelper.abs(f1 * 0.7F) / d0;
             f = (float)((double)f * d1);
@@ -331,8 +327,8 @@ public class FlyingEnemy extends FlyingEntity implements IMob {
             double d3 = (double)(this.speedFactor * MathHelper.cos(f8 * ((float)Math.PI / 180F))) * Math.abs((double)f / d2);
             double d4 = (double)(this.speedFactor * MathHelper.sin(f8 * ((float)Math.PI / 180F))) * Math.abs((double)f2 / d2);
             double d5 = (double)(this.speedFactor * MathHelper.sin(f7 * ((float)Math.PI / 180F))) * Math.abs((double)f1 / d2);
-            Vec3d vec3d = FlyingEnemy.this.getMotion();
-            FlyingEnemy.this.setMotion(vec3d.add((new Vec3d(d3, d5, d4)).subtract(vec3d).scale(0.2D)));
+            Vector3d vec3d = FlyingEnemy.this.getMotion();
+            FlyingEnemy.this.setMotion(vec3d.add((new Vector3d(d3, d5, d4)).subtract(vec3d).scale(0.2D)));
         }
     }
 
@@ -351,16 +347,18 @@ public class FlyingEnemy extends FlyingEntity implements IMob {
     private boolean attackEntityWithRangedAttack(LivingEntity entityIn) {
         float f = 3.0f;//(float) this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue();
         boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), f);
+        /*
         if (flag) {
-            double deltaX = entityIn.func_226277_ct_() - this.func_226277_ct_();
+            double deltaX = entityIn.getPosX() - this.getPosX();
             double deltaY;
-            double deltaZ = entityIn.func_226281_cx_() - this.func_226281_cx_();
+            double deltaZ = entityIn.getPosZ() - this.getPosZ();
             BulletEntity bulletEntity = new BulletEntity(this, this.world);
-            deltaY = entityIn.func_226283_e_(0.3333333333333333D) - bulletEntity.func_226278_cu_();
+            deltaY = entityIn.getPosYHeight(0.3333333333333333D) - bulletEntity.getPosY();
             bulletEntity.shoot(deltaX, deltaY, deltaZ, 1.6F, 1.0F);
             this.playSound(SoundHandler.EXUSIAI_ATTACK, 1.0F, 1.0F);
             this.world.addEntity(bulletEntity);
         }
+         */
         return flag;
     }
 }

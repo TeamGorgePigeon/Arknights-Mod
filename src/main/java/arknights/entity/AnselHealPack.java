@@ -51,7 +51,7 @@ public class AnselHealPack extends ProjectileItemEntity {
             IParticleData iparticledata = this.func_213887_n();
 
             for (int i = 0; i < 8; ++i) {
-                this.world.addParticle(iparticledata, this.func_226277_ct_(), this.func_226278_cu_(), this.func_226281_cx_(), 0.0D, 0.0D, 0.0D);
+                this.world.addParticle(iparticledata, this.getPosX(), this.getPosY(), this.getPosZ(), 0.0D, 0.0D, 0.0D);
             }
         }
 
@@ -76,5 +76,11 @@ public class AnselHealPack extends ProjectileItemEntity {
             this.remove();
         }
 
+    }
+
+    @Override
+    protected Item getDefaultItem() {
+        ItemStack itemstack = this.func_213882_k();
+        return (Item) (itemstack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleData(ParticleTypes.ITEM, itemstack));
     }
 }

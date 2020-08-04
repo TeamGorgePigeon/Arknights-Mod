@@ -9,6 +9,7 @@ import arknights.tileentity.TradingHomeEntity;
 import arknights.tileentity.UpgradeEntity;
 import arknights.tileentity.WorkshopEntity;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
@@ -88,6 +89,9 @@ public class OperatorBase extends TameableEntity {
     @Override
     protected void registerData() {
         super.registerData();
+        this.getAttribute(Attributes.field_233818_a_).setBaseValue(20.0D);
+        this.setHealth(20.0F);
+        this.getAttribute(Attributes.field_233821_d_).setBaseValue(0.3D);
         this.dataManager.register(OPERATORATTACKING, false);
     }
 
@@ -105,13 +109,6 @@ public class OperatorBase extends TameableEntity {
         return null;
     }
 
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-        //this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
-    }
-
     public void onDeath(DamageSource cause) {
         if(this.item instanceof OperatorItem && !world.isRemote()){
             ItemStack itemStack = new ItemStack(this.item, 1);
@@ -121,7 +118,7 @@ public class OperatorBase extends TameableEntity {
             compound.putInt("Trust", this.trust);
             compound.putInt("Xp", this.xp);
             itemStack.setTag(compound);
-            ItemEntity entity = new ItemEntity(world, this.getOwner().getPosition().getX(), this.getOwner().getPosition().getY(), this.getOwner().getPosition().getZ(), itemStack);
+            ItemEntity entity = new ItemEntity(world, this.getOwner().getPositionVec().getX(), this.getOwner().getPositionVec().getY(), this.getOwner().getPositionVec().getZ(), itemStack);
             world.addEntity(entity);
         }
     }

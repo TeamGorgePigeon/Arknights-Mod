@@ -1,19 +1,25 @@
 package arknights.item;
 
+import arknights.entity.operator.OperatorBase;
 import arknights.registry.SoundHandler;
 import arknights.utils.MyMathHelper;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.particle.Particle;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Rarity;
+import net.minecraft.item.SwordItem;
+import net.minecraft.item.UseAction;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
@@ -59,7 +65,7 @@ public class TruesilverSword extends SwordItem {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         playerIn.setActiveHand(handIn);
-        return ActionResult.func_226249_b_(itemstack);
+        return ActionResult.resultSuccess(itemstack);
     }
 
     @Override
@@ -76,7 +82,7 @@ public class TruesilverSword extends SwordItem {
 
     public ItemStack onSwordSwing(World p_213357_1_, ItemStack p_213357_2_, PlayerEntity playerEntity) {
         if (this.isSkill) {
-            Vec3d vec3d = playerEntity.getPositionVec();
+            Vector3d vec3d = playerEntity.getPositionVec();
             List<Entity> list = p_213357_1_.getEntitiesWithinAABBExcludingEntity(playerEntity, new AxisAlignedBB(vec3d.x - 10D, vec3d.y - 0.75D, vec3d.z - 10D, vec3d.x + 10D, vec3d.y + 1.75D, vec3d.z + 10D));
             //Mian2 Chao3
             //double angle = playerEntity.rotationYaw;
@@ -86,7 +92,7 @@ public class TruesilverSword extends SwordItem {
             //float f2 = MathHelper.cos(angle) * 3;
             for (int k2 = 0; k2 < list.size(); ++k2) {
                 Entity entity = list.get(k2);
-                Vec3d pos = entity.getPositionVec();
+                Vector3d pos = entity.getPositionVec();
                 double entityAngle = -Math.toDegrees(Math.atan2(pos.x - playerEntity.getPositionVec().x, pos.z - playerEntity.getPositionVec().z));
                 //Following System.out.prints are for debug
                 //System.out.print((pos.x - playerEntity.getPositionVec().x) + " " + (pos.z - playerEntity.getPositionVec().z) + " ");
@@ -94,7 +100,7 @@ public class TruesilverSword extends SwordItem {
                 //System.out.print(MyMathHelper.in360(entityAngle) + " " + MyMathHelper.in360(playerEntity.rotationYaw) + " " + Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(playerEntity.rotationYaw)) + "\n");
                 //if(entity.getDistance(playerEntity) <= 3 && Math.abs(entityAngle - (playerEntity.rotationYaw % 360 > 180 ? playerEntity.rotationYaw % 360 - 360 : playerEntity.rotationYaw % 360)) <= 90){
                 if ((Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(playerEntity.rotationYaw)) <= 90 || Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(playerEntity.rotationYaw)) >= 270) && entity.getDistance(playerEntity) <= 8) {//Use MyMathHelper in utils to calculate the angle, and make sure only attack entities in front of you. Distance means the range, you can change it.
-                    if (entity instanceof LivingEntity) {
+                    if (entity instanceof LivingEntity && !(entity instanceof OperatorBase)) {
                         entity.attackEntityFrom(DamageSource.causeMobDamage(playerEntity), 8);
                     }
                 }
@@ -134,7 +140,7 @@ public class TruesilverSword extends SwordItem {
                 }
             }
             System.out.print(MyMathHelper.in360(playerEntity.rotationYaw)+" ");*/
-            p_213357_1_.playSound(null, playerEntity.func_226277_ct_(), playerEntity.func_226278_cu_(), playerEntity.func_226281_cx_(), SoundHandler.SKILL_TRUESILVER_SLASH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+            p_213357_1_.playSound(null, playerEntity.getPosX(), playerEntity.getPosY(), playerEntity.getPosZ(), SoundHandler.SKILL_TRUESILVER_SLASH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
         }
         return p_213357_2_;
     }

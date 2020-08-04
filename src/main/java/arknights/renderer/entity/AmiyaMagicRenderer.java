@@ -1,5 +1,5 @@
 package arknights.renderer.entity;
-
+/*
 import arknights.entity.model.AmiyaMagicModel;
 import arknights.entity.notLiving.AmiyaMagic;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -16,3 +16,4 @@ public class AmiyaMagicRenderer<T extends AmiyaMagicModel> extends MobRenderer<A
         return new ResourceLocation("arknights:textures/entity/amiya_magic.png");
     }
 }
+*/

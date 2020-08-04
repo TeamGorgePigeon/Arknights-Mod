@@ -81,6 +81,7 @@
 
   "entity.arknights.crownslayer":"Crownslayer",
   "entity.arknights.originium_slug":"Originium Slug",
+  "entity.arknights.enemyw":"W(Enemy)",
 
   "death.attack.bullet": "%1$s was shot by %2$s",
   "info.skill": "Right click to use the skill.",

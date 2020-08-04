@@ -81,6 +81,7 @@
 
   "entity.arknights.crownslayer":"弑君者",
   "entity.arknights.originium_slug":"源石虫",
+  "entity.arknights.enemyw":"W(敌方)",
 
   "death.attack.bullet":"%1$s 被 %2$s 击中",
   "info.skill":"右键使用技能",

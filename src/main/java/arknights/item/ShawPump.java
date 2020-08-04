@@ -18,7 +18,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
@@ -61,7 +61,7 @@ public class ShawPump extends GunItem {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         onPumpUsing(worldIn, itemstack,playerIn);
-        return ActionResult.func_226249_b_(itemstack);
+        return ActionResult.resultSuccess(itemstack);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class ShawPump extends GunItem {
     }
 
     public ItemStack onPumpUsing(World world, ItemStack stack, PlayerEntity playerEntity) {
-        Vec3d vec3d = playerEntity.getPositionVec();
+        Vector3d vec3d = playerEntity.getPositionVec();
         if (isSkill && !world.isRemote()) {
             if (!playerEntity.isCreative()) {
                 stack.damageItem(-stack.getMaxDamage() - 1,  playerEntity, (user) -> user.sendBreakAnimation(playerEntity.getActiveHand()));
@@ -93,12 +93,12 @@ public class ShawPump extends GunItem {
                     //System.out.print(entityAngle + " " + (playerEntity.rotationYaw % 360 > 180 ? playerEntity.rotationYaw % 360 - 360 : playerEntity.rotationYaw % 360) + " " + Math.abs(entityAngle - (playerEntity.rotationYaw % 360 > 180 ? playerEntity.rotationYaw % 360 - 360 : playerEntity.rotationYaw % 360)) + "\n");
                     //System.out.print(MyMathHelper.in360(entityAngle) + " " + MyMathHelper.in360(playerEntity.rotationYaw) + " " + Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(playerEntity.rotationYaw)) + "\n");
                     //if(entity.getDistance(playerEntity) <= 3 && Math.abs(entityAngle - (playerEntity.rotationYaw % 360 > 180 ? playerEntity.rotationYaw % 360 - 360 : playerEntity.rotationYaw % 360)) <= 90){
-                    Vec3d pos = entity.getPositionVec();
+                    Vector3d pos = entity.getPositionVec();
                     double entityAngle = -Math.toDegrees(Math.atan2(pos.x - playerEntity.getPositionVec().x, pos.z - playerEntity.getPositionVec().z));
                     if ((Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(playerEntity.rotationYaw)) <= 90 || Math.abs(MyMathHelper.in360(entityAngle) - MyMathHelper.in360(playerEntity.rotationYaw)) >= 270) && entity.getDistance(playerEntity) <= 3) {
                         if (entity instanceof LivingEntity && !(entity instanceof PlayerEntity)) {
                             isAnyEntity = true;
-                            ((LivingEntity) entity).knockBack(playerEntity, 5.0F, (double) MathHelper.sin(playerEntity.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(playerEntity.rotationYaw * ((float) Math.PI / 180F))));
+                            ((LivingEntity) entity).func_233627_a_(5.0F, (double) MathHelper.sin(playerEntity.rotationYaw * ((float) Math.PI / 180F)), (double) (-MathHelper.cos(playerEntity.rotationYaw * ((float) Math.PI / 180F))));
                         }
                     }
                 }
@@ -123,7 +123,7 @@ public class ShawPump extends GunItem {
                 world.addParticle(new RedstoneParticleData(	0F,0F,200F,1F), vec3d.x + cos * R, vec3d.y + 1.2F, vec3d.z + sin * R, 0, 0, 0);
             }
         }
-        world.playSound(null, playerEntity.func_226277_ct_(), playerEntity.func_226278_cu_(), playerEntity.func_226281_cx_(), SoundHandler.SKILL_HYDRAULIC, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+        world.playSound(null, playerEntity.getPosX(), playerEntity.getPosY(), playerEntity.getPosZ(), SoundHandler.SKILL_HYDRAULIC, SoundCategory.NEUTRAL, 1.0F, 1.0F);
         return stack;
         }
 

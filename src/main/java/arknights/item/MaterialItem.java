@@ -43,6 +43,6 @@ public class MaterialItem extends Item {
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
         super.addInformation(stack, world, tooltip, flag);
-        tooltip.set(0, tooltip.get(0).applyTextStyle(this.color));
+        tooltip.set(0, new TranslationTextComponent(tooltip.get(0).getString()).func_240699_a_(this.color));
     }
 }

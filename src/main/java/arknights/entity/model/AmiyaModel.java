@@ -11,7 +11,7 @@ public class AmiyaModel extends HumanModel {
 
     public AmiyaModel(float modelSize) {
         super(modelSize);
-        this.trueEar.func_228301_a_(-5.0F,-16F,-0.5F, 10.0F, 9.0F, 1.0F, modelSize);
+        this.trueEar.addBox(-5.0F,-16F,-0.5F, 10.0F, 9.0F, 1.0F, modelSize);
         this.trueEar.setRotationPoint(this.bipedHeadwear.rotationPointX, this.bipedHeadwear.rotationPointY, this.bipedHeadwear.rotationPointZ);
         this.bipedHead.addChild(this.trueEar);
         //this.ear.func_228301_a_(1.0F, -14.0F, -0.5F, 2.0F, 7.0F, 1.0F, modelSize);

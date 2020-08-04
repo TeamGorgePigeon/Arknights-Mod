@@ -5,6 +5,7 @@ import arknights.entity.enemy.EnemyBase;
 import arknights.item.OperatorItem;
 import arknights.registry.SoundHandler;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
@@ -100,6 +101,9 @@ public abstract class MedicSingle extends OperatorBase implements IRangedAttackM
     @Override
     protected void registerData() {
         super.registerData();
+        this.getAttribute(Attributes.field_233818_a_).setBaseValue(20.0D);
+        this.setHealth(20.0F);
+        this.getAttribute(Attributes.field_233821_d_).setBaseValue(0.3D);
         this.dataManager.register(OPERATORATTACKING, false);
     }
 
@@ -109,16 +113,10 @@ public abstract class MedicSingle extends OperatorBase implements IRangedAttackM
         return null;
     }
 
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-        //this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
-    }
 
     public void onDeath(DamageSource cause) {
         if(this.item instanceof OperatorItem && !world.isRemote()){
-            ItemEntity entity = new ItemEntity(world, this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), new ItemStack(this.item, 1));
+            ItemEntity entity = new ItemEntity(world, this.getPositionVec().getX(), this.getPositionVec().getY(), this.getPositionVec().getZ(), new ItemStack(this.item, 1));
             world.addEntity(entity);
         }
     }

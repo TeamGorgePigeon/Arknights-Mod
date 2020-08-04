@@ -17,8 +17,8 @@ public class RendererHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.EnemyW, WRenderer::new);
         //RenderingRegistry.registerEntityRenderingHandler(EntityHandler.MONSTERUAV, MonsterUAVRenderer::new);
 
-        RenderingRegistry.registerEntityRenderingHandler(EntityHandler.BULLET, BulletRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityHandler.AMIYAMAGIC, AmiyaMagicRenderer::new);
+        //RenderingRegistry.registerEntityRenderingHandler(EntityHandler.BULLET, BulletRenderer::new);
+        //RenderingRegistry.registerEntityRenderingHandler(EntityHandler.AMIYAMAGIC, AmiyaMagicRenderer::new);
 
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.DISASTERZERO, DisasterRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.SNOWSTORM, DisasterRenderer::new);
@@ -30,7 +30,7 @@ public class RendererHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.ROPE, RopeRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.ANSEL, AnselRenderer::new);
 
-        RenderingRegistry.registerEntityRenderingHandler(EntityHandler.HOOK, HookRenderer::new);
+        //RenderingRegistry.registerEntityRenderingHandler(EntityHandler.HOOK, HookRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHandler.ANSELHEALPACK, renderManager -> new SpriteRenderer<>(renderManager, Minecraft.getInstance().getItemRenderer()));
     }
 }

@@ -34,12 +34,12 @@ public class MonsterUAVModel<T extends Entity> extends EntityModel<T> {
             modelRenderer = new ModelRenderer(this, 0, 0);
             modelRenderer.setRotationPoint(0.0F, 24.0F, 0.0F);
         }
-        this.body[0].func_228300_a_(-5.0F, -5.0F, -2.5F, 10, 4, 10);
-        this.body[1].func_228300_a_(-5.0F, -7.0F, -0.5F, 10, 2, 8);
-        this.body[2].func_228300_a_(-2.75F, -5.0F, -4.0F, 5, 4, 1);
-        this.body[3].func_228300_a_(-7.0F, -6.0F, -1.5F, 2, 7, 7);
-        this.body[4].func_228300_a_(5.25F, -6.0F, 0.5F, 2, 5, 4);
-        this.body[5].func_228300_a_(-4.0F, -3.0F, 8.0F, 8, 2, 1);
+        this.body[0].addBox(-5.0F, -5.0F, -2.5F, 10, 4, 10);
+        this.body[1].addBox(-5.0F, -7.0F, -0.5F, 10, 2, 8);
+        this.body[2].addBox(-2.75F, -5.0F, -4.0F, 5, 4, 1);
+        this.body[3].addBox(-7.0F, -6.0F, -1.5F, 2, 7, 7);
+        this.body[4].addBox(5.25F, -6.0F, 0.5F, 2, 5, 4);
+        this.body[5].addBox(-4.0F, -3.0F, 8.0F, 8, 2, 1);
 
         //body.setRotationPoint(0.0F, 24.0F, 0.0F);
         //body.cubeList.add(new ModelBox(body, 0, 0, -5.0F, -5.0F, -2.5F, 10, 4, 10, 0.0F, false));
@@ -59,9 +59,9 @@ public class MonsterUAVModel<T extends Entity> extends EntityModel<T> {
         //gun.setRotationPoint(0.0F, 23.0F, 0.0F);
         //setRotationAngle(gun, 0.5236F, 0.0F, 0.0F);
         this.gun[0] = new ModelRenderer(this, 0, 5);
-        this.gun[0].func_228300_a_(-0.5F, -1.8264F, -11.5152F, 1, 1, 10);
+        this.gun[0].addBox(-0.5F, -1.8264F, -11.5152F, 1, 1, 10);
         this.gun[1] = new ModelRenderer(this, 0, 0);
-        this.gun[1].func_228300_a_(-2.625F, -5.2F, -0.7546F, 5, 2, 3);
+        this.gun[1].addBox(-2.625F, -5.2F, -0.7546F, 5, 2, 3);
 
         //gun.cubeList.add(new ModelBox(gun, 0, 5, -0.5F, -1.8264F, -11.5152F, 1, 1, 10, 0.0F, false));
         //gun.cubeList.add(new ModelBox(gun, 0, 0, -2.625F, -5.2F, -0.7546F, 5, 2, 3, 0.0F, false));
@@ -73,13 +73,13 @@ public class MonsterUAVModel<T extends Entity> extends EntityModel<T> {
         this.leftwing1.setRotationPoint(0.0F, -1.0F, 0.0F);
         setRotationAngle(this.leftwing1, -1.2217F, 0.5236F, 0.7854F);
         this.leftwing.addChild(leftwing1);
-        this.leftwing1.func_228300_a_(-15.7753F, -1.6756F, -0.4291F, 10, 1, 1);
+        this.leftwing1.addBox(-15.7753F, -1.6756F, -0.4291F, 10, 1, 1);
 
         this.leftwing2 = new ModelRenderer(this);
         this.leftwing2.setRotationPoint(-1.0F, -2.0F, 5.0F);
         setRotationAngle(this.leftwing2, -0.6981F, -0.3491F, 0.8727F);
         this.leftwing.addChild(leftwing2);
-        this.leftwing2.func_228300_a_(-13.6826F, 1.3453F, -1.3256F, 10, 1, 1);
+        this.leftwing2.addBox(-13.6826F, 1.3453F, -1.3256F, 10, 1, 1);
 
         this.rightwing = new ModelRenderer(this);
         this.rightwing.setRotationPoint(0.0F, 24.0F, 5.0F);
@@ -89,21 +89,21 @@ public class MonsterUAVModel<T extends Entity> extends EntityModel<T> {
         this.leftwing4.setRotationPoint(0.0F, -1.0F, 0.0F);
         setRotationAngle(this.leftwing4, -1.4835F, 0.5236F, 0.7854F);
         this.rightwing.addChild(leftwing4);
-        this.leftwing4.func_228300_a_(-15.7753F, -1.6756F, -0.4291F, 10, 1, 1);
+        this.leftwing4.addBox(-15.7753F, -1.6756F, -0.4291F, 10, 1, 1);
 
         this.leftwing5 = new ModelRenderer(this);
         this.leftwing5.setRotationPoint(-1.0F, -2.0F, 5.0F);
         setRotationAngle(this.leftwing5, -0.6981F, -0.3491F, 0.8727F);
         this.rightwing.addChild(leftwing5);
-        this.leftwing5.func_228300_a_( -13.6826F, 1.3453F, -1.3256F, 10, 1, 1);
+        this.leftwing5.addBox( -13.6826F, 1.3453F, -1.3256F, 10, 1, 1);
 
         //wingfan = new ModelRenderer(this);
         for(ModelRenderer modelRenderer : this.wingfan){
             modelRenderer = new ModelRenderer(this, 0, 0);
             modelRenderer.setRotationPoint(0.0F, 19.0F, 0.0F);
         }
-        this.wingfan[0].func_228300_a_(-12.0F, -6.2F, -4.5F, 5, 1, 5);
-        this.wingfan[1].func_228300_a_(-12.0F, -6.2F, 5.5F, 5, 1, 5);
+        this.wingfan[0].addBox(-12.0F, -6.2F, -4.5F, 5, 1, 5);
+        this.wingfan[1].addBox(-12.0F, -6.2F, 5.5F, 5, 1, 5);
         //wingfan.setRotationPoint(0.0F, 19.0F, 0.0F);
         //wingfan.cubeList.add(new ModelBox(wingfan, 0, 0, -12.0F, -6.2F, -4.5F, 5, 1, 5, 0.0F, false));
         //wingfan.cubeList.add(new ModelBox(wingfan, 0, 0, -12.0F, -6.2F, 5.5F, 5, 1, 5, 0.0F, false));
@@ -112,8 +112,8 @@ public class MonsterUAVModel<T extends Entity> extends EntityModel<T> {
             modelRenderer = new ModelRenderer(this, 0, 0);
             modelRenderer.setRotationPoint(19.0F, 19.0F, 0.0F);
         }
-        this.wingfan2[0].func_228300_a_(-12.0F, -6.2F, -4.5F, 5, 1, 5);
-        this.wingfan2[1].func_228300_a_(-12.0F, -6.2F, 5.5F, 5, 1, 5);
+        this.wingfan2[0].addBox(-12.0F, -6.2F, -4.5F, 5, 1, 5);
+        this.wingfan2[1].addBox(-12.0F, -6.2F, 5.5F, 5, 1, 5);
 
         //wingfan2 = new ModelRenderer(this);
         //wingfan2.setRotationPoint(19.0F, 19.0F, 0.0F);
@@ -122,9 +122,10 @@ public class MonsterUAVModel<T extends Entity> extends EntityModel<T> {
     }
 
     @Override
-    public void func_225597_a_(Entity p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
+    public void setRotationAngles(T t, float v, float v1, float v2, float v3, float v4) {
 
     }
+
 
     public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
@@ -133,7 +134,7 @@ public class MonsterUAVModel<T extends Entity> extends EntityModel<T> {
     }
 
     @Override
-    public void func_225598_a_(MatrixStack p_225598_1_, IVertexBuilder p_225598_2_, int p_225598_3_, int p_225598_4_, float p_225598_5_, float p_225598_6_, float p_225598_7_, float p_225598_8_) {
+    public void render(MatrixStack matrixStack, IVertexBuilder iVertexBuilder, int i, int i1, float v, float v1, float v2, float v3) {
 
     }
 }

@@ -18,16 +18,16 @@ public class WomanModel<T extends LivingEntity> extends HumanModel<T> {
         super(modelSize);
         this.naizi = new ModelRenderer(this,17, 18);
         naizi.setRotationPoint(0.0F, 24.0F, 0.0F);
-        this.naizi.func_228301_a_(-4.0F, -21.3291F, 3.2555F, 8, 3, 3, modelSize-0.5F);
+        this.naizi.addBox(-4.0F, -21.3291F, 3.2555F, 8, 3, 3, modelSize-0.5F);
     }
-    public void func_225597_a_(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
-        super.func_225597_a_(p_225597_1_, p_225597_2_, p_225597_3_, p_225597_4_, p_225597_5_, p_225597_6_);
+    public void setRotationAngles(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
+        super.setRotationAngles(p_225597_1_, p_225597_2_, p_225597_3_, p_225597_4_, p_225597_5_, p_225597_6_);
         this.naizi.rotateAngleX=0.2967F;
         this.naizi.rotateAngleY=0.0F;
         this.naizi.rotateAngleZ=0.0F;
     }
     @Override
-    protected Iterable<ModelRenderer> func_225600_b_() {
-        return Iterables.concat(super.func_225600_b_(), ImmutableList.of(this.naizi));
+    protected Iterable<ModelRenderer> getBodyParts() {
+        return Iterables.concat(super.getBodyParts(), ImmutableList.of(this.naizi));
     }
 }

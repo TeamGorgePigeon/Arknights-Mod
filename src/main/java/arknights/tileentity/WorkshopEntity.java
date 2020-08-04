@@ -3,6 +3,7 @@ package arknights.tileentity;
 import arknights.container.WorkshopContainer;
 import arknights.recipe.WorkshopInv;
 import arknights.registry.TileEntityHandler;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -47,9 +48,8 @@ public class WorkshopEntity extends TileEntity implements INamedContainerProvide
         return write(new CompoundNBT());
     }
 
-    @Override
-    public void read(@Nonnull CompoundNBT nbt) {
-        super.read(nbt);
+    public void func_230337_a_(BlockState blockState, CompoundNBT nbt) {
+        super.func_230337_a_(blockState, nbt);
         inventory.deserializeNBT(nbt);
     }
 

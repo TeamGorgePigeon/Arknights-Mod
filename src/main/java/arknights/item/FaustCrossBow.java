@@ -2,26 +2,34 @@ package arknights.item;
 
 import arknights.registry.ItemHandler;
 import com.google.common.collect.Lists;
+import java.util.List;
+import java.util.Random;
+import java.util.function.Predicate;
+import javax.annotation.Nullable;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.client.renderer.Quaternion;
-import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.Entity;
+import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.ICrossbowUser;
-import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.FireworkRocketEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.entity.projectile.FireworkRocketEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.*;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.vector.Quaternion;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -29,35 +37,15 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.extensions.IForgeItem;
 
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Random;
-import java.util.function.Predicate;
+public class FaustCrossBow extends ShootableItem implements IVanishable {
+    /** Set to {@code true} when the crossbow is 20% charged. */
+    private boolean isLoadingStart = false;
+    /** Set to {@code true} when the crossbow is 50% charged. */
+    private boolean isLoadingMiddle = false;
 
-public class FaustCrossBow extends ShootableItem implements IForgeItem  {
-    private boolean field_220034_c = false;
-    private boolean field_220035_d = false;
-
-    public FaustCrossBow(Item.Properties p_i50052_1_) {
-        super(p_i50052_1_);
-        this.addPropertyOverride(new ResourceLocation("pull"), (p_220022_1_, p_220022_2_, p_220022_3_) -> {
-            if (p_220022_3_ != null && p_220022_1_.getItem() == this) {
-                return isCharged(p_220022_1_) ? 0.0F : (float)(p_220022_1_.getUseDuration() - p_220022_3_.getItemInUseCount()) / (float)getChargeTime(p_220022_1_);
-            } else {
-                return 0.0F;
-            }
-        });
-        this.addPropertyOverride(new ResourceLocation("pulling"), (p_220033_0_, p_220033_1_, p_220033_2_) -> {
-            return p_220033_2_ != null && p_220033_2_.isHandActive() && p_220033_2_.getActiveItemStack() == p_220033_0_ && !isCharged(p_220033_0_) ? 1.0F : 0.0F;
-        });
-        this.addPropertyOverride(new ResourceLocation("charged"), (p_220030_0_, p_220030_1_, p_220030_2_) -> {
-            return p_220030_2_ != null && isCharged(p_220030_0_) ? 1.0F : 0.0F;
-        });
-        this.addPropertyOverride(new ResourceLocation("firework"), (p_220020_0_, p_220020_1_, p_220020_2_) -> {
-            return p_220020_2_ != null && isCharged(p_220020_0_) && hasChargedProjectile(p_220020_0_, Items.FIREWORK_ROCKET) ? 1.0F : 0.0F;
-        });
+    public FaustCrossBow(Item.Properties propertiesIn) {
+        super(propertiesIn);
     }
 
     public Predicate<ItemStack> getAmmoPredicate() {
@@ -80,17 +68,17 @@ public class FaustCrossBow extends ShootableItem implements IForgeItem  {
         if (isCharged(itemstack)) {
             fireProjectiles(worldIn, playerIn, handIn, itemstack, func_220013_l(itemstack), 1.0F);
             setCharged(itemstack, false);
-            return ActionResult.func_226249_b_(itemstack);
+            return ActionResult.resultConsume(itemstack);
         } else if (!playerIn.findAmmo(itemstack).isEmpty()) {
             if (!isCharged(itemstack)) {
-                this.field_220034_c = false;
-                this.field_220035_d = false;
+                this.isLoadingStart = false;
+                this.isLoadingMiddle = false;
                 playerIn.setActiveHand(handIn);
             }
 
-            return ActionResult.func_226249_b_(itemstack);
+            return ActionResult.resultConsume(itemstack);
         } else {
-            return ActionResult.func_226251_d_(itemstack);
+            return ActionResult.resultFail(itemstack);
         }
     }
 
@@ -103,7 +91,7 @@ public class FaustCrossBow extends ShootableItem implements IForgeItem  {
         if (f >= 1.0F && !isCharged(stack) && hasAmmo(entityLiving, stack)) {
             setCharged(stack, true);
             SoundCategory soundcategory = entityLiving instanceof PlayerEntity ? SoundCategory.PLAYERS : SoundCategory.HOSTILE;
-            worldIn.playSound((PlayerEntity)null, entityLiving.func_226277_ct_(), entityLiving.func_226278_cu_(), entityLiving.func_226281_cx_(), SoundEvents.ITEM_CROSSBOW_LOADING_END, soundcategory, 1.0F, 1.0F / (random.nextFloat() * 0.5F + 1.0F) + 0.2F);
+            worldIn.playSound((PlayerEntity)null, entityLiving.getPosX(), entityLiving.getPosY(), entityLiving.getPosZ(), SoundEvents.ITEM_CROSSBOW_LOADING_END, soundcategory, 1.0F, 1.0F / (random.nextFloat() * 0.5F + 1.0F) + 0.2F);
         }
 
     }
@@ -204,42 +192,42 @@ public class FaustCrossBow extends ShootableItem implements IForgeItem  {
 
     }
 
-    private static boolean hasChargedProjectile(ItemStack stack, Item ammoItem) {
+    public static boolean hasChargedProjectile(ItemStack stack, Item ammoItem) {
         return getChargedProjectiles(stack).stream().anyMatch((p_220010_1_) -> {
             return p_220010_1_.getItem() == ammoItem;
         });
     }
 
-    private static void func_220016_a(World p_220016_0_, LivingEntity p_220016_1_, Hand p_220016_2_, ItemStack p_220016_3_, ItemStack p_220016_4_, float p_220016_5_, boolean p_220016_6_, float p_220016_7_, float p_220016_8_, float p_220016_9_) {
-        if (!p_220016_0_.isRemote) {
-            boolean flag = p_220016_4_.getItem() == Items.FIREWORK_ROCKET;
-            IProjectile iprojectile;
+    private static void fireProjectile(World worldIn, LivingEntity shooter, Hand handIn, ItemStack crossbow, ItemStack projectile, float soundPitch, boolean isCreativeMode, float velocity, float inaccuracy, float projectileAngle) {
+        if (!worldIn.isRemote) {
+            boolean flag = projectile.getItem() == Items.FIREWORK_ROCKET;
+            ProjectileEntity projectileentity;
             if (flag) {
-                iprojectile = new FireworkRocketEntity(p_220016_0_, p_220016_4_, p_220016_1_.func_226277_ct_(), p_220016_1_.func_226280_cw_() - (double)0.15F, p_220016_1_.func_226281_cx_(), true);
+                projectileentity = new FireworkRocketEntity(worldIn, projectile, shooter, shooter.getPosX(), shooter.getPosYEye() - (double)0.15F, shooter.getPosZ(), true);
             } else {
-                iprojectile = createArrow(p_220016_0_, p_220016_1_, p_220016_3_, p_220016_4_);
-                if (p_220016_6_ || p_220016_9_ != 0.0F) {
-                    ((AbstractArrowEntity)iprojectile).pickupStatus = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
+                projectileentity = createArrow(worldIn, shooter, crossbow, projectile);
+                if (isCreativeMode || projectileAngle != 0.0F) {
+                    ((AbstractArrowEntity)projectileentity).pickupStatus = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
                 }
             }
 
-            if (p_220016_1_ instanceof ICrossbowUser) {
-                ICrossbowUser icrossbowuser = (ICrossbowUser)p_220016_1_;
-                icrossbowuser.shoot(icrossbowuser.getAttackTarget(), p_220016_3_, iprojectile, p_220016_9_);
+            if (shooter instanceof ICrossbowUser) {
+                ICrossbowUser icrossbowuser = (ICrossbowUser)shooter;
+                icrossbowuser.func_230284_a_(icrossbowuser.getAttackTarget(), crossbow, projectileentity, projectileAngle);
             } else {
-                Vec3d vec3d1 = p_220016_1_.func_213286_i(1.0F);
-                Quaternion quaternion = new Quaternion(new Vector3f(vec3d1), p_220016_9_, true);
-                Vec3d vec3d = p_220016_1_.getLook(1.0F);
-                Vector3f vector3f = new Vector3f(vec3d);
-                vector3f.func_214905_a(quaternion);
-                iprojectile.shoot((double)vector3f.getX(), (double)vector3f.getY(), (double)vector3f.getZ(), p_220016_7_, p_220016_8_);
+                Vector3d vector3d1 = shooter.getUpVector(1.0F);
+                Quaternion quaternion = new Quaternion(new Vector3f(vector3d1), projectileAngle, true);
+                Vector3d vector3d = shooter.getLook(1.0F);
+                Vector3f vector3f = new Vector3f(vector3d);
+                vector3f.transform(quaternion);
+                projectileentity.shoot((double)vector3f.getX(), (double)vector3f.getY(), (double)vector3f.getZ(), velocity, inaccuracy);
             }
 
-            p_220016_3_.damageItem(flag ? 3 : 1, p_220016_1_, (p_220017_1_) -> {
-                p_220017_1_.sendBreakAnimation(p_220016_2_);
+            crossbow.damageItem(flag ? 3 : 1, shooter, (p_220017_1_) -> {
+                p_220017_1_.sendBreakAnimation(handIn);
             });
-            p_220016_0_.addEntity((Entity)iprojectile);
-            p_220016_0_.playSound((PlayerEntity)null, p_220016_1_.func_226277_ct_(), p_220016_1_.func_226278_cu_(), p_220016_1_.func_226281_cx_(), SoundEvents.ITEM_CROSSBOW_SHOOT, SoundCategory.PLAYERS, 1.0F, p_220016_5_);
+            worldIn.addEntity(projectileentity);
+            worldIn.playSound((PlayerEntity)null, shooter.getPosX(), shooter.getPosY(), shooter.getPosZ(), SoundEvents.ITEM_CROSSBOW_SHOOT, SoundCategory.PLAYERS, 1.0F, soundPitch);
         }
     }
 
@@ -251,10 +239,10 @@ public class FaustCrossBow extends ShootableItem implements IForgeItem  {
         }
 
         abstractarrowentity.setHitSound(SoundEvents.ITEM_CROSSBOW_HIT);
-        abstractarrowentity.func_213865_o(true);
+        abstractarrowentity.setShotFromCrossbow(true);
         int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.PIERCING, crossbow);
         if (i > 0) {
-            abstractarrowentity.func_213872_b((byte)i);
+            abstractarrowentity.setPierceLevel((byte)i);
         }
 
         return abstractarrowentity;
@@ -262,67 +250,73 @@ public class FaustCrossBow extends ShootableItem implements IForgeItem  {
 
     public static void fireProjectiles(World worldIn, LivingEntity shooter, Hand handIn, ItemStack stack, float velocityIn, float inaccuracyIn) {
         List<ItemStack> list = getChargedProjectiles(stack);
-        float[] afloat = func_220028_a(shooter.getRNG());
+        float[] afloat = getRandomSoundPitches(shooter.getRNG());
 
         for(int i = 0; i < list.size(); ++i) {
             ItemStack itemstack = list.get(i);
             boolean flag = shooter instanceof PlayerEntity && ((PlayerEntity)shooter).abilities.isCreativeMode;
             if (!itemstack.isEmpty()) {
                 if (i == 0) {
-                    func_220016_a(worldIn, shooter, handIn, stack, itemstack, afloat[i], flag, velocityIn, inaccuracyIn, 0.0F);
+                    fireProjectile(worldIn, shooter, handIn, stack, itemstack, afloat[i], flag, velocityIn, inaccuracyIn, 0.0F);
                 } else if (i == 1) {
-                    func_220016_a(worldIn, shooter, handIn, stack, itemstack, afloat[i], flag, velocityIn, inaccuracyIn, -10.0F);
+                    fireProjectile(worldIn, shooter, handIn, stack, itemstack, afloat[i], flag, velocityIn, inaccuracyIn, -10.0F);
                 } else if (i == 2) {
-                    func_220016_a(worldIn, shooter, handIn, stack, itemstack, afloat[i], flag, velocityIn, inaccuracyIn, 10.0F);
+                    fireProjectile(worldIn, shooter, handIn, stack, itemstack, afloat[i], flag, velocityIn, inaccuracyIn, 10.0F);
                 }
             }
         }
 
-        func_220015_a(worldIn, shooter, stack);
+        fireProjectilesAfter(worldIn, shooter, stack);
     }
 
-    private static float[] func_220028_a(Random p_220028_0_) {
-        boolean flag = p_220028_0_.nextBoolean();
-        return new float[]{1.0F, func_220032_a(flag), func_220032_a(!flag)};
+    private static float[] getRandomSoundPitches(Random rand) {
+        boolean flag = rand.nextBoolean();
+        return new float[]{1.0F, getRandomSoundPitch(flag), getRandomSoundPitch(!flag)};
     }
 
-    private static float func_220032_a(boolean p_220032_0_) {
-        float f = p_220032_0_ ? 0.63F : 0.43F;
+    private static float getRandomSoundPitch(boolean flagIn) {
+        float f = flagIn ? 0.63F : 0.43F;
         return 1.0F / (random.nextFloat() * 0.5F + 1.8F) + f;
     }
 
-    private static void func_220015_a(World p_220015_0_, LivingEntity p_220015_1_, ItemStack p_220015_2_) {
-        if (p_220015_1_ instanceof ServerPlayerEntity) {
-            ServerPlayerEntity serverplayerentity = (ServerPlayerEntity)p_220015_1_;
-            if (!p_220015_0_.isRemote) {
-                CriteriaTriggers.SHOT_CROSSBOW.func_215111_a(serverplayerentity, p_220015_2_);
+    /**
+     * Called after {@plainlink #fireProjectiles} to clear the charged projectile and to update the player advancements.
+     */
+    private static void fireProjectilesAfter(World worldIn, LivingEntity shooter, ItemStack stack) {
+        if (shooter instanceof ServerPlayerEntity) {
+            ServerPlayerEntity serverplayerentity = (ServerPlayerEntity)shooter;
+            if (!worldIn.isRemote) {
+                CriteriaTriggers.SHOT_CROSSBOW.func_215111_a(serverplayerentity, stack);
             }
 
-            serverplayerentity.addStat(Stats.ITEM_USED.get(p_220015_2_.getItem()));
+            serverplayerentity.addStat(Stats.ITEM_USED.get(stack.getItem()));
         }
 
-        clearProjectiles(p_220015_2_);
+        clearProjectiles(stack);
     }
 
-    public void func_219972_a(World worldIn, LivingEntity livingEntityIn, ItemStack stack, int p_219972_4_) {
+    /**
+     * Called as the item is being used by an entity.
+     */
+    public void onUse(World worldIn, LivingEntity livingEntityIn, ItemStack stack, int count) {
         if (!worldIn.isRemote) {
             int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.QUICK_CHARGE, stack);
-            SoundEvent soundevent = this.func_220025_a(i);
+            SoundEvent soundevent = this.getSoundEvent(i);
             SoundEvent soundevent1 = i == 0 ? SoundEvents.ITEM_CROSSBOW_LOADING_MIDDLE : null;
-            float f = (float)(stack.getUseDuration() - p_219972_4_) / (float)getChargeTime(stack);
+            float f = (float)(stack.getUseDuration() - count) / (float)getChargeTime(stack);
             if (f < 0.2F) {
-                this.field_220034_c = false;
-                this.field_220035_d = false;
+                this.isLoadingStart = false;
+                this.isLoadingMiddle = false;
             }
 
-            if (f >= 0.2F && !this.field_220034_c) {
-                this.field_220034_c = true;
-                worldIn.playSound((PlayerEntity)null, livingEntityIn.func_226277_ct_(), livingEntityIn.func_226278_cu_(), livingEntityIn.func_226281_cx_(), soundevent, SoundCategory.PLAYERS, 0.5F, 1.0F);
+            if (f >= 0.2F && !this.isLoadingStart) {
+                this.isLoadingStart = true;
+                worldIn.playSound((PlayerEntity)null, livingEntityIn.getPosX(), livingEntityIn.getPosY(), livingEntityIn.getPosZ(), soundevent, SoundCategory.PLAYERS, 0.5F, 1.0F);
             }
 
-            if (f >= 0.5F && soundevent1 != null && !this.field_220035_d) {
-                this.field_220035_d = true;
-                worldIn.playSound((PlayerEntity)null, livingEntityIn.func_226277_ct_(), livingEntityIn.func_226278_cu_(), livingEntityIn.func_226281_cx_(), soundevent1, SoundCategory.PLAYERS, 0.5F, 1.0F);
+            if (f >= 0.5F && soundevent1 != null && !this.isLoadingMiddle) {
+                this.isLoadingMiddle = true;
+                worldIn.playSound((PlayerEntity)null, livingEntityIn.getPosX(), livingEntityIn.getPosY(), livingEntityIn.getPosZ(), soundevent1, SoundCategory.PLAYERS, 0.5F, 1.0F);
             }
         }
 
@@ -350,8 +344,8 @@ public class FaustCrossBow extends ShootableItem implements IForgeItem  {
         return UseAction.CROSSBOW;
     }
 
-    private SoundEvent func_220025_a(int p_220025_1_) {
-        switch(p_220025_1_) {
+    private SoundEvent getSoundEvent(int enchantmentLevel) {
+        switch(enchantmentLevel) {
             case 1:
                 return SoundEvents.ITEM_CROSSBOW_QUICK_CHARGE_1;
             case 2:
@@ -380,13 +374,13 @@ public class FaustCrossBow extends ShootableItem implements IForgeItem  {
         List<ItemStack> list = getChargedProjectiles(stack);
         if (isCharged(stack) && !list.isEmpty()) {
             ItemStack itemstack = list.get(0);
-            tooltip.add((new TranslationTextComponent("item.minecraft.crossbow.projectile")).appendText(" ").appendSibling(itemstack.getTextComponent()));
+            tooltip.add((new TranslationTextComponent("item.minecraft.crossbow.projectile")).func_240702_b_(" ").func_230529_a_(itemstack.getTextComponent()));
             if (flagIn.isAdvanced() && itemstack.getItem() == Items.FIREWORK_ROCKET) {
                 List<ITextComponent> list1 = Lists.newArrayList();
                 Items.FIREWORK_ROCKET.addInformation(itemstack, worldIn, list1, flagIn);
                 if (!list1.isEmpty()) {
                     for(int i = 0; i < list1.size(); ++i) {
-                        list1.set(i, (new StringTextComponent("  ")).appendSibling(list1.get(i)).applyTextStyle(TextFormatting.GRAY));
+                        list1.set(i, (new StringTextComponent("  ")).func_230529_a_(list1.get(i)).func_240699_a_(TextFormatting.GRAY));
                     }
 
                     tooltip.addAll(list1);
@@ -398,5 +392,9 @@ public class FaustCrossBow extends ShootableItem implements IForgeItem  {
 
     private static float func_220013_l(ItemStack p_220013_0_) {
         return p_220013_0_.getItem() == ItemHandler.FAUST_CROSSBOW && hasChargedProjectile(p_220013_0_, Items.FIREWORK_ROCKET) ? 1.6F : 3.15F;
+    }
+
+    public int func_230305_d_() {
+        return 8;
     }
 }

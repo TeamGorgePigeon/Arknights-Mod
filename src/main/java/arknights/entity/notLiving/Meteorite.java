@@ -1,5 +1,6 @@
 package arknights.entity.notLiving;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
@@ -7,8 +8,9 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
+
 
 public class Meteorite extends FireballEntity {
     private int ticksInAir;
@@ -23,22 +25,24 @@ public class Meteorite extends FireballEntity {
 
     @Override
     public void tick() {
-        if (this.world.isRemote || (this.shootingEntity == null || !this.shootingEntity.removed) && this.world.isBlockLoaded(new BlockPos(this))) {
+        Entity shootingEntity = this.func_234616_v_();
+        if (this.world.isRemote || (shootingEntity == null || !shootingEntity.removed) && this.world.isBlockLoaded(new BlockPos(this.func_233580_cy_()))) {
             super.tick();
             if (this.isFireballFiery()) {
                 this.setFire(1);
             }
 
             ++this.ticksInAir;
-            RayTraceResult raytraceresult = ProjectileHelper.func_221266_a(this, true, this.ticksInAir >= 25, this.shootingEntity, RayTraceContext.BlockMode.COLLIDER);
+            RayTraceResult raytraceresult = ProjectileHelper.func_234618_a_(this, this::func_230298_a_, RayTraceContext.BlockMode.COLLIDER);
+            //RayTraceResult raytraceresult = ProjectileHelper.func_221266_a(this, true, this.ticksInAir >= 25, shootingEntity, RayTraceContext.BlockMode.COLLIDER);
             if (raytraceresult.getType() != RayTraceResult.Type.MISS && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, raytraceresult)) {
                 this.onImpact(raytraceresult);
             }
 
-            Vec3d vec3d = this.getMotion();
-            double d0 = this.func_226277_ct_() + vec3d.x;
-            double d1 = this.func_226278_cu_() + vec3d.y;
-            double d2 = this.func_226281_cx_() + vec3d.z;
+            Vector3d vec3d = this.getMotion();
+            double d0 = this.getPosX() + vec3d.x;
+            double d1 = this.getPosY() + vec3d.y;
+            double d2 = this.getPosZ() + vec3d.z;
             ProjectileHelper.rotateTowardsMovement(this, 0.2F);
             float f = this.getMotionFactor();
             if (this.isInWater()) {

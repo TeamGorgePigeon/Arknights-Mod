@@ -20,14 +20,14 @@ import net.minecraftforge.registries.IForgeRegistry;
 import static arknights.Arknights.MODID;
 
 public class EntityHandler {
-    public static final EntityType<Hook> HOOK = (EntityType<Hook>) EntityType.Builder.<Hook>create(Hook::new, EntityClassification.MISC).build("hook").setRegistryName(MODID + ":hook");
+    //public static final EntityType<Hook> HOOK = (EntityType<Hook>) EntityType.Builder.<Hook>create(Hook::new, EntityClassification.MISC).build("hook").setRegistryName(MODID + ":hook");
 
     public static final EntityType<DisasterZero> DISASTERZERO = (EntityType<DisasterZero>) EntityType.Builder.<DisasterZero>create(DisasterZero::new, EntityClassification.MISC).build("disaster_zero").setRegistryName(MODID + ":disaster_zero");
     public static final EntityType<SnowStorm> SNOWSTORM = (EntityType<SnowStorm>) EntityType.Builder.<SnowStorm>create(SnowStorm::new, EntityClassification.MISC).build("snowstorm").setRegistryName(MODID + ":snowstorm");
 
     public static final EntityType<Meteorite> METEORITE = (EntityType<Meteorite>)EntityType.Builder.<Meteorite>create(Meteorite::new, EntityClassification.MISC).build("meteorite").setRegistryName(MODID + ":" + "meteorite");
-    public static final EntityType<BulletEntity> BULLET = (EntityType<BulletEntity>)EntityType.Builder.<BulletEntity>create(BulletEntity::new, EntityClassification.MISC).build("bullet").setRegistryName(MODID+ ":bullet");
-    public static final EntityType<AmiyaMagic> AMIYAMAGIC = (EntityType<AmiyaMagic>)EntityType.Builder.<AmiyaMagic>create(AmiyaMagic::new, EntityClassification.MISC).build("amiya_magic").setRegistryName(MODID+ ":amiya_magic");
+    //public static final EntityType<BulletEntity> BULLET = (EntityType<BulletEntity>)EntityType.Builder.<BulletEntity>create(BulletEntity::new, EntityClassification.MISC).build("bullet").setRegistryName(MODID+ ":bullet");
+    //public static final EntityType<AmiyaMagic> AMIYAMAGIC = (EntityType<AmiyaMagic>)EntityType.Builder.<AmiyaMagic>create(AmiyaMagic::new, EntityClassification.MISC).build("amiya_magic").setRegistryName(MODID+ ":amiya_magic");
 
     //public static final EntityType<OriginiumSlugEntity> ORIGINIUMSLUG = (EntityType<OriginiumSlugEntity>)EntityType.Builder.<OriginiumSlugEntity>create(OriginiumSlugEntity::new, EntityClassification.MONSTER).size(0.8F, 0.5F).build("originium_slug").setRegistryName(MODID + ":" + "originium_slug");
     public static final EntityType<OriginiumSlugEntity> ORIGINIUMSLUG = registerEntity(MODID + ":" + "originium_slug", EntityType.Builder.create(OriginiumSlugEntity::new, EntityClassification.MONSTER).size(0.8F, 0.5F));
@@ -53,13 +53,13 @@ public class EntityHandler {
     @SubscribeEvent
     public static void register(RegistryEvent.Register<EntityType<?>> evt){
         IForgeRegistry<EntityType<?>> r = evt.getRegistry();
-        r.register(HOOK);
+        //r.register(HOOK);
 
         r.register(DISASTERZERO);
         r.register(SNOWSTORM);
 
         r.register(METEORITE);
-        r.register(BULLET);
+        //r.register(BULLET);
         //r.register(AMIYAMAGIC);
 
         //r.register(ORIGINIUMSLUG.setRegistryName(MODID + ":" + "originium_slug"));

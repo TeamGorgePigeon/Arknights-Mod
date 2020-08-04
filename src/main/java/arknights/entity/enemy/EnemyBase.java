@@ -5,6 +5,8 @@ import arknights.item.OperatorItem;
 import arknights.registry.ItemHandler;
 import arknights.registry.SoundHandler;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.MonsterEntity;
@@ -43,20 +45,21 @@ public class EnemyBase extends MonsterEntity {
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
     }
 
+    public static AttributeModifierMap.MutableAttribute func_234305_eI_() {
+        return MonsterEntity.func_234295_eP_().func_233815_a_(Attributes.field_233818_a_, 16.0D).func_233815_a_(Attributes.field_233821_d_, (double)0.3F);
+    }
+
+    public static AttributeModifierMap.MutableAttribute func_234278_m_() {
+        return MonsterEntity.func_234295_eP_().func_233815_a_(Attributes.field_233821_d_, 0.25D);
+    }
+
     @Override
     protected void registerData() {
         super.registerData();
+        this.getAttribute(Attributes.field_233818_a_).setBaseValue(20.0D);
+        this.setHealth(20.0F);
+        this.getAttribute(Attributes.field_233821_d_).setBaseValue(0.3D);
         //this.dataManager.register(OPERATORATTACKING, false);
-    }
-
-    @Nullable
-    @Override
-
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-        //this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
     }
 
     static class SummonEnemyGoal extends Goal {
@@ -101,7 +104,7 @@ public class EnemyBase extends MonsterEntity {
     }
 
     public void summonItem(IItemProvider Item) {
-        ItemEntity entity = new ItemEntity(world, this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), new ItemStack(Item, 1));
+        ItemEntity entity = new ItemEntity(world, this.getPositionVec().getX(), this.getPositionVec().getY(), this.getPositionVec().getZ(), new ItemStack(Item, 1));
         world.addEntity(entity);
     }
 

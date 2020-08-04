@@ -3,6 +3,7 @@ package arknights.entity.enemy;
 import arknights.entity.model.CrownslayerModel;
 import arknights.registry.ItemHandler;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -31,11 +32,13 @@ public class CrownslayerEntity extends MeleeEnemy {
     /**
      * Returns the Y Offset of this entity.
      */
-
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
-        this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
+    @Override
+    protected void registerData() {
+        super.registerData();
+        this.getAttribute(Attributes.field_233818_a_).setBaseValue(25.0D);
+        this.setHealth(25.0F);
+        this.getAttribute(Attributes.field_233823_f_).setBaseValue(5.0D);
+        //this.dataManager.register(OPERATORATTACKING, false);
     }
 
     public void onDeath(DamageSource source) {
@@ -54,7 +57,7 @@ public class CrownslayerEntity extends MeleeEnemy {
 
     public static boolean spawnCondition (EntityType<? extends CrownslayerEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
         //IWorldLightListener skyLight = world.func_225524_e_().getLightEngine(LightType.SKY);
-        int light = world.func_225524_e_().getLightEngine(LightType.SKY).getLightFor(pos);
+        int light = world.getLightManager().getLightEngine(LightType.SKY).getLightFor(pos);
         return light > 1;
         //return true;
     }

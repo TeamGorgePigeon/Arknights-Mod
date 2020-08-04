@@ -12,6 +12,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -29,7 +30,7 @@ public class OriginitePrime extends Item {
 
     @Override
     public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
-        tooltip.set(0, tooltip.get(0).applyTextStyle(TextFormatting.GOLD));
+        tooltip.set(0, new TranslationTextComponent(tooltip.get(0).getString()).func_240699_a_(TextFormatting.GOLD));
     }
 
     @Override
@@ -49,7 +50,7 @@ public class OriginitePrime extends Item {
         this.playerName = playerIn.getScoreboardName();
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         playerIn.setActiveHand(handIn);
-        return ActionResult.func_226249_b_(itemstack);
+        return ActionResult.resultSuccess(itemstack);
     }
 
     @Override
@@ -61,7 +62,7 @@ public class OriginitePrime extends Item {
     public ItemStack onOriginniumsEaten(World p_213357_1_, ItemStack p_213357_2_, PlayerEntity playerEntity) {
         playerEntity.getFoodStats().addStats(20,20);
         playerEntity.addStat(Stats.ITEM_USED.get(p_213357_2_.getItem()));
-        p_213357_1_.playSound(null, playerEntity.func_226277_ct_(), playerEntity.func_226278_cu_(), playerEntity.func_226281_cx_(), playerEntity.getEatSound(p_213357_2_), SoundCategory.NEUTRAL, 1.0F, 1.0F + (p_213357_1_.rand.nextFloat() - p_213357_1_.rand.nextFloat()) * 0.4F);
+        p_213357_1_.playSound(null, playerEntity.getPosX(), playerEntity.getPosY(), playerEntity.getPosZ(), playerEntity.getEatSound(p_213357_2_), SoundCategory.NEUTRAL, 1.0F, 1.0F + (p_213357_1_.rand.nextFloat() - p_213357_1_.rand.nextFloat()) * 0.4F);
         this.effectsList();
         playerEntity.clearActivePotions();
         applyFoodEffects(p_213357_2_, p_213357_1_, playerEntity);

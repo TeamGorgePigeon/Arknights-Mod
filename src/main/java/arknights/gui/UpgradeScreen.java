@@ -1,6 +1,7 @@
 package arknights.gui;
 
 import arknights.container.UpgradeContainer;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
@@ -12,7 +13,8 @@ public class UpgradeScreen extends ContainerScreen<UpgradeContainer> {
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+    protected void func_230450_a_(MatrixStack matrixStack, float v, int i, int i1) {
 
     }
+
 }

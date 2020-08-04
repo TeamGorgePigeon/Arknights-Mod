@@ -1,6 +1,8 @@
 package arknights.entity.enemy;
 
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
@@ -22,7 +24,7 @@ public class OriginiumSlugEntity extends MeleeEnemy {
 
    public static boolean spawnCondition (EntityType<? extends OriginiumSlugEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
       //IWorldLightListener skyLight = world.func_225524_e_().getLightEngine(LightType.SKY);
-      int light = world.func_225524_e_().getLightEngine(LightType.SKY).getLightFor(pos);
+      int light = world.getLightManager().getLightEngine(LightType.SKY).getLightFor(pos);
       return light > 1;
       //return true;
    }
@@ -30,11 +32,20 @@ public class OriginiumSlugEntity extends MeleeEnemy {
    /**
     * Returns the Y Offset of this entity.
     */
-   protected void registerAttributes() {
-      super.registerAttributes();
-      this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
-      this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
+
+   public static AttributeModifierMap.MutableAttribute func_234278_m_() {
+      return MobEntity.func_233666_p_().func_233815_a_(Attributes.field_233818_a_, 8.0D).func_233815_a_(Attributes.field_233821_d_, (double)0.23F);
    }
+   @Override
+   protected void registerData() {
+      super.registerData();
+      this.getAttribute(Attributes.field_233818_a_).setBaseValue(8.0D);
+      this.setHealth(8.0F);
+      this.getAttribute(Attributes.field_233821_d_).setBaseValue(0.3D);
+      this.getAttribute(Attributes.field_233823_f_).setBaseValue(3.0D);
+      //this.dataManager.register(OPERATORATTACKING, false);
+   }
+
 
    public double getYOffset() {
       return 0.1D;

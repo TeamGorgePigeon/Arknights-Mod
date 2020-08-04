@@ -1,16 +1,12 @@
 package arknights.entity.special;
 
-import arknights.entity.operator.OperatorBase;
 import arknights.entity.operator.RopeEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
@@ -19,9 +15,11 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.network.play.server.SSpawnObjectPacket;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.*;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.extensions.IForgeFluidState;
 
 import javax.annotation.Nullable;
 
@@ -44,9 +42,9 @@ public class Hook extends Entity {
     public Hook(World worldIn, RopeEntity user, double x, double y, double z) {
         this(worldIn, user);
         this.setPosition(x, y, z);
-        this.prevPosX = this.func_226277_ct_();
-        this.prevPosY = this.func_226278_cu_();
-        this.prevPosZ = this.func_226281_cx_();
+        this.prevPosX = this.getPosX();
+        this.prevPosY = this.getPosY();
+        this.prevPosZ = this.getPosZ();
     }
 
     public Hook(RopeEntity user, World world) {
@@ -57,16 +55,16 @@ public class Hook extends Entity {
         float f3 = MathHelper.sin(-f1 * ((float)Math.PI / 180F) - (float)Math.PI);
         float f4 = -MathHelper.cos(-f * ((float)Math.PI / 180F));
         float f5 = MathHelper.sin(-f * ((float)Math.PI / 180F));
-        double d0 = this.angler.func_226277_ct_() - (double)f3 * 0.3D;
-        double d1 = this.angler.func_226280_cw_();
-        double d2 = this.angler.func_226281_cx_() - (double)f2 * 0.3D;
+        double d0 = this.angler.getPosX() - (double)f3 * 0.3D;
+        double d1 = this.angler.getPosYEye();
+        double d2 = this.angler.getPosZ() - (double)f2 * 0.3D;
         this.setLocationAndAngles(d0, d1, d2, f1, f);
-        Vec3d vec3d = new Vec3d((double)(-f3), (double)MathHelper.clamp(-(f5 / f4), -5.0F, 5.0F), (double)(-f2));
+        Vector3d vec3d = new Vector3d((double)(-f3), (double)MathHelper.clamp(-(f5 / f4), -5.0F, 5.0F), (double)(-f2));
         double d3 = vec3d.length();
         vec3d = vec3d.mul(0.6D / d3 + 0.5D + this.rand.nextGaussian() * 0.0045D, 0.6D / d3 + 0.5D + this.rand.nextGaussian() * 0.0045D, 0.6D / d3 + 0.5D + this.rand.nextGaussian() * 0.0045D);
         this.setMotion(vec3d.scale(10.0D));
         this.rotationYaw = (float)(MathHelper.atan2(vec3d.x, vec3d.z) * (double)(180F / (float)Math.PI));
-        this.rotationPitch = (float)(MathHelper.atan2(vec3d.y, (double)MathHelper.sqrt(func_213296_b(vec3d))) * (double)(180F / (float)Math.PI));
+        //this.rotationPitch = (float)(MathHelper.atan2(vec3d.y, (double)MathHelper.sqrt(func_213296_b(vec3d))) * (double)(180F / (float)Math.PI));
         this.prevRotationYaw = this.rotationYaw;
         this.prevRotationPitch = this.rotationPitch;
     }
@@ -122,12 +120,12 @@ public class Hook extends Entity {
                 }
             }
 
-            BlockPos blockpos = new BlockPos(this);
-            IFluidState ifluidstate = this.world.getFluidState(blockpos);
+            //BlockPos blockpos = new BlockPos(this);
+            //IForgeFluidState ifluidstate = this.world.getFluidState(blockpos);
 
             if (this.currentState == Hook.State.FLYING) {
                 if (this.caughtEntity != null) {
-                    this.setMotion(Vec3d.ZERO);
+                    this.setMotion(Vector3d.ZERO);
                     this.currentState = Hook.State.HOOKED_IN_ENTITY;
                     return;
                 }
@@ -140,7 +138,7 @@ public class Hook extends Entity {
                     ++this.ticksInAir;
                 } else {
                     this.ticksInAir = 0;
-                    this.setMotion(Vec3d.ZERO);
+                    this.setMotion(Vector3d.ZERO);
                 }
             } else {
                 if (this.currentState == Hook.State.HOOKED_IN_ENTITY) {
@@ -149,7 +147,7 @@ public class Hook extends Entity {
                             this.caughtEntity = null;
                             this.currentState = Hook.State.FLYING;
                         } else {
-                            this.setPosition(this.caughtEntity.func_226277_ct_(), this.caughtEntity.func_226283_e_(0.8D), this.caughtEntity.func_226281_cx_());
+                           // this.setPosition(this.caughtEntity.getPosX(), this.caughtEntity.func_226283_e_(0.8D), this.caughtEntity.getPosZ());
                         }
                     }
 
@@ -157,14 +155,14 @@ public class Hook extends Entity {
                 }
             }
 
-            if (!ifluidstate.isTagged(FluidTags.WATER)) {
+            /*if (!ifluidstate.isTagged(FluidTags.WATER)) {
                 this.setMotion(this.getMotion().add(0.0D, -0.03D, 0.0D));
-            }
+            }*/
 
             this.move(MoverType.SELF, this.getMotion());
             this.updateRotation();
             this.setMotion(this.getMotion().scale(0.92D));
-            this.func_226264_Z_();
+            //this.func_226264_Z_();
         }
     }
 
@@ -178,13 +176,13 @@ public class Hook extends Entity {
     }
 
     private void updateRotation() {
-        Vec3d vec3d = this.getMotion();
-        float f = MathHelper.sqrt(func_213296_b(vec3d));
+        Vector3d vec3d = this.getMotion();
+        //float f = MathHelper.sqrt(func_213296_b(vec3d));
         this.rotationYaw = (float)(MathHelper.atan2(vec3d.x, vec3d.z) * (double)(180F / (float)Math.PI));
 
-        for(this.rotationPitch = (float)(MathHelper.atan2(vec3d.y, (double)f) * (double)(180F / (float)Math.PI)); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
+        /*for(this.rotationPitch = (float)(MathHelper.atan2(vec3d.y, (double)f) * (double)(180F / (float)Math.PI)); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
             ;
-        }
+        }*/
 
         while(this.rotationPitch - this.prevRotationPitch >= 180.0F) {
             this.prevRotationPitch += 360.0F;
@@ -203,7 +201,7 @@ public class Hook extends Entity {
     }
 
     private void checkCollision() {
-        RayTraceResult raytraceresult = ProjectileHelper.func_221267_a(this, this.getBoundingBox().expand(this.getMotion()).grow(1.0D), (p_213856_1_) -> {
+        /*RayTraceResult raytraceresult = ProjectileHelper.func_221267_a(this, this.getBoundingBox().expand(this.getMotion()).grow(1.0D), (p_213856_1_) -> {
             return !p_213856_1_.isSpectator() && (p_213856_1_.canBeCollidedWith() || p_213856_1_ instanceof ItemEntity) && (p_213856_1_ != this.angler || this.ticksInAir >= 5);
         }, RayTraceContext.BlockMode.COLLIDER, true);
         if (raytraceresult.getType() != RayTraceResult.Type.MISS) {
@@ -213,7 +211,7 @@ public class Hook extends Entity {
             } else {
                 this.inGround = true;
             }
-        }
+        }*/
 
     }
 
@@ -266,7 +264,7 @@ public class Hook extends Entity {
 
     protected void bringInHookedEntity() {
         if (this.angler != null) {
-            Vec3d vec3d = (new Vec3d(this.angler.func_226277_ct_() - this.func_226277_ct_(), this.angler.func_226278_cu_() - this.func_226278_cu_(), this.angler.func_226281_cx_() - this.func_226281_cx_())).scale(0.1D);
+            Vector3d vec3d = (new Vector3d(this.angler.getPosX() - this.getPosX(), this.angler.getPosY() - this.getPosY(), this.angler.getPosZ() - this.getPosZ())).scale(0.1D);
             this.caughtEntity.setMotion(this.caughtEntity.getMotion().add(vec3d.scale(5.0D)));
             this.remove();
             this.angler.hook = null;

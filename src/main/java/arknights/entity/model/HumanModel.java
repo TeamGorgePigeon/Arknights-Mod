@@ -27,56 +27,56 @@ public class HumanModel<T extends LivingEntity> extends BipedModel<T> {
 
 
     public HumanModel(float modelSize) {
-        super(RenderType::func_228644_e_, modelSize, 0.0F, 128, 64);
+        super(RenderType::getEntityTranslucent, modelSize, 0.0F, 128, 64);
         this.bipedDeadmau5Head = new ModelRenderer(this, 24, 0);
-        this.bipedDeadmau5Head.func_228301_a_(-3.0F, -6.0F, -1.0F, 6.0F, 6.0F, 1.0F, modelSize-0.1F);
+        this.bipedDeadmau5Head.addBox(-3.0F, -6.0F, -1.0F, 6.0F, 6.0F, 1.0F, modelSize-0.1F);
 
         this.bipedHead = new ModelRenderer(this, 0, 0);
-        this.bipedHead.func_228301_a_(-4.0F, -6.7055F, -3.8955F, 8, 8, 8, modelSize-0.6F);
+        this.bipedHead.addBox(-4.0F, -6.7055F, -3.8955F, 8, 8, 8, modelSize-0.6F);
         this.bipedHead.setRotationPoint(0.0F, 0.0F, 0.0F);
 
         this.bipedHeadwear = new ModelRenderer(this, 32, 0);
-        this.bipedHeadwear.func_228301_a_( -4.0F, -6.7055F, -3.8955F, 8, 8, 8, modelSize-0.1F);
+        this.bipedHeadwear.addBox( -4.0F, -6.7055F, -3.8955F, 8, 8, 8, modelSize-0.1F);
         this.bipedHeadwear.setRotationPoint(0.0F, 0.0F, 0.0F);
 
         this.bipedLeftArm = new ModelRenderer(this, 32, 48);
-        this.bipedLeftArm.func_228301_a_(-1.5F, -1.8F, -2.0F, 3, 12, 4, modelSize-0.25F);
+        this.bipedLeftArm.addBox(-1.5F, -1.8F, -2.0F, 3, 12, 4, modelSize-0.25F);
         this.bipedLeftArm.setRotationPoint(5.0F, 3.0F, 0.0F);
 
         this.bipedRightArm = new ModelRenderer(this, 40, 16);
-        this.bipedRightArm.func_228301_a_(-1.5F, -1.2F, -2.0F, 3, 12, 4, modelSize-0.25F);
+        this.bipedRightArm.addBox(-1.5F, -1.2F, -2.0F, 3, 12, 4, modelSize-0.25F);
         this.bipedRightArm.setRotationPoint(-5.0F, 2.0F, 0.0F);
 
         this.bipedLeftArmwear = new ModelRenderer(this, 48, 48);
-        this.bipedLeftArmwear.func_228301_a_(-1.5F, -1.8F, -2.0F, 3, 12, 4, modelSize);
+        this.bipedLeftArmwear.addBox(-1.5F, -1.8F, -2.0F, 3, 12, 4, modelSize);
         this.bipedLeftArmwear.setRotationPoint(5.0F, 3.0F, 0.0F);
 
         this.bipedRightArmwear = new ModelRenderer(this, 40, 32);
-        this.bipedRightArmwear.func_228301_a_(-1.5F, -1.2F, -2.0F, 3, 12, 4, modelSize);
+        this.bipedRightArmwear.addBox(-1.5F, -1.2F, -2.0F, 3, 12, 4, modelSize);
         this.bipedRightArmwear.setRotationPoint(-5.0F, 2.0F, 0.0F);
 
         this.bipedLeftLeg = new ModelRenderer(this, 16, 48);
-        this.bipedLeftLeg.func_228301_a_(-2.0F, 0.0F, -2.0F, 4, 12, 4, modelSize-0.5F);
+        this.bipedLeftLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, modelSize-0.5F);
         this.bipedLeftLeg.setRotationPoint(1.9F, 12.0F, 0.0F);
 
         this.bipedRightLeg = new ModelRenderer(this, 0, 16);
-        this.bipedRightLeg.func_228301_a_(-2.0F, 0.0F, -2.0F, 4, 12, 4, modelSize-0.5F);
+        this.bipedRightLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, modelSize-0.5F);
         this.bipedRightLeg.setRotationPoint(-1.9F, 12.0F, 0.0F);
 
         this.bipedLeftLegwear = new ModelRenderer(this, 0, 48);
-        this.bipedLeftLegwear.func_228301_a_(-2.0F, 0.0F, -2.0F, 4, 12, 4, modelSize-0.25F);
+        this.bipedLeftLegwear.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, modelSize-0.25F);
         this.bipedLeftLegwear.setRotationPoint(1.9F, 12.0F, 0.0F);
 
         this.bipedRightLegwear = new ModelRenderer(this, 0, 32);
-        this.bipedRightLegwear.func_228301_a_(-2.0F, 0.0F, -2.0F, 4, 12, 4, modelSize-0.25F);
+        this.bipedRightLegwear.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, modelSize-0.25F);
         this.bipedRightLegwear.setRotationPoint(-1.9F, 12.0F, 0.0F);
 
         this.bipedBody = new ModelRenderer(this, 16, 16);
-        this.bipedBody.func_228301_a_(-4.0F, 0.8F, -2.0F, 8, 12, 4, modelSize-0.3F);
+        this.bipedBody.addBox(-4.0F, 0.8F, -2.0F, 8, 12, 4, modelSize-0.3F);
         this.bipedBody.setRotationPoint(0.0F, 1.0F, 0.0F);
 
         this.bipedBodyWear = new ModelRenderer(this, 16, 32);
-        this.bipedBodyWear.func_228301_a_( -4.0F, 1.3F, -2.0F, 8, 10, 4, modelSize-0.2F);
+        this.bipedBodyWear.addBox( -4.0F, 1.3F, -2.0F, 8, 10, 4, modelSize-0.2F);
         this.bipedBodyWear.setRotationPoint(0.0F, 1.0F, 0.0F);
         //this.bipedHalo = new ModelRenderer(this, 65, 0);
         //this.bipedHalo.setRotationPoint(0.0F, 24.0F, 0.0F);
@@ -100,20 +100,20 @@ public class HumanModel<T extends LivingEntity> extends BipedModel<T> {
 		*/
     }
 
-    protected Iterable<ModelRenderer> func_225600_b_() {
-        return Iterables.concat(super.func_225600_b_(), ImmutableList.of(this.bipedLeftLegwear, this.bipedRightLegwear, this.bipedLeftArmwear, this.bipedRightArmwear, this.bipedBodyWear));
+    protected Iterable<ModelRenderer> getBodyParts() {
+        return Iterables.concat(super.getBodyParts(), ImmutableList.of(this.bipedLeftLegwear, this.bipedRightLegwear, this.bipedLeftArmwear, this.bipedRightArmwear, this.bipedBodyWear));
     }
 
     public void func_228287_a_(MatrixStack p_228287_1_, IVertexBuilder p_228287_2_, int p_228287_3_, int p_228287_4_) {
         this.bipedDeadmau5Head.copyModelAngles(this.bipedHead);
         this.bipedDeadmau5Head.rotationPointX = 0.0F;
         this.bipedDeadmau5Head.rotationPointY = 0.0F;
-        this.bipedDeadmau5Head.func_228308_a_(p_228287_1_, p_228287_2_, p_228287_3_, p_228287_4_);
+        this.bipedDeadmau5Head.render(p_228287_1_, p_228287_2_, p_228287_3_, p_228287_4_);
     }
 
 
-    public void func_225597_a_(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
-        super.func_225597_a_(p_225597_1_, p_225597_2_, p_225597_3_, p_225597_4_, p_225597_5_, p_225597_6_);
+    public void setRotationAngles(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
+        super.setRotationAngles(p_225597_1_, p_225597_2_, p_225597_3_, p_225597_4_, p_225597_5_, p_225597_6_);
         this.bipedLeftLegwear.copyModelAngles(this.bipedLeftLeg);
         this.bipedRightLegwear.copyModelAngles(this.bipedRightLeg);
         this.bipedLeftArmwear.copyModelAngles(this.bipedLeftArm);
@@ -134,11 +134,11 @@ public class HumanModel<T extends LivingEntity> extends BipedModel<T> {
         this.bipedDeadmau5Head.showModel = visible;
     }
 
-    public void func_225599_a_(HandSide p_225599_1_, MatrixStack p_225599_2_) {
+    public void translateHan(HandSide p_225599_1_, MatrixStack p_225599_2_) {
         ModelRenderer modelrenderer = this.getArmForSide(p_225599_1_);
         float f = 0.5F * (float)(p_225599_1_ == HandSide.RIGHT ? 1 : -1);
         modelrenderer.rotationPointX += f;
-        modelrenderer.func_228307_a_(p_225599_2_);
+        modelrenderer.translateRotate(p_225599_2_);
         modelrenderer.rotationPointX -= f;
 
     }

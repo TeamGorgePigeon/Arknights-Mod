@@ -1,5 +1,5 @@
 package arknights.entity.notLiving;
-
+/*
 import arknights.registry.EntityHandler;
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
@@ -11,6 +11,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -26,6 +27,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -38,7 +40,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class BulletEntity extends Entity implements IProjectile {
+public class BulletEntity extends Entity implements ProjectileEntity {
     private static final DataParameter<Byte> CRITICAL = EntityDataManager.createKey(BulletEntity.class, DataSerializers.BYTE);
     protected static final DataParameter<Optional<UUID>> field_212362_a = EntityDataManager.createKey(BulletEntity.class, DataSerializers.OPTIONAL_UNIQUE_ID);
     private static final DataParameter<Byte> field_213876_as = EntityDataManager.createKey(BulletEntity.class, DataSerializers.BYTE);
@@ -67,7 +69,7 @@ public class BulletEntity extends Entity implements IProjectile {
     }
 
     public BulletEntity(LivingEntity p_i48548_2_, World p_i48548_3_) {
-        this(EntityHandler.BULLET, p_i48548_2_.func_226277_ct_(), p_i48548_2_.func_226280_cw_() - (double)0.1F, p_i48548_2_.func_226281_cx_(), p_i48548_3_);
+        this(EntityHandler.BULLET, p_i48548_2_.getPosX(), p_i48548_2_.getPosY() - (double)0.1F, p_i48548_2_.getPosZ(), p_i48548_3_);
         this.setShooter(p_i48548_2_);
         if (p_i48548_2_ instanceof PlayerEntity) {
             this.pickupStatus = AbstractArrowEntity.PickupStatus.ALLOWED;
@@ -82,6 +84,7 @@ public class BulletEntity extends Entity implements IProjectile {
     /**
      * Checks if the entity is in range to render.
      */
+/*
     @OnlyIn(Dist.CLIENT)
     public boolean isInRangeToRenderDist(double distance) {
         double d0 = this.getBoundingBox().getAverageEdgeLength() * 10.0D;
@@ -110,8 +113,9 @@ public class BulletEntity extends Entity implements IProjectile {
     /**
      * Similar to setArrowHeading, it's point the throwable entity to a x, y, z direction.
      */
+/*
     public void shoot(double x, double y, double z, float velocity, float inaccuracy) {
-        Vec3d vec3d = (new Vec3d(x, y, z)).normalize().add(this.rand.nextGaussian() * (double)0.0075F * (double)inaccuracy, this.rand.nextGaussian() * (double)0.0075F * (double)inaccuracy, this.rand.nextGaussian() * (double)0.0075F * (double)inaccuracy).scale((double)velocity);
+        Vector3d vec3d = (new Vector3d(x, y, z)).normalize().add(this.rand.nextGaussian() * (double)0.0075F * (double)inaccuracy, this.rand.nextGaussian() * (double)0.0075F * (double)inaccuracy, this.rand.nextGaussian() * (double)0.0075F * (double)inaccuracy).scale((double)velocity);
         this.setMotion(vec3d);
         float f = MathHelper.sqrt(func_213296_b(vec3d));
         this.rotationYaw = (float)(MathHelper.atan2(vec3d.x, vec3d.z) * (double)(180F / (float)Math.PI));
@@ -124,6 +128,7 @@ public class BulletEntity extends Entity implements IProjectile {
     /**
      * Sets a target for the client to interpolate towards over the next few ticks
      */
+/*
     @OnlyIn(Dist.CLIENT)
     public void setPositionAndRotationDirect(double x, double y, double z, float yaw, float pitch, int posRotationIncrements, boolean teleport) {
         this.setPosition(x, y, z);
@@ -133,6 +138,7 @@ public class BulletEntity extends Entity implements IProjectile {
     /**
      * Updates the entity motion clientside, called by packets from the server
      */
+/*
     @OnlyIn(Dist.CLIENT)
     public void setVelocity(double x, double y, double z) {
         this.setMotion(x, y, z);
@@ -142,7 +148,7 @@ public class BulletEntity extends Entity implements IProjectile {
             this.rotationYaw = (float)(MathHelper.atan2(x, z) * (double)(180F / (float)Math.PI));
             this.prevRotationPitch = this.rotationPitch;
             this.prevRotationYaw = this.rotationYaw;
-            this.setLocationAndAngles(this.func_226277_ct_(), this.func_226278_cu_(), this.func_226281_cx_(), this.rotationYaw, this.rotationPitch);
+            this.setLocationAndAngles(this.getPosX(), this.getPosY(), this.getPosZ(), this.rotationYaw, this.rotationPitch);
             this.ticksInGround = 0;
         }
 
@@ -151,10 +157,11 @@ public class BulletEntity extends Entity implements IProjectile {
     /**
      * Called to update the entity's position/logic.
      */
+/*
     public void tick() {
         super.tick();
         boolean flag = this.func_203047_q();
-        Vec3d vec3d = this.getMotion();
+        Vector3d vec3d = this.getMotion();
         if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F) {
             float f = MathHelper.sqrt(func_213296_b(vec3d));
             this.rotationYaw = (float)(MathHelper.atan2(vec3d.x, vec3d.z) * (double)(180F / (float)Math.PI));
@@ -168,7 +175,7 @@ public class BulletEntity extends Entity implements IProjectile {
         if (!blockstate.isAir(this.world, blockpos) && !flag) {
             VoxelShape voxelshape = blockstate.getCollisionShape(this.world, blockpos);
             if (!voxelshape.isEmpty()) {
-                Vec3d vec3d1 = this.getPositionVec();
+                Vector3d vec3d1 = this.getPositionVec();
 
                 for(AxisAlignedBB axisalignedbb : voxelshape.toBoundingBoxList()) {
                     if (axisalignedbb.offset(blockpos).contains(vec3d1)) {
@@ -197,8 +204,8 @@ public class BulletEntity extends Entity implements IProjectile {
         } else {
             this.timeInGround = 0;
             ++this.ticksInAir;
-            Vec3d vec3d2 = this.getPositionVec();
-            Vec3d vec3d3 = vec3d2.add(vec3d);
+            Vector3d vec3d2 = this.getPositionVec();
+            Vector3d vec3d3 = vec3d2.add(vec3d);
             RayTraceResult raytraceresult = this.world.rayTraceBlocks(new RayTraceContext(vec3d2, vec3d3, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this));
             if (raytraceresult.getType() != RayTraceResult.Type.MISS) {
                 vec3d3 = raytraceresult.getHitVec();
@@ -236,9 +243,9 @@ public class BulletEntity extends Entity implements IProjectile {
             double d4 = vec3d.y;
             double d0 = vec3d.z;
 
-            double d5 = this.func_226277_ct_() + d3;
-            double d1 = this.func_226278_cu_() + d4;
-            double d2 = this.func_226281_cx_() + d0;
+            double d5 = this.getPosX() + d3;
+            double d1 = this.getPosY() + d4;
+            double d2 = this.getPosZ() + d0;
             float f1 = MathHelper.sqrt(func_213296_b(vec3d));
             if (flag) {
                 this.rotationYaw = (float)(MathHelper.atan2(-d3, -d0) * (double)(180F / (float)Math.PI));
@@ -277,7 +284,7 @@ public class BulletEntity extends Entity implements IProjectile {
 
             this.setMotion(vec3d.scale((double)f2));
             if (!this.hasNoGravity() && !flag) {
-                Vec3d vec3d4 = this.getMotion();
+                Vector3d vec3d4 = this.getMotion();
                 this.setMotion(vec3d4.x, vec3d4.y - (double)0.05F, vec3d4.z);
             }
 
@@ -297,6 +304,7 @@ public class BulletEntity extends Entity implements IProjectile {
     /**
      * Called when the arrow hits a block or an entity
      */
+/*
     protected void onHit(RayTraceResult raytraceResultIn) {
         RayTraceResult.Type raytraceresult$type = raytraceResultIn.getType();
         if (raytraceresult$type == RayTraceResult.Type.ENTITY) {
@@ -305,10 +313,10 @@ public class BulletEntity extends Entity implements IProjectile {
             BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult)raytraceResultIn;
             BlockState blockstate = this.world.getBlockState(blockraytraceresult.getPos());
             this.inBlockState = blockstate;
-            Vec3d vec3d = blockraytraceresult.getHitVec().subtract(this.func_226277_ct_(), this.func_226278_cu_(), this.func_226281_cx_());
+            Vector3d vec3d = blockraytraceresult.getHitVec().subtract(this.getPosX(), this.getPosY(), this.getPosZ());
             this.setMotion(vec3d);
-            Vec3d vec3d1 = vec3d.normalize().scale((double)0.05F);
-            this.func_226288_n_(this.func_226277_ct_() - vec3d1.x, this.func_226278_cu_() - vec3d1.y, this.func_226281_cx_() - vec3d1.z);
+            Vector3d vec3d1 = vec3d.normalize().scale((double)0.05F);
+            this.func_226288_n_(this.getPosX() - vec3d1.x, this.getPosY() - vec3d1.y, this.getPosZ() - vec3d1.z);
             this.inGround = true;
             this.arrowShake = 7;
             this.setIsCritical(false);
@@ -429,7 +437,7 @@ public class BulletEntity extends Entity implements IProjectile {
     }
 
     @Nullable
-    protected EntityRayTraceResult func_213866_a(Vec3d p_213866_1_, Vec3d p_213866_2_) {
+    protected EntityRayTraceResult func_213866_a(Vector3d p_213866_1_, Vector3d p_213866_2_) {
         return ProjectileHelper.func_221271_a(this.world, this, p_213866_1_, p_213866_2_, this.getBoundingBox().expand(this.getMotion()).grow(1.0D), (p_213871_1_) -> {
             return !p_213871_1_.isSpectator() && p_213871_1_.isAlive() && p_213871_1_.canBeCollidedWith() && (p_213871_1_ != this.getShooter() || this.ticksInAir >= 5) && (this.field_213878_az == null || !this.field_213878_az.contains(p_213871_1_.getEntityId()));
         });
@@ -458,6 +466,7 @@ public class BulletEntity extends Entity implements IProjectile {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+/*
     public void readAdditional(CompoundNBT compound) {
         this.ticksInGround = compound.getShort("life");
         if (compound.contains("inBlockState", 10)) {
@@ -505,6 +514,7 @@ public class BulletEntity extends Entity implements IProjectile {
     /**
      * Called by a player entity when they collide with an entity
      */
+/*
     public void onCollideWithPlayer(PlayerEntity entityIn) {
         if (!this.world.isRemote && (this.inGround || this.func_203047_q()) && this.arrowShake <= 0) {
             boolean flag = this.pickupStatus == AbstractArrowEntity.PickupStatus.ALLOWED || this.pickupStatus == AbstractArrowEntity.PickupStatus.CREATIVE_ONLY && entityIn.abilities.isCreativeMode || this.func_203047_q() && this.getShooter().getUniqueID() == entityIn.getUniqueID();
@@ -539,6 +549,7 @@ public class BulletEntity extends Entity implements IProjectile {
     /**
      * Sets the amount of knockback the arrow applies when it hits a mob.
      */
+/*
     public void setKnockbackStrength(int knockbackStrengthIn) {
         this.knockbackStrength = knockbackStrengthIn;
     }
@@ -546,6 +557,7 @@ public class BulletEntity extends Entity implements IProjectile {
     /**
      * Returns true if it's possible to attack this entity with an item.
      */
+/*
     public boolean canBeAttackedWithItem() {
         return false;
     }
@@ -557,6 +569,7 @@ public class BulletEntity extends Entity implements IProjectile {
     /**
      * Whether the arrow has a stream of critical hit particles flying behind it.
      */
+/*
     public void setIsCritical(boolean critical) {
         this.func_203049_a(1, critical);
     }
@@ -578,6 +591,7 @@ public class BulletEntity extends Entity implements IProjectile {
     /**
      * Whether the arrow has a stream of critical hit particles flying behind it.
      */
+/*
     public boolean getIsCritical() {
         byte b0 = this.dataManager.get(CRITICAL);
         return (b0 & 1) != 0;
@@ -650,3 +664,4 @@ public class BulletEntity extends Entity implements IProjectile {
         }
     }
 }
+*/

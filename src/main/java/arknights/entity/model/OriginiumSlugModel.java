@@ -26,16 +26,16 @@ public class OriginiumSlugModel<T extends Entity> extends SegmentedModel<T> {
       this.textureHeight = 64;
       float f = 0.0F;
       this.bodyBoxes[0] = new ModelRenderer(this, 0, 0);
-      this.bodyBoxes[0].func_228300_a_(-4.0F, 0.0F, -5.0F, 8.0F, 6.0F, 10.0F);//4,3,5
+      this.bodyBoxes[0].addBox(-4.0F, 0.0F, -5.0F, 8.0F, 6.0F, 10.0F);//4,3,5
       this.bodyBoxes[0].setRotationPoint(0.0F, 18.0F, f);
       this.zPlacement[0] = f;
 
       this.hornBoxes = new ModelRenderer[2];
       this.hornBoxes[0] = new ModelRenderer(this, 0, 16);
-      this.hornBoxes[0].func_228300_a_(-8.0F, 0.0F, -1F, 16.0F, 10.0F, 2.0F);
+      this.hornBoxes[0].addBox(-8.0F, 0.0F, -1F, 16.0F, 10.0F, 2.0F);
       this.hornBoxes[0].setRotationPoint(0.0F, 14.0F, f);
       this.hornBoxes[1] = new ModelRenderer(this, 0, 32);
-      this.hornBoxes[1].func_228300_a_(0.0F, 0.0F, -8.0F, 2.0F, 12.0F, 16.0F);
+      this.hornBoxes[1].addBox(0.0F, 0.0F, -8.0F, 2.0F, 12.0F, 16.0F);
       this.hornBoxes[1].setRotationPoint(0.0F, 12.0F, f);
       Builder<ModelRenderer> builder = ImmutableList.builder();
       builder.addAll(Arrays.asList(this.bodyBoxes));
@@ -68,9 +68,16 @@ public class OriginiumSlugModel<T extends Entity> extends SegmentedModel<T> {
       this.field_228295_f_ = builder.build();*/
    }
 
-   public ImmutableList<ModelRenderer> func_225601_a_() {
+   @Override
+   public void setRotationAngles(T t, float v, float v1, float v2, float v3, float v4) {
+
+   }
+
+   @Override
+   public Iterable<ModelRenderer> getParts() {
       return this.field_228295_f_;
    }
+
 
    public void func_225597_a_(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
       /*

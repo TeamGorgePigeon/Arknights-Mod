@@ -13,7 +13,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
@@ -52,7 +52,7 @@ public class OperatorItem extends Item {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         playerIn.setActiveHand(handIn);
-        return ActionResult.func_226249_b_(itemstack);
+        return ActionResult.resultSuccess(itemstack);
     }
 
     public void newOperator(World world){
@@ -68,7 +68,7 @@ public class OperatorItem extends Item {
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         //String playerName = entityLiving.getScoreboardName()
         if(!worldIn.isRemote()){
-            Vec3d pos = entityLiving.getPositionVec();
+            Vector3d pos = entityLiving.getPositionVec();
             this.newOperator(entityLiving.world);
             if (stack.getTag() == null) {
                 CompoundNBT compound = new CompoundNBT();

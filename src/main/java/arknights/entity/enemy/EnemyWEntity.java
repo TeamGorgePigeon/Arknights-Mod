@@ -4,8 +4,8 @@ import arknights.entity.model.WModel;
 import arknights.registry.SoundHandler;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
@@ -51,11 +51,12 @@ public class EnemyWEntity extends RangeEnemy {
     /**
      * Returns the Y Offset of this entity.
      */
-
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
-        this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
+    @Override
+    protected void registerData() {
+        super.registerData();
+        this.getAttribute(Attributes.field_233818_a_).setBaseValue(40.0D);
+        this.setHealth(40.0F);
+        //this.dataManager.register(OPERATORATTACKING, false);
     }
 
     public void onDeath(DamageSource source) {
@@ -71,7 +72,7 @@ public class EnemyWEntity extends RangeEnemy {
         if (this.tick==290 && this.getAttackTarget()!=null) {
             this.goalSelector.disableFlag(Goal.Flag.MOVE);
             this.goalSelector.disableFlag(Goal.Flag.JUMP);
-            this.getAttackTarget().playSound(SoundHandler.SKILL_ENEMYWCOUNTDOWN, 1.0F, 1.0F);
+            this.getAttackTarget().world.playSound((PlayerEntity)null, this.getAttackTarget().getPosX(), this.getAttackTarget().getPosY(), this.getAttackTarget().getPosZ(), SoundHandler.SKILL_ENEMYWCOUNTDOWN, this.getAttackTarget().getSoundCategory(), 1.0F, 1.0F);
         }
         if (this.tick==350) {
             this.tick=0;
@@ -86,16 +87,16 @@ public class EnemyWEntity extends RangeEnemy {
 
     public void attackTargetWithBomb(LivingEntity entityTarget) {
         entityTarget.attackEntityFrom(DamageSource.causeExplosionDamage(this), 15);
-        entityTarget.playSound(SoundHandler.ENEMYW_SKILL_GRENADE, 1.0F, 1.0F);
+        entityTarget.world.playSound((PlayerEntity)null, entityTarget.getPosX(), entityTarget.getPosY(), entityTarget.getPosZ(), SoundHandler.ENEMYW_SKILL_GRENADE, entityTarget.getSoundCategory(), 1.0F, 1.0F);
     }
     public void attackTargetWithGrenade(LivingEntity entityTarget) {
         entityTarget.attackEntityFrom(DamageSource.causeExplosionDamage(this), 3);
-        entityTarget.playSound(SoundHandler.ENEMYW_GRENADE,1.0F, 1.0F);
+        entityTarget.world.playSound((PlayerEntity)null, entityTarget.getPosX(), entityTarget.getPosY(), entityTarget.getPosZ(), SoundHandler.ENEMYW_GRENADE, entityTarget.getSoundCategory(), 1.0F, 1.0F);
     }
 
     public static boolean spawnCondition (EntityType<? extends EnemyWEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
         //IWorldLightListener skyLight = world.func_225524_e_().getLightEngine(LightType.SKY);
-        int light = world.func_225524_e_().getLightEngine(LightType.SKY).getLightFor(pos);
+        int light = world.getLightManager().getLightEngine(LightType.SKY).getLightFor(pos);
         return light > 1;
         //return true;
     }

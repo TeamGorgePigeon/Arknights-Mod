@@ -1,33 +1,15 @@
-# This is an example mods.toml file. It contains the data relating to the loading mods.
-# There are several mandatory fields (#mandatory), and many more that are optional (#optional).
-# The overall format is standard TOML format, v0.5.0.
-# Note that there are a couple of TOML lists in this file.
-# Find more information on toml format here:  https://github.com/toml-lang/toml
-# The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
 modLoader="javafml" #mandatory
-# A version range to match for said mod loader - for regular FML @Mod it will be the forge version
-loaderVersion="[30,)" #mandatory (28 is current forge version)
-# A URL to refer people to when problems occur with this mod
-issueTrackerURL="https://github.com/TeamGrainPigeon/Minecraft-Arknights-Mod" #optional
-# A list of mods - how many allowed here is determined by the individual mod loader
+loaderVersion="[32,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+issueTrackerURL="http://my.issue.tracker/" #optional
 [[mods]] #mandatory
-# The modid of the mod
 modId="arknights" #mandatory
-# The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
 version="${file.jarVersion}" #mandatory
- # A display name for the mod
-displayName="Arknights" #mandatory
-# A URL to query for updates for this mod. See the JSON update specification <here>
+displayName="Arknights Mod" #mandatory
 updateJSONURL="https://github.com/TeamGrainPigeon/Minecraft-Arknights-Mod" #optional
-# A URL for the "homepage" for this mod, displayed in the mod UI
 displayURL="https://github.com/TeamGrainPigeon/Minecraft-Arknights-Mod" #optional
-# A file name (in the root of the mod JAR) containing a logo for display
 logoFile="arknights.png" #optional
-# A text field displayed in the mod UI
 credits="NGYF, Tao0Lu\n感谢黄金之匣美工社提供的干员皮肤，GrakePCH大佬的源石、合成玉模型\nThank Team The Gold Chest for the Operator Skin,GrakePCH for the originium and the orundum models." #optional
-# A text field displayed in the mod UI
 authors="NGYF, Tao0Lu" #optional
-# The description text for the mod (multi line!) (#mandatory)
 description='''
 
 我的世界明日方舟mod，让明日方舟成为真正的方舟。
@@ -40,24 +22,17 @@ mod开源且不收取任何费用，部分模型和文件来自开源项目，�
 This mod has no affiliation with hypergryph and mojang.
 This mod is open source and free. Some models and files are from open source projects or from other sources and have been authorized.
 As the skin provided by Team The Gold Chest follows the CC-BY-NC-SA 4.0 agreement, it shall not be used for commercial purposes without authorization.
-
 '''
-# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.examplemod]] #optional
-    # the modid of the dependency
+
+[[dependencies.arknights]] #optional
     modId="forge" #mandatory
-    # Does this dependency have to exist - if not, ordering below must be specified
     mandatory=true #mandatory
-    # The version range of the dependency
-    versionRange="[30,)" #mandatory
-    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+    versionRange="[32,)" #mandatory
     ordering="NONE"
-    # Side this dependency is applied on - BOTH, CLIENT or SERVER
     side="BOTH"
-# Here's another dependency
-[[dependencies.examplemod]]
+[[dependencies.arknights]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.15.2]"
+    versionRange="[1.16.1]"
     ordering="NONE"
     side="BOTH"
